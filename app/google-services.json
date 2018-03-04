@@ -1,0 +1,102 @@
+{
+  "project_info": {
+    "project_number": "1080481830157",
+    "firebase_url": "https://anime-sher1234.firebaseio.com",
+    "project_id": "anime-sher1234",
+    "storage_bucket": "anime-sher1234.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080481830157:android:dcc775b814358a3b",
+        "android_client_info": {
+          "package_name": "com.android.udit.animelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080481830157-m1glk8949f8n8v95q4540oikk9i6oain.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.udit.animelist",
+            "certificate_hash": "84e899810e35c4b9fa101db82d419b04fa333f52"
+          }
+        },
+        {
+          "client_id": "1080481830157-f02npsn93m9hqqmni3qiflcmibdn837t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.udit.animelist",
+            "certificate_hash": "9081d2548d96c1ceef7aa7b53f79d9a880b68305"
+          }
+        },
+        {
+          "client_id": "1080481830157-o5rao9q28n49hmaekhggnatgivimnjik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.udit.animelist",
+            "certificate_hash": "42763fc476d3ae026cb66c8d7f136265362c4ca0"
+          }
+        },
+        {
+          "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjj0MgqH4vYS_iKQAiIT9z1-tvNx3bQlk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080481830157:android:440581095e2ab252",
+        "android_client_info": {
+          "package_name": "info.horriblesubs.sher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjj0MgqH4vYS_iKQAiIT9z1-tvNx3bQlk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

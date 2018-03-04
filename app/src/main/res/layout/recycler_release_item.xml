@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="5dp"
+    android:layout_gravity="center">
+
+    <View
+        android:alpha="0.5"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:background="#bfffffff"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="start|center_vertical"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/TextView.Label"
+                android:layout_weight="0"
+                android:background="#003e8b"
+                android:text="@string/_480p" />
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/TextView.Label"
+                android:layout_weight="0"
+                android:background="#4a008b"
+                android:text="@string/_720p" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/TextView.Label"
+                android:layout_marginEnd="0dp"
+                android:layout_weight="0"
+                android:background="#8b003c"
+                android:text="@string/_1080p"
+                android:layout_marginRight="0dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -34,7 +34,7 @@ public class Start extends AppCompatActivity {
         view = findViewById(R.id.imageView);
         hide();
         TextView textView = findViewById(R.id.textView);
-        new FetchReleaseItems(this, textView).execute();
+        new FetchReleaseItems(this, textView).execute("?mode=latest");
     }
 
     @Override

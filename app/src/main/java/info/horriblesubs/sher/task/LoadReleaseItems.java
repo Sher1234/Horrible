@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public class LoadReleaseItems extends AsyncTask<Intent, Void, List<ReleaseItem>>
     protected List<ReleaseItem> doInBackground(Intent... intents) {
         List<ReleaseItem> releaseItems = new ArrayList<>();
         int i = intents[0].getIntExtra("size", 0);
-        Log.d("HOME-SIZE", "" + i);
         for (int j = 0; j < i; j++) {
             ReleaseItem releaseItem = (ReleaseItem) intents[0].getSerializableExtra("extra-" + j);
             if (releaseItem != null)

@@ -17,7 +17,7 @@ public class PageItem extends Item {
     @Override
     public String toString() {
         return "ID: " + this.id +
-                "\n" + "Notification ID: " + this.nId +
+                "\n" + "NotificationRequest ID: " + this.nId +
                 "\n" + "Title: " + this.title +
                 "\n" + "Link: " + this.link +
                 "\n" + "Image: " + this.image +

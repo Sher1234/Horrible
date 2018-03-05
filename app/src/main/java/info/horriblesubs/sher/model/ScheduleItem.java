@@ -1,11 +1,13 @@
 package info.horriblesubs.sher.model;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("all")
 public class ScheduleItem extends Item {
 
-    private Date date;
     public String time;
     public boolean isScheduled;
 
@@ -15,12 +17,22 @@ public class ScheduleItem extends Item {
         this.isScheduled = isScheduled;
     }
 
+    public Date getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd HH:mm Z");
+        try {
+            return dateFormat.parse(this.time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @Override
     public String toString() {
-        return "Notification ID: " + this.nId +
+        return "NotificationRequest ID: " + this.nId +
                 "\n" + "Title: " + this.title +
                 "\n" + "Link: " + this.link +
-                "\n" + "Time: " + this.date.toString() +
+                "\n" + "Time: " + this.getDate() +
                 "\n" + "isScheduled: " + this.isScheduled;
     }
 }

@@ -19,7 +19,7 @@ import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.ReleaseItem;
 
 /**
- * ReleaseRecycler for RecyclerView-HorribleSubs.
+ * ReleaseRecycler
  */
 
 public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHolder> {
@@ -43,28 +43,31 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
             public void onClick(View view) {
                 final ReleaseItem releaseItem = releaseItems.get(viewHolder.getAdapterPosition());
                 AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                        .setTitle(releaseItem.title + " - " + releaseItem.number)
-                        .setPositiveButton("480p", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startDownload(releaseItem.link480);
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNegativeButton("720p", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startDownload(releaseItem.link720);
-                                dialog.dismiss();
-                            }
-                        })
-                        .setNeutralButton("1080p", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startDownload(releaseItem.link1080);
-                                dialog.dismiss();
-                            }
-                        });
+                        .setTitle(releaseItem.title + " - " + releaseItem.number);
+                if (releaseItem.link480 != null && !releaseItem.link480.isEmpty())
+                    builder.setPositiveButton("480p", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startDownload(releaseItem.link480);
+                            dialog.dismiss();
+                        }
+                    });
+                if (releaseItem.link720 != null && !releaseItem.link720.isEmpty())
+                    builder.setNegativeButton("720p", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startDownload(releaseItem.link720);
+                            dialog.dismiss();
+                        }
+                    });
+                if (releaseItem.link1080 != null && !releaseItem.link1080.isEmpty())
+                    builder.setNeutralButton("1080p", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startDownload(releaseItem.link1080);
+                            dialog.dismiss();
+                        }
+                    });
                 builder.create().show();
             }
         });

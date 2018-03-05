@@ -18,7 +18,7 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "Notification ID: " + this.nId +
+        return "NotificationRequest ID: " + this.nId +
                 "\n" + "Title: " + this.title +
                 "\n" + "Link: " + this.link;
     }

@@ -3,35 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group>
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/navHome"
+            android:title="@string/latest_releases" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/navBatch"
+            android:title="@string/latest_batches" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/navTodaySchedule"
+            android:title="@string/today_s_schedule" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/navFullSchedule"
+            android:title="@string/full_schedule" />
+        <item
+            android:id="@+id/navCurrentShows"
+            android:title="@string/current_shows" />
+        <item
+            android:id="@+id/navAllShows"
+            android:title="@string/all_shows" />
+        <item
+            android:id="@+id/navRss"
+            android:title="@string/rss" />
+        <item
+            android:id="@+id/navBrowser"
+            android:title="@string/open_in_browser" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/share_and_feedback">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/navShare"
+                android:title="@string/share" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/navFeedback"
+                android:title="@string/report_and_feedback" />
         </menu>
     </item>
 

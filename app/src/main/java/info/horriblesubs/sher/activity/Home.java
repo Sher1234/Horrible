@@ -1,26 +1,44 @@
 package info.horriblesubs.sher.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ImageView;
+
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.receiver.Notification;
+import info.horriblesubs.sher.task.FetchReleaseItems;
 import info.horriblesubs.sher.task.LoadReleaseItems;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView recyclerView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private String mode;
+    private Map<String, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +47,28 @@ public class Home extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        new LoadReleaseItems(this, recyclerView).execute(intent);
+        map = new HashMap<>();
+        map.put("latest-all", "latest");
+        map.put("latest-batch", "latest-batch");
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        ImageView imageView = findViewById(R.id.imageView);
+        Picasso.with(this).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
+                .into(imageView);
+
+        Intent intent = getIntent();
+        recyclerView = findViewById(R.id.recyclerView);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        mode = intent.getStringExtra("mode");
+        if (intent.getIntExtra("size", 0) == 0)
+            new FetchReleaseItems(Home.this, recyclerView, swipeRefreshLayout)
+                    .execute("?mode=" + map.get(mode));
+        else
+            new LoadReleaseItems(this, recyclerView).execute(intent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onRefresh() {
+                new FetchReleaseItems(Home.this, recyclerView, swipeRefreshLayout)
+                        .execute("?mode=" + map.get(mode));
             }
         });
 
@@ -63,44 +93,121 @@ public class Home extends AppCompatActivity
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        boolean b = sharedPreferences.getBoolean("alarmSet", false);
+        if (b) {
+            menu.findItem(R.id.actionNotifications).setTitle("Disable Notifications");
+            menu.findItem(R.id.actionNotifications).setIcon(R.drawable.ic_notifications_on);
+        } else {
+            menu.findItem(R.id.actionNotifications).setTitle("Enable Notifications");
+            menu.findItem(R.id.actionNotifications).setIcon(R.drawable.ic_notifications_off);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.actionSearch:
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.actionNotifications:
+                this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+                boolean b = sharedPreferences.getBoolean("alarmSet", false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                if (b) {
+                    builder.setTitle("Disable Notifications");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteAlarm();
+                        }
+                    });
+                } else {
+                    builder.setTitle("Enable Notifications");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setAlarm();
+                        }
+                    });
+                }
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.navHome:
+                if (mode.equalsIgnoreCase("latest-all"))
+                    break;
+                intent = new Intent(this, Home.class);
+                intent.putExtra("mode", "latest-all");
+                startActivity(intent);
+                finish();
+                break;
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            case R.id.navBatch:
+                if (mode.equalsIgnoreCase("latest-batch"))
+                    break;
+                intent = new Intent(this, Home.class);
+                intent.putExtra("mode", "latest-batch");
+                startActivity(intent);
+                finish();
+                break;
 
-        } else if (id == R.id.nav_slideshow) {
+            case R.id.navTodaySchedule:
+                intent = new Intent(this, Schedule.class);
+                intent.putExtra("mode", "today");
+                startActivity(intent);
+                finish();
+                break;
 
-        } else if (id == R.id.nav_manage) {
+            case R.id.navFullSchedule:
+                intent = new Intent(this, Schedule.class);
+                intent.putExtra("mode", "all");
+                startActivity(intent);
+                finish();
+                break;
 
-        } else if (id == R.id.nav_share) {
+            case R.id.navCurrentShows:
+                break;
 
-        } else if (id == R.id.nav_send) {
+            case R.id.navAllShows:
+                break;
+
+            case R.id.navRss:
+                break;
+
+            case R.id.navBrowser:
+                break;
+
+            case R.id.navFeedback:
+                break;
+
+            case R.id.navShare:
+                break;
 
         }
 
@@ -108,4 +215,34 @@ public class Home extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void deleteAlarm() {
+        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("alarmSet", true).apply();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
+        Intent intent = new Intent(Home.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(Home.this, 4869, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.cancel(pendingIntent);
+        invalidateOptionsMenu();
+    }
+
+    private void setAlarm() {
+        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("alarmSet", true).apply();
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        Intent intent = new Intent(Home.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(Home.this, 4869, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        invalidateOptionsMenu();
+    }
+
 }

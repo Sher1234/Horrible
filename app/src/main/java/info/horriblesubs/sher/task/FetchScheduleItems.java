@@ -4,10 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -21,33 +18,30 @@ import java.net.URL;
 import java.util.List;
 
 import info.horriblesubs.sher.BuildConfig;
-import info.horriblesubs.sher.activity.Home;
-import info.horriblesubs.sher.adapter.ReleaseRecycler;
-import info.horriblesubs.sher.model.ReleaseItem;
+import info.horriblesubs.sher.activity.Schedule;
+import info.horriblesubs.sher.model.ScheduleItem;
 
 @SuppressLint("StaticFieldLeak")
-public class FetchReleaseItems extends AsyncTask<String, String, List<ReleaseItem>> {
+public class FetchScheduleItems extends AsyncTask<String, String, List<ScheduleItem>> {
 
     private Context context;
+    private String string;
     private TextView textView;
-    private RecyclerView recyclerView;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean b;
     private String[] strings = {"Initializing App...", "Connecting to Server...",
             "Fetching Latest Releases...", "Verifying Data...", "Parsing Received Data..."};
     private int i = 0;
 
-    public FetchReleaseItems(Context context, TextView textView) {
+    public FetchScheduleItems(Context context, TextView textView, String string) {
+        this.string = string;
         this.context = context;
         this.textView = textView;
         b = true;
     }
 
-    public FetchReleaseItems(Context context, RecyclerView recyclerView,
-                             SwipeRefreshLayout swipeRefreshLayout) {
+    public FetchScheduleItems(Context context, String string) {
+        this.string = string;
         this.context = context;
-        this.recyclerView = recyclerView;
-        this.swipeRefreshLayout = swipeRefreshLayout;
         b = false;
     }
 
@@ -55,8 +49,6 @@ public class FetchReleaseItems extends AsyncTask<String, String, List<ReleaseIte
     protected void onPreExecute() {
         super.onPreExecute();
         publishProgress(strings[i++]);
-        if (!b)
-            swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -69,7 +61,7 @@ public class FetchReleaseItems extends AsyncTask<String, String, List<ReleaseIte
     }
 
     @Override
-    protected List<ReleaseItem> doInBackground(String... strings) {
+    protected List<ScheduleItem> doInBackground(String... strings) {
         publishProgress(this.strings[i++]);
         String s = BuildConfig.HAPI + strings[0];
         try {
@@ -82,7 +74,7 @@ public class FetchReleaseItems extends AsyncTask<String, String, List<ReleaseIte
                 BufferedReader bufferedReader = new BufferedReader(new
                         InputStreamReader(httpURLConnection.getInputStream()));
                 return new Gson().fromJson(bufferedReader,
-                        new TypeToken<List<ReleaseItem>>() {
+                        new TypeToken<List<ScheduleItem>>() {
                         }.getType());
             } finally {
                 if (httpURLConnection != null)
@@ -95,25 +87,19 @@ public class FetchReleaseItems extends AsyncTask<String, String, List<ReleaseIte
     }
 
     @Override
-    protected void onPostExecute(List<ReleaseItem> releaseItems) {
-        super.onPostExecute(releaseItems);
-        if (releaseItems != null)
+    protected void onPostExecute(List<ScheduleItem> scheduleItems) {
+        super.onPostExecute(scheduleItems);
+        if (scheduleItems != null)
             if (b) {
                 publishProgress(strings[i++]);
-                Intent intent = new Intent(context, Home.class);
-                intent.putExtra("size", releaseItems.size());
-                intent.putExtra("mode", "latest-all");
-                int i = 0;
-                for (ReleaseItem listItem : releaseItems) {
-                    intent.putExtra("extra-" + i, listItem);
-                    i++;
-                }
+                Intent intent = new Intent(context, Schedule.class);
+                intent.putExtra("mode", string);
+                intent.putExtra("size", scheduleItems.size());
+                Schedule.scheduleItems = scheduleItems;
                 context.startActivity(intent);
                 ((AppCompatActivity) context).finish();
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
-                recyclerView.setAdapter(new ReleaseRecycler(context, releaseItems));
-                swipeRefreshLayout.setRefreshing(false);
+                Schedule.scheduleItems = scheduleItems;
             }
         else
             publishProgress("Error Fetching Data from Server\nTry Again Later...");

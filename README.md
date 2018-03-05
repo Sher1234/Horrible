@@ -17,10 +17,16 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 
 * Supports Anime Listing of Latest 60 releases from HS
 
+* Lists Today's as well as full weeks Schedule (According to User Time)
+
+* Notifies on Every New Release Availabe on HS
+
 
 ## Release Updates
 
 ```
+Added Support for Schedule, Notification on New Release & Design Improvemnts      Major Commit   - March 05, 2018
+
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 
@@ -30,9 +36,9 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 * Shows List
 
-* Schedule
+* ~~Schedule~~
 
-* Notification Support
+* ~~Notification Support~~
 
 * Design Improvemnents
 

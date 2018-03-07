@@ -2,6 +2,7 @@ package info.horriblesubs.sher.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Detail;
+import info.horriblesubs.sher.model.Item;
 import info.horriblesubs.sher.model.ScheduleItem;
 
 /**
@@ -62,10 +66,19 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
                 s = "To be scheduled";
             }
             holder.textView3.setText(s);
+            final Item item = scheduleItems.get(position);
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context = context;
+                    if (item.link == null) {
+                        Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Intent intent = new Intent(context, Detail.class);
+                    String[] s = item.link.split("/");
+                    String link = s[s.length - 1];
+                    intent.putExtra("link", link);
+                    context.startActivity(intent);
                 }
             });
         } catch (NullPointerException e) {

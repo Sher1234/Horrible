@@ -27,8 +27,8 @@ public class IdService extends FirebaseInstanceIdService {
     }
 
     private void storeToken(String s) {
-        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
-        SharedPreferences sharedPreferences = getSharedPreferences("horriblesubs",
+        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("horriblesubs-prefs",
                 Context.MODE_PRIVATE);
         sharedPreferences.edit().putString("token", s).apply();
     }

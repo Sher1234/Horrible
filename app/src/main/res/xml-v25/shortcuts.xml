@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_shortcut_schedule"
+        android:shortcutDisabledMessage="@string/today_s_schedule"
+        android:shortcutId="schedule.today"
+        android:shortcutLongLabel="@string/today_s_schedule"
+        android:shortcutShortLabel="@string/today_s_schedule">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="info.horriblesubs.sher.activity.Start"
+            android:targetPackage="info.horriblesubs.sher">
+            <extra
+                android:name="start-mode"
+                android:value="schedule-today" />
+        </intent>
+        <categories android:name="android.shortcut" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_shortcut_list"
+        android:shortcutDisabledMessage="@string/current_seasons"
+        android:shortcutId="season.current"
+        android:shortcutLongLabel="@string/current_seasons"
+        android:shortcutShortLabel="@string/current_seasons">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="info.horriblesubs.sher.activity.Start"
+            android:targetPackage="info.horriblesubs.sher">
+            <extra
+                android:name="start-mode"
+                android:value="list-current" />
+        </intent>
+        <categories android:name="android.shortcut" />
+    </shortcut>
+</shortcuts>

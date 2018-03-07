@@ -16,13 +16,21 @@
     <string name="report_and_feedback"><![CDATA[Report & Feedback]]></string>
     <string name="share">Share</string>
     <string name="share_and_feedback"><![CDATA[Share & Feedback]]></string>
-    <string name="latest_releases">Latest Releases</string>
-    <string name="latest_batches">Latest Batches</string>
+    <string name="releases">Releases</string>
+    <string name="batches">Batches</string>
+    <string name="today_s">Today\'s</string>
     <string name="today_s_schedule">Today\'s Schedule</string>
-    <string name="full_schedule">Full Schedule</string>
-    <string name="current_shows">Current Shows</string>
-    <string name="all_shows">All Shows</string>
+    <string name="full">Full</string>
+    <string name="current_seasons">Current Seasons</string>
+    <string name="all">All</string>
     <string name="rss">RSS</string>
     <string name="open_in_browser">Open In Browser</string>
     <string name="today">Today</string>
+    <string name="latest">Latest</string>
+    <string name="schedule">Schedule</string>
+    <string name="shows">Shows</string>
+    <string name="others">Others</string>
+    <string name="horrible_subs_link">http://horriblesubs.info</string>
+    <string name="info">Info</string>
+    <string name="episodes">Episodes</string>
 </resources>

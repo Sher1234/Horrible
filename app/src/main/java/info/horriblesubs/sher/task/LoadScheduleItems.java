@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -79,6 +80,7 @@ public class LoadScheduleItems extends AsyncTask<Void, Void, List<ScheduleItem>>
     @Override
     protected void onPostExecute(List<ScheduleItem> scheduleItems) {
         super.onPostExecute(scheduleItems);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         recyclerView.setAdapter(new ScheduleRecycler(context, scheduleItems));
         swipeRefreshLayout.setRefreshing(false);

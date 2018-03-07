@@ -31,11 +31,17 @@ public class Schedule extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.content_home, container, false);
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
+        final SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         assert getArguments() != null;
         new LoadScheduleItems(recyclerView, getContext(), swipeRefreshLayout,
                 getArguments().getString(ARG_SCHEDULE_MODE), getArguments().getInt(ARG_SECTION_NUMBER))
                 .execute();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         return rootView;
     }
 }

@@ -17,8 +17,8 @@ public class Notification extends BroadcastReceiver {
         if (Intent.ACTION_LOCKED_BOOT_COMPLETED.equals(intent.getAction()) ||
                 Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             SharedPreferences sharedPreferences = context
-                    .getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
-            boolean b = sharedPreferences.getBoolean("alarmSet", false);
+                    .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+            boolean b = sharedPreferences.getBoolean("notification-on", false);
             if (b)
                 setAlarm(context.getApplicationContext());
         }
@@ -32,6 +32,6 @@ public class Notification extends BroadcastReceiver {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
         alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
-                1200000, pendingIntent);
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
     }
 }

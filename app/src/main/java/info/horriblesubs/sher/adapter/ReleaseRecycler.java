@@ -12,10 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Detail;
+import info.horriblesubs.sher.model.Item;
 import info.horriblesubs.sher.model.ReleaseItem;
 
 /**
@@ -93,6 +96,22 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
             if (releaseItems.get(position).link1080 == null ||
                     releaseItems.get(position).link1080.isEmpty())
                 holder.textView5.setVisibility(View.GONE);
+            final Item item = releaseItems.get(position);
+            holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (item.link == null) {
+                        Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    Intent intent = new Intent(context, Detail.class);
+                    String[] s = item.link.split("/");
+                    String link = s[s.length - 1];
+                    intent.putExtra("link", link);
+                    context.startActivity(intent);
+                    return true;
+                }
+            });
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -113,6 +132,11 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         intent.setData(Uri.parse(link));
         context.startActivity(intent);
+    }
+
+    public void onQueryUpdate(List<ReleaseItem> releaseItems) {
+        this.releaseItems = releaseItems;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

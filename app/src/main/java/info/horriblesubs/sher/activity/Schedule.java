@@ -40,7 +40,7 @@ public class Schedule extends AppCompatActivity
         setContentView(R.layout.activity_schedule);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        invalidateOptionsMenu();
         ImageView imageView = findViewById(R.id.imageView);
         Picasso.with(this).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
                 .into(imageView);
@@ -49,10 +49,10 @@ public class Schedule extends AppCompatActivity
         mode = intent.getStringExtra("mode");
         if (mode == null)
             mode = "today";
-        if (intent.getIntExtra("size", 0) == 0)
+        if (intent.getIntExtra("size", 0) == 0 || scheduleItems.size() == 0)
             new FetchScheduleItems(this, mode).execute("?mode=schedule");
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -79,7 +79,7 @@ public class Schedule extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -91,6 +91,8 @@ public class Schedule extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.actionNotifications).setVisible(false);
         menu.findItem(R.id.actionNotifications).setCheckable(false);
+        menu.findItem(R.id.actionSearch).setVisible(false);
+        menu.findItem(R.id.actionSearch).setCheckable(false);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -148,9 +150,17 @@ public class Schedule extends AppCompatActivity
                 break;
 
             case R.id.navCurrentShows:
+                intent = new Intent(this, info.horriblesubs.sher.activity.List.class);
+                intent.putExtra("mode", "current");
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.navAllShows:
+                intent = new Intent(this, info.horriblesubs.sher.activity.List.class);
+                intent.putExtra("mode", "all");
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.navRss:
@@ -167,7 +177,7 @@ public class Schedule extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

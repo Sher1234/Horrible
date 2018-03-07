@@ -1,5 +1,6 @@
 package info.horriblesubs.sher.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -20,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
@@ -32,6 +34,7 @@ import info.horriblesubs.sher.receiver.Notification;
 import info.horriblesubs.sher.task.FetchReleaseItems;
 import info.horriblesubs.sher.task.LoadReleaseItems;
 
+@SuppressLint("StaticFieldLeak")
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,9 +42,10 @@ public class Home extends AppCompatActivity
     private SwipeRefreshLayout swipeRefreshLayout;
     private String mode;
     private Map<String, String> map;
+    public static SearchView searchView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -58,6 +62,7 @@ public class Home extends AppCompatActivity
         Intent intent = getIntent();
         recyclerView = findViewById(R.id.recyclerView);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        invalidateOptionsMenu();
         mode = intent.getStringExtra("mode");
         if (intent.getIntExtra("size", 0) == 0)
             new FetchReleaseItems(Home.this, recyclerView, swipeRefreshLayout)
@@ -72,7 +77,7 @@ public class Home extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -84,74 +89,13 @@ public class Home extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START) &&
+                !Home.searchView.getQuery().toString().isEmpty()) {
+            Home.searchView.setQuery("", false);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        boolean b = sharedPreferences.getBoolean("alarmSet", false);
-        if (b) {
-            menu.findItem(R.id.actionNotifications).setTitle("Disable Notifications");
-            menu.findItem(R.id.actionNotifications).setIcon(R.drawable.ic_notifications_on);
-        } else {
-            menu.findItem(R.id.actionNotifications).setTitle("Enable Notifications");
-            menu.findItem(R.id.actionNotifications).setIcon(R.drawable.ic_notifications_off);
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.actionSearch:
-                return true;
-
-            case R.id.actionNotifications:
-                this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
-                SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-                boolean b = sharedPreferences.getBoolean("alarmSet", false);
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                if (b) {
-                    builder.setTitle("Disable Notifications");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            deleteAlarm();
-                        }
-                    });
-                } else {
-                    builder.setTitle("Enable Notifications");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            setAlarm();
-                        }
-                    });
-                }
-                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.create().show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -192,9 +136,17 @@ public class Home extends AppCompatActivity
                 break;
 
             case R.id.navCurrentShows:
+                intent = new Intent(this, List.class);
+                intent.putExtra("mode", "current");
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.navAllShows:
+                intent = new Intent(this, List.class);
+                intent.putExtra("mode", "all");
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.navRss:
@@ -211,15 +163,77 @@ public class Home extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void deleteAlarm() {
-        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("alarmSet", true).apply();
+        boolean b = sharedPreferences.getBoolean("notification-on", false);
+        searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
+        if (b) {
+            menu.findItem(R.id.actionNotifications).setTitle("Disable Notifications");
+            menu.findItem(R.id.actionNotifications).setIcon(R.drawable.ic_notifications_on);
+        } else {
+            menu.findItem(R.id.actionNotifications).setTitle("Enable Notifications");
+            menu.findItem(R.id.actionNotifications).setIcon(R.drawable.ic_notifications_off);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home, menu);
+        searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.actionNotifications:
+                this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+                boolean b = sharedPreferences.getBoolean("notification-on", false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                if (b) {
+                    builder.setTitle("Disable Notifications");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            removeNotificationAlert();
+                        }
+                    });
+                } else {
+                    builder.setTitle("Enable Notifications");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            setNotificationAlert();
+                        }
+                    });
+                }
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void removeNotificationAlert() {
+        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("notification-on", false).apply();
         FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
         Intent intent = new Intent(Home.this, Notification.class);
         PendingIntent pendingIntent = PendingIntent
@@ -230,10 +244,10 @@ public class Home extends AppCompatActivity
         invalidateOptionsMenu();
     }
 
-    private void setAlarm() {
-        this.getSharedPreferences("horriblesubs", Context.MODE_PRIVATE);
+    private void setNotificationAlert() {
+        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("alarmSet", true).apply();
+        sharedPreferences.edit().putBoolean("notification-on", true).apply();
         FirebaseMessaging.getInstance().subscribeToTopic("all");
         Intent intent = new Intent(Home.this, Notification.class);
         PendingIntent pendingIntent = PendingIntent
@@ -244,5 +258,4 @@ public class Home extends AppCompatActivity
                 AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
         invalidateOptionsMenu();
     }
-
 }

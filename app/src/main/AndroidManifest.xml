@@ -13,19 +13,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
+
         <receiver
             android:name=".receiver.Notification"
-            android:enabled="true"
-            android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".service.NotifyService"
             tools:ignore="ExportedService">
@@ -50,6 +49,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="horriblesubs.info.notification.channel.new" />
+
         <activity
             android:name=".activity.Start"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -81,6 +81,7 @@
             android:name=".activity.Detail"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.StatusBarDark" />
+
     </application>
 
 </manifest>

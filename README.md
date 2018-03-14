@@ -1,9 +1,9 @@
 # HorribleSubs
 HorribleSubs Mobile App
 
-Not affiliated with http://horriblesubs.info in any way
+Not affiliated with **http://horriblesubs.info** in any way
 
-Support http://horriblesubs.info
+Support **http://horriblesubs.info**
 
 ## Base
 ```
@@ -19,7 +19,7 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 
 * Lists Today's as well as full weeks Schedule (According to User Time)
 
-* Notifies on Every New Release Availabe on HS (Sometimes Buggy)
+* Notifies on Every New Release Available on HS (Sometimes Buggy)
 
 * Lists Available as well as Current Shows from HS
 
@@ -31,6 +31,8 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 ## Release Updates
 
 ```
+Improved Notification Support                                                     Minor Commit   - March 14, 2018
+
 Added Support for Lists, Notification sometimes buggy, Show Pages, Search         Major Commit   - March 08, 2018
 
 Added Support for Schedule, Notification on New Release & Design Improvements     Major Commit   - March 05, 2018
@@ -57,7 +59,3 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 ## Authors
 
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)
-
-## License
-
-Currently Not Licensed

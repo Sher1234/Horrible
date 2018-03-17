@@ -170,8 +170,8 @@ public class Home extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this
+                .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         boolean b = sharedPreferences.getBoolean("notification-on", false);
         searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
         if (b) {
@@ -195,8 +195,8 @@ public class Home extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.actionNotifications:
-                this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-                SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = this
+                        .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
                 boolean b = sharedPreferences.getBoolean("notification-on", false);
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 if (b) {
@@ -231,8 +231,7 @@ public class Home extends AppCompatActivity
     }
 
     private void removeNotificationAlert() {
-        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notification-on", false).apply();
         FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
         Intent intent = new Intent(Home.this, Notification.class);
@@ -245,8 +244,7 @@ public class Home extends AppCompatActivity
     }
 
     private void setNotificationAlert() {
-        this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-        SharedPreferences sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notification-on", true).apply();
         FirebaseMessaging.getInstance().subscribeToTopic("all");
         Intent intent = new Intent(Home.this, Notification.class);

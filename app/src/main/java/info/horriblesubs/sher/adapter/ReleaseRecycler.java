@@ -1,11 +1,9 @@
 package info.horriblesubs.sher.adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -14,12 +12,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.List;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Detail;
 import info.horriblesubs.sher.model.Item;
 import info.horriblesubs.sher.model.ReleaseItem;
+import info.horriblesubs.sher.util.DialogX;
 
 /**
  * ReleaseRecycler
@@ -40,41 +41,21 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.recycler_release_item, parent, false);
-        final ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
+        return new ViewHolder(view);
+    }
+
+    @NonNull
+    @Contract(pure = true)
+    private View.OnClickListener getOnClickListener(String link, DialogX dialogX) {
+        final DialogX dialog = dialogX;
+        final String s = link;
+        return new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                final ReleaseItem releaseItem = releaseItems.get(viewHolder.getAdapterPosition());
-                AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                        .setTitle(releaseItem.title + " - " + releaseItem.number);
-                if (releaseItem.link480 != null && !releaseItem.link480.isEmpty())
-                    builder.setPositiveButton("480p", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startDownload(releaseItem.link480);
-                            dialog.dismiss();
-                        }
-                    });
-                if (releaseItem.link720 != null && !releaseItem.link720.isEmpty())
-                    builder.setNegativeButton("720p", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startDownload(releaseItem.link720);
-                            dialog.dismiss();
-                        }
-                    });
-                if (releaseItem.link1080 != null && !releaseItem.link1080.isEmpty())
-                    builder.setNeutralButton("1080p", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startDownload(releaseItem.link1080);
-                            dialog.dismiss();
-                        }
-                    });
-                builder.create().show();
+            public void onClick(View v) {
+                startDownload(s);
+                dialog.dismiss();
             }
-        });
-        return viewHolder;
+        };
     }
 
     @Override
@@ -112,6 +93,23 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
                     return true;
                 }
             });
+
+            final ReleaseItem releaseItem = releaseItems.get(position);
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String s = "Episode - " + releaseItem.number;
+                    DialogX dialogX = new DialogX(context).setTitle(releaseItem.title).setDescription(s);
+                    if (releaseItem.link480 != null && !releaseItem.link480.isEmpty())
+                        dialogX.positiveButton("480p", getOnClickListener(releaseItem.link480, dialogX));
+                    if (releaseItem.link720 != null && !releaseItem.link720.isEmpty())
+                        dialogX.negativeButton("720p", getOnClickListener(releaseItem.link720, dialogX));
+                    if (releaseItem.link1080 != null && !releaseItem.link1080.isEmpty())
+                        dialogX.neutralButton("1080p", getOnClickListener(releaseItem.link1080, dialogX));
+                    dialogX.show();
+                }
+            });
+
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

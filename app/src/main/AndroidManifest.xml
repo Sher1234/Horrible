@@ -10,12 +10,12 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor">
-
+        tools:ignore="GoogleAppIndexingWarning">
         <receiver
             android:name=".receiver.Notification"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -81,7 +81,16 @@
             android:name=".activity.Detail"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar.StatusBarDark" />
+        <!-- Redesigned Horrible Subs -->
+        <activity
+            android:name=".activity.beta.Home"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

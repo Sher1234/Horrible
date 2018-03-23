@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navTodaySchedule"
+        android:title="@string/today_s" />
+    <item
+        android:id="@+id/navFullSchedule"
+        android:title="@string/full" />
+</menu>

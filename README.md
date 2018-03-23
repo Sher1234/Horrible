@@ -31,6 +31,8 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 ## Release Updates
 
 ```
+Notification Improvements, Design Improvements                                    Major Commit   - March 23, 2018
+
 Improved Notification Support                                                     Minor Commit   - March 14, 2018
 
 Added Support for Lists, Notification sometimes buggy, Show Pages, Search         Major Commit   - March 08, 2018
@@ -48,7 +50,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 * ~~Schedule~~
 
-* Notification Support **[Needs Improvement]**
+* ~~Notification Support~~
 
 * ~~Search~~
 

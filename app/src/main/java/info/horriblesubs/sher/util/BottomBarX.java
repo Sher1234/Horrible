@@ -6,13 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.SearchView;
-import android.view.MenuItem;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -21,61 +18,26 @@ import org.jetbrains.annotations.NotNull;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.receiver.Notification;
 
-public class BottomBar implements PopupMenu.OnMenuItemClickListener, View.OnClickListener {
+public class BottomBarX implements View.OnClickListener {
 
     private Context context;
 
     private SearchView searchView;
 
-    private PopupMenu popupMenuLatestReleases;
-    private PopupMenu popupMenuSchedule;
-    private PopupMenu popupMenuShows;
-    private PopupMenu popupMenu;
+    private ImageView imageView;
 
-    private ProgressBar progressBar;
-
-    private ImageView imageViewNotifications;
-
-    public BottomBar(@NotNull View view, @NotNull Context context) {
+    public BottomBarX(@NotNull View view, @NotNull Context context) {
         this.context = context;
-
-        TextView textView0 = view.findViewById(R.id.textViewShows);
-        TextView textView1 = view.findViewById(R.id.textViewSchedule);
-        TextView textView2 = view.findViewById(R.id.textViewLatestReleases);
-        textView0.setOnClickListener(this);
-        textView1.setOnClickListener(this);
-        textView2.setOnClickListener(this);
 
         searchView = view.findViewById(R.id.searchView);
         EditText searchEditText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        searchEditText.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        searchEditText.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
         searchEditText.setHintTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
+        searchEditText.setGravity(Gravity.CENTER);
+        searchEditText.setTextSize((float) 14.5);
 
-        ImageView imageView = view.findViewById(R.id.imageViewMore);
+        imageView = view.findViewById(R.id.imageViewNotification);
         imageView.setOnClickListener(this);
-
-        progressBar = view.findViewById(R.id.progressBar);
-        imageViewNotifications = view.findViewById(R.id.imageViewNotification);
-        imageViewNotifications.setOnClickListener(this);
-
-        popupMenu = new PopupMenu(context, imageView);
-        popupMenu.getMenuInflater().inflate(R.menu.activity_home_2, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(this);
-
-        popupMenuShows = new PopupMenu(context, textView0);
-        popupMenuShows.getMenuInflater()
-                .inflate(R.menu.activity_home_3_shows, popupMenuShows.getMenu());
-        popupMenuShows.setOnMenuItemClickListener(this);
-
-        popupMenuSchedule = new PopupMenu(context, textView1);
-        popupMenuSchedule.getMenuInflater()
-                .inflate(R.menu.activity_home_3_schedule, popupMenuSchedule.getMenu());
-        popupMenuSchedule.setOnMenuItemClickListener(this);
-
-        popupMenuLatestReleases = new PopupMenu(context, textView2);
-        popupMenuLatestReleases.getMenuInflater()
-                .inflate(R.menu.activity_home_3_latest, popupMenuLatestReleases.getMenu());
-        popupMenuLatestReleases.setOnMenuItemClickListener(this);
 
         invalidateNotification();
     }
@@ -84,22 +46,6 @@ public class BottomBar implements PopupMenu.OnMenuItemClickListener, View.OnClic
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.imageViewMore:
-                popupMenu.show();
-                break;
-
-            case R.id.textViewShows:
-                popupMenuShows.show();
-                break;
-
-            case R.id.textViewSchedule:
-                popupMenuSchedule.show();
-                break;
-
-            case R.id.textViewLatestReleases:
-                popupMenuLatestReleases.show();
-                break;
-
             case R.id.imageViewNotification:
                 SharedPreferences sharedPreferences = context
                         .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
@@ -134,14 +80,7 @@ public class BottomBar implements PopupMenu.OnMenuItemClickListener, View.OnClic
                 });
                 dialogX.show();
                 break;
-
         }
-
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        return false;
     }
 
     public void setTitle(String s) {
@@ -157,11 +96,11 @@ public class BottomBar implements PopupMenu.OnMenuItemClickListener, View.OnClic
                 .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         boolean b = sharedPreferences.getBoolean("notification-on", false);
         if (b) {
-            imageViewNotifications.setContentDescription("Disable Notifications");
-            imageViewNotifications.setImageResource(R.drawable.ic_notifications_on);
+            imageView.setContentDescription("Disable Notifications");
+            imageView.setImageResource(R.drawable.ic_notifications_on);
         } else {
-            imageViewNotifications.setContentDescription("Enable Notifications");
-            imageViewNotifications.setImageResource(R.drawable.ic_notifications_off);
+            imageView.setContentDescription("Enable Notifications");
+            imageView.setImageResource(R.drawable.ic_notifications_off);
         }
     }
 
@@ -190,9 +129,5 @@ public class BottomBar implements PopupMenu.OnMenuItemClickListener, View.OnClic
         alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
                 AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
         invalidateNotification();
-    }
-
-    public void setProgressBarVisibility(int i) {
-        progressBar.setVisibility(i);
     }
 }

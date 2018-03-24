@@ -19,9 +19,9 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 
 * Lists Today's as well as full weeks Schedule (According to User Time)
 
-* Notifies on Every New Release Available on HS (Sometimes Buggy)
+* Notifies on Every New Release Available on HS
 
-* Lists Available as well as Current Shows from HS
+* Lists All Available as well as Current Shows from HS
 
 * Show pages for previous show releases
 
@@ -31,6 +31,8 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 ## Release Updates
 
 ```
+Design Improvements                                                               Minor Commit   - March 24, 2018
+
 Notification Improvements, Design Improvements                                    Major Commit   - March 23, 2018
 
 Improved Notification Support                                                     Minor Commit   - March 14, 2018
@@ -44,15 +46,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 ## TODO
 
-* ~~Shows Pages~~
-
-* ~~Shows List~~
-
-* ~~Schedule~~
-
-* ~~Notification Support~~
-
-* ~~Search~~
+* Search [Needs Improvement]
 
 * Design Improvements
 

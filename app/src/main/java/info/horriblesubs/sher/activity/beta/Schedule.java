@@ -32,16 +32,19 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.List;
+import info.horriblesubs.sher.model.ScheduleItem;
 import info.horriblesubs.sher.receiver.Notification;
 import info.horriblesubs.sher.task.FetchScheduleItems;
 import info.horriblesubs.sher.task.LoadScheduleItemsX;
 import info.horriblesubs.sher.util.DialogX;
 
 @SuppressLint("StaticFieldLeak")
-public class Home extends AppCompatActivity
+public class Schedule extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    public static SearchView searchView = null;
+    public static java.util.List<ScheduleItem> scheduleItems;
+    public static String[] DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+            "Friday", "Saturday", "To be Scheduled"};
     private ImageView imageView;
 
     @Override
@@ -52,6 +55,7 @@ public class Home extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         final TextView textView = findViewById(R.id.textView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior
                 .from(findViewById(R.id.bottomSheet));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -71,32 +75,35 @@ public class Home extends AppCompatActivity
 
             }
         });
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         new FetchScheduleItems(this, "all").execute("?mode=schedule");
         new LoadScheduleItemsX(recyclerView, this, null, 1).execute();
 
         info.horriblesubs.sher.activity.Home.searchView = findViewById(R.id.searchView);
         SearchView searchView = info.horriblesubs.sher.activity.Home.searchView;
+        searchView.setQueryHint(getResources().getString(R.string.schedule));
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setGravity(Gravity.CENTER);
         editText.setTextSize((float) 14.5);
-        searchView.setQueryHint(getResources().getString(R.string.app_name));
 
         findViewById(R.id.imageViewDrawer).setOnClickListener(this);
         this.imageView = findViewById(R.id.imageViewNotification);
         this.imageView.setOnClickListener(this);
+        this.imageView.setVisibility(View.GONE);
 
         invalidateNotificationItem();
+
+        new FetchScheduleItems(this, "all").execute("?mode=schedule");
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("All"));
-        tabLayout.addTab(tabLayout.newTab().setText("Batches"));
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        for (String s : DAYS)
+            tabLayout.addTab(tabLayout.newTab().setText(s));
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -120,12 +127,12 @@ public class Home extends AppCompatActivity
         Intent intent;
         switch (item.getItemId()) {
             case R.id.navHome:
+                intent = new Intent(this, info.horriblesubs.sher.activity.beta.Home.class);
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.navSchedule:
-                intent = new Intent(this, Schedule.class);
-                startActivity(intent);
-                finish();
                 break;
 
             case R.id.navShows:
@@ -218,9 +225,9 @@ public class Home extends AppCompatActivity
         SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notification-on", false).apply();
         FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
-        Intent intent = new Intent(Home.this, Notification.class);
+        Intent intent = new Intent(Schedule.this, Notification.class);
         PendingIntent pendingIntent = PendingIntent
-                .getBroadcast(Home.this, 4869, intent, 0);
+                .getBroadcast(Schedule.this, 4869, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
         alarmManager.cancel(pendingIntent);
@@ -231,9 +238,9 @@ public class Home extends AppCompatActivity
         SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notification-on", true).apply();
         FirebaseMessaging.getInstance().subscribeToTopic("all");
-        Intent intent = new Intent(Home.this, Notification.class);
+        Intent intent = new Intent(Schedule.this, Notification.class);
         PendingIntent pendingIntent = PendingIntent
-                .getBroadcast(Home.this, 4869, intent, 0);
+                .getBroadcast(Schedule.this, 4869, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
         alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
@@ -249,12 +256,13 @@ public class Home extends AppCompatActivity
 
         @Override
         public Fragment getItem(int position) {
-            return info.horriblesubs.sher.fragment.beta.Home.newInstance(position);
+            return info.horriblesubs.sher.fragment.beta.Schedule
+                    .newInstance(position + 2);
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 8;
         }
     }
 }

@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.SearchView;
 
 import com.squareup.picasso.Picasso;
 
@@ -77,7 +76,7 @@ public class List extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        Home.searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
+        //Home.searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
         menu.findItem(R.id.actionNotifications).setVisible(false);
         menu.findItem(R.id.actionNotifications).setCheckable(false);
         return super.onPrepareOptionsMenu(menu);
@@ -86,7 +85,7 @@ public class List extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home, menu);
-        Home.searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
+        //Home.searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
         return true;
     }
 

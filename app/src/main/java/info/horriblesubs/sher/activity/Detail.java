@@ -23,7 +23,6 @@ import info.horriblesubs.sher.task.FetchPageItem;
 @SuppressLint("StaticFieldLeak")
 public class Detail extends AppCompatActivity {
 
-    public static ImageView imageView = null;
     public static PageItem pageItem = null;
     private String link = null;
 
@@ -33,7 +32,7 @@ public class Detail extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        imageView = findViewById(R.id.imageView);
+        ImageView imageView = findViewById(R.id.imageView);
         Picasso.with(this).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
                 .into(imageView);
         Intent intent = getIntent();

@@ -31,6 +31,8 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 ## Release Updates
 
 ```
+Redesign the Nav & Toolbar, & Fixed some Crashes                                  Major Commit   - March 26, 2018
+
 Design Improvements                                                               Minor Commit   - March 24, 2018
 
 Notification Improvements, Design Improvements                                    Major Commit   - March 23, 2018

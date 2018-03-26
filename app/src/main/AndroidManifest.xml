@@ -54,17 +54,7 @@
             android:name=".activity.Start"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-        </activity>
+            android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".activity.Home"
             android:label="@string/app_name"
@@ -80,17 +70,25 @@
         <activity
             android:name=".activity.Detail"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar.StatusBarDark" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- Redesigned Horrible Subs -->
         <activity
             android:name=".activity.beta.Home"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
+        <activity
+            android:name=".activity.beta.Schedule"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

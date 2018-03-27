@@ -1,8 +1,14 @@
 package info.horriblesubs.sher.activity;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,67 +17,91 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.ScheduleItem;
+import info.horriblesubs.sher.receiver.Notification;
 import info.horriblesubs.sher.task.FetchScheduleItems;
+import info.horriblesubs.sher.task.LoadScheduleItems;
+import info.horriblesubs.sher.util.DialogX;
 
+@SuppressLint("StaticFieldLeak")
 public class Schedule extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    public static List<ScheduleItem> scheduleItems;
-    public static String[] DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+    public static java.util.List<ScheduleItem> scheduleItems;
+    private final String[] DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "To be Scheduled"};
-    private String mode;
+    private ImageView imageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        invalidateOptionsMenu();
-        ImageView imageView = findViewById(R.id.imageView);
-        Picasso.with(this).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
-                .into(imageView);
 
-        Intent intent = getIntent();
-        mode = intent.getStringExtra("mode");
-        if (mode == null)
-            mode = "today";
-        if (intent.getIntExtra("size", 0) == 0 || scheduleItems.size() == 0)
-            new FetchScheduleItems(this, mode).execute("?mode=schedule");
+        final TextView textView = findViewById(R.id.textView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior
+                .from(findViewById(R.id.bottomSheet));
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED)
+                    textView.setCompoundDrawablesWithIntrinsicBounds(null,
+                            getResources().getDrawable(R.drawable.ic_up), null, null);
+                else
+                    textView.setCompoundDrawablesWithIntrinsicBounds(null,
+                            getResources().getDrawable(R.drawable.ic_down), null, null);
+            }
 
-        DrawerLayout drawer = findViewById(R.id.drawerLayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+        new FetchScheduleItems().execute("?mode=schedule");
+        new LoadScheduleItems(recyclerView, this, null, 1).execute();
+
+        Home.searchView = findViewById(R.id.searchView);
+        SearchView searchView = Home.searchView;
+        searchView.setQueryHint(getResources().getString(R.string.schedule));
+        EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        editText.setGravity(Gravity.CENTER);
+        editText.setTextSize((float) 14.5);
+
+        findViewById(R.id.imageViewDrawer).setOnClickListener(this);
+        this.imageView = findViewById(R.id.imageViewNotification);
+        this.imageView.setOnClickListener(this);
+        this.imageView.setVisibility(View.GONE);
+
+        invalidateNotificationItem();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        if (mode.equals("all")) {
-            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-            for (String s : DAYS)
-                tabLayout.addTab(tabLayout.newTab().setText(s));
-        } else if (mode.equals("today")) {
-            tabLayout.setTabMode(TabLayout.MODE_FIXED);
-            tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.today)));
-        }
-        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), mode);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        for (String s : DAYS)
+            tabLayout.addTab(tabLayout.newTab().setText(s));
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
@@ -79,37 +109,13 @@ public class Schedule extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawerLayout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START) &&
+                !Home.searchView.getQuery().toString().isEmpty()) {
+            Home.searchView.setQuery("", false);
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.actionNotifications).setVisible(false);
-        menu.findItem(R.id.actionNotifications).setCheckable(false);
-        menu.findItem(R.id.actionSearch).setVisible(false);
-        menu.findItem(R.id.actionSearch).setCheckable(false);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.actionSearch:
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -119,46 +125,15 @@ public class Schedule extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.navHome:
                 intent = new Intent(this, Home.class);
-                intent.putExtra("mode", "latest-all");
                 startActivity(intent);
                 finish();
                 break;
 
-            case R.id.navBatch:
-                intent = new Intent(this, Home.class);
-                intent.putExtra("mode", "latest-batch");
-                startActivity(intent);
-                finish();
+            case R.id.navSchedule:
                 break;
 
-            case R.id.navTodaySchedule:
-                if (mode.equalsIgnoreCase("today"))
-                    break;
-                intent = new Intent(this, Schedule.class);
-                intent.putExtra("mode", "today");
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navFullSchedule:
-                if (mode.equalsIgnoreCase("all"))
-                    break;
-                intent = new Intent(this, Schedule.class);
-                intent.putExtra("mode", "all");
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navCurrentShows:
-                intent = new Intent(this, info.horriblesubs.sher.activity.List.class);
-                intent.putExtra("mode", "current");
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navAllShows:
-                intent = new Intent(this, info.horriblesubs.sher.activity.List.class);
-                intent.putExtra("mode", "all");
+            case R.id.navShows:
+                intent = new Intent(this, List.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -182,31 +157,109 @@ public class Schedule extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageViewDrawer:
+                DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                else
+                    drawerLayout.openDrawer(GravityCompat.START);
+                break;
+
+            case R.id.imageViewNotification:
+                SharedPreferences sharedPreferences = getSharedPreferences("horriblesubs-prefs",
+                        Context.MODE_PRIVATE);
+                boolean b = sharedPreferences.getBoolean("notification-on", false);
+                final DialogX dialogX = new DialogX(this);
+                if (b) {
+                    dialogX.setTitle("Disable Notifications")
+                            .setDescription("This will disable new release notifications, You will not be able receive notifications on any new release.");
+                    dialogX.positiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            removeNotificationAlert();
+                            dialogX.dismiss();
+                        }
+                    });
+                } else {
+                    dialogX.setTitle("Enable Notifications")
+                            .setDescription("This will enable new release notifications, You will receive notifications on every new release.");
+                    dialogX.positiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            setNotificationAlert();
+                            dialogX.dismiss();
+                        }
+                    });
+                }
+                dialogX.negativeButton("CANCEL", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogX.dismiss();
+                    }
+                });
+                dialogX.show();
+                break;
+        }
+    }
+
+    private void invalidateNotificationItem() {
+        SharedPreferences sharedPreferences = this
+                .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        boolean b = sharedPreferences.getBoolean("notification-on", false);
+        if (b) {
+            imageView.setContentDescription("Disable Notifications");
+            imageView.setImageResource(R.drawable.ic_notifications_on);
+        } else {
+            imageView.setContentDescription("Enable Notifications");
+            imageView.setImageResource(R.drawable.ic_notifications_off);
+        }
+    }
+
+    private void removeNotificationAlert() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("notification-on", false).apply();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
+        Intent intent = new Intent(Schedule.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(Schedule.this, 4869, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.cancel(pendingIntent);
+        invalidateOptionsMenu();
+    }
+
+    private void setNotificationAlert() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("notification-on", true).apply();
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        Intent intent = new Intent(Schedule.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(Schedule.this, 4869, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        invalidateOptionsMenu();
+    }
+
     class PagerAdapter extends FragmentPagerAdapter {
 
-        private String MODE;
-
-        PagerAdapter(FragmentManager fragmentManager, String MODE) {
+        PagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
-            this.MODE = MODE;
         }
 
         @Override
         public Fragment getItem(int position) {
             return info.horriblesubs.sher.fragment.Schedule
-                    .newInstance(position + 1, this.MODE);
+                    .newInstance(position + 2);
         }
 
         @Override
         public int getCount() {
-            switch (this.MODE) {
-                case "all":
-                    return 8;
-                case "today":
-                    return 1;
-                default:
-                    return 0;
-            }
+            return 8;
         }
     }
 }

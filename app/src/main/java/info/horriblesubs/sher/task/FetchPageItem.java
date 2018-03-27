@@ -24,11 +24,6 @@ public class FetchPageItem extends AsyncTask<String, String, PageItem> {
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
     protected PageItem doInBackground(String... strings) {
         String s = BuildConfig.HAPI + strings[0];
         try {

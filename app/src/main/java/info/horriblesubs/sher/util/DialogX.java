@@ -23,7 +23,7 @@ public class DialogX extends Dialog {
     private TextView textViewTitle;
     private TextView textViewDescription;
 
-    private Context context;
+    private final Context context;
 
     private ImageView imageView;
 

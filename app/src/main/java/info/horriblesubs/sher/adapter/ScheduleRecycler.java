@@ -29,7 +29,7 @@ import info.horriblesubs.sher.model.ScheduleItem;
 @SuppressLint("SimpleDateFormat")
 public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.ViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<ScheduleItem> scheduleItems;
 
     public ScheduleRecycler(Context context, List<ScheduleItem> scheduleItems) {
@@ -97,10 +97,10 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView1;
-        TextView textView2;
-        TextView textView3;
-        View layout;
+        final TextView textView1;
+        final TextView textView2;
+        final TextView textView3;
+        final View layout;
 
         ViewHolder(View view) {
             super(view);

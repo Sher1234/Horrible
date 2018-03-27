@@ -11,14 +11,14 @@ import org.jetbrains.annotations.NotNull;
 import info.horriblesubs.sher.activity.Detail;
 
 @SuppressLint("StaticFieldLeak")
-public class LoadShowReleases extends AsyncTask<Integer, Integer, String> {
+public class FetchShowReleases extends AsyncTask<Integer, Integer, String> {
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
-    private Context context;
+    private final SwipeRefreshLayout swipeRefreshLayout;
+    private final RecyclerView recyclerView;
+    private final Context context;
 
-    public LoadShowReleases(RecyclerView recyclerView, Context context,
-                            SwipeRefreshLayout swipeRefreshLayout) {
+    public FetchShowReleases(RecyclerView recyclerView, Context context,
+                             SwipeRefreshLayout swipeRefreshLayout) {
         this.swipeRefreshLayout = swipeRefreshLayout;
         this.recyclerView = recyclerView;
         this.context = context;
@@ -27,12 +27,17 @@ public class LoadShowReleases extends AsyncTask<Integer, Integer, String> {
     @Override
     protected String doInBackground(@NotNull Integer... integers) {
         String s;
-        if (integers[0] == 1)
-            s = "?mode=id-episode&showId=";
-        else if (integers[0] == 2)
-            s = "?mode=id-batch&showId=";
-        else
-            s = "?mode=id-episode&showId=";
+        switch (integers[0]) {
+            case 1:
+                s = "?mode=id-episode&showId=";
+                break;
+            case 2:
+                s = "?mode=id-batch&showId=";
+                break;
+            default:
+                s = "?mode=id-episode&showId=";
+                break;
+        }
         while (true)
             if (Detail.pageItem != null)
                 break;

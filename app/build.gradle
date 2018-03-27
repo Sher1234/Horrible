@@ -7,8 +7,8 @@ android {
         applicationId "info.horriblesubs.sher"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 14
-        versionName "0.1.4"
+        versionCode 15
+        versionName "0.1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,9 +27,9 @@ dependencies {
     // android support library
     implementation 'com.android.support:design:27.1.0'
     // firebase library
-    implementation 'com.google.firebase:firebase-ads:11.8.0'
-    implementation 'com.google.firebase:firebase-messaging:11.8.0'
-    implementation 'com.google.android.gms:play-services-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-ads:12.0.0'
+    implementation 'com.google.firebase:firebase-messaging:12.0.0'
+    implementation 'com.google.android.gms:play-services-auth:12.0.0'
     //other libraries
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'

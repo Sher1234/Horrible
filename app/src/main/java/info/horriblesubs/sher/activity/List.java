@@ -1,92 +1,105 @@
 package info.horriblesubs.sher.activity;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.task.FetchListItems;
-import info.horriblesubs.sher.task.LoadListItems;
+import info.horriblesubs.sher.receiver.Notification;
+import info.horriblesubs.sher.task.FetchScheduleItems;
+import info.horriblesubs.sher.task.LoadScheduleItems;
+import info.horriblesubs.sher.util.DialogX;
 
+@SuppressLint("StaticFieldLeak")
 public class List extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
-    private Map<String, String> map;
-    private String mode;
+    private ImageView imageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Home.searchView = null;
-        map = new HashMap<>();
-        map.put("all", "list-all");
-        map.put("current", "list-current");
 
-        ImageView imageView = findViewById(R.id.imageView);
-        Picasso.with(this).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
-                .into(imageView);
-
-        Intent intent = getIntent();
-        recyclerView = findViewById(R.id.recyclerView);
-        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-        mode = intent.getStringExtra("mode");
-        if (intent.getIntExtra("size", 0) == 0)
-            new FetchListItems(List.this, recyclerView, swipeRefreshLayout)
-                    .execute("?mode=" + map.get(mode));
-        else
-            new LoadListItems(this, recyclerView).execute(intent);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        final TextView textView = findViewById(R.id.textView);
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior
+                .from(findViewById(R.id.bottomSheet));
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
-            public void onRefresh() {
-                new FetchListItems(List.this, recyclerView, swipeRefreshLayout)
-                        .execute("?mode=" + map.get(mode));
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED)
+                    textView.setCompoundDrawablesWithIntrinsicBounds(null,
+                            getResources().getDrawable(R.drawable.ic_up), null, null);
+                else
+                    textView.setCompoundDrawablesWithIntrinsicBounds(null,
+                            getResources().getDrawable(R.drawable.ic_down), null, null);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        new FetchScheduleItems().execute("?mode=schedule");
+        new LoadScheduleItems(recyclerView, this, null, 1).execute();
 
-        DrawerLayout drawer = findViewById(R.id.drawerLayout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        Home.searchView = findViewById(R.id.searchView);
+        SearchView searchView = Home.searchView;
+        EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        editText.setGravity(Gravity.CENTER);
+        editText.setTextSize((float) 14.5);
+        searchView.setQueryHint(getResources().getString(R.string.shows));
+
+        findViewById(R.id.imageViewDrawer).setOnClickListener(this);
+        this.imageView = findViewById(R.id.imageViewNotification);
+        this.imageView.setOnClickListener(this);
+        this.imageView.setVisibility(View.GONE);
+
+        invalidateNotificationItem();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        //Home.searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
-        menu.findItem(R.id.actionNotifications).setVisible(false);
-        menu.findItem(R.id.actionNotifications).setCheckable(false);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.home, menu);
-        //Home.searchView = (SearchView) menu.findItem(R.id.actionSearch).getActionView();
-        return true;
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Current Shows"));
+        tabLayout.addTab(tabLayout.newTab().setText("All"));
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
     }
 
     @Override
@@ -106,53 +119,18 @@ public class List extends AppCompatActivity
         Intent intent;
         switch (item.getItemId()) {
             case R.id.navHome:
-                if (mode.equalsIgnoreCase("latest-all"))
-                    break;
                 intent = new Intent(this, Home.class);
-                intent.putExtra("mode", "latest-all");
                 startActivity(intent);
                 finish();
                 break;
 
-            case R.id.navBatch:
-                if (mode.equalsIgnoreCase("latest-batch"))
-                    break;
-                intent = new Intent(this, Home.class);
-                intent.putExtra("mode", "latest-batch");
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navTodaySchedule:
+            case R.id.navSchedule:
                 intent = new Intent(this, Schedule.class);
-                intent.putExtra("mode", "today");
                 startActivity(intent);
                 finish();
                 break;
 
-            case R.id.navFullSchedule:
-                intent = new Intent(this, Schedule.class);
-                intent.putExtra("mode", "all");
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navCurrentShows:
-                if (mode.equalsIgnoreCase("current"))
-                    break;
-                intent = new Intent(this, List.class);
-                intent.putExtra("mode", "current");
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navAllShows:
-                if (mode.equalsIgnoreCase("all"))
-                    break;
-                intent = new Intent(this, List.class);
-                intent.putExtra("mode", "all");
-                startActivity(intent);
-                finish();
+            case R.id.navShows:
                 break;
 
             case R.id.navRss:
@@ -172,5 +150,110 @@ public class List extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageViewDrawer:
+                DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+                if (drawerLayout.isDrawerOpen(GravityCompat.START))
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                else
+                    drawerLayout.openDrawer(GravityCompat.START);
+                break;
+
+            case R.id.imageViewNotification:
+                SharedPreferences sharedPreferences = getSharedPreferences("horriblesubs-prefs",
+                        Context.MODE_PRIVATE);
+                boolean b = sharedPreferences.getBoolean("notification-on", false);
+                final DialogX dialogX = new DialogX(this);
+                if (b) {
+                    dialogX.setTitle("Disable Notifications")
+                            .setDescription("This will disable new release notifications, You will not be able receive notifications on any new release.");
+                    dialogX.positiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            removeNotificationAlert();
+                            dialogX.dismiss();
+                        }
+                    });
+                } else {
+                    dialogX.setTitle("Enable Notifications")
+                            .setDescription("This will enable new release notifications, You will receive notifications on every new release.");
+                    dialogX.positiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            setNotificationAlert();
+                            dialogX.dismiss();
+                        }
+                    });
+                }
+                dialogX.negativeButton("CANCEL", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogX.dismiss();
+                    }
+                });
+                dialogX.show();
+                break;
+        }
+    }
+
+    private void invalidateNotificationItem() {
+        SharedPreferences sharedPreferences = this
+                .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        boolean b = sharedPreferences.getBoolean("notification-on", false);
+        if (b) {
+            imageView.setContentDescription("Disable Notifications");
+            imageView.setImageResource(R.drawable.ic_notifications_on);
+        } else {
+            imageView.setContentDescription("Enable Notifications");
+            imageView.setImageResource(R.drawable.ic_notifications_off);
+        }
+    }
+
+    private void removeNotificationAlert() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("notification-on", false).apply();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
+        Intent intent = new Intent(List.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(List.this, 4869, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.cancel(pendingIntent);
+        invalidateOptionsMenu();
+    }
+
+    private void setNotificationAlert() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("notification-on", true).apply();
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        Intent intent = new Intent(List.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(List.this, 4869, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
+                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        invalidateOptionsMenu();
+    }
+
+    class PagerAdapter extends FragmentPagerAdapter {
+
+        PagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return info.horriblesubs.sher.fragment.List.newInstance(position);
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
     }
 }

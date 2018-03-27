@@ -10,17 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.task.FetchScheduleItems;
-import info.horriblesubs.sher.task.LoadScheduleItems;
+import info.horriblesubs.sher.task.FetchListItems;
 
-public class Schedule extends Fragment {
+public class List extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
+    private String s;
 
-    public static Schedule newInstance(int sectionNumber) {
-        Schedule fragment = new Schedule();
+    public static List newInstance(int i) {
+        List fragment = new List();
         Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        args.putInt(ARG_SECTION_NUMBER, i);
         fragment.setArguments(args);
         return fragment;
     }
@@ -29,20 +31,17 @@ public class Schedule extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recycler_view, container, false);
-        final RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
-        final SwipeRefreshLayout swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         assert getArguments() != null;
-        new LoadScheduleItems(recyclerView, getContext(), swipeRefreshLayout,
-                getArguments().getInt(ARG_SECTION_NUMBER))
-                .execute();
+        s = "?mode=list-current";
+        if (getArguments().getInt(ARG_SECTION_NUMBER, 0) == 1)
+            s = "?mode=list-all";
+        new FetchListItems(getContext(), recyclerView, swipeRefreshLayout).execute(s);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new FetchScheduleItems().execute("?mode=schedule");
-                new LoadScheduleItems(recyclerView, getContext(), swipeRefreshLayout,
-                        getArguments().getInt(ARG_SECTION_NUMBER))
-                        .execute();
-                swipeRefreshLayout.setRefreshing(false);
+                new FetchListItems(getContext(), recyclerView, swipeRefreshLayout).execute(s);
             }
         });
         return rootView;

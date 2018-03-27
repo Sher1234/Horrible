@@ -28,7 +28,7 @@ import info.horriblesubs.sher.util.DialogX;
 
 public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<ReleaseItem> releaseItems;
 
     public ReleaseRecycler(Context context, List<ReleaseItem> releaseItems) {
@@ -138,12 +138,12 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView1;
-        TextView textView2;
-        TextView textView3;
-        TextView textView4;
-        TextView textView5;
-        View layout;
+        final TextView textView1;
+        final TextView textView2;
+        final TextView textView3;
+        final TextView textView4;
+        final TextView textView5;
+        final View layout;
 
         ViewHolder(View view) {
             super(view);

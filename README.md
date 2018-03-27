@@ -31,6 +31,8 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 ## Release Updates
 
 ```
+Full Redesign & Optimized App Resources, Removed Search [For Now]                 Major Commit   - March 27, 2018
+
 Redesign the Nav & Toolbar, & Fixed some Crashes                                  Major Commit   - March 26, 2018
 
 Design Improvements                                                               Minor Commit   - March 24, 2018
@@ -48,7 +50,9 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 ## TODO
 
-* Search [Needs Improvement]
+* About Or Preference Activity
+
+* Search [Requires Rework]
 
 * Design Improvements
 

@@ -3,35 +3,27 @@
     <shortcut
         android:enabled="true"
         android:icon="@mipmap/ic_shortcut_schedule"
-        android:shortcutDisabledMessage="@string/today_s_schedule"
-        android:shortcutId="schedule.today"
-        android:shortcutLongLabel="@string/today_s_schedule"
-        android:shortcutShortLabel="@string/today_s_schedule">
+        android:shortcutDisabledMessage="@string/schedule"
+        android:shortcutId="schedule.hs"
+        android:shortcutLongLabel="@string/schedule"
+        android:shortcutShortLabel="@string/schedule">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Start"
-            android:targetPackage="info.horriblesubs.sher">
-            <extra
-                android:name="start-mode"
-                android:value="schedule-today" />
-        </intent>
+            android:targetClass="info.horriblesubs.sher.activity.Schedule"
+            android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
     <shortcut
         android:enabled="true"
         android:icon="@mipmap/ic_shortcut_list"
-        android:shortcutDisabledMessage="@string/current_seasons"
-        android:shortcutId="season.current"
-        android:shortcutLongLabel="@string/current_seasons"
-        android:shortcutShortLabel="@string/current_seasons">
+        android:shortcutDisabledMessage="@string/shows"
+        android:shortcutId="season.hs"
+        android:shortcutLongLabel="@string/shows"
+        android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Start"
-            android:targetPackage="info.horriblesubs.sher">
-            <extra
-                android:name="start-mode"
-                android:value="list-current" />
-        </intent>
+            android:targetClass="info.horriblesubs.sher.activity.List"
+            android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
 </shortcuts>

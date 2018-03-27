@@ -5,12 +5,8 @@
         android:icon="@mipmap/ic_shortcut_schedule">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Start"
-            android:targetPackage="info.horriblesubs.sher">
-            <extra
-                android:name="start-mode"
-                android:value="schedule-today" />
-        </intent>
+            android:targetClass="info.horriblesubs.sher.activity.Schedule"
+            android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
     <shortcut
@@ -18,12 +14,8 @@
         android:icon="@mipmap/ic_shortcut_list">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Start"
-            android:targetPackage="info.horriblesubs.sher">
-            <extra
-                android:name="start-mode"
-                android:value="list-current" />
-        </intent>
+            android:targetClass="info.horriblesubs.sher.activity.List"
+            android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
 </shortcuts>

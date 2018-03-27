@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.fragment.beta;
+package info.horriblesubs.sher.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,7 +30,7 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_home, container, false);
+        View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         assert getArguments() != null;

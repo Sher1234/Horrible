@@ -10,6 +10,7 @@
 
     <application
         android:allowBackup="true"
+        android:supportsRtl="false"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -50,30 +51,9 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="horriblesubs.info.notification.channel.new" />
 
-        <activity
-            android:name=".activity.Start"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".activity.Home"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.Schedule"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.List"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.Detail"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
         <!-- Redesigned Horrible Subs -->
         <activity
-            android:name=".activity.beta.Home"
+            android:name=".activity.Home"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -86,7 +66,15 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".activity.beta.Schedule"
+            android:name=".activity.Schedule"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.List"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.Detail"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

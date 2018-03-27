@@ -24,7 +24,7 @@ public class NotifyService extends FirebaseMessagingService {
     public NotifyService() {
     }
 
-    public static boolean isAppIsInBackground(@NotNull Context context) {
+    private static boolean isAppInBackground(@NotNull Context context) {
         boolean isInBackground = true;
         ActivityManager activityManager = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
@@ -54,7 +54,7 @@ public class NotifyService extends FirebaseMessagingService {
 
     private void handleNotification(String message) {
         Log.d("message", message + "");
-        if (!isAppIsInBackground(getApplicationContext())) {
+        if (!isAppInBackground(getApplicationContext())) {
             Intent intent = new Intent("horribleSubs.service.notification");
             intent.putExtra("message", message);
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
@@ -62,7 +62,7 @@ public class NotifyService extends FirebaseMessagingService {
         playNotificationSound();
     }
 
-    public void playNotificationSound() {
+    private void playNotificationSound() {
         try {
             Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName()
                     + "/raw/notification");

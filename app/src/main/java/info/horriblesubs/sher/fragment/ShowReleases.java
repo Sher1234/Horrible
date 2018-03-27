@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.task.LoadShowReleases;
+import info.horriblesubs.sher.task.FetchShowReleases;
 
 public class ShowReleases extends Fragment {
 
@@ -29,16 +29,16 @@ public class ShowReleases extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_home, container, false);
+        View rootView = inflater.inflate(R.layout.recycler_view, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
         swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
         assert getArguments() != null;
-        new LoadShowReleases(recyclerView, getContext(), swipeRefreshLayout)
+        new FetchShowReleases(recyclerView, getContext(), swipeRefreshLayout)
                 .execute(getArguments().getInt(ARG_SECTION_NUMBER));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new LoadShowReleases(recyclerView, getContext(), swipeRefreshLayout)
+                new FetchShowReleases(recyclerView, getContext(), swipeRefreshLayout)
                         .execute(getArguments().getInt(ARG_SECTION_NUMBER));
             }
         });

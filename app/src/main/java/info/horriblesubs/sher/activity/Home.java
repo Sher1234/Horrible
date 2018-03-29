@@ -145,6 +145,12 @@ public class Home extends AppCompatActivity
             case R.id.navShare:
                 break;
 
+            case R.id.navAbout:
+                intent = new Intent(this, About.class);
+                startActivity(intent);
+                finish();
+                break;
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawerLayout);

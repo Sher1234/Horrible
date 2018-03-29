@@ -115,9 +115,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_down" />
-                            <entry key="sourceFile" value="C:\Users\agghu" />
+                            <entry key="outputName" value="ic_github" />
+                            <entry key="sourceFile" value="C:\Users\agghu\Desktop\pinned-octocat.svg" />
                           </map>
                         </option>
                       </PersistentState>

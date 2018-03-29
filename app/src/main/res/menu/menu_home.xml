@@ -34,6 +34,9 @@
     <item android:title="@string/share_and_feedback">
         <menu>
             <item
+                android:id="@+id/navAbout"
+                android:title="@string/about_us" />
+            <item
                 android:enabled="false"
                 android:id="@+id/navShare"
                 android:title="@string/share" />

@@ -75,6 +75,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1080481830157-vppuk1injhrpo62nadkovd5770pgtf0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "84e899810e35c4b9fa101db82d419b04fa333f52"
+          }
+        },
+        {
           "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -89,8 +97,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -142,6 +142,12 @@ public class List extends AppCompatActivity
             case R.id.navFeedback:
                 break;
 
+            case R.id.navAbout:
+                intent = new Intent(this, About.class);
+                startActivity(intent);
+                finish();
+                break;
+
             case R.id.navShare:
                 break;
 

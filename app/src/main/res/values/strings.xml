@@ -15,4 +15,11 @@
     <string name="horrible_subs_link">http://horriblesubs.info</string>
     <string name="latest_releases">Latest Releases</string>
     <string name="schedule">Schedule</string>
+    <string name="author">Author</string>
+    <string name="sher1234">Sher1234</string>
+    <string name="installed_version">Installed Version</string>
+    <string name="latest_version">Latest Version</string>
+    <string name="update_available">Update Available</string>
+    <string name="no_update_available">No Update Available</string>
+    <string name="about_us">About Us</string>
 </resources>

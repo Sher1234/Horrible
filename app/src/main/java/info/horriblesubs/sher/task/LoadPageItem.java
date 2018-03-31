@@ -3,7 +3,7 @@ package info.horriblesubs.sher.task;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,22 +33,17 @@ public class LoadPageItem extends AsyncTask<Void, Void, PageItem> {
 
     @Override
     protected PageItem doInBackground(@NotNull Void... voids) {
-        while (true) {
-            Log.e("PAGE-ITEM", "NULL");
-            if (Detail.pageItem != null) {
-                Log.e("PAGE-ITEM", Detail.pageItem.toString());
-                break;
-            }
-        }
-        return Detail.pageItem;
+        while (true)
+            if (Detail.pageItem != null)
+                return Detail.pageItem;
     }
 
     @Override
     protected void onPostExecute(PageItem pageItem) {
         super.onPostExecute(pageItem);
-        textView1.setText(Detail.pageItem.title);
-        textView2.setText(Detail.pageItem.body);
-        Home.searchView.setQueryHint(Detail.pageItem.title);
+        textView1.setText(Html.fromHtml(Detail.pageItem.title));
+        textView2.setText(Html.fromHtml(Detail.pageItem.body));
+        Home.searchView.setQueryHint(Html.fromHtml(Detail.pageItem.title));
         Picasso.with(context).load(Detail.pageItem.image).into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

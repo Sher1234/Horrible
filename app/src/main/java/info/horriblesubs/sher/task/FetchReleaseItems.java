@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,11 +16,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import info.horriblesubs.sher.BuildConfig;
-import info.horriblesubs.sher.activity.Home;
 import info.horriblesubs.sher.adapter.ReleaseRecycler;
 import info.horriblesubs.sher.model.ReleaseItem;
 
@@ -77,25 +74,6 @@ public class FetchReleaseItems extends AsyncTask<String, String, List<ReleaseIte
             recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
             recyclerView.setAdapter(releaseRecycler);
             swipeRefreshLayout.setRefreshing(false);
-            if (Home.searchView != null)
-                Home.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        List<ReleaseItem> releaseItems1 = new ArrayList<>();
-                        for (ReleaseItem releaseItem : releaseItems) {
-                            String s = releaseItem.title + " - " + releaseItem.number;
-                            if (s.toLowerCase().contains(newText.toLowerCase()))
-                                releaseItems1.add(releaseItem);
-                        }
-                        releaseRecycler.onQueryUpdate(releaseItems1);
-                        return false;
-                    }
-                });
         }
     }
 }

@@ -7,8 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,11 +16,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import info.horriblesubs.sher.BuildConfig;
-import info.horriblesubs.sher.activity.Home;
 import info.horriblesubs.sher.adapter.ListRecycler;
 import info.horriblesubs.sher.model.Item;
 
@@ -50,7 +46,6 @@ public class FetchListItems extends AsyncTask<String, String, List<Item>> {
     protected List<Item> doInBackground(String... strings) {
         String s = BuildConfig.HAPI + strings[0];
         try {
-            Log.e("LINK_FLIs", s);
             URL url = new URL(s);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             try {
@@ -78,23 +73,5 @@ public class FetchListItems extends AsyncTask<String, String, List<Item>> {
         recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
         recyclerView.setAdapter(listRecycler);
         swipeRefreshLayout.setRefreshing(false);
-        if (Home.searchView != null)
-            Home.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    List<Item> items1 = new ArrayList<>();
-                    for (Item item : items) {
-                        if (item.title.toLowerCase().contains(newText.toLowerCase()))
-                            items1.add(item);
-                    }
-                    listRecycler.onQueryUpdate(items1);
-                    return false;
-                }
-            });
     }
 }

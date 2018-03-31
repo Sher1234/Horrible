@@ -7,10 +7,13 @@ Support **http://horriblesubs.info**
 
 ## Base
 ```
-Based on Previous HorribleSubs Implementation in Anime List Project (Currently Deprecated)
-Using Custom HorribleSubs API based on a PHP (version-3)
-  Provides JSON Responses
-  Faster & Robust
+
+Based on HorribleSubs Implementation in Anime List Project (Currently Deprecated)
+
+Using Custom HorribleSubs API based on a PHP (api-v3)
+  JSON Responses
+  Faster, Robust & Reliable
+
 ```
 
 ## Features
@@ -31,6 +34,8 @@ Using Custom HorribleSubs API based on a PHP (version-3)
 ## Release Updates
 
 ```
+Search Activity [Beta], List Search only in All Shows                             Major Commit   - March 31, 2018
+
 About Activity [Beta]                                                             Major Commit   - March 29, 2018
 
 Full Redesign & Optimized App Resources, Removed Search [For Now]                 Major Commit   - March 27, 2018
@@ -52,14 +57,13 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 ## TODO
 
-* About Or Preference Activity
+* About [Beta]
 
-* Search [Requires Rework]
-
-* Design Improvements
+* Search [Beta]
 
 * &amp; More
 
 ## Authors
 
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)
+

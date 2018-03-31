@@ -92,6 +92,10 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         final TextView textView1;
         final TextView textView2;

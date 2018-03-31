@@ -5,11 +5,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Home;
+import info.horriblesubs.sher.adapter.ListRecycler;
+import info.horriblesubs.sher.model.Item;
 import info.horriblesubs.sher.task.FetchListItems;
 
 public class List extends Fragment {
@@ -44,6 +50,37 @@ public class List extends Fragment {
                 new FetchListItems(getContext(), recyclerView, swipeRefreshLayout).execute(s);
             }
         });
+        if (Home.searchView != null)
+            if (getArguments().getInt(ARG_SECTION_NUMBER, 0) == 0) {
+                Home.searchView.setEnabled(false);
+                Home.searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)
+                        .setEnabled(false);
+            } else {
+                Home.searchView.setEnabled(true);
+                Home.searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)
+                        .setEnabled(true);
+                Home.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    private java.util.List<Item> itemList = null;
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        java.util.List<Item> items = new ArrayList<>();
+                        ListRecycler listRecycler = (ListRecycler) recyclerView.getAdapter();
+                        if (itemList == null)
+                            itemList = listRecycler.getItems();
+                        for (Item item : itemList)
+                            if (item.title.toLowerCase().contains(newText.toLowerCase()))
+                                items.add(item);
+                        listRecycler.onQueryUpdate(items);
+                        return false;
+                    }
+                });
+            }
         return rootView;
     }
 }

@@ -1,11 +1,7 @@
 package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -25,17 +21,12 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.ScheduleItem;
-import info.horriblesubs.sher.receiver.Notification;
 import info.horriblesubs.sher.task.FetchScheduleItems;
 import info.horriblesubs.sher.task.LoadScheduleItems;
-import info.horriblesubs.sher.util.DialogX;
 
 @SuppressLint("StaticFieldLeak")
 public class Schedule extends AppCompatActivity
@@ -44,7 +35,6 @@ public class Schedule extends AppCompatActivity
     public static java.util.List<ScheduleItem> scheduleItems;
     private final String[] DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "To be Scheduled"};
-    private ImageView imageView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -87,11 +77,9 @@ public class Schedule extends AppCompatActivity
         editText.setTextSize((float) 14.5);
 
         findViewById(R.id.imageViewDrawer).setOnClickListener(this);
-        this.imageView = findViewById(R.id.imageViewNotification);
-        this.imageView.setOnClickListener(this);
-        this.imageView.setVisibility(View.GONE);
-
-        invalidateNotificationItem();
+        findViewById(R.id.imageViewNotification).setVisibility(View.INVISIBLE);
+        findViewById(R.id.imageViewNotification).setEnabled(false);
+        findViewById(R.id.imageViewNotification).setClickable(false);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -153,9 +141,7 @@ public class Schedule extends AppCompatActivity
             case R.id.navAbout:
                 intent = new Intent(this, About.class);
                 startActivity(intent);
-                finish();
                 break;
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
@@ -173,82 +159,7 @@ public class Schedule extends AppCompatActivity
                 else
                     drawerLayout.openDrawer(GravityCompat.START);
                 break;
-
-            case R.id.imageViewNotification:
-                SharedPreferences sharedPreferences = getSharedPreferences("horriblesubs-prefs",
-                        Context.MODE_PRIVATE);
-                boolean b = sharedPreferences.getBoolean("notification-on", false);
-                final DialogX dialogX = new DialogX(this);
-                if (b) {
-                    dialogX.setTitle("Disable Notifications")
-                            .setDescription("This will disable new release notifications, You will not be able receive notifications on any new release.");
-                    dialogX.positiveButton("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            removeNotificationAlert();
-                            dialogX.dismiss();
-                        }
-                    });
-                } else {
-                    dialogX.setTitle("Enable Notifications")
-                            .setDescription("This will enable new release notifications, You will receive notifications on every new release.");
-                    dialogX.positiveButton("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            setNotificationAlert();
-                            dialogX.dismiss();
-                        }
-                    });
-                }
-                dialogX.negativeButton("CANCEL", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogX.dismiss();
-                    }
-                });
-                dialogX.show();
-                break;
         }
-    }
-
-    private void invalidateNotificationItem() {
-        SharedPreferences sharedPreferences = this
-                .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-        boolean b = sharedPreferences.getBoolean("notification-on", false);
-        if (b) {
-            imageView.setContentDescription("Disable Notifications");
-            imageView.setImageResource(R.drawable.ic_notifications_on);
-        } else {
-            imageView.setContentDescription("Enable Notifications");
-            imageView.setImageResource(R.drawable.ic_notifications_off);
-        }
-    }
-
-    private void removeNotificationAlert() {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("notification-on", false).apply();
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
-        Intent intent = new Intent(Schedule.this, Notification.class);
-        PendingIntent pendingIntent = PendingIntent
-                .getBroadcast(Schedule.this, 4869, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        assert alarmManager != null;
-        alarmManager.cancel(pendingIntent);
-        invalidateOptionsMenu();
-    }
-
-    private void setNotificationAlert() {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("notification-on", true).apply();
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
-        Intent intent = new Intent(Schedule.this, Notification.class);
-        PendingIntent pendingIntent = PendingIntent
-                .getBroadcast(Schedule.this, 4869, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        assert alarmManager != null;
-        alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
-                AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
-        invalidateOptionsMenu();
     }
 
     class PagerAdapter extends FragmentPagerAdapter {

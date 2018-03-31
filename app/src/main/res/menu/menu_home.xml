@@ -16,7 +16,9 @@
                 android:title="@string/shows" />
         </menu>
     </item>
+
     <item
+        android:visible="false"
         android:enabled="false"
         android:title="@string/others">
         <menu>
@@ -37,6 +39,7 @@
                 android:id="@+id/navAbout"
                 android:title="@string/about_us" />
             <item
+                android:visible="false"
                 android:enabled="false"
                 android:id="@+id/navShare"
                 android:title="@string/share" />

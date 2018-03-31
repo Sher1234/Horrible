@@ -82,6 +82,20 @@ public class Home extends AppCompatActivity
         editText.setGravity(Gravity.CENTER);
         editText.setTextSize((float) 14.5);
         searchView.setQueryHint(getResources().getString(R.string.app_name));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(Home.this, Search.class);
+                intent.putExtra(Search.SEARCH_HS, query);
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         findViewById(R.id.imageViewDrawer).setOnClickListener(this);
         this.imageView = findViewById(R.id.imageViewNotification);
@@ -148,9 +162,7 @@ public class Home extends AppCompatActivity
             case R.id.navAbout:
                 intent = new Intent(this, About.class);
                 startActivity(intent);
-                finish();
                 break;
-
         }
 
         DrawerLayout drawer = findViewById(R.id.drawerLayout);

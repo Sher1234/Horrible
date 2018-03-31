@@ -57,13 +57,14 @@ public class About extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         SearchView searchView = findViewById(R.id.searchView);
-        searchView.setEnabled(false);
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setGravity(Gravity.CENTER);
         editText.setTextSize((float) 14.5);
-        searchView.setQueryHint("Settings");
+        searchView.setEnabled(false);
+        editText.setEnabled(false);
+        searchView.setQueryHint("About App");
 
         button = findViewById(R.id.button);
         button.setText(R.string.no_update_available);

@@ -2,6 +2,7 @@ package info.horriblesubs.sher.task;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -22,6 +23,7 @@ public class NotificationRequest extends AsyncTask<String, Void, Void> {
         HttpURLConnection httpURLConnection = null;
         try {
             httpURLConnection = (HttpURLConnection) new URL(strings[0]).openConnection();
+            Log.v(NotificationRequest.class.getSimpleName(), httpURLConnection.getResponseMessage());
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

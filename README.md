@@ -34,6 +34,8 @@ Using Custom HorribleSubs API based on a PHP (api-v3)
 ## Release Updates
 
 ```
+Fixed Notifications [Reverted to Previous Commit]                                 Minor Commit   - April 01, 2018
+
 Search Activity [Beta], List Search only in All Shows                             Major Commit   - March 31, 2018
 
 About Activity [Beta]                                                             Major Commit   - March 29, 2018

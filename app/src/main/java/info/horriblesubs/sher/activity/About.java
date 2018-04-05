@@ -24,19 +24,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
@@ -192,7 +191,7 @@ public class About extends AppCompatActivity
                     break;
                 if (link.isEmpty())
                     break;
-                new Download().execute();
+                new Download(progressBar, button).execute();
                 /*
                 final DialogX dialogX = new DialogX(this);
                 dialogX.setTitle("Downloading Update")
@@ -211,6 +210,14 @@ public class About extends AppCompatActivity
 
     class Download extends AsyncTask<Void, Integer, Boolean> {
 
+        ProgressBar progressBar;
+        Button button;
+
+        Download(ProgressBar progressBar, Button button) {
+            this.progressBar = progressBar;
+            this.button = button;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -220,46 +227,31 @@ public class About extends AppCompatActivity
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            progressBar.setIndeterminate(false);
-            progressBar.setMax(values[1]);
-            progressBar.setProgress(values[0]);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                progressBar.setProgress(values[0], true);
-        }
-
-        @Override
         protected Boolean doInBackground(Void... voids) {
-            HttpURLConnection httpURLConnection = null;
-            int i;
             try {
                 URL url = new URL(link);
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-                int l = httpURLConnection.getContentLength();
-                InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
-                OutputStream outputStream = new FileOutputStream(
-                        Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                File.separator + "Downloads" + File.separator + "HorribleSubs.apk");
-                byte[] data = new byte[1024];
-                int x = 0;
-                while ((i = inputStream.read(data)) != -1) {
-                    x += i;
-                    publishProgress(x, l);
-                    outputStream.write(data, 0, i);
+                URLConnection urlConnection = url.openConnection();
+                String ESD = Environment.getExternalStorageDirectory()
+                        .toString();
+                File folder = new File(ESD, "Horrible Subs");
+                File file;
+                if (folder.mkdir())
+                    file = new File(folder, "Update.apk");
+                else
+                    file = new File(folder, "Update.apk");
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                urlConnection.connect();
+                InputStream inputStream = urlConnection.getInputStream();
+
+                byte[] buffer = new byte[1024];
+                int len1;
+                while ((len1 = inputStream.read(buffer)) > 0) {
+                    fileOutputStream.write(buffer, 0, len1);
                 }
-                outputStream.flush();
-                outputStream.close();
-                inputStream.close();
+                fileOutputStream.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                button.setEnabled(true);
-                progressBar.setVisibility(View.GONE);
                 return false;
-            } finally {
-                if (httpURLConnection != null)
-                    httpURLConnection.disconnect();
-                progressBar.setVisibility(View.GONE);
             }
             return true;
         }
@@ -271,10 +263,12 @@ public class About extends AppCompatActivity
                 progressBar.setVisibility(View.GONE);
                 button.setEnabled(false);
                 button.setText(R.string.no_update_available);
+                Toast.makeText(About.this, "Open Downloads Folder to Install", Toast.LENGTH_SHORT).show();
             } else {
                 progressBar.setVisibility(View.GONE);
                 button.setEnabled(true);
                 button.setText(R.string.update_available);
+                Toast.makeText(About.this, "Error Downloading App Update", Toast.LENGTH_SHORT).show();
             }
         }
     }

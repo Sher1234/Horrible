@@ -34,6 +34,8 @@ Using Custom HorribleSubs API based on a PHP (api-v3)
 ## Release Updates
 
 ```
+Increased Notification Time Limit & Updated Gradle Support                        Minor Commit   - April 07, 2018
+
 Fixed Update Support (Needs Improvements)& Updated Gradle                         Minor Commit   - April 05, 2018
 
 Fixed Notifications [Reverted to Previous Commit]                                 Minor Commit   - April 01, 2018
@@ -61,9 +63,9 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 ## TODO
 
-* About [Beta]
+* About [Needs Some Improvements]
 
-* Search [Beta]
+* RSS
 
 * &amp; More
 

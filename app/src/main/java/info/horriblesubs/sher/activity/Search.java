@@ -95,6 +95,12 @@ public class Search extends AppCompatActivity
                 finish();
                 break;
 
+            case R.id.navFav:
+                intent = new Intent(this, Favourite.class);
+                startActivity(intent);
+                finish();
+                break;
+
             case R.id.navShows:
                 intent = new Intent(this, List.class);
                 startActivity(intent);

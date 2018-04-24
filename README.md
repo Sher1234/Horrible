@@ -34,6 +34,8 @@ Using Custom HorribleSubs API based on a PHP (api-v3)
 ## Release Updates
 
 ```
+Implemented Bookmark Feature [Beta] 											  Major Commit   - April 25, 2018
+
 Redesign About, Implemented Changelog, Improved Update Support & Updated Gradle   Minor Commit   - April 24, 2018
 
 Increased Notification Time Limit & Updated Gradle Support                        Minor Commit   - April 07, 2018
@@ -66,8 +68,6 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 ## TODO
 
 * RSS
-
-* Bookmark Favourites
 
 * &amp; More
 

@@ -117,6 +117,12 @@ public class List extends AppCompatActivity
                 finish();
                 break;
 
+            case R.id.navFav:
+                intent = new Intent(this, Favourite.class);
+                startActivity(intent);
+                finish();
+                break;
+
             case R.id.navShows:
                 break;
 

@@ -157,6 +157,12 @@ public class About extends AppCompatActivity
                 finish();
                 break;
 
+            case R.id.navFav:
+                intent = new Intent(this, Favourite.class);
+                startActivity(intent);
+                finish();
+                break;
+
             case R.id.navSchedule:
                 intent = new Intent(this, Schedule.class);
                 startActivity(intent);

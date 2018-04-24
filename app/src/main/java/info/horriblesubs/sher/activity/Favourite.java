@@ -24,17 +24,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.model.ScheduleItem;
 import info.horriblesubs.sher.task.FetchScheduleItems;
 import info.horriblesubs.sher.task.LoadScheduleItems;
 
 @SuppressLint("StaticFieldLeak")
-public class Schedule extends AppCompatActivity
+public class Favourite extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
-    public static java.util.List<ScheduleItem> scheduleItems;
-    private final String[] DAYS = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-            "Friday", "Saturday", "To be Scheduled"};
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -69,7 +64,7 @@ public class Schedule extends AppCompatActivity
 
         Home.searchView = findViewById(R.id.searchView);
         SearchView searchView = Home.searchView;
-        searchView.setQueryHint(getResources().getString(R.string.schedule));
+        searchView.setQueryHint(getResources().getString(R.string.app_name));
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -87,8 +82,7 @@ public class Schedule extends AppCompatActivity
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        for (String s : DAYS)
-            tabLayout.addTab(tabLayout.newTab().setText(s));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.favourites)));
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -118,12 +112,18 @@ public class Schedule extends AppCompatActivity
                 break;
 
             case R.id.navSchedule:
+                intent = new Intent(this, Schedule.class);
+                startActivity(intent);
+                finish();
                 break;
 
             case R.id.navShows:
                 intent = new Intent(this, List.class);
                 startActivity(intent);
                 finish();
+                break;
+
+            case R.id.navFav:
                 break;
 
             case R.id.navRss:
@@ -136,12 +136,6 @@ public class Schedule extends AppCompatActivity
                 break;
 
             case R.id.navShare:
-                break;
-
-            case R.id.navFav:
-                intent = new Intent(this, Favourite.class);
-                startActivity(intent);
-                finish();
                 break;
 
             case R.id.navAbout:
@@ -176,13 +170,13 @@ public class Schedule extends AppCompatActivity
 
         @Override
         public Fragment getItem(int position) {
-            return info.horriblesubs.sher.fragment.Schedule
-                    .newInstance(position + 2);
+            return info.horriblesubs.sher.fragment.Favourite
+                    .newInstance();
         }
 
         @Override
         public int getCount() {
-            return 8;
+            return 1;
         }
     }
 }

@@ -101,7 +101,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener,
         this.imageView = findViewById(R.id.imageViewNotification);
         this.imageView.setOnClickListener(this);
 
-        invalidateNotificationItem();
+        invalidateNotifications();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -137,6 +137,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener,
 
             case R.id.navSchedule:
                 intent = new Intent(this, Schedule.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            case R.id.navFav:
+                intent = new Intent(this, Favourite.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -218,7 +224,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener,
         }
     }
 
-    private void invalidateNotificationItem() {
+    private void invalidateNotifications() {
         SharedPreferences sharedPreferences = this
                 .getSharedPreferences("horriblesubs-prefs", Context.MODE_PRIVATE);
         boolean b = sharedPreferences.getBoolean("notification-on", false);
@@ -241,7 +247,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener,
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
         alarmManager.cancel(pendingIntent);
-        invalidateNotificationItem();
+        invalidateNotifications();
     }
 
     private void setNotificationAlert() {
@@ -255,7 +261,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener,
         assert alarmManager != null;
         alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(),
                 AlarmManager.INTERVAL_HOUR, pendingIntent);
-        invalidateNotificationItem();
+        invalidateNotifications();
     }
 
     class PagerAdapter extends FragmentPagerAdapter {

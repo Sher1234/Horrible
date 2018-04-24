@@ -1,7 +1,10 @@
 package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -21,8 +24,11 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.fragment.Details;
@@ -37,6 +43,7 @@ public class Detail extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     public static PageItem pageItem = null;
+    private ImageView imageView;
     private String link = null;
 
     @Override
@@ -69,7 +76,6 @@ public class Detail extends AppCompatActivity
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         new FetchScheduleItems().execute("?mode=schedule");
         new LoadScheduleItems(recyclerView, this, null, 1).execute();
-
         Intent intent = getIntent();
         if (intent.getStringExtra("link") != null)
             link = intent.getStringExtra("link");
@@ -78,6 +84,7 @@ public class Detail extends AppCompatActivity
             finish();
         }
         new FetchPageItem().execute("?mode=show-detail&link=" + link);
+        new OnLoad().execute();
 
         Home.searchView = findViewById(R.id.searchView);
         SearchView searchView = Home.searchView;
@@ -90,9 +97,10 @@ public class Detail extends AppCompatActivity
         searchView.setQueryHint(getResources().getString(R.string.shows));
 
         findViewById(R.id.imageViewDrawer).setOnClickListener(this);
-        findViewById(R.id.imageViewNotification).setVisibility(View.INVISIBLE);
-        findViewById(R.id.imageViewNotification).setEnabled(false);
-        findViewById(R.id.imageViewNotification).setClickable(false);
+        imageView = findViewById(R.id.imageViewNotification);
+        imageView.setOnClickListener(this);
+
+        invalidateBookmark();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -154,6 +162,12 @@ public class Detail extends AppCompatActivity
                 startActivity(intent);
                 break;
 
+            case R.id.navFav:
+                intent = new Intent(this, Favourite.class);
+                startActivity(intent);
+                finish();
+                break;
+
             case R.id.navShare:
                 break;
 
@@ -174,7 +188,51 @@ public class Detail extends AppCompatActivity
                 else
                     drawerLayout.openDrawer(GravityCompat.START);
                 break;
+
+            case R.id.imageViewNotification:
+                SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-bookmarks", Context.MODE_PRIVATE);
+                if (Detail.pageItem == null)
+                    return;
+                String string = sharedPreferences.getString(Detail.pageItem.id, null);
+                if (string != null)
+                    removeBookmark();
+                else
+                    addBookmark();
+                break;
         }
+    }
+
+    private void invalidateBookmark() {
+        SharedPreferences sharedPreferences = this
+                .getSharedPreferences("horriblesubs-bookmarks", Context.MODE_PRIVATE);
+        imageView.setImageResource(R.drawable.ic_bookmark_off);
+        if (Detail.pageItem == null)
+            return;
+        String string = sharedPreferences.getString(Detail.pageItem.id, null);
+        if (string != null) {
+            imageView.setContentDescription("Remove Bookmark");
+            imageView.setImageResource(R.drawable.ic_bookmark_on);
+        } else {
+            imageView.setContentDescription("Add Bookmark");
+            imageView.setImageResource(R.drawable.ic_bookmark_off);
+        }
+    }
+
+    private void addBookmark() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-bookmarks", Context.MODE_PRIVATE);
+        if (Detail.pageItem != null) {
+            Gson gson = new Gson();
+            String s = gson.toJson(Detail.pageItem.getPageItem());
+            sharedPreferences.edit().putString(Detail.pageItem.id, s).apply();
+        }
+        invalidateBookmark();
+    }
+
+    private void removeBookmark() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("horriblesubs-bookmarks", Context.MODE_PRIVATE);
+        if (Detail.pageItem != null)
+            sharedPreferences.edit().remove(Detail.pageItem.id).apply();
+        invalidateBookmark();
     }
 
     class PagerAdapter extends FragmentPagerAdapter {
@@ -200,6 +258,29 @@ public class Detail extends AppCompatActivity
         @Override
         public int getCount() {
             return 3;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Detail.pageItem = null;
+    }
+
+    class OnLoad extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            while (true)
+                if (Detail.pageItem != null)
+                    break;
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            invalidateBookmark();
         }
     }
 }

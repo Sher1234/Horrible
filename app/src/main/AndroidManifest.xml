@@ -89,6 +89,12 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".activity.Favourite"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <provider
             android:name=".util.GenericFileProvider"
             android:authorities="FileProvider"

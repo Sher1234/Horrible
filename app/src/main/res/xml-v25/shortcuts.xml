@@ -26,4 +26,17 @@
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_shortcut_favourite"
+        android:shortcutDisabledMessage="@string/favourites"
+        android:shortcutId="favourite.hs"
+        android:shortcutLongLabel="@string/favourites"
+        android:shortcutShortLabel="@string/favourites">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="info.horriblesubs.sher.activity.Favourite"
+            android:targetPackage="info.horriblesubs.sher" />
+        <categories android:name="android.shortcut" />
+    </shortcut>
 </shortcuts>

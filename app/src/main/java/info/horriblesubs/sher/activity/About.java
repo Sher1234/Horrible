@@ -2,8 +2,10 @@ package info.horriblesubs.sher.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -39,14 +42,18 @@ import java.net.URLConnection;
 
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.util.DialogX;
 
+@SuppressWarnings("all")
 @SuppressLint("StaticFieldLeak")
 public class About extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ProgressBar progressBar;
+    private Context context;
     private Button button;
     private String link;
+    private String clog;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -54,6 +61,7 @@ public class About extends AppCompatActivity
         setContentView(R.layout.activity_about);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context = this;
 
         SearchView searchView = findViewById(R.id.searchView);
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
@@ -93,11 +101,24 @@ public class About extends AppCompatActivity
                         }
                     }
                 });
+        firestore.collection("HorribleSubs").document("changelog")
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(DocumentSnapshot documentSnapshot, FirebaseFirestoreException e) {
+                        Log.e("ASA", documentSnapshot.getId());
+                        if (documentSnapshot.exists()) {
+                            clog = documentSnapshot.getString("" + BuildConfig.VERSION_CODE);
+                        }
+                    }
+                });
         TextView textView = findViewById(R.id.textViewVersion);
-        textView.setText(BuildConfig.VERSION_NAME);
+        String s = "HorribleSubs .v" + BuildConfig.VERSION_NAME + " (" + BuildConfig.VERSION_CODE +
+                "), " + BuildConfig.APPLICATION_ID;
+        textView.setText(s);
 
+        findViewById(R.id.textViewChangelog).setOnClickListener(this);
         findViewById(R.id.imageViewDrawer).setOnClickListener(this);
-        findViewById(R.id.textViewAuthor).setOnClickListener(this);
+        findViewById(R.id.textViewSource).setOnClickListener(this);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -111,6 +132,19 @@ public class About extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void onClickChangelog() {
+        clog = clog.replace("/", "\n");
+        clog = "v" + clog;
+        final DialogX dialogX = new DialogX(this);
+        dialogX.setTitle("Changelog").setDescription(clog).positiveButton("CLOSE", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogX.dismiss();
+            }
+        }).setDescriptionGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+        dialogX.show();
     }
 
     @Override
@@ -175,7 +209,11 @@ public class About extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.textViewAuthor:
+            case R.id.textViewSource:
+                break;
+
+            case R.id.textViewChangelog:
+                onClickChangelog();
                 break;
 
             case R.id.imageViewDrawer:
@@ -191,31 +229,16 @@ public class About extends AppCompatActivity
                     break;
                 if (link.isEmpty())
                     break;
-                new Download(progressBar, button).execute();
-                /*
-                final DialogX dialogX = new DialogX(this);
-                dialogX.setTitle("Downloading Update")
-                        .setDescription("").setCancelable(false);
-                dialogX.negativeButton("CANCEL", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogX.dismiss();
-                    }
-                });
-                dialogX.show();
-                */
+                new Download().execute();
                 break;
         }
     }
 
     class Download extends AsyncTask<Void, Integer, Boolean> {
 
-        ProgressBar progressBar;
-        Button button;
+        private File file;
 
-        Download(ProgressBar progressBar, Button button) {
-            this.progressBar = progressBar;
-            this.button = button;
+        Download() {
         }
 
         @Override
@@ -234,7 +257,6 @@ public class About extends AppCompatActivity
                 String ESD = Environment.getExternalStorageDirectory()
                         .toString();
                 File folder = new File(ESD, "Horrible Subs");
-                File file;
                 if (folder.mkdir())
                     file = new File(folder, "Update.apk");
                 else
@@ -263,7 +285,12 @@ public class About extends AppCompatActivity
                 progressBar.setVisibility(View.GONE);
                 button.setEnabled(false);
                 button.setText(R.string.no_update_available);
-                Toast.makeText(About.this, "Open Downloads Folder to Install", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri uri = FileProvider.getUriForFile(context, "FileProvider", file);
+                Log.e("UriX", uri.toString());
+                intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivityForResult(intent, 0);
             } else {
                 progressBar.setVisibility(View.GONE);
                 button.setEnabled(true);

@@ -18,13 +18,13 @@ Using Custom HorribleSubs API based on a PHP (api-v3)
 
 ## Features
 
-* Supports Anime Listing of Latest 60 releases from HS
+* Supports Anime Listing of Latest 60 releases from HorribleSubs
 
 * Lists Today's as well as full weeks Schedule (According to User Time)
 
-* Notifies on Every New Release Available on HS
+* Notifies on Every New Release Available on HorribleSubs
 
-* Lists All Available as well as Current Shows from HS
+* Lists All Available as well as Current Shows from HorribleSubs
 
 * Show pages for previous show releases
 
@@ -34,6 +34,8 @@ Using Custom HorribleSubs API based on a PHP (api-v3)
 ## Release Updates
 
 ```
+Redesign About, Implemented Changelog, Improved Update Support & Updated Gradle   Minor Commit   - April 24, 2018
+
 Increased Notification Time Limit & Updated Gradle Support                        Minor Commit   - April 07, 2018
 
 Fixed Update Support (Needs Improvements)& Updated Gradle                         Minor Commit   - April 05, 2018
@@ -63,9 +65,9 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 ## TODO
 
-* About [Needs Some Improvements]
-
 * RSS
+
+* Bookmark Favourites
 
 * &amp; More
 

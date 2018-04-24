@@ -37,8 +37,8 @@ import info.horriblesubs.sher.task.LoadScheduleItems;
 import info.horriblesubs.sher.util.DialogX;
 
 @SuppressLint("StaticFieldLeak")
-public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class Home extends AppCompatActivity implements View.OnClickListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     public static SearchView searchView = null;
     private ImageView imageView;

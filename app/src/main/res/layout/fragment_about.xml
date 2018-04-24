@@ -1,129 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.CoordinatorLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="175dp"
-                android:layout_height="175dp"
-                android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher_round" />
-
             <TextView
+                android:layout_width="match_parent"
+                android:drawableStart="@mipmap/ic_launcher_round"
                 android:id="@+id/textViewAppName"
-                android:layout_width="175dp"
+                android:drawableLeft="@mipmap/ic_launcher_round"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="#cafafafa"
-                android:gravity="center"
-                android:lines="2"
-                android:padding="2dp"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:padding="25dp"
                 android:text="@string/app_name"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_anchor="@id/imageView"
-                app:layout_anchorGravity="bottom" />
-
-        </android.support.design.widget.CoordinatorLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="290dp"
-            android:orientation="vertical">
+                android:textSize="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="28dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="28dp"
                 android:padding="5dp"
-                android:text="@string/author"
+                android:text="@string/version"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="23dp"
-                android:layout_marginBottom="4dp"
-                android:drawableEnd="@drawable/ic_github"
-                android:drawableRight="@drawable/ic_github"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="@string/sher1234"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
-                android:padding="5dp"
-                android:text="@string/installed_version"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="17sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewVersion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="23dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="33dp"
                 android:layout_marginBottom="4dp"
                 android:gravity="center_vertical"
-                android:padding="10dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp" />
+                tools:text="@tools:sample/us_zipcodes" />
 
-            <Button
-                android:id="@+id/button"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textViewChangelog"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="16dp"
-                android:enabled="false"
-                android:text="@string/update_available"
-                android:textAllCaps="false"
-                android:textColor="@drawable/button" />
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="28dp"
+                android:padding="5dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:lines="2"
+                android:text="@string/changelog"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewSource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="28dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:lines="2"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/source_code"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:enabled="false"
+            android:text="@string/update_available"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button" />
+
         <ProgressBar
             android:id="@+id/progressBar"
+            android:indeterminate="true"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom" />
 
     </android.support.design.widget.CoordinatorLayout>
+
 </ScrollView>

@@ -1,7 +1,6 @@
 package info.horriblesubs.sher.task;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.view.View;
@@ -19,13 +18,11 @@ import info.horriblesubs.sher.model.PageItem;
 @SuppressLint("StaticFieldLeak")
 public class LoadPageItem extends AsyncTask<Void, Void, PageItem> {
 
-    private final Context context;
     private final TextView textView1;
     private final TextView textView2;
     private final ImageView imageView;
 
-    public LoadPageItem(Context context, TextView textView1, TextView textView2, ImageView imageView) {
-        this.context = context;
+    public LoadPageItem(TextView textView1, TextView textView2, ImageView imageView) {
         this.textView1 = textView1;
         this.textView2 = textView2;
         this.imageView = imageView;
@@ -44,7 +41,7 @@ public class LoadPageItem extends AsyncTask<Void, Void, PageItem> {
         textView1.setText(Html.fromHtml(Detail.pageItem.title));
         textView2.setText(Html.fromHtml(Detail.pageItem.body));
         Home.searchView.setQueryHint(Html.fromHtml(Detail.pageItem.title));
-        Picasso.with(context).load(Detail.pageItem.image).into(imageView);
+        Picasso.get().load(Detail.pageItem.image).into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

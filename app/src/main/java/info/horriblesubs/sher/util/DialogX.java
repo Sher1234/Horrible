@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import info.horriblesubs.sher.R;
 
+@SuppressWarnings("all")
 public class DialogX extends Dialog {
 
     private Button buttonPositive;
@@ -58,7 +59,7 @@ public class DialogX extends Dialog {
 
         viewDivider.setVisibility(View.GONE);
 
-        Picasso.with(context).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
+        Picasso.get().load("http://horriblesubs.info/images/b/ccs_banner.jpg")
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -66,31 +67,34 @@ public class DialogX extends Dialog {
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception e) {
                         imageView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark));
                     }
                 });
     }
 
-    public void positiveButton(String s, View.OnClickListener onClickListener) {
+    public DialogX positiveButton(String s, View.OnClickListener onClickListener) {
         buttonPositive.setText(s);
         buttonPositive.setOnClickListener(onClickListener);
         buttonPositive.setVisibility(View.VISIBLE);
         showDivider();
+        return this;
     }
 
-    public void negativeButton(String s, View.OnClickListener onClickListener) {
+    public DialogX negativeButton(String s, View.OnClickListener onClickListener) {
         buttonNegative.setText(s);
         buttonNegative.setOnClickListener(onClickListener);
         buttonNegative.setVisibility(View.VISIBLE);
         showDivider();
+        return this;
     }
 
-    public void neutralButton(String s, View.OnClickListener onClickListener) {
+    public DialogX neutralButton(String s, View.OnClickListener onClickListener) {
         buttonNeutral.setText(s);
         buttonNeutral.setOnClickListener(onClickListener);
         buttonNeutral.setVisibility(View.VISIBLE);
         showDivider();
+        return this;
     }
 
     private void showDivider() {
@@ -108,7 +112,12 @@ public class DialogX extends Dialog {
 
     public DialogX setDescription(String s) {
         textViewDescription.setText(s);
-        textViewDescription.setGravity(Gravity.CENTER_HORIZONTAL);
+        this.setDescriptionGravity(Gravity.CENTER_HORIZONTAL);
+        return this;
+    }
+
+    public DialogX setDescriptionGravity(int i) {
+        textViewDescription.setGravity(i);
         return this;
     }
 }

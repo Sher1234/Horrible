@@ -25,7 +25,7 @@ public class Details extends Fragment {
         ImageView imageView = rootView.findViewById(R.id.imageView);
         TextView textView1 = rootView.findViewById(R.id.textView1);
         TextView textView2 = rootView.findViewById(R.id.textView2);
-        new LoadPageItem(getContext(), textView1, textView2, imageView).execute();
+        new LoadPageItem(textView1, textView2, imageView).execute();
         return rootView;
     }
 }

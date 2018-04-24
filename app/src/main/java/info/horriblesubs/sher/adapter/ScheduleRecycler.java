@@ -30,7 +30,7 @@ import info.horriblesubs.sher.model.ScheduleItem;
 public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.ViewHolder> {
 
     private final Context context;
-    private List<ScheduleItem> scheduleItems;
+    private final List<ScheduleItem> scheduleItems;
 
     public ScheduleRecycler(Context context, List<ScheduleItem> scheduleItems) {
         this.context = context;

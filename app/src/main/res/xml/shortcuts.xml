@@ -1,21 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_schedule">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Schedule"
-            android:targetPackage="info.horriblesubs.sher" />
-        <categories android:name="android.shortcut" />
-    </shortcut>
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_list">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.List"
-            android:targetPackage="info.horriblesubs.sher" />
-        <categories android:name="android.shortcut" />
-    </shortcut>
+<shortcuts>
 </shortcuts>

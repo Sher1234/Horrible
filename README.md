@@ -34,6 +34,10 @@ Using Custom HorribleSubs API based on a PHP (api-v3)
 ## Release Updates
 
 ```
+Updated README.md					 											  Minor Commit   - April 25, 2018
+
+Simplified App Shorcut Icons		 											  Minor Commit   - April 25, 2018
+
 Implemented Bookmark Feature [Beta] 											  Major Commit   - April 25, 2018
 
 Redesign About, Implemented Changelog, Improved Update Support & Updated Gradle   Minor Commit   - April 24, 2018

@@ -9,7 +9,7 @@
         android:shortcutShortLabel="@string/schedule">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Schedule"
+            android:targetClass="info.horriblesubs.sher.old.activity.Schedule"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
@@ -22,7 +22,7 @@
         android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.List"
+            android:targetClass="info.horriblesubs.sher.old.activity.List"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
@@ -35,7 +35,7 @@
         android:shortcutShortLabel="@string/favourites">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Favourite"
+            android:targetClass="info.horriblesubs.sher.old.activity.Favourite"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <receiver
-            android:name=".receiver.Notification"
+            android:name=".old.receiver.Notification"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -27,14 +28,14 @@
         </receiver>
 
         <service
-            android:name=".service.NotifyService"
+            android:name=".old.service.NotifyService"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".service.IdService"
+            android:name=".old.service.IdService"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -53,7 +54,7 @@
 
         <!-- Redesigned Horrible Subs -->
         <activity
-            android:name=".activity.Home"
+            android:name=".old.activity.Home"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -67,36 +68,36 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".activity.Schedule"
+            android:name=".old.activity.Schedule"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.List"
+            android:name=".old.activity.List"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.Detail"
+            android:name=".old.activity.Detail"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.About"
+            android:name=".old.activity.About"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.Search"
+            android:name=".old.activity.Search"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.Favourite"
+            android:name=".old.activity.Favourite"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
-            android:name=".util.GenericFileProvider"
+            android:name=".old.util.GenericFileProvider"
             android:authorities="FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

@@ -51,7 +51,7 @@
                 android:layout_marginBottom="4dp"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimaryDark"
-                tools:text="@tools:sample/us_zipcodes" />
+                tools:text="@tools:sample/full_names" />
 
             <TextView
                 android:id="@+id/textViewChangelog"

@@ -1,52 +1,18 @@
 package info.horriblesubs.sher.old.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.old.receiver.Notification;
-import info.horriblesubs.sher.old.task.FetchScheduleItems;
-import info.horriblesubs.sher.old.task.LoadScheduleItems;
-import info.horriblesubs.sher.old.util.DialogX;
 
 @SuppressLint("StaticFieldLeak")
-public class Home extends AppCompatActivity implements View.OnClickListener,
-        NavigationView.OnNavigationItemSelectedListener {
-
+public class Home extends AppCompatActivity {
+/*
     public static SearchView searchView = null;
     private ImageView imageView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_x);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -280,4 +246,5 @@ public class Home extends AppCompatActivity implements View.OnClickListener,
             return 2;
         }
     }
+*/
 }

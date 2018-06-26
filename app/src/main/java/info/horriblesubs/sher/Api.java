@@ -6,7 +6,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface Api {
-    String ApiLink = "https://sher1234.000webhostapp.com/api/hs/";
+    String Link = "https://sher1234.000webhostapp.com/api/hs/";
+    String Prefs = "info.horrible.subs.sher.prefs";
     String ServerTime = "dd HH:mm Z";
     String ViewTime = "HH:mm";
 

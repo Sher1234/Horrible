@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.adapter;
+package info.horriblesubs.sher.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,10 +28,18 @@ import info.horriblesubs.sher.old.util.DialogX;
 
 public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHolder> {
 
+    private final int size;
     private final Context context;
     private List<ReleaseItem> releaseItems;
 
     public ReleaseRecycler(Context context, List<ReleaseItem> releaseItems) {
+        this.context = context;
+        this.size = releaseItems.size();
+        this.releaseItems = releaseItems;
+    }
+
+    public ReleaseRecycler(Context context, List<ReleaseItem> releaseItems, int size) {
+        this.size = size;
         this.context = context;
         this.releaseItems = releaseItems;
     }
@@ -117,7 +125,7 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
 
     @Override
     public int getItemCount() {
-        return releaseItems.size();
+        return size;
     }
 
     @Override

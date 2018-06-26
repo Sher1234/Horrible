@@ -22,4 +22,8 @@
     <string name="changelog">Changelog</string>
     <string name="source_code">Source Code</string>
     <string name="favourites">Favourites</string>
+    <string name="new_releases">New Releases</string>
+    <string name="view_more">View More</string>
+    <string name="batches">Batches</string>
+    <string name="refresh">Refresh</string>
 </resources>

@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.adapter;
+package info.horriblesubs.sher.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -65,7 +65,7 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
         try {
             holder.textView1.setText(Html.fromHtml(items.get(position).title));
             if (items.get(position).link == null)
-                holder.textView1.setTextColor(context.getResources().getColor(R.color.colorText2));
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.colorText));
             else
                 holder.textView1.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
             holder.textView2.setVisibility(View.GONE);

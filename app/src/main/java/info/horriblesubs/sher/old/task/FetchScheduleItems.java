@@ -15,7 +15,6 @@ import java.util.List;
 
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.model.base.ScheduleItem;
-import info.horriblesubs.sher.old.activity.Schedule;
 
 @SuppressLint("StaticFieldLeak")
 public class FetchScheduleItems extends AsyncTask<String, String, List<ScheduleItem>> {
@@ -50,6 +49,6 @@ public class FetchScheduleItems extends AsyncTask<String, String, List<ScheduleI
     protected void onPostExecute(List<ScheduleItem> scheduleItems) {
         super.onPostExecute(scheduleItems);
         if (scheduleItems != null)
-                Schedule.scheduleItems = scheduleItems;
+            scheduleItems = scheduleItems;
     }
 }

@@ -19,8 +19,8 @@ import java.net.URL;
 import java.util.List;
 
 import info.horriblesubs.sher.BuildConfig;
+import info.horriblesubs.sher.adapter.ListRecycler;
 import info.horriblesubs.sher.model.base.Item;
-import info.horriblesubs.sher.old.adapter.ListRecycler;
 
 @SuppressLint("StaticFieldLeak")
 public class FetchListItems extends AsyncTask<String, String, List<Item>> {

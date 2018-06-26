@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.adapter;
+package info.horriblesubs.sher.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,10 +31,18 @@ import info.horriblesubs.sher.old.activity.Detail;
 @SuppressLint("SimpleDateFormat")
 public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.ViewHolder> {
 
+    private final int size;
     private final Context context;
     private final List<ScheduleItem> scheduleItems;
 
-    public ScheduleRecycler(Context context, List<ScheduleItem> scheduleItems) {
+    public ScheduleRecycler(Context context, @NotNull List<ScheduleItem> scheduleItems) {
+        this.context = context;
+        size = scheduleItems.size();
+        this.scheduleItems = scheduleItems;
+    }
+
+    public ScheduleRecycler(Context context, List<ScheduleItem> scheduleItems, int size) {
+        this.size = size;
         this.context = context;
         this.scheduleItems = scheduleItems;
     }
@@ -54,7 +64,7 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
     public void onBindViewHolder(@NonNull ScheduleRecycler.ViewHolder holder, int position) {
         try {
             holder.textView1.setText(Html.fromHtml(scheduleItems.get(position).title));
-            Date date = scheduleItems.get(position).getDate();
+            Date date = scheduleItems.get(position).getTime();
             DateFormat dateFormat = new SimpleDateFormat("HH:mm");
             String s;
             if (scheduleItems.get(position).isScheduled) {
@@ -88,7 +98,7 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
 
     @Override
     public int getItemCount() {
-        return scheduleItems.size();
+        return size;
     }
 
     @Override

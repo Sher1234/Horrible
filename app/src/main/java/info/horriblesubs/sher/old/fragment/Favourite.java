@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.Set;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.adapter.ItemRecycler;
 import info.horriblesubs.sher.model.base.PageItem;
-import info.horriblesubs.sher.old.adapter.ItemRecycler;
 
 public class Favourite extends Fragment {
 

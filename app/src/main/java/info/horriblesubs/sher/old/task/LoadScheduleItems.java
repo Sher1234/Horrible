@@ -12,9 +12,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import info.horriblesubs.sher.adapter.ScheduleRecycler;
 import info.horriblesubs.sher.model.base.ScheduleItem;
-import info.horriblesubs.sher.old.activity.Schedule;
-import info.horriblesubs.sher.old.adapter.ScheduleRecycler;
 
 @SuppressLint("StaticFieldLeak")
 public class LoadScheduleItems extends AsyncTask<Void, Void, List<ScheduleItem>> {
@@ -42,15 +41,15 @@ public class LoadScheduleItems extends AsyncTask<Void, Void, List<ScheduleItem>>
     @Override
     protected List<ScheduleItem> doInBackground(Void... voids) {
         while (true)
-            if (Schedule.scheduleItems != null)
+            if (null != null)
                 break;
-        List<ScheduleItem> scheduleItems = Schedule.scheduleItems;
+        List<ScheduleItem> scheduleItems = null;
         if (scheduleItems != null) {
             List<ScheduleItem> scheduleItemList = new ArrayList<>();
             Calendar calendar1 = Calendar.getInstance();
             Calendar calendar2 = Calendar.getInstance();
             for (ScheduleItem scheduleItem : scheduleItems) {
-                calendar1.setTime(scheduleItem.getDate());
+                calendar1.setTime(scheduleItem.getTime());
                 if (i == 1) {
                     if (calendar1.get(Calendar.DAY_OF_WEEK) == calendar2.get(Calendar.DAY_OF_WEEK)
                             && scheduleItem.isScheduled)

@@ -1,29 +1,11 @@
 package info.horriblesubs.sher.old.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-
-import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.old.task.FetchReleaseItems;
 
 @SuppressLint("StaticFieldLeak")
-public class Search extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SearchView.OnQueryTextListener {
-
+public class Search extends AppCompatActivity {
+/*
     public static final String SEARCH_HS = "HSS_PARAM";
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -35,8 +17,7 @@ public class Search extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Home.searchView = findViewById(R.id.searchView);
-        SearchView searchView = Home.searchView;
+        SearchView searchView = findViewById(R.id.searchView);
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -70,9 +51,7 @@ public class Search extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
-        if (drawerLayout.isDrawerOpen(GravityCompat.START) &&
-                !Home.searchView.getQuery().toString().isEmpty()) {
-            Home.searchView.setQuery("", false);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -154,4 +133,5 @@ public class Search extends AppCompatActivity
     public boolean onQueryTextChange(String newText) {
         return false;
     }
+*/
 }

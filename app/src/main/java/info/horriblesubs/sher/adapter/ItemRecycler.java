@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.adapter;
+package info.horriblesubs.sher.adapter;
 
 import android.content.Context;
 import android.content.Intent;

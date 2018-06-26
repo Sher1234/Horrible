@@ -14,16 +14,23 @@ Horrible Subs uses number of open source projects to work properly:
  - SimpleHtmlDom for PHP-HTML Parsing
 
 #### Features
---- Mentioned features might not work in upcoming releases but will be fixed soon ---
- * Supports Anime Listing of Latest 60 releases from HorribleSubs
- * Lists Today's as well as full weeks Schedule (According to User Time)
- * Notifies on Every New Release Available on HorribleSubs
- * Lists All Available as well as Current Shows from HorribleSubs
- * Show pages for previous show releases
- * Search in List
+ * Supports Listing
+   - New Releases (60),
+   - Batches (40) &
+   - Today's Schedule (According to User Timezone)
+ * Notification Support for every new release available on HorribleSubs
+   - Needs to be enabled by user
+   - Notifications might get delayed by 30 minutes (Max).
+
+Mentioned features might not work in upcoming releases but will be fixed soon
+ * ~~Lists full weeks Schedule (According to User Time)~~
+ * ~~Lists All Available as well as Current Shows from HorribleSubs~~
+ * ~~Show pages for previous show releases~~
+ * ~~Search in List~~
 
 #### Release Updates
 ```
+New Home Activity, Improved Notifications, Improved UI for Releases & Schedule    Major Commit   - June  27, 2018
 Updated Data Models for Api-v4, Updated Gradle, Support for Android P & More      Major Commit   - June  26, 2018
 Updated README.md                                                                 Minor Commit   - April 25, 2018
 Simplified App Shortcut Icons                                                     Minor Commit   - April 25, 2018

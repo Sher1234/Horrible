@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
-import info.horriblesubs.sher.old.activity.Detail;
-
 @SuppressLint("StaticFieldLeak")
 public class FetchShowReleases extends AsyncTask<Integer, Integer, String> {
 
@@ -39,9 +37,9 @@ public class FetchShowReleases extends AsyncTask<Integer, Integer, String> {
                 break;
         }
         while (true)
-            if (Detail.pageItem != null)
+            if (null != null)
                 break;
-        return s + Detail.pageItem.id;
+        return s + "Detail.pageItem.id";
     }
 
     @Override

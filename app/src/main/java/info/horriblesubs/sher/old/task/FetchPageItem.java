@@ -14,7 +14,6 @@ import java.net.URL;
 
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.model.base.PageItem;
-import info.horriblesubs.sher.old.activity.Detail;
 
 @SuppressLint("StaticFieldLeak")
 public class FetchPageItem extends AsyncTask<String, String, PageItem> {
@@ -49,6 +48,6 @@ public class FetchPageItem extends AsyncTask<String, String, PageItem> {
     @Override
     protected void onPostExecute(PageItem pageItem) {
         super.onPostExecute(pageItem);
-        Detail.pageItem = pageItem;
+        pageItem = pageItem;
     }
 }

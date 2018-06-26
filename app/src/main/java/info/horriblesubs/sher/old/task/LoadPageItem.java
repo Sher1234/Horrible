@@ -12,8 +12,6 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import info.horriblesubs.sher.model.base.PageItem;
-import info.horriblesubs.sher.old.activity.Detail;
-import info.horriblesubs.sher.old.activity.Home;
 
 @SuppressLint("StaticFieldLeak")
 public class LoadPageItem extends AsyncTask<Void, Void, PageItem> {
@@ -31,17 +29,16 @@ public class LoadPageItem extends AsyncTask<Void, Void, PageItem> {
     @Override
     protected PageItem doInBackground(@NotNull Void... voids) {
         while (true)
-            if (Detail.pageItem != null)
-                return Detail.pageItem;
+            if (null != null)
+                return null;
     }
 
     @Override
     protected void onPostExecute(PageItem pageItem) {
         super.onPostExecute(pageItem);
-        textView1.setText(Html.fromHtml(Detail.pageItem.title));
-        textView2.setText(Html.fromHtml(Detail.pageItem.body));
-        Home.searchView.setQueryHint(Html.fromHtml(Detail.pageItem.title));
-        Picasso.get().load(Detail.pageItem.image).into(imageView);
+        textView1.setText(Html.fromHtml(pageItem.title));
+        textView2.setText(Html.fromHtml(pageItem.body));
+        Picasso.get().load(pageItem.image).into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

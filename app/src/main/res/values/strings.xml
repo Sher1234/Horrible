@@ -27,4 +27,7 @@
     <string name="batches">Batches</string>
     <string name="refresh">Refresh</string>
     <string name="search">Search</string>
+    <string name="loading">Loading…</string>
+    <string name="all_shows">All Shows</string>
+    <string name="current_shows">Current Shows</string>
 </resources>

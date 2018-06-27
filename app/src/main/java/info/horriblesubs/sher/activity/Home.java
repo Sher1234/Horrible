@@ -48,24 +48,24 @@ public class Home extends AppCompatActivity
         implements FragmentNavigation, SearchView.OnQueryTextListener {
 
     private HomeTask task;
+    private View progressBar;
     private ViewPager viewPager;
     private SearchView searchView;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewPager);
-
         searchView = findViewById(R.id.searchView);
+        progressBar = findViewById(R.id.progressBar);
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         editText.setTextColor(getResources().getColor(R.color.colorText));
         editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
         editText.setTextSize((float) 13.5);
         searchView.setOnQueryTextListener(this);
-
         task = new HomeTask();
         task.execute();
         // onLoadData(fakeHomeResponse());
@@ -159,6 +159,13 @@ public class Home extends AppCompatActivity
                 task.execute();
                 return true;
 
+            case R.id.about:
+                return true;
+
+            case R.id.shows:
+                startActivity(new Intent(this, Shows.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -241,6 +248,8 @@ public class Home extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.requestFocus();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -277,6 +286,7 @@ public class Home extends AppCompatActivity
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
+            progressBar.setVisibility(View.GONE);
             if (i == 1) {
                 if (home == null)
                     Toast.makeText(Home.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();

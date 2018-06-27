@@ -17,10 +17,6 @@ import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.base.Item;
 import info.horriblesubs.sher.old.activity.Detail;
 
-/**
- * ReleaseRecycler
- */
-
 public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> {
 
     private final Context context;
@@ -35,24 +31,8 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.recycler_release_item, parent, false);
-        final ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Item item = items.get(viewHolder.getAdapterPosition());
-                if (item.link == null) {
-                    Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(context, Detail.class);
-                String[] s = item.link.split("/");
-                String link = s[s.length - 1];
-                intent.putExtra("link", link);
-                context.startActivity(intent);
-            }
-        });
-        return viewHolder;
+        View view = inflater.inflate(R.layout.recycler_list_item, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -63,15 +43,26 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ListRecycler.ViewHolder holder, int position) {
         try {
-            holder.textView1.setText(Html.fromHtml(items.get(position).title));
-            if (items.get(position).link == null)
-                holder.textView1.setTextColor(context.getResources().getColor(R.color.colorText));
+            final Item item = items.get(position);
+            holder.textView.setText(Html.fromHtml(item.title));
+            if (item.link == null)
+                holder.textView.setTextColor(context.getResources().getColor(R.color.colorTextDisabled));
             else
-                holder.textView1.setTextColor(context.getResources().getColor(R.color.colorPrimaryDark));
-            holder.textView2.setVisibility(View.GONE);
-            holder.textView3.setVisibility(View.GONE);
-            holder.textView4.setVisibility(View.GONE);
-            holder.textView5.setVisibility(View.GONE);
+                holder.textView.setTextColor(context.getResources().getColor(R.color.colorText));
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (item.link == null) {
+                        Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Intent intent = new Intent(context, Detail.class);
+                    String[] s = item.link.split("/");
+                    String link = s[s.length - 1];
+                    intent.putExtra("link", link);
+                    context.startActivity(intent);
+                }
+            });
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -97,21 +88,13 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView textView1;
-        final TextView textView2;
-        final TextView textView3;
-        final TextView textView4;
-        final TextView textView5;
+        final TextView textView;
         final View layout;
 
         ViewHolder(View view) {
             super(view);
             layout = view;
-            textView1 = layout.findViewById(R.id.textView1);
-            textView2 = layout.findViewById(R.id.textView2);
-            textView3 = layout.findViewById(R.id.textView3);
-            textView4 = layout.findViewById(R.id.textView4);
-            textView5 = layout.findViewById(R.id.textView5);
+            textView = layout.findViewById(R.id.textView);
         }
     }
 }

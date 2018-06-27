@@ -13,6 +13,10 @@
         android:title="@string/refresh" />
 
     <item
+        android:id="@+id/shows"
+        android:title="@string/shows" />
+
+    <item
         android:id="@+id/about"
         android:title="@string/about_us" />
 

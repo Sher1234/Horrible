@@ -6,8 +6,8 @@ android {
         applicationId "info.horriblesubs.sher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 25
-        versionName "0.2.5"
+        versionCode 26
+        versionName "0.2.6"
         multiDexEnabled = true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

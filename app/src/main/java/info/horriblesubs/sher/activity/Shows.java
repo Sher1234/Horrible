@@ -2,13 +2,16 @@ package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,42 +25,48 @@ import org.jetbrains.annotations.NotNull;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.adapter.ReleaseRecycler;
-import info.horriblesubs.sher.model.response.SearchResponse;
+import info.horriblesubs.sher.fragment.ShowsFragment;
+import info.horriblesubs.sher.model.response.ShowsResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
-public class Search extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class Shows extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    private String search;
-    private SearchTask task;
+    private ShowsTask task;
     private View progressBar;
-    private RecyclerView recyclerView;
+    private ViewPager viewPager;
+    private SearchView searchView;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_shows);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        viewPager = findViewById(R.id.viewPager);
+        searchView = findViewById(R.id.searchView);
         progressBar = findViewById(R.id.progressBar);
-        recyclerView = findViewById(R.id.recyclerView);
-        SearchView searchView = findViewById(R.id.searchView);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
         editText.setTextColor(getResources().getColor(R.color.colorText));
-        searchView.setOnQueryTextListener(this);
+        editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
         editText.setTextSize((float) 13.5);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        search = getIntent().getStringExtra(SearchManager.QUERY);
-        if (search == null || search.isEmpty())
+        searchView.setOnQueryTextListener(this);
+        task = new ShowsTask();
+        task.execute();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (searchView.getQuery() != null && !searchView.getQuery().toString().isEmpty())
             searchView.setQuery(null, false);
-        else
-            searchView.setQuery(search, true);
+
     }
 
     @Override
@@ -79,12 +88,8 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
                 if (task != null)
                     task.cancel(true);
                 task = null;
-                task = new SearchTask();
+                task = new ShowsTask();
                 task.execute();
-                return true;
-
-            case R.id.about:
-                Toast.makeText(this, "About App", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -92,14 +97,18 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         }
     }
 
+    private void onLoadData(@NotNull ShowsResponse showsResponse) {
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), showsResponse));
+    }
+
     @Override
     public boolean onQueryTextSubmit(String s) {
-        if (task != null)
-            task.cancel(true);
-        task = null;
-        task = new SearchTask();
-        task.execute();
-        return false;
+        if (s == null || s.isEmpty() || s.length() < 2)
+            return false;
+        Intent intent = new Intent(this, Search.class);
+        intent.putExtra(SearchManager.QUERY, s);
+        startActivity(intent);
+        return true;
     }
 
     @Override
@@ -107,19 +116,15 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         return false;
     }
 
-    private void onLoadData(@NotNull SearchResponse response) {
-        ReleaseRecycler releaseRecycler = new ReleaseRecycler(this, response.search);
-        recyclerView.setAdapter(releaseRecycler);
-    }
-
-    class SearchTask extends AsyncTask<Void, Void, Boolean> {
+    class ShowsTask extends AsyncTask<Void, Void, Boolean> {
 
         private int i = 0;
-        private SearchResponse searchResponse;
+        private ShowsResponse shows;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressBar.requestFocus();
             progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -127,18 +132,18 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         protected Boolean doInBackground(Void... voids) {
             Retrofit retrofit = AppController.getRetrofit(Api.Link);
             Api api = retrofit.create(Api.class);
-            Call<SearchResponse> call = api.getSearch(search);
-            call.enqueue(new Callback<SearchResponse>() {
+            Call<ShowsResponse> call = api.getShows("0");
+            call.enqueue(new Callback<ShowsResponse>() {
                 @Override
-                public void onResponse(@NonNull Call<SearchResponse> call,
-                                       @NonNull Response<SearchResponse> response) {
+                public void onResponse(@NonNull Call<ShowsResponse> call,
+                                       @NonNull Response<ShowsResponse> response) {
                     if (response.body() != null)
-                        searchResponse = response.body();
+                        shows = response.body();
                     i = 1;
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
+                public void onFailure(@NonNull Call<ShowsResponse> call, @NonNull Throwable t) {
                     t.printStackTrace();
                     i = -1;
                 }
@@ -148,7 +153,7 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
                     return true;
                 if (isCancelled()) {
                     i = -1;
-                    searchResponse = null;
+                    shows = null;
                     return true;
                 }
             }
@@ -159,12 +164,32 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
             super.onPostExecute(aBoolean);
             progressBar.setVisibility(View.GONE);
             if (i == 1) {
-                if (searchResponse == null)
-                    Toast.makeText(Search.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
+                if (shows == null)
+                    Toast.makeText(Shows.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
                 else
-                    onLoadData(searchResponse);
+                    onLoadData(shows);
             } else
-                Toast.makeText(Search.this, "Server Error...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Shows.this, "Server Error...", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class PagerAdapter extends FragmentPagerAdapter {
+
+        private final ShowsResponse showsResponse;
+
+        PagerAdapter(FragmentManager fragmentManager, ShowsResponse showsResponse) {
+            super(fragmentManager);
+            this.showsResponse = showsResponse;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return ShowsFragment.newInstance(showsResponse, position);
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
         }
     }
 }

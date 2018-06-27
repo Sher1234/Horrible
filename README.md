@@ -22,15 +22,16 @@ Horrible Subs uses number of open source projects to work properly:
    - Needs to be enabled by user
    - Notifications might get delayed by 30 minutes (Max).
  * In App Search for listing available subs from Horrible Subs
+ * Views All as well as Current Shows
 
 Mentioned features might not work in upcoming releases but will be fixed soon
  * ~~Lists full weeks Schedule (According to User Time)~~
- * ~~Lists All Available as well as Current Shows from HorribleSubs~~
  * ~~Show pages for previous show releases~~
  * ~~Search in List~~
 
 #### Release Updates
 ```
+Shows Activity - Listing all & current shows, Improved UI                         Major Commit   - June  27, 2018
 New Search Activity, Improved Home UI with SearchView, Optimized Data Models      Major Commit   - June  27, 2018
 New Home Activity, Improved Notifications, Improved UI for Releases & Schedule    Major Commit   - June  27, 2018
 Updated Data Models for Api-v4, Updated Gradle, Support for Android P & More      Major Commit   - June  26, 2018
@@ -62,12 +63,13 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 #### Download
 | Type | Date | Version | Api | Download |
-| ------ |------ | ------ | ------ | ------ |
-| Alpha | ------ | ------ | ------ | ------ |
+| ------ | ------ | ------ | ------ | ------ |
+| Alpha 2 | ------ | ------ | ------ | ------ |
+| Alpha 1 | June 27 2018 | 25 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.5/app-debug.apk) |
 | **Latest Release** | **April 25, 2018** | **22** | **v3** | **[Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.2/app-debug.apk)** |
 | Release 1 | April 24, 2018 | 21 | v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.1/hs-21.apk) |
 | Beta 2 | April 1, 2018 | 18 | v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.1.8/app-debug.apk) |
-| Beta 1 | March 29, 2018 | 16 | v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.1.6/app-debug.apk) |
+| Beta 1 | March 29, 2018 | 16 | v2 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.1.6/app-debug.apk) |
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

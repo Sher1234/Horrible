@@ -30,9 +30,9 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.recycler_view, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_shows, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        swipeRefreshLayout = rootView.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = rootView.findViewById(R.id.textView);
         assert getArguments() != null;
         s = "?mode=latest";
         if (getArguments().getInt(ARG_SECTION_NUMBER, 0) == 1)

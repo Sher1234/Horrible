@@ -29,11 +29,8 @@
         <item name="android:textSize">8sp</item>
     </style>
 
-    <style name="TabLayout">
-        <item name="android:layout_gravity">top</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+    <style name="ProgressBar">
+        <item name="colorAccent">@color/colorPrimaryLight</item>
     </style>
 
 </resources>

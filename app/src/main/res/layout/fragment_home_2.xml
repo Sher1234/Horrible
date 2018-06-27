@@ -60,6 +60,11 @@
 
             </android.support.v7.widget.LinearLayoutCompat>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#20000000" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"

@@ -91,7 +91,7 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
                     context.startActivity(intent);
                 }
             });
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

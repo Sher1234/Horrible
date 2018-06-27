@@ -54,10 +54,10 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="horriblesubs.info.notification.channel.new" />
 
-        <!-- Redesigned Horrible Subs -->
         <activity
             android:name=".activity.Home"
             android:label="@string/app_name"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -69,6 +69,17 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
+
+        <activity
+            android:name=".activity.Search"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".old.activity.Schedule"
             android:label="@string/app_name"

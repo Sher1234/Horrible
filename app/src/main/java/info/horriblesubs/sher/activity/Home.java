@@ -1,6 +1,8 @@
 package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -13,20 +15,26 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.fragment.HomeFragment1;
+import info.horriblesubs.sher.model.base.ReleaseItem;
+import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.HomeResponse;
 import info.horriblesubs.sher.old.util.DialogX;
 import info.horriblesubs.sher.util.FragmentNavigation;
@@ -36,10 +44,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
-public class Home extends AppCompatActivity implements FragmentNavigation {
+public class Home extends AppCompatActivity
+        implements FragmentNavigation, SearchView.OnQueryTextListener {
 
     private HomeTask task;
     private ViewPager viewPager;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -48,10 +58,17 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewPager);
+
+        searchView = findViewById(R.id.searchView);
+        EditText editText = searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        editText.setTextColor(getResources().getColor(R.color.colorText));
+        editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
+        editText.setTextSize((float) 13.5);
+        searchView.setOnQueryTextListener(this);
+
         task = new HomeTask();
         task.execute();
         // onLoadData(fakeHomeResponse());
-        // new HomeTask().execute();
     }
 
     @Override
@@ -60,6 +77,14 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
             getSupportFragmentManager().popBackStack();
         else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (searchView.getQuery() != null && !searchView.getQuery().toString().isEmpty())
+            searchView.setQuery(null, false);
+
     }
 
     @Override
@@ -72,7 +97,7 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -124,7 +149,7 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
                     }
                 });
                 dialogX.show();
-                break;
+                return true;
 
             case R.id.refresh:
                 if (task != null)
@@ -132,9 +157,11 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
                 task = null;
                 task = new HomeTask();
                 task.execute();
-                break;
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void removeNotificationAlert() {
@@ -151,23 +178,22 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
         invalidateOptionsMenu();
     }
 
-    /*
-        private HomeResponse fakeHomeResponse() {
-            HomeResponse response = new HomeResponse();
-            ArrayList<ReleaseItem> items = new ArrayList<>();
-            ArrayList<ScheduleItem> sitems = new ArrayList<>();
-            for (int i = 0; i < 60; i++) {
-                ReleaseItem item = new ReleaseItem(i + "", "", i + "", i+"","", "", "");
-                items.add(item);
-                ScheduleItem xitem = new ScheduleItem(i + "", "", i + "", "06 09:30 -07:00",true);
-                sitems.add(xitem);
-            }
-            response.schedule = sitems;
-            response.allBatches = items;
-            response.allSubs = items;
-            return response;
+    private HomeResponse fakeHomeResponse() {
+        HomeResponse response = new HomeResponse();
+        ArrayList<ReleaseItem> items = new ArrayList<>();
+        ArrayList<ScheduleItem> sitems = new ArrayList<>();
+        for (int i = 0; i < 60; i++) {
+            ReleaseItem item = new ReleaseItem(i + "", "", i + "", i + "", "", "", "");
+            items.add(item);
+            ScheduleItem xitem = new ScheduleItem(i + "", "", i + "", "06 09:30 -07:00", true);
+            sitems.add(xitem);
         }
-    */
+        response.schedule = sitems;
+        response.allBatches = items;
+        response.allSubs = items;
+        return response;
+    }
+
     private void onLoadData(@NotNull HomeResponse homeResponse) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(F_TAG);
         if (fragment != null)
@@ -190,6 +216,21 @@ public class Home extends AppCompatActivity implements FragmentNavigation {
                 .replace(R.id.frameLayout, fragment, FragmentNavigation.F_TAG)
                 .addToBackStack(F_TAG)
                 .commit();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        if (s == null || s.isEmpty() || s.length() < 2)
+            return false;
+        Intent intent = new Intent(this, Search.class);
+        intent.putExtra(SearchManager.QUERY, s);
+        startActivity(intent);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
     }
 
     class HomeTask extends AsyncTask<Void, Void, Boolean> {

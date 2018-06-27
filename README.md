@@ -21,6 +21,7 @@ Horrible Subs uses number of open source projects to work properly:
  * Notification Support for every new release available on HorribleSubs
    - Needs to be enabled by user
    - Notifications might get delayed by 30 minutes (Max).
+ * In App Search for listing available subs from Horrible Subs
 
 Mentioned features might not work in upcoming releases but will be fixed soon
  * ~~Lists full weeks Schedule (According to User Time)~~
@@ -30,6 +31,7 @@ Mentioned features might not work in upcoming releases but will be fixed soon
 
 #### Release Updates
 ```
+New Search Activity, Improved Home UI with SearchView, Optimized Data Models      Major Commit   - June  27, 2018
 New Home Activity, Improved Notifications, Improved UI for Releases & Schedule    Major Commit   - June  27, 2018
 Updated Data Models for Api-v4, Updated Gradle, Support for Android P & More      Major Commit   - June  26, 2018
 Updated README.md                                                                 Minor Commit   - April 25, 2018

@@ -1,6 +1,10 @@
 package info.horriblesubs.sher;
 
 import info.horriblesubs.sher.model.response.HomeResponse;
+import info.horriblesubs.sher.model.response.ScheduleResponse;
+import info.horriblesubs.sher.model.response.SearchResponse;
+import info.horriblesubs.sher.model.response.ShowResponse;
+import info.horriblesubs.sher.model.response.ShowsResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,14 +19,14 @@ public interface Api {
     Call<HomeResponse> getHome();
 
     @GET("schedule/0")
-    Call<HomeResponse> getSchedule();
+    Call<ScheduleResponse> getSchedule();
 
     @GET("search/{query}")
-    Call<HomeResponse> getSearch(@Path(value = "query", encoded = true) String query);
+    Call<SearchResponse> getSearch(@Path(value = "query", encoded = true) String query);
 
     @GET("show/{link}")
-    Call<HomeResponse> getShow(@Path(value = "link", encoded = true) String link);
+    Call<ShowResponse> getShow(@Path(value = "link", encoded = true) String link);
 
     @GET("shows/{type}")
-    Call<HomeResponse> getShows(@Path(value = "type", encoded = true) String type);
+    Call<ShowsResponse> getShows(@Path(value = "type", encoded = true) String type);
 }

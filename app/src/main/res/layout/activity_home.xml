@@ -16,11 +16,38 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title=""
-            tools:title="@string/app_name" />
+            tools:title="@string/app_name">
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/search"
+                android:imeOptions="actionSearch"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="@string/app_name"
+                app:searchIcon="@null" />
+
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_home" />
+
+    <View
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <requestFocus />
+
+    </View>
 
 </android.support.design.widget.CoordinatorLayout>

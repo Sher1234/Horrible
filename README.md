@@ -7,10 +7,9 @@ Support the official site **http://horriblesubs.info**
 Horrible Subs uses number of open source projects to work properly:
  - Retrofit Networking Libraries
  - OkHttp Library for Network Handling
- - Gson Library for JSON Parsing
  - Android Support Libraries
  - Firebase for Push Notifications & Ads
- - Picasso for Displaying Images
+ - Glide for Displaying Images
  - SimpleHtmlDom for PHP-HTML Parsing
 
 #### Features
@@ -28,6 +27,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Performance improvements, Crash fixes & Optimized app resources & dependencies    Major Commit   - June  28, 2018
 Added Show Activity with New UI & Updated Dialog UI with new design language      Major Commit   - June  27, 2018
 Schedule Activity - Listing Full Schedule                                         Major Commit   - June  27, 2018
 Shows Activity - Listing all & current shows, Improved UI                         Major Commit   - June  27, 2018

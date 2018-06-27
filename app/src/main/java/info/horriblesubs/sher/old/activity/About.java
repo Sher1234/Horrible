@@ -42,9 +42,6 @@ import java.net.URLConnection;
 
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Home;
-import info.horriblesubs.sher.activity.Schedule;
-import info.horriblesubs.sher.activity.Shows;
 import info.horriblesubs.sher.util.DialogX;
 
 @SuppressWarnings("all")
@@ -152,49 +149,6 @@ public class About extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Intent intent;
-        switch (item.getItemId()) {
-            case R.id.navHome:
-                intent = new Intent(this, Home.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navFav:
-                intent = new Intent(this, Favourite.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navSchedule:
-                intent = new Intent(this, Schedule.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navShows:
-                intent = new Intent(this, Shows.class);
-                startActivity(intent);
-                finish();
-                break;
-
-            case R.id.navRss:
-                break;
-
-            case R.id.navBrowser:
-                break;
-
-            case R.id.navFeedback:
-                break;
-
-            case R.id.navShare:
-                break;
-
-            case R.id.navAbout:
-                break;
-
-        }
-
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -78,15 +78,6 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
         return position;
     }
 
-    public void onQueryUpdate(List<Item> items) {
-        this.items = items;
-        notifyDataSetChanged();
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder {
         final TextView textView;
         final View layout;

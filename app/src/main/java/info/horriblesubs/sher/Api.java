@@ -14,6 +14,7 @@ public interface Api {
     String Prefs = "info.horrible.subs.sher.prefs";
     String ServerTime = "dd HH:mm Z";
     String ViewTime = "HH:mm";
+    String ViewDay = "EEEE";
 
     @GET("home/0")
     Call<HomeResponse> getHome();

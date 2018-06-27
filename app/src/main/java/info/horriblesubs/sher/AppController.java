@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -16,12 +15,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppController extends Application {
-    private static AppController mInstance;
-
-    @Contract(pure = true)
-    public static synchronized AppController getInstance() {
-        return mInstance;
-    }
 
     @NonNull
     public static Retrofit getRetrofit(@NotNull String url) {
@@ -44,6 +37,5 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance = this;
     }
 }

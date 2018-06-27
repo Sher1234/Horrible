@@ -14,14 +14,10 @@ import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Show;
-import info.horriblesubs.sher.model.base.Item;
 import info.horriblesubs.sher.model.base.ScheduleItem;
 
 /**
@@ -63,20 +59,17 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
     @Override
     public void onBindViewHolder(@NonNull ScheduleRecycler.ViewHolder holder, int position) {
         try {
-            holder.textView1.setText(Html.fromHtml(scheduleItems.get(position).title));
-            Date date = scheduleItems.get(position).getTime();
-            DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            final ScheduleItem item = scheduleItems.get(position);
+            holder.textView1.setText(Html.fromHtml(item.title));
             String s;
             if (scheduleItems.get(position).isScheduled) {
-                holder.textView2.setText(dateFormat.format(date));
-                dateFormat = new SimpleDateFormat("EEEE");
-                s = dateFormat.format(date);
+                holder.textView2.setText(item.getViewTime());
+                s = item.getViewDay();
             } else {
-                holder.textView2.setVisibility(View.GONE);
                 s = "To be scheduled";
+                holder.textView2.setVisibility(View.GONE);
             }
             holder.textView3.setText(s);
-            final Item item = scheduleItems.get(position);
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

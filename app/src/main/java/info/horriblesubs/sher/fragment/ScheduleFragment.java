@@ -41,7 +41,7 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_shows, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
         return rootView;
     }

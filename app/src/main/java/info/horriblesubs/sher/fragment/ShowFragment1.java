@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ReleaseRecycler;
@@ -99,8 +99,8 @@ public class ShowFragment1 extends Fragment implements View.OnClickListener {
     }
 
     private void onLoadData() {
-        Picasso.get().load(showResponse.detail.image).error(R.mipmap.ic_launcher_round)
-                .placeholder(R.mipmap.ic_launcher_round).into(imageView);
+        Glide.with(this).load(showResponse.detail.image).into(imageView);
+        // Picasso.get().load(showResponse.detail.image).error(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round).into(imageView);
         textView1.setText(Html.fromHtml(showResponse.detail.title));
         textView2.setText(Html.fromHtml(showResponse.detail.body));
         if (showResponse.detail.body.length() < 200)
@@ -112,11 +112,12 @@ public class ShowFragment1 extends Fragment implements View.OnClickListener {
             button2.setEnabled(false);
         } else {
             ReleaseRecycler releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allBatches, 2);
-            recyclerView1.setAdapter(releaseRecycler);
             if (showResponse.allBatches.size() < 3) {
                 button2.setVisibility(View.INVISIBLE);
                 button2.setEnabled(false);
+                releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allBatches);
             }
+            recyclerView1.setAdapter(releaseRecycler);
         }
         if (showResponse.allSubs == null || showResponse.allSubs.size() < 1) {
             recyclerView2.setVisibility(View.GONE);
@@ -125,11 +126,12 @@ public class ShowFragment1 extends Fragment implements View.OnClickListener {
             button3.setEnabled(false);
         } else {
             ReleaseRecycler releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allSubs, 2);
-            recyclerView2.setAdapter(releaseRecycler);
             if (showResponse.allSubs.size() < 3) {
                 button3.setVisibility(View.INVISIBLE);
                 button3.setEnabled(false);
+                releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allSubs);
             }
+            recyclerView2.setAdapter(releaseRecycler);
         }
     }
 

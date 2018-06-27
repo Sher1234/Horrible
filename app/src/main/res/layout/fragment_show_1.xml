@@ -202,7 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="@string/no_batches_available"
+                    android:text="@string/no_episodes_available"
                     android:visibility="gone"
                     tools:visibility="visible" />
 

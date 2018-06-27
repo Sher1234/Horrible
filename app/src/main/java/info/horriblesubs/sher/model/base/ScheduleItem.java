@@ -11,8 +11,8 @@ import info.horriblesubs.sher.Api;
 
 public class ScheduleItem extends Item {
 
-    public String time;
-    public boolean isScheduled;
+    public final String time;
+    public final boolean isScheduled;
 
     public ScheduleItem(String id, String link, String title, String time, boolean isScheduled) {
         super(id, link, title);
@@ -34,6 +34,11 @@ public class ScheduleItem extends Item {
     @SuppressLint("SimpleDateFormat")
     public String getViewTime() {
         return (new SimpleDateFormat(Api.ViewTime)).format(getTime());
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public String getViewDay() {
+        return (new SimpleDateFormat(Api.ViewDay)).format(getTime());
     }
 
     @Override

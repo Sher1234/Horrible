@@ -4,14 +4,8 @@
     <string name="_720p">720p</string>
     <string name="_1080p">1080p</string>
     <string name="notifications">Notifications</string>
-    <string name="report_and_feedback"><![CDATA[Report & Feedback]]></string>
-    <string name="share">Share</string>
-    <string name="share_and_feedback"><![CDATA[Share & Feedback]]></string>
     <string name="today_s_schedule">Today\'s Schedule</string>
-    <string name="rss">RSS</string>
-    <string name="open_in_browser">Open In Browser</string>
     <string name="shows">Shows</string>
-    <string name="others">Others</string>
     <string name="horrible_subs_link">http://horriblesubs.info</string>
     <string name="latest_releases">Latest Releases</string>
     <string name="schedule">Schedule</string>
@@ -26,7 +20,6 @@
     <string name="view_more">View More</string>
     <string name="batches">Batches</string>
     <string name="refresh">Refresh</string>
-    <string name="search">Search</string>
     <string name="loading">Loading…</string>
     <string name="all_shows">All Shows</string>
     <string name="current_shows">Current Shows</string>
@@ -34,4 +27,5 @@
     <string name="no_batches_available">No batches available</string>
     <string name="disable_notify">This will disable new release notifications, You will not be able receive notifications on any new release.</string>
     <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
+    <string name="no_episodes_available">No episodes available</string>
 </resources>

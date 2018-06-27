@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ import info.horriblesubs.sher.model.base.PageItem;
 
 public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<PageItem> pageItems;
 
     public ItemRecycler(Context context, List<PageItem> pageItems) {
@@ -52,7 +52,7 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
         try {
             final PageItem pageItem = pageItems.get(position);
             holder.textView.setText(Html.fromHtml(pageItem.title));
-            Picasso.get().load(pageItem.image).into(holder.imageView);
+            Glide.with(context).load(pageItem.image).into(holder.imageView);
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,15 +82,10 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
         return position;
     }
 
-    public void onQueryUpdate(List<PageItem> items) {
-        this.pageItems = items;
-        notifyDataSetChanged();
-    }
-
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        ImageView imageView;
-        View layout;
+        final TextView textView;
+        final ImageView imageView;
+        final View layout;
 
         ViewHolder(View view) {
             super(view);

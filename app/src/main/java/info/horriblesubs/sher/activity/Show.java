@@ -3,7 +3,6 @@ package info.horriblesubs.sher.activity;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,21 +22,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.fragment.ShowFragment1;
-import info.horriblesubs.sher.model.base.ReleaseItem;
-import info.horriblesubs.sher.model.base.ScheduleItem;
-import info.horriblesubs.sher.model.response.HomeResponse;
 import info.horriblesubs.sher.model.response.ShowResponse;
-import info.horriblesubs.sher.util.DialogX;
 import info.horriblesubs.sher.util.FragmentNavigation;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -111,54 +102,13 @@ public class Show extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
-        boolean b = sharedPreferences.getBoolean("notifications", false);
-        if (b) {
-            menu.findItem(R.id.notifications).setTitle("Disable Notifications");
-            menu.findItem(R.id.notifications).setIcon(R.drawable.ic_notifications_on);
-        } else {
-            menu.findItem(R.id.notifications).setTitle("Enable Notifications");
-            menu.findItem(R.id.notifications).setIcon(R.drawable.ic_notifications_off);
-        }
+        menu.findItem(R.id.notifications).setVisible(false).setEnabled(false);
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.notifications:
-                SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
-                final boolean b = sharedPreferences.getBoolean("notifications", false);
-                final DialogX dialogX = new DialogX(this);
-                if (b)
-                    dialogX.setTitle("Disable Notifications")
-                            .setDescription("This will disable new release notifications, You will not be able receive notifications on any new release.")
-                            .positiveButton("Ok", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    removeNotificationAlert();
-                                    dialogX.dismiss();
-                                }
-                            });
-                else
-                    dialogX.setTitle("Enable Notifications")
-                            .setDescription("This will enable new release notifications, You will receive notifications on every new release.")
-                            .positiveButton("Ok", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    setNotificationAlert();
-                                    dialogX.dismiss();
-                                }
-                            });
-                dialogX.negativeButton("Cancel", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialogX.dismiss();
-                    }
-                });
-                dialogX.show();
-                return true;
-
             case R.id.refresh:
                 if (task != null)
                     task.cancel(true);
@@ -177,36 +127,6 @@ public class Show extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void removeNotificationAlert() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("notifications", false).apply();
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("hs_all");
-        invalidateOptionsMenu();
-    }
-
-    private void setNotificationAlert() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("notifications", true).apply();
-        FirebaseMessaging.getInstance().subscribeToTopic("hs_all");
-        invalidateOptionsMenu();
-    }
-
-    private HomeResponse fakeHomeResponse() {
-        HomeResponse response = new HomeResponse();
-        ArrayList<ReleaseItem> items = new ArrayList<>();
-        ArrayList<ScheduleItem> sitems = new ArrayList<>();
-        for (int i = 0; i < 60; i++) {
-            ReleaseItem item = new ReleaseItem(i + "", "", i + "", i + "", "", "", "");
-            items.add(item);
-            ScheduleItem xitem = new ScheduleItem(i + "", "", i + "", "06 09:30 -07:00", true);
-            sitems.add(xitem);
-        }
-        response.schedule = sitems;
-        response.allBatches = items;
-        response.allSubs = items;
-        return response;
     }
 
     private void onLoadData(@NotNull ShowResponse showResponse) {

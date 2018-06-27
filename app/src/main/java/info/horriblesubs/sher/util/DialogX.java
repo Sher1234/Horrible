@@ -9,8 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import info.horriblesubs.sher.R;
 
@@ -55,18 +54,8 @@ public class DialogX extends Dialog {
 
         viewDivider.setVisibility(View.GONE);
 
-        Picasso.get().load("http://horriblesubs.info/images/b/ccs_banner.jpg")
-                .into(imageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        imageView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark));
-                    }
-                });
+        Glide.with(context).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
+                .into(imageView);
     }
 
     public DialogX positiveButton(String s, View.OnClickListener onClickListener) {

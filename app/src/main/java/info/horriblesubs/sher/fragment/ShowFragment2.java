@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.response.ShowResponse;
@@ -68,7 +68,7 @@ public class ShowFragment2 extends Fragment {
     private void onLoadData() {
         textView1.setText(Html.fromHtml(showResponse.detail.title));
         textView2.setText(Html.fromHtml(showResponse.detail.body));
-        Picasso.get().load(showResponse.detail.image).error(R.mipmap.ic_launcher_round)
-                .placeholder(R.mipmap.ic_launcher_round).into(imageView);
+        //Picasso.get().load(showResponse.detail.image).error(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round).into(imageView);
+        Glide.with(this).load(showResponse.detail.image).into(imageView);
     }
 }

@@ -1,8 +1,11 @@
 package info.horriblesubs.sher.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.transition.Fade;
+import android.support.transition.TransitionInflater;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -60,6 +63,13 @@ public class HomeFragment1 extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.fade));
+            setEnterTransition(new Fade());
+            setExitTransition(new Fade());
+            setReturnTransition(new Fade());
+            setSharedElementReturnTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.fade));
+        }
         assert getArguments() != null;
         homeResponse = (HomeResponse) getArguments().getSerializable(ARG_RESPONSE);
     }

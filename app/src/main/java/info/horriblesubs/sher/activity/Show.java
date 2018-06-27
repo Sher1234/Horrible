@@ -27,11 +27,16 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.fragment.HomeFragment1;
+import info.horriblesubs.sher.fragment.ShowFragment1;
+import info.horriblesubs.sher.model.base.ReleaseItem;
+import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.HomeResponse;
+import info.horriblesubs.sher.model.response.ShowResponse;
 import info.horriblesubs.sher.util.DialogX;
 import info.horriblesubs.sher.util.FragmentNavigation;
 import retrofit2.Call;
@@ -40,10 +45,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
-public class Home extends AppCompatActivity
+public class Show extends AppCompatActivity
         implements FragmentNavigation, SearchView.OnQueryTextListener {
 
-    private HomeTask task;
+    private String link;
+    private ShowTask task;
     private View progressBar;
     private ViewPager viewPager;
     private SearchView searchView;
@@ -54,6 +60,11 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        link = getIntent().getStringExtra("link");
+        if (link == null || link.isEmpty())
+            finish();
+
         viewPager = findViewById(R.id.viewPager);
         searchView = findViewById(R.id.searchView);
         progressBar = findViewById(R.id.progressBar);
@@ -62,8 +73,10 @@ public class Home extends AppCompatActivity
         editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
         editText.setTextSize((float) 13.5);
         searchView.setOnQueryTextListener(this);
-        task = new HomeTask();
+
+        task = new ShowTask();
         task.execute();
+        // onLoadData(fakeHomeResponse());
     }
 
     @Override
@@ -119,7 +132,7 @@ public class Home extends AppCompatActivity
                 final DialogX dialogX = new DialogX(this);
                 if (b)
                     dialogX.setTitle("Disable Notifications")
-                            .setDescription(getResources().getString(R.string.disable_notify))
+                            .setDescription("This will disable new release notifications, You will not be able receive notifications on any new release.")
                             .positiveButton("Ok", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -129,7 +142,7 @@ public class Home extends AppCompatActivity
                             });
                 else
                     dialogX.setTitle("Enable Notifications")
-                            .setDescription(getResources().getString(R.string.enable_notify))
+                            .setDescription("This will enable new release notifications, You will receive notifications on every new release.")
                             .positiveButton("Ok", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -150,7 +163,7 @@ public class Home extends AppCompatActivity
                 if (task != null)
                     task.cancel(true);
                 task = null;
-                task = new HomeTask();
+                task = new ShowTask();
                 task.execute();
                 return true;
 
@@ -180,11 +193,27 @@ public class Home extends AppCompatActivity
         invalidateOptionsMenu();
     }
 
-    private void onLoadData(@NotNull HomeResponse homeResponse) {
+    private HomeResponse fakeHomeResponse() {
+        HomeResponse response = new HomeResponse();
+        ArrayList<ReleaseItem> items = new ArrayList<>();
+        ArrayList<ScheduleItem> sitems = new ArrayList<>();
+        for (int i = 0; i < 60; i++) {
+            ReleaseItem item = new ReleaseItem(i + "", "", i + "", i + "", "", "", "");
+            items.add(item);
+            ScheduleItem xitem = new ScheduleItem(i + "", "", i + "", "06 09:30 -07:00", true);
+            sitems.add(xitem);
+        }
+        response.schedule = sitems;
+        response.allBatches = items;
+        response.allSubs = items;
+        return response;
+    }
+
+    private void onLoadData(@NotNull ShowResponse showResponse) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(F_TAG);
         if (fragment != null)
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), homeResponse));
+        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), showResponse));
     }
 
     @Override
@@ -219,10 +248,10 @@ public class Home extends AppCompatActivity
         return false;
     }
 
-    class HomeTask extends AsyncTask<Void, Void, Boolean> {
+    class ShowTask extends AsyncTask<Void, Void, Boolean> {
 
         private int i = 0;
-        private HomeResponse home;
+        private ShowResponse show;
 
         @Override
         protected void onPreExecute() {
@@ -235,18 +264,18 @@ public class Home extends AppCompatActivity
         protected Boolean doInBackground(Void... voids) {
             Retrofit retrofit = AppController.getRetrofit(Api.Link);
             Api api = retrofit.create(Api.class);
-            Call<HomeResponse> call = api.getHome();
-            call.enqueue(new Callback<HomeResponse>() {
+            Call<ShowResponse> call = api.getShow(link);
+            call.enqueue(new Callback<ShowResponse>() {
                 @Override
-                public void onResponse(@NonNull Call<HomeResponse> call,
-                                       @NonNull Response<HomeResponse> response) {
+                public void onResponse(@NonNull Call<ShowResponse> call,
+                                       @NonNull Response<ShowResponse> response) {
                     if (response.body() != null)
-                        home = response.body();
+                        show = response.body();
                     i = 1;
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<HomeResponse> call, @NonNull Throwable t) {
+                public void onFailure(@NonNull Call<ShowResponse> call, @NonNull Throwable t) {
                     t.printStackTrace();
                     i = -1;
                 }
@@ -256,7 +285,7 @@ public class Home extends AppCompatActivity
                     return true;
                 if (isCancelled()) {
                     i = -1;
-                    home = null;
+                    show = null;
                     return true;
                 }
             }
@@ -267,27 +296,27 @@ public class Home extends AppCompatActivity
             super.onPostExecute(aBoolean);
             progressBar.setVisibility(View.GONE);
             if (i == 1) {
-                if (home == null)
-                    Toast.makeText(Home.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
+                if (show == null)
+                    Toast.makeText(Show.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
                 else
-                    onLoadData(home);
+                    onLoadData(show);
             } else
-                Toast.makeText(Home.this, "Server Error...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Show.this, "Server Error...", Toast.LENGTH_SHORT).show();
         }
     }
 
     class PagerAdapter extends FragmentPagerAdapter {
 
-        private final HomeResponse homeResponse;
+        private final ShowResponse showResponse;
 
-        PagerAdapter(FragmentManager fragmentManager, HomeResponse homeResponse) {
+        PagerAdapter(FragmentManager fragmentManager, ShowResponse showResponse) {
             super(fragmentManager);
-            this.homeResponse = homeResponse;
+            this.showResponse = showResponse;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return HomeFragment1.newInstance(homeResponse);
+            return ShowFragment1.newInstance(showResponse);
         }
 
         @Override

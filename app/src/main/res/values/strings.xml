@@ -31,4 +31,7 @@
     <string name="all_shows">All Shows</string>
     <string name="current_shows">Current Shows</string>
     <string name="full_schedule">Full Schedule</string>
+    <string name="no_batches_available">No batches available</string>
+    <string name="disable_notify">This will disable new release notifications, You will not be able receive notifications on any new release.</string>
+    <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
 </resources>

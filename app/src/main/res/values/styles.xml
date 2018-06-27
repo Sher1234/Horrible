@@ -33,4 +33,8 @@
         <item name="colorAccent">@color/colorPrimaryLight</item>
     </style>
 
+    <style name="AppTheme.Dialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

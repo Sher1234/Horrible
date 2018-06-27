@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.service;
+package info.horriblesubs.sher.service;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

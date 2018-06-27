@@ -31,14 +31,10 @@ public class DialogX extends Dialog {
     private View viewDivider;
 
     public DialogX(@NonNull Context context) {
-        super(context);
+        super(context, R.style.AppTheme_Dialog);
         this.context = context;
-        setContentView();
+        setContentView(R.layout.dialog_layout);
         setViewElements();
-    }
-
-    private void setContentView() {
-        super.setContentView(R.layout.dialog_layout);
     }
 
     private void setViewElements() {
@@ -94,6 +90,15 @@ public class DialogX extends Dialog {
         buttonNeutral.setOnClickListener(onClickListener);
         buttonNeutral.setVisibility(View.VISIBLE);
         showDivider();
+        return this;
+    }
+
+    public DialogX setColouredButtons(boolean b) {
+        if (b) {
+            buttonPositive.setTextColor(R.color.colorSD);
+            buttonNegative.setTextColor(R.color.colorHD);
+            buttonNeutral.setTextColor(R.color.colorFHD);
+        }
         return this;
     }
 

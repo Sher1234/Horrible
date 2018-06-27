@@ -17,9 +17,9 @@ import org.jetbrains.annotations.Contract;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.Item;
 import info.horriblesubs.sher.model.base.ReleaseItem;
-import info.horriblesubs.sher.old.activity.Detail;
 import info.horriblesubs.sher.util.DialogX;
 
 /**
@@ -89,11 +89,11 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
             holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (item.link == null) {
+                    if (item.link == null || item.link.isEmpty()) {
                         Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
                         return true;
                     }
-                    Intent intent = new Intent(context, Detail.class);
+                    Intent intent = new Intent(context, Show.class);
                     String[] s = item.link.split("/");
                     String link = s[s.length - 1];
                     intent.putExtra("link", link);
@@ -109,16 +109,16 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
                     String s = "Episode - " + releaseItem.number;
                     DialogX dialogX = new DialogX(context).setTitle(releaseItem.title).setDescription(s);
                     if (releaseItem.link480 != null && !releaseItem.link480.isEmpty())
-                        dialogX.positiveButton("480p", getOnClickListener(releaseItem.link480, dialogX));
+                        dialogX = dialogX.positiveButton("480p", getOnClickListener(releaseItem.link480, dialogX));
                     if (releaseItem.link720 != null && !releaseItem.link720.isEmpty())
-                        dialogX.negativeButton("720p", getOnClickListener(releaseItem.link720, dialogX));
+                        dialogX = dialogX.negativeButton("720p", getOnClickListener(releaseItem.link720, dialogX));
                     if (releaseItem.link1080 != null && !releaseItem.link1080.isEmpty())
-                        dialogX.neutralButton("1080p", getOnClickListener(releaseItem.link1080, dialogX));
+                        dialogX = dialogX.neutralButton("1080p", getOnClickListener(releaseItem.link1080, dialogX));
                     dialogX.show();
                 }
             });
 
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

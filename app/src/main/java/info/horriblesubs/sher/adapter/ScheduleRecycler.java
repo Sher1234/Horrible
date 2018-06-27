@@ -20,9 +20,9 @@ import java.util.Date;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.Item;
 import info.horriblesubs.sher.model.base.ScheduleItem;
-import info.horriblesubs.sher.old.activity.Detail;
 
 /**
  * ReleaseRecycler
@@ -84,7 +84,7 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
                         Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Intent intent = new Intent(context, Detail.class);
+                    Intent intent = new Intent(context, Show.class);
                     String[] s = item.link.split("/");
                     String link = s[s.length - 1];
                     intent.putExtra("link", link);

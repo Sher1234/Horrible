@@ -17,8 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.PageItem;
-import info.horriblesubs.sher.old.activity.Detail;
 
 /**
  * ListRecycler
@@ -60,7 +60,7 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
                         Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Intent intent = new Intent(context, Detail.class);
+                    Intent intent = new Intent(context, Show.class);
                     String[] s = pageItem.link.split("/");
                     String link = s[s.length - 1];
                     intent.putExtra("link", link);

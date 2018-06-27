@@ -141,7 +141,7 @@ public class About extends AppCompatActivity
         clog = clog.replace("/", "\n");
         clog = "v" + clog;
         final DialogX dialogX = new DialogX(this);
-        dialogX.setTitle("Changelog").setDescription(clog).positiveButton("CLOSE", new View.OnClickListener() {
+        dialogX.setTitle("Changelog").setDescription(clog).positiveButton("Close", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogX.dismiss();

@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.service;
+package info.horriblesubs.sher.service;
 
 import android.app.ActivityManager;
 import android.content.ContentResolver;

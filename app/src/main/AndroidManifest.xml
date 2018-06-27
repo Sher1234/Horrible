@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <service
-            android:name=".old.service.NotifyService"
+            android:name=".service.NotifyService"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -28,7 +28,7 @@
         </service>
 
         <service
-            android:name=".old.service.IdService"
+            android:name=".service.IdService"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -88,9 +88,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".old.activity.Detail"
+            android:name=".activity.Show"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".old.activity.About"
             android:exported="true"

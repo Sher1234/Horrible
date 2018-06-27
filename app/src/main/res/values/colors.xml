@@ -2,9 +2,14 @@
 <resources>
     <color name="colorPrimaryLight">#ffffffff</color>
     <color name="colorPrimaryDark">#ccffffff</color>
+    <color name="colorActivityBg">#fffafafa</color>
     <color name="colorPrimary">#eeffffff</color>
     <color name="colorAccent">#1e88e5</color>
     <!--#d81b60-->
     <color name="colorText">#000000</color>
     <color name="colorTextDisabled">#737373</color>
+
+    <color name="colorSD">#003e8b</color>
+    <color name="colorHD">#4a008b</color>
+    <color name="colorFHD">#8b003c</color>
 </resources>

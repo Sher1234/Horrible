@@ -23,14 +23,15 @@ Horrible Subs uses number of open source projects to work properly:
    - Notifications might get delayed by 30 minutes (Max).
  * In App Search for listing available subs from Horrible Subs
  * Views All as well as Current Shows
+ * Lists full weeks schedule day wise(According to User Time)
 
 Mentioned features might not work in upcoming releases but will be fixed soon
- * ~~Lists full weeks Schedule (According to User Time)~~
  * ~~Show pages for previous show releases~~
  * ~~Search in List~~
 
 #### Release Updates
 ```
+Schedule Activity - Listing Full Schedule                                         Major Commit   - June  27, 2018
 Shows Activity - Listing all & current shows, Improved UI                         Major Commit   - June  27, 2018
 New Search Activity, Improved Home UI with SearchView, Optimized Data Models      Major Commit   - June  27, 2018
 New Home Activity, Improved Notifications, Improved UI for Releases & Schedule    Major Commit   - June  27, 2018
@@ -64,7 +65,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 #### Download
 | Type | Date | Version | Api | Download |
 | ------ | ------ | ------ | ------ | ------ |
-| Alpha 2 | ------ | ------ | ------ | ------ |
+| Alpha 2 | June 27 2018 | 27 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.7/app-debug.apk) |
 | Alpha 1 | June 27 2018 | 25 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.5/app-debug.apk) |
 | **Latest Release** | **April 25, 2018** | **22** | **v3** | **[Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.2/app-debug.apk)** |
 | Release 1 | April 24, 2018 | 21 | v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.1/hs-21.apk) |

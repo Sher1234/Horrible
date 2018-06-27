@@ -1,4 +1,4 @@
-package info.horriblesubs.sher.old.util;
+package info.horriblesubs.sher.util;
 
 import android.app.Dialog;
 import android.content.Context;

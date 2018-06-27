@@ -30,4 +30,5 @@
     <string name="loading">Loading…</string>
     <string name="all_shows">All Shows</string>
     <string name="current_shows">Current Shows</string>
+    <string name="full_schedule">Full Schedule</string>
 </resources>

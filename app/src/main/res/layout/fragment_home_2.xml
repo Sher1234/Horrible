@@ -52,9 +52,9 @@
                     android:layout_gravity="end"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:enabled="false"
-                    android:text="@string/view_more"
+                    android:text="@string/full_schedule"
                     android:textSize="12sp"
+                    tools:visibility="visible"
                     android:visibility="invisible"
                     app:textAllCaps="false" />
 

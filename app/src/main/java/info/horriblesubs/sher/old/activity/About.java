@@ -42,7 +42,10 @@ import java.net.URLConnection;
 
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.old.util.DialogX;
+import info.horriblesubs.sher.activity.Home;
+import info.horriblesubs.sher.activity.Schedule;
+import info.horriblesubs.sher.activity.Shows;
+import info.horriblesubs.sher.util.DialogX;
 
 @SuppressWarnings("all")
 @SuppressLint("StaticFieldLeak")
@@ -170,7 +173,7 @@ public class About extends AppCompatActivity
                 break;
 
             case R.id.navShows:
-                intent = new Intent(this, List.class);
+                intent = new Intent(this, Shows.class);
                 startActivity(intent);
                 finish();
                 break;

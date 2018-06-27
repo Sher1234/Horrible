@@ -36,7 +36,7 @@ import info.horriblesubs.sher.fragment.HomeFragment1;
 import info.horriblesubs.sher.model.base.ReleaseItem;
 import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.HomeResponse;
-import info.horriblesubs.sher.old.util.DialogX;
+import info.horriblesubs.sher.util.DialogX;
 import info.horriblesubs.sher.util.FragmentNavigation;
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -1,9 +1,11 @@
 package info.horriblesubs.sher.fragment;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.button.MaterialButton;
 import android.support.transition.ChangeTransform;
 import android.support.transition.TransitionInflater;
 import android.support.v4.app.Fragment;
@@ -20,12 +22,13 @@ import java.util.Calendar;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.activity.Schedule;
 import info.horriblesubs.sher.adapter.ReleaseRecycler;
 import info.horriblesubs.sher.adapter.ScheduleRecycler;
 import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.HomeResponse;
 
-public class HomeFragment2 extends Fragment {
+public class HomeFragment2 extends Fragment implements View.OnClickListener {
 
     private static final String ARG_RESPONSE = "RESPONSE-HOME";
     private static final String ARG_NUMBER = "RESPONSE-NUMBER";
@@ -33,6 +36,7 @@ public class HomeFragment2 extends Fragment {
     private int type;
     private HomeResponse homeResponse;
     private RecyclerView recyclerView;
+    private MaterialButton button;
     private TextView textView;
 
     public static HomeFragment2 newInstance(HomeResponse homeResponse, int i) {
@@ -50,6 +54,9 @@ public class HomeFragment2 extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home_2, container, false);
         recyclerView = rootView.findViewById(R.id.recyclerView);
         textView = rootView.findViewById(R.id.textView);
+        button = rootView.findViewById(R.id.button);
+        button.setOnClickListener(this);
+        button.setEnabled(false);
         return rootView;
     }
 
@@ -96,9 +103,21 @@ public class HomeFragment2 extends Fragment {
                 break;
 
             case 2:
+                button.setEnabled(true);
+                button.setVisibility(View.VISIBLE);
                 textView.setText(R.string.today_s_schedule);
                 recyclerView.setAdapter(new ScheduleRecycler(getContext(), getTodaySchedule()));
                 break;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.button) {
+            assert getFragmentManager() != null;
+            getFragmentManager().popBackStack();
+            assert getActivity() != null;
+            getActivity().startActivity(new Intent(getActivity(), Schedule.class));
         }
     }
 }

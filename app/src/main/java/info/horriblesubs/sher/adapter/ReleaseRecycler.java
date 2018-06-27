@@ -20,7 +20,7 @@ import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.base.Item;
 import info.horriblesubs.sher.model.base.ReleaseItem;
 import info.horriblesubs.sher.old.activity.Detail;
-import info.horriblesubs.sher.old.util.DialogX;
+import info.horriblesubs.sher.util.DialogX;
 
 /**
  * ReleaseRecycler

@@ -22,7 +22,7 @@
         android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.old.activity.List"
+            android:targetClass="info.horriblesubs.sher.activity.List"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>

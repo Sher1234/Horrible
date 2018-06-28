@@ -63,16 +63,8 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 * &amp; More
 
 #### Download
-| Type | Date | Version | Api | Download |
-| ----- | ----- | ----- | ----- | ----- |
-| **Latest Release** | **June 28, 2018** | **30** | **v4** | **[Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.3.0/app-debug.apk)** |
-| Beta 3 | June 27, 2018 | 28 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.8/app-debug.apk) |
-| Alpha 2 | June 27, 2018 | 27 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.7/app-debug.apk) |
-| Alpha 1 | June 27, 2018 | 25 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.5/app-debug.apk) |
-| Release 2 | April 25, 2018| 22| v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.2/app-debug.apk) |
-| Release 1 | April 24, 2018 | 21 | v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.1/hs-21.apk) |
-| Beta 2 | April 1, 2018 | 18 | v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.1.8/app-debug.apk) |
-| Beta 1 | March 29, 2018 | 16 | v2 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.1.6/app-debug.apk) |
+> Head over to releases for downloading latest release/beta/alpha
+> [Releases](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

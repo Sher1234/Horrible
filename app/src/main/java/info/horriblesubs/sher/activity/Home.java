@@ -4,15 +4,18 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.transition.ChangeTransform;
 import android.support.transition.TransitionInflater;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -27,6 +30,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.BuildConfig;
@@ -35,6 +44,7 @@ import info.horriblesubs.sher.fragment.HomeFragment1;
 import info.horriblesubs.sher.model.response.HomeResponse;
 import info.horriblesubs.sher.util.DialogX;
 import info.horriblesubs.sher.util.FragmentNavigation;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -221,6 +231,22 @@ public class Home extends AppCompatActivity
         return false;
     }
 
+    private void onUpdateAvailable(final HomeResponse update) {
+        final DialogX dialogX = new DialogX(this);
+        dialogX.setTitle("Update Available")
+                .setDescription(getResources().getString(R.string.update_text))
+                .positiveButton("Download", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DownloadTask downloadTask = new DownloadTask();
+                        downloadTask.execute(update.update.Link);
+                        dialogX.dismiss();
+                    }
+                })
+                .setCancelable(false);
+        dialogX.show();
+    }
+
     class HomeTask extends AsyncTask<Void, Void, Boolean> {
 
         private int i = 0;
@@ -271,8 +297,11 @@ public class Home extends AppCompatActivity
             if (i == 1) {
                 if (home == null)
                     Toast.makeText(Home.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
-                else
+                else {
+                    if (home.update != null && home.update.Version > BuildConfig.VERSION_CODE)
+                        onUpdateAvailable(home);
                     onLoadData(home);
+                }
             } else
                 Toast.makeText(Home.this, "Server Error...", Toast.LENGTH_SHORT).show();
         }
@@ -295,6 +324,103 @@ public class Home extends AppCompatActivity
         @Override
         public int getCount() {
             return 1;
+        }
+    }
+
+    class DownloadTask extends AsyncTask<String, Void, Boolean> {
+
+        private File file;
+        private int i = 0;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+
+            Retrofit retrofit = AppController.getRetrofit(Api.Link);
+            Api api = retrofit.create(Api.class);
+            Call<ResponseBody> call = api.downloadUpdate(strings[0]);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(@NonNull Call<ResponseBody> call,
+                                       @NonNull Response<ResponseBody> response) {
+                    if (response.body() != null && downloadFile(response.body()))
+                        i = 1;
+                    else
+                        i = -1;
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                    t.printStackTrace();
+                    i = -1;
+                }
+            });
+            while (true) {
+                if (i != 0)
+                    return true;
+                if (isCancelled()) {
+                    i = -1;
+                    return true;
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            progressBar.setVisibility(View.GONE);
+            if (i == 1) {
+                Toast.makeText(Home.this, "Update downloaded successfully", Toast.LENGTH_SHORT).show();
+                Uri uri = FileProvider.getUriForFile(Home.this,
+                        getApplicationContext().getPackageName() + ".provider", file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            } else
+                Toast.makeText(Home.this, "Error downloading update", Toast.LENGTH_SHORT).show();
+        }
+
+        private boolean downloadFile(@NotNull ResponseBody body) {
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            String ESD = Environment.getExternalStorageDirectory().getPath();
+            File folder = new File(ESD, "HorribleSubz");
+            if (folder.mkdir())
+                file = new File(folder, "app_update.apk");
+            else
+                file = new File(folder, "app_update.apk");
+            try {
+                byte[] bytes = new byte[4096];
+                inputStream = body.byteStream();
+                outputStream = new FileOutputStream(file);
+                while (true) {
+                    int read = inputStream.read(bytes);
+                    if (read == -1)
+                        break;
+                    outputStream.write(bytes, 0, read);
+                }
+                outputStream.flush();
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+                try {
+                    if (inputStream != null)
+                        inputStream.close();
+                    if (outputStream != null)
+                        outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

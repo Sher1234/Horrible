@@ -9,33 +9,20 @@
         android:shortcutShortLabel="@string/schedule">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.old.activity.Schedule"
+            android:targetClass="info.horriblesubs.sher.activity.Schedule"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_list"
+        android:icon="@mipmap/ic_shortcut_shows"
         android:shortcutDisabledMessage="@string/shows"
         android:shortcutId="season.hs"
         android:shortcutLongLabel="@string/shows"
         android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.List"
-            android:targetPackage="info.horriblesubs.sher" />
-        <categories android:name="android.shortcut" />
-    </shortcut>
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_favourite"
-        android:shortcutDisabledMessage="@string/favourites"
-        android:shortcutId="favourite.hs"
-        android:shortcutLongLabel="@string/favourites"
-        android:shortcutShortLabel="@string/favourites">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.old.activity.Favourite"
+            android:targetClass="info.horriblesubs.sher.activity.Shows"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>

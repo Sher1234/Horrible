@@ -238,7 +238,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 if (update == null)
                     textView0.setText(getResources().getString(R.string.application_updated));
                 else {
-                    if (update.update.Version > BuildConfig.VERSION_CODE) {
+                    if (update.update != null && update.update.Version > BuildConfig.VERSION_CODE) {
                         textView0.setText(getResources().getString(R.string.application_update));
                         onUpdateAvailable(update);
                     } else

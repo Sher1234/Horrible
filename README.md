@@ -8,7 +8,7 @@ Horrible Subs uses number of open source projects to work properly:
  - Retrofit Networking Libraries
  - OkHttp Library for Network Handling
  - Android Support Libraries
- - Firebase for Push Notifications & Ads
+ - Firebase for Push Notifications ~~& Ads~~
  - Glide for Displaying Images
  - SimpleHtmlDom for PHP-HTML Parsing
 
@@ -28,6 +28,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Updated App Icon, App Shortcuts fixed & Optimized resources                       Major Commit   - June  28, 2018
 App Release, New About Activity, Performance improvement, & Optimized resources   Major Commit   - June  28, 2018
 Performance improvements, Crash fixes & Optimized app resources & dependencies    Major Commit   - June  28, 2018
 Added Show Activity with New UI & Updated Dialog UI with new design language      Major Commit   - June  27, 2018
@@ -55,16 +56,12 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos
-* Implementation of Api-v4
-* Update Features
-* Material UI
 * Dark Mode
 * RSS
 * &amp; More
 
 #### Download
-> Head over to releases for downloading latest release/beta/alpha
-> [Releases](https://github.com/Sher1234/HorribleSubs/releases)
+> Head over to releases for downloading latest release/beta/alpha: [Releases](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

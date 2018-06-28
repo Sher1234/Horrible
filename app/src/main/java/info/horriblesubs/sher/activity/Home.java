@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
+import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.fragment.HomeFragment1;
 import info.horriblesubs.sher.model.response.HomeResponse;
@@ -155,6 +156,7 @@ public class Home extends AppCompatActivity
                 return true;
 
             case R.id.about:
+                startActivity(new Intent(this, About.class));
                 return true;
 
             case R.id.shows:
@@ -235,7 +237,7 @@ public class Home extends AppCompatActivity
         protected Boolean doInBackground(Void... voids) {
             Retrofit retrofit = AppController.getRetrofit(Api.Link);
             Api api = retrofit.create(Api.class);
-            Call<HomeResponse> call = api.getHome();
+            Call<HomeResponse> call = api.getHome(BuildConfig.VERSION_CODE);
             call.enqueue(new Callback<HomeResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<HomeResponse> call,

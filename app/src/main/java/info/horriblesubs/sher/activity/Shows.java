@@ -92,6 +92,10 @@ public class Shows extends AppCompatActivity implements SearchView.OnQueryTextLi
                 task.execute();
                 return true;
 
+            case R.id.about:
+                startActivity(new Intent(this, About.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -100,10 +100,9 @@ public class ShowFragment1 extends Fragment implements View.OnClickListener {
 
     private void onLoadData() {
         Glide.with(this).load(showResponse.detail.image).into(imageView);
-        // Picasso.get().load(showResponse.detail.image).error(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round).into(imageView);
         textView1.setText(Html.fromHtml(showResponse.detail.title));
         textView2.setText(Html.fromHtml(showResponse.detail.body));
-        if (showResponse.detail.body.length() < 200)
+        if (showResponse.detail.body.length() < 300)
             button1.setVisibility(View.GONE);
         if (showResponse.allBatches == null || showResponse.allBatches.size() < 1) {
             recyclerView1.setVisibility(View.GONE);

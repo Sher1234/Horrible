@@ -24,9 +24,11 @@ Horrible Subs uses number of open source projects to work properly:
  * Views All as well as Current Shows
  * Lists full weeks schedule day wise(According to User Time)
  * Show Activity for viewing previous show releases and show details
+ * About Activity & Application Update Notification
 
 #### Release Updates
 ```
+App Release, New About Activity, Performance improvement, & Optimized resources   Major Commit   - June  28, 2018
 Performance improvements, Crash fixes & Optimized app resources & dependencies    Major Commit   - June  28, 2018
 Added Show Activity with New UI & Updated Dialog UI with new design language      Major Commit   - June  27, 2018
 Schedule Activity - Listing Full Schedule                                         Major Commit   - June  27, 2018
@@ -62,7 +64,9 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 #### Download
 | Type | Date | Version | Api | Download |
-| Beta 3 | June 27, | 28 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.8/app-debug.apk) |
+| ----- | ----- | ----- | ----- | ----- |
+| **Latest Release** | **June 28, 2018** | **30** | **v4** | **[Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.3.0/app-debug.apk)** |
+| Beta 3 | June 27, 2018 | 28 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.8/app-debug.apk) |
 | Alpha 2 | June 27, 2018 | 27 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.7/app-debug.apk) |
 | Alpha 1 | June 27, 2018 | 25 | v4 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.5/app-debug.apk) |
 | Release 2 | April 25, 2018| 22| v3 | [Click Here](https://github.com/Sher1234/HorribleSubs/releases/download/hs-0.2.2/app-debug.apk) |
@@ -72,9 +76,5 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)
-
-#### Note:
-> All the features will be re-added & updated with upcoming v4 updates.
-> Upcoming apk release 0.3.0 (v30)
 
 **Free Application, Hell Yeah!**

@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".activity.Search">
 
     <android.support.design.widget.AppBarLayout
+        app:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -57,7 +59,7 @@
         android:focusable="true"
         android:visibility="gone"
         app:elevation="16dp"
-        tools:visibility="visible">
+        tools:visibility="invisible">
 
         <TextView
             android:layout_width="match_parent"

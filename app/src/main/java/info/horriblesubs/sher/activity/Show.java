@@ -118,7 +118,9 @@ public class Show extends AppCompatActivity
                 return true;
 
             case R.id.about:
+                startActivity(new Intent(this, About.class));
                 return true;
+
 
             case R.id.shows:
                 startActivity(new Intent(this, Shows.class));

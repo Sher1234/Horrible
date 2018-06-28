@@ -28,4 +28,13 @@
     <string name="disable_notify">This will disable new release notifications, You will not be able receive notifications on any new release.</string>
     <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
     <string name="no_episodes_available">No episodes available</string>
+    <string name="application_updated">Your application is up to date</string>
+    <string name="application_update">New application update available</string>
+    <string name="checking_update">Checking for updates…</string>
+    <string name="downloading_update">Downloading update…</string>
+    <string name="app_ver">Application version:</string>
+    <string name="release_date">Release date:</string>
+    <string name="last_update_check">Last update check: </string>
+    <string name="check_for_updates">Check for updates</string>
+    <string name="update_text">A newer version of HorribleSubz is available for download. The update includes various fixes &amp; performance improvements.</string>
 </resources>

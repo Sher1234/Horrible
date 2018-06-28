@@ -2,25 +2,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:fillViewport="true">
 
     <android.support.v7.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <android.support.design.card.MaterialCardView
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="5dp"
             android:transitionName="Horrible Subz"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
             tools:targetApi="lollipop">
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -78,16 +77,19 @@
 
         </android.support.design.card.MaterialCardView>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="8dp"
+            android:background="#b6b6b6" />
+
         <android.support.design.card.MaterialCardView
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="4dp"
             android:transitionName="Horrible Subz"
-            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
             tools:targetApi="lollipop">
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -138,8 +140,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView1"
                     android:layout_width="match_parent"
-                    android:layout_height="83dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="86dp"
                     android:gravity="center"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"
@@ -149,16 +150,19 @@
 
         </android.support.design.card.MaterialCardView>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="8dp"
+            android:background="#b6b6b6" />
+
         <android.support.design.card.MaterialCardView
             android:id="@+id/view3"
+            app:cardCornerRadius="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="5dp"
             android:transitionName="Horrible Subz"
-            app:cardCornerRadius="8dp"
+            app:cardElevation="0dp"
             tools:targetApi="lollipop">
 
             <android.support.v7.widget.LinearLayoutCompat
@@ -209,8 +213,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
-                    android:layout_height="83dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="88dp"
                     android:gravity="center"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"

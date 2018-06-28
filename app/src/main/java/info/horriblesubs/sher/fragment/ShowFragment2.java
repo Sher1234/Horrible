@@ -68,7 +68,6 @@ public class ShowFragment2 extends Fragment {
     private void onLoadData() {
         textView1.setText(Html.fromHtml(showResponse.detail.title));
         textView2.setText(Html.fromHtml(showResponse.detail.body));
-        //Picasso.get().load(showResponse.detail.image).error(R.mipmap.ic_launcher_round).placeholder(R.mipmap.ic_launcher_round).into(imageView);
         Glide.with(this).load(showResponse.detail.image).into(imageView);
     }
 }

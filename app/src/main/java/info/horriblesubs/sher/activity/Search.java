@@ -2,6 +2,7 @@ package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -84,7 +85,7 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
                 return true;
 
             case R.id.about:
-                Toast.makeText(this, "About App", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, About.class));
                 return true;
 
             default:

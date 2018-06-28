@@ -99,6 +99,10 @@ public class Schedule extends AppCompatActivity implements SearchView.OnQueryTex
                 task.execute();
                 return true;
 
+            case R.id.about:
+                startActivity(new Intent(this, About.class));
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

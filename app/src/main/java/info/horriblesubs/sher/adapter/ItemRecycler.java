@@ -20,10 +20,6 @@ import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.PageItem;
 
-/**
- * ListRecycler
- */
-
 public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> {
 
     private final Context context;

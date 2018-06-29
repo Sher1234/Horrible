@@ -2,7 +2,6 @@ package info.horriblesubs.sher.util;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import androidx.annotation.NonNull;
 import info.horriblesubs.sher.R;
 
 @SuppressWarnings("all")

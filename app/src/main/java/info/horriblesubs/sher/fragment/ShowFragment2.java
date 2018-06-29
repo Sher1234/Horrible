@@ -2,11 +2,6 @@ package info.horriblesubs.sher.fragment;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.transition.Fade;
-import android.support.transition.TransitionInflater;
-import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +11,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.transition.Fade;
+import androidx.transition.TransitionInflater;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.model.response.ShowResponse;
 
@@ -66,8 +66,9 @@ public class ShowFragment2 extends Fragment {
     }
 
     private void onLoadData() {
+        assert getContext() != null;
         textView1.setText(Html.fromHtml(showResponse.detail.title));
         textView2.setText(Html.fromHtml(showResponse.detail.body));
-        Glide.with(this).load(showResponse.detail.image).into(imageView);
+        Glide.with(getContext()).load(showResponse.detail.image).into(imageView);
     }
 }

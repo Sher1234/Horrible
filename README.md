@@ -28,6 +28,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Migrated App to AndroidX, Fixed Crash on Android M & below                        Major Commit   - June  29, 2018
 Updated App Icon, App Shortcuts fixed & Optimized resources                       Major Commit   - June  28, 2018
 App Release, New About Activity, Performance improvement, & Optimized resources   Major Commit   - June  28, 2018
 Performance improvements, Crash fixes & Optimized app resources & dependencies    Major Commit   - June  28, 2018

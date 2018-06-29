@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:fillViewport="true">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:background="@color/colorPrimaryLight"
         android:orientation="vertical"
         android:padding="8dp">
 
-        <android.support.design.card.MaterialCardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             app:cardElevation="0dp"
             tools:targetApi="lollipop">
 
-            <android.support.v7.widget.LinearLayoutCompat
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -36,7 +36,7 @@
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter" />
 
-                <android.support.v7.widget.LinearLayoutCompat
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
@@ -61,7 +61,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textSize="13.5sp" />
 
-                    <android.support.design.button.MaterialButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/button1"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
@@ -71,11 +71,11 @@
                         android:textSize="12sp"
                         app:textAllCaps="false" />
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-            </android.support.v7.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </android.support.design.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <View
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             android:layout_margin="8dp"
             android:background="#b6b6b6" />
 
-        <android.support.design.card.MaterialCardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,12 +92,12 @@
             app:cardElevation="0dp"
             tools:targetApi="lollipop">
 
-            <android.support.v7.widget.LinearLayoutCompat
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.LinearLayoutCompat
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
@@ -114,7 +114,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textSize="14.5sp" />
 
-                    <android.support.design.button.MaterialButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/button2"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
                         android:textSize="12sp"
                         app:textAllCaps="false" />
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -137,7 +137,7 @@
                     android:visibility="gone"
                     tools:visibility="visible" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
                     android:layout_width="match_parent"
                     android:layout_height="86dp"
@@ -146,9 +146,9 @@
                     android:paddingEnd="6dp"
                     tools:listitem="@layout/recycler_release_item" />
 
-            </android.support.v7.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </android.support.design.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <View
             android:layout_width="match_parent"
@@ -156,7 +156,7 @@
             android:layout_margin="8dp"
             android:background="#b6b6b6" />
 
-        <android.support.design.card.MaterialCardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/view3"
             app:cardCornerRadius="4dp"
             android:layout_width="match_parent"
@@ -165,12 +165,12 @@
             app:cardElevation="0dp"
             tools:targetApi="lollipop">
 
-            <android.support.v7.widget.LinearLayoutCompat
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.LinearLayoutCompat
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
@@ -187,7 +187,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textSize="14.5sp" />
 
-                    <android.support.design.button.MaterialButton
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/button3"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
@@ -199,7 +199,7 @@
                         android:textSize="12sp"
                         app:textAllCaps="false" />
 
-                </android.support.v7.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -210,7 +210,7 @@
                     android:visibility="gone"
                     tools:visibility="visible" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView2"
                     android:layout_width="match_parent"
                     android:layout_height="88dp"
@@ -219,10 +219,10 @@
                     android:paddingEnd="6dp"
                     tools:listitem="@layout/recycler_release_item" />
 
-            </android.support.v7.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </android.support.design.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>

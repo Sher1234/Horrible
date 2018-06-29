@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLight">#ffffffff</color>
-    <color name="colorPrimaryDark">#ccffffff</color>
-    <color name="colorActivityBg">#fffafafa</color>
-    <color name="colorPrimary">#eeffffff</color>
+    <color name="colorPrimaryLight">#ffffff</color>
+    <color name="colorPrimaryDark">#eeeeee</color>
+    <color name="colorActivityBg">#fafafa</color>
+    <color name="colorPrimary">#fefefe</color>
     <color name="colorAccent">#1e88e5</color>
     <!--#d81b60-->
     <color name="colorText">#000000</color>

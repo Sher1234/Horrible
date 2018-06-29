@@ -97,7 +97,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:exported="true"
             android:name=".activity.About"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
@@ -105,7 +104,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

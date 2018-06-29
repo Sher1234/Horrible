@@ -83,6 +83,14 @@
           }
         },
         {
+          "client_id": "1080481830157-s6f7c7pcho7ulft2q3bt06kk55cads88.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "7981baa506c5aaf204c6b1688b216789373cd83e"
+          }
+        },
+        {
           "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
           "client_type": 3
         }

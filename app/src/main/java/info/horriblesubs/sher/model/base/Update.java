@@ -1,7 +1,6 @@
 package info.horriblesubs.sher.model.base;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.Nullable;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -9,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import androidx.annotation.Nullable;
 import info.horriblesubs.sher.Api;
 
 @SuppressWarnings("All")

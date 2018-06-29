@@ -2,15 +2,6 @@ package info.horriblesubs.sher.fragment;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.button.MaterialButton;
-import android.support.transition.Fade;
-import android.support.transition.TransitionInflater;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Fade;
+import androidx.transition.TransitionInflater;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ReleaseRecycler;
 import info.horriblesubs.sher.model.response.ShowResponse;
@@ -99,7 +99,8 @@ public class ShowFragment1 extends Fragment implements View.OnClickListener {
     }
 
     private void onLoadData() {
-        Glide.with(this).load(showResponse.detail.image).into(imageView);
+        assert getContext() != null;
+        Glide.with(getContext()).load(showResponse.detail.image).into(imageView);
         textView1.setText(Html.fromHtml(showResponse.detail.title));
         textView2.setText(Html.fromHtml(showResponse.detail.body));
         if (showResponse.detail.body.length() < 300)

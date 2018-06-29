@@ -2,12 +2,12 @@ package info.horriblesubs.sher.service;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import info.horriblesubs.sher.Api;
 
 public class IdService extends FirebaseInstanceIdService {

@@ -100,12 +100,12 @@ public class HomeFragment1 extends Fragment implements View.OnClickListener {
     }
 
     private void onLoadData() {
-        LatestRecycler latestRecycler = new LatestRecycler(getContext(), homeResponse.subs, 8);
+        LatestRecycler latestRecycler = new LatestRecycler(getContext(), homeResponse.subs, 10);
         ScheduleRecycler scheduleRecycler;
-        if (getTodaySchedule().size() < 4)
+        if (getTodaySchedule().size() < 6)
             scheduleRecycler = new ScheduleRecycler(getContext(), getTodaySchedule(), getTodaySchedule().size());
         else
-            scheduleRecycler = new ScheduleRecycler(getContext(), getTodaySchedule(), 4);
+            scheduleRecycler = new ScheduleRecycler(getContext(), getTodaySchedule(), 6);
         recyclerView1.setAdapter(latestRecycler);
         recyclerView3.setAdapter(scheduleRecycler);
     }

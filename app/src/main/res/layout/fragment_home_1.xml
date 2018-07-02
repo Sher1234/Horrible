@@ -61,7 +61,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView1"
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="435dp"
                     android:gravity="center"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"
@@ -72,12 +72,14 @@
         </com.google.android.material.card.MaterialCardView>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_margin="8dp"
             android:background="#b6b6b6" />
 
         <com.google.android.material.card.MaterialCardView
+            android:visibility="gone"
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -190,7 +192,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView3"
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
+                    android:layout_height="206dp"
                     android:gravity="center"
                     android:paddingStart="6dp"
                     android:paddingEnd="6dp"

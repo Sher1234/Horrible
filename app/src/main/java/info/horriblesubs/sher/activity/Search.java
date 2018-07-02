@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.adapter.ReleaseRecycler;
+import info.horriblesubs.sher.adapter.LatestRecycler;
 import info.horriblesubs.sher.model.response.SearchResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,8 +109,7 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
     }
 
     private void onLoadData(@NotNull SearchResponse response) {
-        ReleaseRecycler releaseRecycler = new ReleaseRecycler(this, response.search);
-        recyclerView.setAdapter(releaseRecycler);
+        recyclerView.setAdapter(new LatestRecycler(this, response.search));
     }
 
     class SearchTask extends AsyncTask<Void, Void, Boolean> {

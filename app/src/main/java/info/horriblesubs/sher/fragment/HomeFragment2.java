@@ -24,7 +24,7 @@ import androidx.transition.Fade;
 import androidx.transition.TransitionInflater;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Schedule;
-import info.horriblesubs.sher.adapter.ReleaseRecycler;
+import info.horriblesubs.sher.adapter.LatestRecycler;
 import info.horriblesubs.sher.adapter.ScheduleRecycler;
 import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.HomeResponse;
@@ -93,14 +93,11 @@ public class HomeFragment2 extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        assert getContext() != null;
         switch (type) {
             case 0:
                 textView.setText(R.string.new_releases);
-                recyclerView.setAdapter(new ReleaseRecycler(getContext(), homeResponse.allSubs));
-                break;
-            case 1:
-                textView.setText(R.string.batches);
-                recyclerView.setAdapter(new ReleaseRecycler(getContext(), homeResponse.allBatches));
+                recyclerView.setAdapter(new LatestRecycler(getContext(), homeResponse.subs));
                 break;
 
             case 2:

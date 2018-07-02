@@ -65,16 +65,17 @@ public class ShowFragment3 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        assert getContext() != null;
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         switch (type) {
             case 0:
                 textView.setText(R.string.batches);
-                recyclerView.setAdapter(new ReleaseRecycler(getContext(), showResponse.allBatches));
+                recyclerView.setAdapter(new ReleaseRecycler(getContext(), showResponse.batches));
                 break;
             case 1:
                 textView.setText(R.string.latest_releases);
-                recyclerView.setAdapter(new ReleaseRecycler(getContext(), showResponse.allSubs));
+                recyclerView.setAdapter(new ReleaseRecycler(getContext(), showResponse.subs));
                 break;
         }
     }

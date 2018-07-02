@@ -75,19 +75,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1080481830157-vppuk1injhrpo62nadkovd5770pgtf0k.apps.googleusercontent.com",
+          "client_id": "1080481830157-mjcgi9p2apmr8crjjh6pkdpae8n31psi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "info.horriblesubs.sher",
-            "certificate_hash": "84e899810e35c4b9fa101db82d419b04fa333f52"
-          }
-        },
-        {
-          "client_id": "1080481830157-s6f7c7pcho7ulft2q3bt06kk55cads88.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "info.horriblesubs.sher",
-            "certificate_hash": "7981baa506c5aaf204c6b1688b216789373cd83e"
+            "certificate_hash": "bb680431e08284e7e4cbcb74676ef73914c073b2"
           }
         },
         {

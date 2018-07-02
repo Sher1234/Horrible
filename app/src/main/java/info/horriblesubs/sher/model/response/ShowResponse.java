@@ -11,8 +11,8 @@ public class ShowResponse implements Serializable {
 
     public PageItem detail;
     public Response response;
-    public List<ReleaseItem> allSubs;
-    public List<ReleaseItem> allBatches;
+    public List<ReleaseItem> subs;
+    public List<ReleaseItem> batches;
 
     public ShowResponse() {
 

@@ -1,7 +1,7 @@
 # HorribleSubs
 HorribleSubs Mobile App
-Not affiliated with **http://horriblesubs.info** in any way
-Support the official site **http://horriblesubs.info**
+Not affiliated with **https://horriblesubs.info** in any way
+Support the official site **https://horriblesubs.info**
 
 #### Tech
 Horrible Subs uses number of open source projects to work properly:
@@ -12,10 +12,12 @@ Horrible Subs uses number of open source projects to work properly:
  - Glide for Displaying Images
  - SimpleHtmlDom for PHP-HTML Parsing
 
+> Note: Latest App Release supporting newer https://horriblesubs.info will be released soon,
+> Earlier versions won't work as HorribleSubs changed its api
+
 #### Features
  * Supports Listing
-   - New Releases (60),
-   - Batches (40) &
+   - New Releases (80),
    - Today's Schedule (According to User Timezone)
  * Notification Support for every new release available on HorribleSubs
    - Needs to be enabled by user
@@ -28,6 +30,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Migrating Api to v5, Support for new HorribleSubs, & More                         Major Commit   - July  02, 2018
 Migrated App to AndroidX, Fixed Crash on Android M & below                        Major Commit   - June  29, 2018
 Updated App Icon, App Shortcuts fixed & Optimized resources                       Major Commit   - June  28, 2018
 App Release, New About Activity, Performance improvement, & Optimized resources   Major Commit   - June  28, 2018
@@ -57,12 +60,15 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos
+* Migrate to Api-v5 [In-Transition]
+* Featured Shows
+* App Optimizations
 * Dark Mode
 * RSS
 * &amp; More
 
 #### Download
-> Head over to releases for downloading latest release/beta/alpha: [Releases](https://github.com/Sher1234/HorribleSubs/releases)
+> ~~Head over to releases for downloading latest release/beta/alpha: [Releases](https://github.com/Sher1234/HorribleSubs/releases)~~
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

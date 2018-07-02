@@ -4,27 +4,32 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import info.horriblesubs.sher.Api;
 
-public class IdService extends FirebaseInstanceIdService {
+public class MessagingService extends FirebaseMessagingService {
 
-    private static final String TAG = "HorribleSubsIdService";
+    private static final String TAG = "HzMessageService";
 
-    public IdService() {
+    public MessagingService() {
     }
 
     @Override
-    public void onTokenRefresh() {
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        Log.d(TAG, "Refreshed token: " + s);
         Intent intent = new Intent("horribleSubs.service.registered");
-        intent.putExtra("token", refreshedToken);
+        intent.putExtra("token", s);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-        storeToken(refreshedToken);
+        storeToken(s);
+    }
+
+    @Override
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
     }
 
     private void storeToken(String s) {

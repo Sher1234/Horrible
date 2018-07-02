@@ -172,7 +172,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
         final DialogX dialogX = new DialogX(this);
         dialogX.setTitle("Update Available")
                 .setDescription(getResources().getString(R.string.update_text))
-                .positiveButton("Download", new View.OnClickListener() {
+                .positiveButton("Links", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         downloadTask = new DownloadTask();

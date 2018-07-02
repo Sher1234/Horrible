@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.Fade;
 import androidx.transition.TransitionInflater;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.adapter.ReleaseRecycler;
+import info.horriblesubs.sher.adapter.LatestRecycler;
 import info.horriblesubs.sher.adapter.ScheduleRecycler;
 import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.HomeResponse;
@@ -51,6 +51,7 @@ public class HomeFragment1 extends Fragment implements View.OnClickListener {
         view1 = rootView.findViewById(R.id.view1);
         view2 = rootView.findViewById(R.id.view2);
         view3 = rootView.findViewById(R.id.view3);
+        view2.setVisibility(View.GONE);
         recyclerView1 = rootView.findViewById(R.id.recyclerView1);
         recyclerView2 = rootView.findViewById(R.id.recyclerView2);
         recyclerView3 = rootView.findViewById(R.id.recyclerView3);
@@ -99,11 +100,13 @@ public class HomeFragment1 extends Fragment implements View.OnClickListener {
     }
 
     private void onLoadData() {
-        ReleaseRecycler releaseRecycler1 = new ReleaseRecycler(getContext(), homeResponse.allSubs, 8);
-        ReleaseRecycler releaseRecycler2 = new ReleaseRecycler(getContext(), homeResponse.allBatches, 4);
-        ScheduleRecycler scheduleRecycler = new ScheduleRecycler(getContext(), getTodaySchedule(), 4);
-        recyclerView1.setAdapter(releaseRecycler1);
-        recyclerView2.setAdapter(releaseRecycler2);
+        LatestRecycler latestRecycler = new LatestRecycler(getContext(), homeResponse.subs, 8);
+        ScheduleRecycler scheduleRecycler;
+        if (getTodaySchedule().size() < 4)
+            scheduleRecycler = new ScheduleRecycler(getContext(), getTodaySchedule(), getTodaySchedule().size());
+        else
+            scheduleRecycler = new ScheduleRecycler(getContext(), getTodaySchedule(), 4);
+        recyclerView1.setAdapter(latestRecycler);
         recyclerView3.setAdapter(scheduleRecycler);
     }
 

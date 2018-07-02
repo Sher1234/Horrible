@@ -8,17 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Show;
-import info.horriblesubs.sher.model.base.Item;
+import info.horriblesubs.sher.model.base.Download;
 import info.horriblesubs.sher.model.base.ReleaseItem;
 import info.horriblesubs.sher.util.DialogX;
 
@@ -32,7 +31,7 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
     private final Context context;
     private List<ReleaseItem> releaseItems;
 
-    public ReleaseRecycler(Context context, List<ReleaseItem> releaseItems) {
+    public ReleaseRecycler(@NotNull Context context, @NotNull List<ReleaseItem> releaseItems) {
         this.context = context;
         this.size = releaseItems.size();
         this.releaseItems = releaseItems;
@@ -74,46 +73,35 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ReleaseRecycler.ViewHolder holder, int position) {
         try {
-            holder.textView1.setText(Html.fromHtml(releaseItems.get(position).title));
-            holder.textView2.setText(releaseItems.get(position).number);
-            if (releaseItems.get(position).link480 == null ||
-                    releaseItems.get(position).link480.isEmpty())
-                holder.textView3.setVisibility(View.GONE);
-            if (releaseItems.get(position).link720 == null ||
-                    releaseItems.get(position).link720.isEmpty())
-                holder.textView4.setVisibility(View.GONE);
-            if (releaseItems.get(position).link1080 == null ||
-                    releaseItems.get(position).link1080.isEmpty())
-                holder.textView5.setVisibility(View.GONE);
-            final Item item = releaseItems.get(position);
-            holder.layout.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (item.link == null || item.link.isEmpty()) {
-                        Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                    Intent intent = new Intent(context, Show.class);
-                    String[] s = item.link.split("/");
-                    String link = s[s.length - 1];
-                    intent.putExtra("link", link);
-                    context.startActivity(intent);
-                    return true;
-                }
-            });
-
             final ReleaseItem releaseItem = releaseItems.get(position);
+            holder.textView1.setText(Html.fromHtml(releaseItem.title));
+            holder.textView2.setText(releaseItem.number);
+            holder.textView3.setVisibility(View.GONE);
+            holder.textView4.setVisibility(View.GONE);
+            holder.textView5.setVisibility(View.GONE);
+            if (releaseItem.badge != null) {
+                if (releaseItem.badge.get(0).contains("SD") || releaseItem.badge.get(0).contains("480"))
+                    holder.textView3.setVisibility(View.VISIBLE);
+                if (releaseItem.badge.get(0).contains("720") || releaseItem.badge.get(1).contains("720"))
+                    holder.textView4.setVisibility(View.VISIBLE);
+                if (releaseItem.badge.get(0).contains("1080") || releaseItem.badge.get(1).contains("1080")
+                        || releaseItem.badge.get(2).contains("1080"))
+                    holder.textView5.setVisibility(View.VISIBLE);
+            }
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String s = "Episode - " + releaseItem.number;
                     DialogX dialogX = new DialogX(context).setTitle(releaseItem.title).setDescription(s);
-                    if (releaseItem.link480 != null && !releaseItem.link480.isEmpty())
-                        dialogX = dialogX.positiveButton("480p", getOnClickListener(releaseItem.link480, dialogX));
-                    if (releaseItem.link720 != null && !releaseItem.link720.isEmpty())
-                        dialogX = dialogX.negativeButton("720p", getOnClickListener(releaseItem.link720, dialogX));
-                    if (releaseItem.link1080 != null && !releaseItem.link1080.isEmpty())
-                        dialogX = dialogX.neutralButton("1080p", getOnClickListener(releaseItem.link1080, dialogX));
+                    Download download0 = releaseItem.downloads.get(0);
+                    Download download1 = releaseItem.downloads.get(1);
+                    Download download2 = releaseItem.downloads.get(2);
+                    if (download0.links.get(0).link != null && download0.links.get(0).link.contains("magnet"))
+                        dialogX.positiveButton(download0.quality, getOnClickListener(download0.links.get(0).link, dialogX));
+                    if (download1.links.get(0).link != null && download1.links.get(0).link.contains("magnet"))
+                        dialogX.negativeButton(download1.quality, getOnClickListener(download1.links.get(0).link, dialogX));
+                    if (download2.links.get(0).link != null && download2.links.get(0).link.contains("magnet"))
+                        dialogX.neutralButton(download2.quality, getOnClickListener(download2.links.get(0).link, dialogX));
                     dialogX.show();
                 }
             });
@@ -138,11 +126,6 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         intent.setData(Uri.parse(link));
         context.startActivity(intent);
-    }
-
-    public void onQueryUpdate(List<ReleaseItem> releaseItems) {
-        this.releaseItems = releaseItems;
-        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

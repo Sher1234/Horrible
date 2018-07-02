@@ -11,13 +11,11 @@ import info.horriblesubs.sher.Api;
 
 public class ScheduleItem extends Item {
 
-    public final String time;
-    public final boolean isScheduled;
+    private String time;
+    public boolean isScheduled;
 
-    public ScheduleItem(String id, String link, String title, String time, boolean isScheduled) {
-        super(id, link, title);
-        this.time = time;
-        this.isScheduled = isScheduled;
+    public ScheduleItem() {
+        super();
     }
 
     @SuppressLint("SimpleDateFormat")

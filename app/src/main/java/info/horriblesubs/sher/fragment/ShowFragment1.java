@@ -105,31 +105,31 @@ public class ShowFragment1 extends Fragment implements View.OnClickListener {
         textView2.setText(Html.fromHtml(showResponse.detail.body));
         if (showResponse.detail.body.length() < 300)
             button1.setVisibility(View.GONE);
-        if (showResponse.allBatches == null || showResponse.allBatches.size() < 1) {
+        if (showResponse.batches == null || showResponse.batches.size() < 1) {
             recyclerView1.setVisibility(View.GONE);
             textView3.setVisibility(View.VISIBLE);
             button2.setVisibility(View.INVISIBLE);
             button2.setEnabled(false);
         } else {
-            ReleaseRecycler releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allBatches, 2);
-            if (showResponse.allBatches.size() < 3) {
+            ReleaseRecycler releaseRecycler = new ReleaseRecycler(getContext(), showResponse.batches, 2);
+            if (showResponse.batches.size() < 3) {
                 button2.setVisibility(View.INVISIBLE);
                 button2.setEnabled(false);
-                releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allBatches);
+                releaseRecycler = new ReleaseRecycler(getContext(), showResponse.batches);
             }
             recyclerView1.setAdapter(releaseRecycler);
         }
-        if (showResponse.allSubs == null || showResponse.allSubs.size() < 1) {
+        if (showResponse.subs == null || showResponse.subs.size() < 1) {
             recyclerView2.setVisibility(View.GONE);
             textView4.setVisibility(View.VISIBLE);
             button3.setVisibility(View.INVISIBLE);
             button3.setEnabled(false);
         } else {
-            ReleaseRecycler releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allSubs, 2);
-            if (showResponse.allSubs.size() < 3) {
+            ReleaseRecycler releaseRecycler = new ReleaseRecycler(getContext(), showResponse.subs, 2);
+            if (showResponse.subs.size() < 3) {
                 button3.setVisibility(View.INVISIBLE);
                 button3.setEnabled(false);
-                releaseRecycler = new ReleaseRecycler(getContext(), showResponse.allSubs);
+                releaseRecycler = new ReleaseRecycler(getContext(), showResponse.subs);
             }
             recyclerView2.setAdapter(releaseRecycler);
         }

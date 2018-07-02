@@ -9,11 +9,9 @@ import info.horriblesubs.sher.model.base.Response;
 public class ShowsResponse implements Serializable {
 
     public List<Item> all;
-    public List<Item> shows;
     public Response response;
     public List<Item> current;
 
     public ShowsResponse() {
-
     }
 }

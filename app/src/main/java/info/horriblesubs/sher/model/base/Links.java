@@ -2,20 +2,18 @@ package info.horriblesubs.sher.model.base;
 
 import java.io.Serializable;
 
-public class Item implements Serializable {
+public class Links implements Serializable {
 
-    public String id;
+    public String type;
     public String link;
-    public String title;
 
 
-    Item() {
+    Links() {
     }
 
     @Override
     public String toString() {
-        return "ID: " + this.id +
-                "\n" + "Title: " + this.title +
+        return "Type: " + this.type +
                 "\n" + "Link: " + this.link;
     }
 }

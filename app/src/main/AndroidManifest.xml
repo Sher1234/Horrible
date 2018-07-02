@@ -27,7 +27,7 @@
         </service>
 
         <service
-            android:name=".service.IdService"
+            android:name=".service.MessagingService"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

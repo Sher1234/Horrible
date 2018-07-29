@@ -14,13 +14,6 @@ import retrofit2.http.Url;
 
 public interface Api {
     String Link = "https://sher1234.000webhostapp.com/api/hs/";
-    String Prefs = "info.horrible.subs.sher.prefs";
-    String User = "info.horrible.subs.sher.user";
-    String ServerDate = "yyyy-MM-dd";
-    String ServerTime = "dd HH:mm Z";
-    String ViewDate = "MMM dd, yyyy";
-    String ViewTime = "HH:mm";
-    String ViewDay = "EEEE";
 
     @GET("home/{version}")
     Call<HomeResponse> getHome(@Path(value = "version", encoded = true) int version);

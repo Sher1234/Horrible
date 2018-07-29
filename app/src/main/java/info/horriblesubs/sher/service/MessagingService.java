@@ -8,7 +8,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import info.horriblesubs.sher.Api;
+import info.horriblesubs.sher.Strings;
 
 public class MessagingService extends FirebaseMessagingService {
 
@@ -33,7 +33,7 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     private void storeToken(String s) {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
         sharedPreferences.edit().putString("token", s).apply();
     }
 }

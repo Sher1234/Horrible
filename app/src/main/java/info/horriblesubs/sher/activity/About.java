@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.Strings;
 import info.horriblesubs.sher.model.response.UpdatesResponse;
 import info.horriblesubs.sher.util.DialogX;
 import okhttp3.ResponseBody;
@@ -80,7 +82,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
     private void onStarted() {
         String s = getResources().getString(R.string.app_ver) + " " + BuildConfig.VERSION_NAME;
         textView1.setText(s);
-        SharedPreferences preferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
         s = getResources().getString(R.string.last_update_check) + " " +
                 preferences.getString("last-date", "Never");
         textView2.setText(s);
@@ -249,11 +251,11 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(About.this, "Server Error...", Toast.LENGTH_SHORT).show();
         }
 
-        @SuppressLint("SimpleDateFormat")
         private void onUpdateChecked() {
-            SharedPreferences preferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+            SharedPreferences preferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("last-date", new SimpleDateFormat(Api.ViewDate).format(Calendar.getInstance().getTime()));
+            editor.putString("last-date", new SimpleDateFormat(Strings.ViewDate, Locale.US)
+                    .format(Calendar.getInstance().getTime()));
             editor.apply();
             onStarted();
         }

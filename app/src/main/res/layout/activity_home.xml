@@ -8,42 +8,27 @@
     tools:context=".activity.Home">
 
     <com.google.android.material.appbar.AppBarLayout
-        app:elevation="0dp"
+        app:liftOnScroll="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
+            android:layout_width="match_parent"
+            app:logo="@mipmap/ic_launcher_round"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            tools:title="@string/app_name">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/search"
-                android:imeOptions="actionSearch"
-                android:paddingStart="6dp"
-                android:paddingEnd="6dp"
-                app:iconifiedByDefault="false"
-                app:queryHint="@string/app_name"
-                app:searchIcon="@null" />
-
-        </androidx.appcompat.widget.Toolbar>
+            app:title="@string/app_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_home" />
 
     <View
+        android:focusable="true"
         android:layout_width="0px"
         android:layout_height="0px"
-        android:focusable="true"
         android:focusableInTouchMode="true">
 
         <requestFocus />
@@ -59,7 +44,7 @@
         android:focusable="true"
         android:visibility="gone"
         app:elevation="16dp"
-        tools:visibility="invisible">
+        tools:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"

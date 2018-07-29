@@ -54,6 +54,14 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         editText.setTextSize((float) 13.5);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+//        ComponentName componentName = new ComponentName(this, Search.class);
+//        if (searchManager != null)
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+//        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+//            search = getIntent().getStringExtra(SearchManager.QUERY);
+//            Toast.makeText(this, search, Toast.LENGTH_SHORT).show();
+//        }
         search = getIntent().getStringExtra(SearchManager.QUERY);
         if (search == null || search.isEmpty())
             searchView.setQuery(null, false);

@@ -2,12 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    buildToolsVersion '28.0.1'
     defaultConfig {
         applicationId "info.horriblesubs.sher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 34
-        versionName "0.3.4-beta"
+        versionCode 35
+        versionName "0.3.5-release"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -20,22 +21,23 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-alpha3'
-    implementation 'com.google.android.material:material:1.0.0-alpha3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha3'
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-beta01'
+    implementation 'com.google.android.material:material:1.0.0-beta01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
 
     testImplementation 'junit:junit:4.12'
     implementation 'org.jetbrains:annotations-java5:16.0.1'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 }
 apply plugin: 'com.google.gms.google-services'

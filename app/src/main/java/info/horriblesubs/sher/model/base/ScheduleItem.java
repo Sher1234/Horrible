@@ -1,13 +1,12 @@
 package info.horriblesubs.sher.model.base;
 
-import android.annotation.SuppressLint;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
-import info.horriblesubs.sher.Api;
+import info.horriblesubs.sher.Strings;
 
 public class ScheduleItem extends Item {
 
@@ -18,9 +17,8 @@ public class ScheduleItem extends Item {
         super();
     }
 
-    @SuppressLint("SimpleDateFormat")
     public Date getTime() {
-        DateFormat dateFormat = new SimpleDateFormat(Api.ServerTime);
+        DateFormat dateFormat = new SimpleDateFormat(Strings.ServerTime, Locale.US);
         try {
             return dateFormat.parse(this.time);
         } catch (ParseException e) {
@@ -29,14 +27,12 @@ public class ScheduleItem extends Item {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
     public String getViewTime() {
-        return (new SimpleDateFormat(Api.ViewTime)).format(getTime());
+        return (new SimpleDateFormat(Strings.ViewTime, Locale.US)).format(getTime());
     }
 
-    @SuppressLint("SimpleDateFormat")
     public String getViewDay() {
-        return (new SimpleDateFormat(Api.ViewDay)).format(getTime());
+        return (new SimpleDateFormat(Strings.ViewDay, Locale.US)).format(getTime());
     }
 
     @Override

@@ -37,4 +37,5 @@
     <string name="last_update_check">Last update check: </string>
     <string name="check_for_updates">Check for updates</string>
     <string name="update_text">A newer version of HorribleSubz is available for download. The update includes various fixes &amp; performance improvements.</string>
+    <string name="anime">Anime</string>
 </resources>

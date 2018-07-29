@@ -1,15 +1,14 @@
 package info.horriblesubs.sher.model.base;
 
-import android.annotation.SuppressLint;
-
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import androidx.annotation.Nullable;
-import info.horriblesubs.sher.Api;
+import info.horriblesubs.sher.Strings;
 
 @SuppressWarnings("All")
 public class Update implements Serializable {
@@ -22,9 +21,8 @@ public class Update implements Serializable {
     public String ReleaseDate;
 
     @Nullable
-    @SuppressLint("SimpleDateFormat")
     private Date getDate() {
-        DateFormat dateFormat = new SimpleDateFormat(Api.ServerDate);
+        DateFormat dateFormat = new SimpleDateFormat(Strings.ServerDate, Locale.US);
         try {
             return dateFormat.parse(this.ReleaseDate);
         } catch (ParseException e) {
@@ -33,9 +31,8 @@ public class Update implements Serializable {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
     public String getViewDate() {
-        return (new SimpleDateFormat(Api.ViewDate)).format(getDate());
+        return (new SimpleDateFormat(Strings.ViewDate, Locale.US)).format(getDate());
     }
 
     @Override

@@ -40,6 +40,7 @@ import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
+import info.horriblesubs.sher.Strings;
 import info.horriblesubs.sher.fragment.HomeFragment1;
 import info.horriblesubs.sher.model.response.HomeResponse;
 import info.horriblesubs.sher.util.DialogX;
@@ -73,6 +74,9 @@ public class Home extends AppCompatActivity
         editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
         editText.setTextSize((float) 13.5);
         searchView.setOnQueryTextListener(this);
+        if (task != null)
+            task.cancel(true);
+        task = null;
         task = new HomeTask();
         task.execute();
     }
@@ -109,7 +113,7 @@ public class Home extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
         boolean b = sharedPreferences.getBoolean("notifications", false);
         if (b) {
             menu.findItem(R.id.notifications).setTitle("Disable Notifications");
@@ -125,7 +129,7 @@ public class Home extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.notifications:
-                SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
                 final boolean b = sharedPreferences.getBoolean("notifications", false);
                 final DialogX dialogX = new DialogX(this);
                 if (b)
@@ -179,14 +183,14 @@ public class Home extends AppCompatActivity
     }
 
     private void removeNotificationAlert() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notifications", false).apply();
         FirebaseMessaging.getInstance().unsubscribeFromTopic("hs_all");
         invalidateOptionsMenu();
     }
 
     private void setNotificationAlert() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Api.Prefs, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notifications", true).apply();
         FirebaseMessaging.getInstance().subscribeToTopic("hs_all");
         invalidateOptionsMenu();

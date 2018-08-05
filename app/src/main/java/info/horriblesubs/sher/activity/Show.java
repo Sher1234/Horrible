@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -87,7 +88,12 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
 
             @Override
             public void onAdLoaded() {
-                interstitialAd.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        interstitialAd.show();
+                    }
+                }, 1200);
             }
         });
 

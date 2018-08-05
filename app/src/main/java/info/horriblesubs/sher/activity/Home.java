@@ -10,10 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -47,7 +45,6 @@ public class Home extends AppCompatActivity
     private HomeTask task;
     private View progressView;
     private HomeResponse homeResponse;
-    private InterstitialAd interstitialAd;
     private BottomNavigationView navigationView;
 
     @Override
@@ -64,21 +61,6 @@ public class Home extends AppCompatActivity
         });
 
         adView = findViewById(R.id.adView);
-
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int e) {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-            @Override
-            public void onAdLoaded() {
-                interstitialAd.show();
-            }
-        });
-        interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_1));
-        interstitialAd.loadAd(new AdRequest.Builder().build());
 
         navigationView = findViewById(R.id.bottomNavigationView);
         navigationView.setOnNavigationItemSelectedListener(this);

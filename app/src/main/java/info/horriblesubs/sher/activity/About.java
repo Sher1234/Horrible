@@ -155,9 +155,9 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                                            @NonNull int[] grantResults) {
         if (requestCode == 4869) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                Toast.makeText(this, "Permissions Granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permissions granted...", Toast.LENGTH_SHORT).show();
             else {
-                Toast.makeText(this, "Permission Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission error...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         Uri.parse("package:" + getPackageName()));
                 startActivity(intent);
@@ -169,7 +169,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
         final DialogX dialogX = new DialogX(this);
         dialogX.setTitle("Update Available")
                 .setDescription(getResources().getString(R.string.update_text))
-                .positiveButton("Links", new View.OnClickListener() {
+                .positiveButton("Download", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         downloadTask = new DownloadTask();
@@ -319,6 +319,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(About.this, "Error downloading update...", Toast.LENGTH_SHORT).show();
         }
 
+        @SuppressWarnings("all")
         private boolean downloadFile(@NotNull ResponseBody body) {
             InputStream inputStream = null;
             OutputStream outputStream = null;

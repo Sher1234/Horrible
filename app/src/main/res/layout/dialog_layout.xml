@@ -11,71 +11,53 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:orientation="vertical">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_height="match_parent"
-                android:id="@+id/imageViewBanner"
-                android:layout_width="match_parent"
-                android:scaleType="centerCrop" />
-
             <TextView
-                android:layout_height="match_parent"
-                android:id="@+id/textViewTitle"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:alpha="0.9"
-                android:background="#95000000"
+                android:background="#05000000"
+                android:id="@+id/textViewTitle"
+                android:maxLines="4"
+                android:paddingTop="16dp"
                 android:paddingStart="20dp"
-                android:paddingTop="14dp"
+                android:paddingBottom="16dp"
                 android:paddingEnd="20dp"
                 android:gravity="center"
-                android:paddingBottom="14dp"
-                android:maxLines="4"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                android:textColor="#ffffff"
                 android:textSize="24sp"
-                tools:text="@string/app_name" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/colorText" />
 
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
             android:id="@+id/textViewDescription"
-            android:layout_width="match_parent"
+            android:layout_marginStart="22dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="26dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="4dp"
             android:alpha="0.8"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:text="@string/latest_releases"
             android:textColor="@color/colorText"
-            android:textSize="14.5sp" />
+            android:textSize="13sp" />
 
         <View
-            android:id="@+id/viewDivider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="4dp"
-            android:alpha="0.3"
-            android:background="@android:color/darker_gray"
-            android:gravity="start|center_vertical"
-            android:visibility="visible" />
+            android:id="@+id/viewDivider"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:paddingStart="8dp"
+            android:gravity="end"
             android:paddingEnd="8dp">
 
             <com.google.android.material.button.MaterialButton

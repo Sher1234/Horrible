@@ -5,10 +5,7 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import info.horriblesubs.sher.R;
@@ -25,8 +22,6 @@ public class DialogX extends Dialog {
 
     private final Context context;
 
-    private ImageView imageView;
-
     private View viewDivider;
 
     public DialogX(@NonNull Context context) {
@@ -37,8 +32,6 @@ public class DialogX extends Dialog {
     }
 
     private void setViewElements() {
-        imageView = findViewById(R.id.imageViewBanner);
-
         textViewTitle = findViewById(R.id.textViewTitle);
         textViewDescription = findViewById(R.id.textViewDescription);
 
@@ -53,9 +46,6 @@ public class DialogX extends Dialog {
         buttonNeutral.setVisibility(View.GONE);
 
         viewDivider.setVisibility(View.GONE);
-
-        Glide.with(context).load("http://horriblesubs.info/images/b/ccs_banner.jpg")
-                .into(imageView);
     }
 
     public DialogX positiveButton(String s, View.OnClickListener onClickListener) {

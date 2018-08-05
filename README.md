@@ -29,7 +29,8 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
-Updated UI, Fully support new HorribleSubs, Added support for DDL, Ads & More     Major Commit   - Aug   04, 2018
+Updated app icon                                                                  Major Commit   - Aug   05, 2018
+Updated UI, Fully support new HorribleSubs, Added support for DDL, Ads & More     Major Commit   - Aug   05, 2018
 Migrating Api to v5, Support for new HorribleSubs, & More                         Major Commit   - July  02, 2018
 Migrated App to AndroidX, Fixed Crash on Android M & below                        Major Commit   - June  29, 2018
 Updated App Icon, App Shortcuts fixed & Optimized resources                       Major Commit   - June  28, 2018

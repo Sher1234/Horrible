@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="68" />
+                                                <entry key="scalingPercent" value="70" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -35,7 +35,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="ffffff" />
-                                                <entry key="scalingPercent" value="64" />
+                                                <entry key="scalingPercent" value="108" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -46,8 +46,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="fontFamily" value="Cooper Black" />
-                                                <entry key="text" value="HS" />
+                                                <entry key="text" value="horribles" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -59,7 +58,7 @@
                                     <map>
                                       <entry key="backgroundImage" value="C:\Users\agghu\Desktop\#Desktop\#Android\image_02.png" />
                                       <entry key="foregroundAssetType" value="TEXT" />
-                                      <entry key="webIconShape" value="CIRCLE" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -22,6 +22,8 @@ import com.google.android.material.chip.Chip;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -77,8 +79,14 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
 
         adView = findViewById(R.id.adView);
 
+        int i = new Random().nextInt(100);
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_2));
+        if (i < 34)
+            interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_1));
+        else if (i < 68)
+            interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_2));
+        else if (i < 101)
+            interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_3));
         interstitialAd.loadAd(new AdRequest.Builder().build());
         interstitialAd.setAdListener(new AdListener() {
             @Override

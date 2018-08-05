@@ -17,6 +17,10 @@
         android:title="@string/shows" />
 
     <item
+        android:id="@+id/schedule"
+        android:title="@string/schedule" />
+
+    <item
         android:id="@+id/about"
         android:title="@string/about_us" />
 

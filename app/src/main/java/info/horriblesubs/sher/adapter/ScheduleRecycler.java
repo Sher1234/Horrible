@@ -37,12 +37,6 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
         this.scheduleItems = scheduleItems;
     }
 
-    public ScheduleRecycler(Context context, List<ScheduleItem> scheduleItems, int size) {
-        this.size = size;
-        this.context = context;
-        this.scheduleItems = scheduleItems;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

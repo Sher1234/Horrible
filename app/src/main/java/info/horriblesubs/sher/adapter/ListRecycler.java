@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -45,25 +44,21 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
         try {
             final Item item = items.get(position);
             holder.textView.setText(Html.fromHtml(item.title));
-            if (item.link == null)
-                holder.textView.setTextColor(context.getResources().getColor(R.color.colorTextDisabled));
-            else
-                holder.textView.setTextColor(context.getResources().getColor(R.color.colorText));
+            holder.textView.setTextColor(context.getResources().getColor(R.color.colorText));
             holder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (item.link == null) {
-                        Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
-                        return;
+                    try {
+                        Intent intent = new Intent(context, Show.class);
+                        String[] s = item.link.split("/");
+                        intent.putExtra("link", s[s.length - 1]);
+                        context.startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    Intent intent = new Intent(context, Show.class);
-                    String[] s = item.link.split("/");
-                    String link = s[s.length - 1];
-                    intent.putExtra("link", link);
-                    context.startActivity(intent);
                 }
             });
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -103,11 +103,6 @@ public class About extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.changelog:
@@ -312,7 +307,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
             progressBar.setVisibility(View.GONE);
             view.setVisibility(View.VISIBLE);
             if (i == 1) {
-                Toast.makeText(About.this, "Update downloaded successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(About.this, "Update downloaded...", Toast.LENGTH_SHORT).show();
                 Uri uri = FileProvider.getUriForFile(About.this,
                         getApplicationContext().getPackageName() + ".provider", file);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -321,14 +316,14 @@ public class About extends AppCompatActivity implements View.OnClickListener {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             } else
-                Toast.makeText(About.this, "Error downloading update", Toast.LENGTH_SHORT).show();
+                Toast.makeText(About.this, "Error downloading update...", Toast.LENGTH_SHORT).show();
         }
 
         private boolean downloadFile(@NotNull ResponseBody body) {
             InputStream inputStream = null;
             OutputStream outputStream = null;
             String ESD = Environment.getExternalStorageDirectory().getPath();
-            File folder = new File(ESD, "HorribleSubz");
+            File folder = new File(ESD, "Horrible");
             if (folder.mkdir())
                 file = new File(folder, "app_update.apk");
             else

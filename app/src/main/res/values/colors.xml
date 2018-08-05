@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryLight">#ffffff</color>
-    <color name="colorPrimaryDark">#eeeeee</color>
-    <color name="colorActivityBg">#fafafa</color>
     <color name="colorPrimary">#fefefe</color>
-    <color name="colorAccent">#1e88e5</color>
+    <color name="colorAccent">#4285f4</color>
     <!--#d81b60-->
     <color name="colorText">#000000</color>
-    <color name="colorTextDisabled">#737373</color>
+    <color name="colorTextDisabled">#606060</color>
 
-    <color name="colorSD">#003e8b</color>
-    <color name="colorHD">#4a008b</color>
-    <color name="colorFHD">#8b003c</color>
+    <color name="colorSD">#4285f4</color>
+    <color name="colorHD">#ea4335</color>
+    <color name="colorFHD">#34a853</color>
 </resources>

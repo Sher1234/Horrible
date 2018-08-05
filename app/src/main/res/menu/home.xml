@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/favourites"
+        android:checked="true"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/favourites" />
+
+    <item
+        android:id="@+id/releases"
+        android:icon="@drawable/ic_notification_new"
+        android:title="@string/new_releases" />
+
+    <item
+        android:id="@+id/schedule"
+        android:icon="@drawable/ic_time"
+        android:title="@string/today_s_schedule" />
+
+</menu>

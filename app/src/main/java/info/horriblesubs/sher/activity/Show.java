@@ -1,97 +1,113 @@
 package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.material.chip.Chip;
 
 import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.transition.ChangeTransform;
-import androidx.transition.TransitionInflater;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.fragment.ShowFragment1;
+import info.horriblesubs.sher.adapter.ReleaseRecycler;
+import info.horriblesubs.sher.fragment.Downloads;
+import info.horriblesubs.sher.model.base.ReleaseItem;
 import info.horriblesubs.sher.model.response.ShowResponse;
-import info.horriblesubs.sher.util.FragmentNavigation;
+import info.horriblesubs.sher.util.FavDBFunctions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
-public class Show extends AppCompatActivity
-        implements FragmentNavigation, SearchView.OnQueryTextListener {
+public class Show extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
+    private Chip chip;
     private String link;
+    private AdView adView;
     private ShowTask task;
     private View progressBar;
-    private ViewPager viewPager;
-    private SearchView searchView;
+    private ImageView imageView;
+    private ShowResponse showResponse;
+    private InterstitialAd interstitialAd;
+    private RecyclerView recyclerView1, recyclerView2;
+    private TextView textView1, textView2, textView3, textView4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_show);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Show.this, Search.class));
+            }
+        });
         link = getIntent().getStringExtra("link");
-        if (link == null || link.isEmpty())
+        if (link == null || link.isEmpty()) {
             finish();
+            return;
+        }
 
-        viewPager = findViewById(R.id.viewPager);
-        searchView = findViewById(R.id.searchView);
+        adView = findViewById(R.id.adView);
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_2));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int e) {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+            @Override
+            public void onAdLoaded() {
+                interstitialAd.show();
+            }
+        });
+
+        chip = findViewById(R.id.chip);
+        chip.setOnCheckedChangeListener(this);
+        imageView = findViewById(R.id.imageView);
+        textView4 = findViewById(R.id.textView4);
+        textView3 = findViewById(R.id.textView3);
+        textView2 = findViewById(R.id.textView2);
+        textView1 = findViewById(R.id.textView1);
         progressBar = findViewById(R.id.progressBar);
-        EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-        editText.setTextColor(getResources().getColor(R.color.colorText));
-        editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
-        editText.setTextSize((float) 13.5);
-        searchView.setOnQueryTextListener(this);
-
-        task = new ShowTask();
-        task.execute();
-        // onLoadData(fakeHomeResponse());
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
-            getSupportFragmentManager().popBackStack();
-        else
-            super.onBackPressed();
+        recyclerView1 = findViewById(R.id.recyclerView1);
+        recyclerView2 = findViewById(R.id.recyclerView2);
+        startTask();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (searchView.getQuery() != null && !searchView.getQuery().toString().isEmpty())
-            searchView.setQuery(null, false);
-
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(F_TAG);
-        if (fragment != null)
-            getSupportFragmentManager().putFragment(outState, F_TAG, fragment);
+        adView.loadAd(new AdRequest.Builder().build());
     }
 
     @Override
@@ -103,27 +119,25 @@ public class Show extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.notifications).setVisible(false).setEnabled(false);
+        menu.findItem(R.id.schedule).setVisible(false).setEnabled(false);
+        menu.findItem(R.id.shows).setVisible(false).setEnabled(false);
+        menu.findItem(R.id.about).setVisible(false).setEnabled(false);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void startTask() {
+        if (task != null)
+            task.cancel(true);
+        task = null;
+        task = new ShowTask();
+        task.execute();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refresh:
-                if (task != null)
-                    task.cancel(true);
-                task = null;
-                task = new ShowTask();
-                task.execute();
-                return true;
-
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
-
-
-            case R.id.shows:
-                startActivity(new Intent(this, Shows.class));
+                startTask();
                 return true;
 
             default:
@@ -132,42 +146,58 @@ public class Show extends AppCompatActivity
     }
 
     private void onLoadData(@NotNull ShowResponse showResponse) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(F_TAG);
-        if (fragment != null)
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), showResponse));
+        this.showResponse = showResponse;
+        ReleaseRecycler releaseRecycler1 = new ReleaseRecycler(this, showResponse.batches);
+        ReleaseRecycler releaseRecycler2 = new ReleaseRecycler(this, showResponse.subs);
+        chip.setChecked((FavDBFunctions.checkFavourite(this, showResponse.detail.id)));
+        recyclerView1.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView2.setLayoutManager(new GridLayoutManager(this, 2));
+        Glide.with(this).load(showResponse.detail.image).into(imageView);
+        recyclerView1.setItemAnimator(new DefaultItemAnimator());
+        recyclerView2.setItemAnimator(new DefaultItemAnimator());
+        recyclerView1.setNestedScrollingEnabled(false);
+        recyclerView2.setNestedScrollingEnabled(false);
+        textView1.setText(showResponse.detail.title);
+        textView2.setText(showResponse.detail.body);
+        recyclerView1.setAdapter(releaseRecycler1);
+        recyclerView2.setAdapter(releaseRecycler2);
+        if (showResponse.batches != null && showResponse.batches.size() != 0)
+            textView3.setVisibility(View.GONE);
+        if (showResponse.subs != null && showResponse.subs.size() != 0)
+            textView4.setVisibility(View.GONE);
     }
 
     @Override
-    public void onNavigateToFragment(@NotNull Fragment fragment, View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            fragment.setEnterTransition(new ChangeTransform());
-            fragment.setExitTransition(new ChangeTransform());
-            fragment.setReturnTransition(new ChangeTransform());
-            fragment.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
-            fragment.setSharedElementReturnTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
-        }
-        getSupportFragmentManager()
-                .beginTransaction()
-                .addSharedElement(view, "Horrible Subz")
-                .replace(R.id.frameLayout, fragment, FragmentNavigation.F_TAG)
-                .addToBackStack(F_TAG)
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag("Download");
+        if (fragment != null)
+            fm.beginTransaction().remove(fragment).commit();
+        else
+            super.onBackPressed();
+    }
+
+    public void viewDownloadFragment(@NotNull ReleaseItem item) {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.bottom_enter, R.anim.bottom_exit,
+                        R.anim.bottom_enter, R.anim.bottom_exit)
+                .replace(R.id.frameLayout, Downloads.newInstance(item, showResponse.detail.image), "Download")
                 .commit();
     }
 
     @Override
-    public boolean onQueryTextSubmit(String s) {
-        if (s == null || s.isEmpty() || s.length() < 2)
-            return false;
-        Intent intent = new Intent(this, Search.class);
-        intent.putExtra(SearchManager.QUERY, s);
-        startActivity(intent);
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
-        return false;
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (showResponse == null || showResponse.detail == null)
+            Toast.makeText(this, "Horrible error, try refreshing page...", Toast.LENGTH_SHORT).show();
+        else {
+            if (b) {
+                chip.setText(R.string.favourited);
+                FavDBFunctions.addToFavourites(this, this.showResponse.detail);
+            } else {
+                chip.setText(R.string.add_to_favourites);
+                FavDBFunctions.removeFromFavourites(this, showResponse.detail.id);
+            }
+        }
     }
 
     class ShowTask extends AsyncTask<Void, Void, Boolean> {
@@ -199,14 +229,14 @@ public class Show extends AppCompatActivity
                 @Override
                 public void onFailure(@NonNull Call<ShowResponse> call, @NonNull Throwable t) {
                     t.printStackTrace();
-                    i = -1;
+                    i = 306;
                 }
             });
             while (true) {
                 if (i != 0)
                     return true;
                 if (isCancelled()) {
-                    i = -1;
+                    i = 307;
                     show = null;
                     return true;
                 }
@@ -219,31 +249,15 @@ public class Show extends AppCompatActivity
             progressBar.setVisibility(View.GONE);
             if (i == 1) {
                 if (show == null)
-                    Toast.makeText(Show.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Show.this, "Error loading subs, try again...", Toast.LENGTH_SHORT).show();
                 else
                     onLoadData(show);
-            } else
-                Toast.makeText(Show.this, "Server Error...", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class PagerAdapter extends FragmentPagerAdapter {
-
-        private final ShowResponse showResponse;
-
-        PagerAdapter(FragmentManager fragmentManager, ShowResponse showResponse) {
-            super(fragmentManager);
-            this.showResponse = showResponse;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return ShowFragment1.newInstance(showResponse);
-        }
-
-        @Override
-        public int getCount() {
-            return 1;
+            } else if (i == 306)
+                Toast.makeText(Show.this, "Network failure...", Toast.LENGTH_SHORT).show();
+            else if (i == 307)
+                Toast.makeText(Show.this, "Request cancelled...", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(Show.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
         }
     }
 }

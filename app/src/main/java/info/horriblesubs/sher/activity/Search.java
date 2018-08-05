@@ -1,21 +1,24 @@
 package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.EditText;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,12 +34,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
-public class Search extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class Search extends AppCompatActivity implements TextView.OnEditorActionListener, View.OnClickListener {
 
+    private AdView adView;
     private String search;
     private SearchTask task;
     private View progressBar;
     private RecyclerView recyclerView;
+    private TextInputEditText editText;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -44,80 +50,70 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         setContentView(R.layout.activity_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        adView = findViewById(R.id.adView);
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_3));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int e) {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+            @Override
+            public void onAdLoaded() {
+                interstitialAd.show();
+            }
+        });
+
+        editText = findViewById(R.id.editText);
+        editText.setOnEditorActionListener(this);
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
-        SearchView searchView = findViewById(R.id.searchView);
-        EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-        editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
-        editText.setTextColor(getResources().getColor(R.color.colorText));
-        searchView.setOnQueryTextListener(this);
-        editText.setTextSize((float) 13.5);
+        editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        findViewById(R.id.imageView).setOnClickListener(this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-//        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-//        ComponentName componentName = new ComponentName(this, Search.class);
-//        if (searchManager != null)
-//            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
-//        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-//            search = getIntent().getStringExtra(SearchManager.QUERY);
-//            Toast.makeText(this, search, Toast.LENGTH_SHORT).show();
-//        }
-        search = getIntent().getStringExtra(SearchManager.QUERY);
-        if (search == null || search.isEmpty())
-            searchView.setQuery(null, false);
-        else
-            searchView.setQuery(search, true);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return super.onCreateOptionsMenu(menu);
+    protected void onResume() {
+        super.onResume();
+        adView.loadAd(new AdRequest.Builder().build());
+    }
+
+    private void onLoadData(@NotNull SearchResponse response) {
+        recyclerView.setAdapter(new LatestRecycler(this, response.search));
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.notifications).setVisible(false).setEnabled(false);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.refresh:
-                if (task != null)
-                    task.cancel(true);
-                task = null;
-                task = new SearchTask();
-                task.execute();
-                return true;
-
-            case R.id.about:
-                startActivity(new Intent(this, About.class));
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+        if (i == EditorInfo.IME_ACTION_SEARCH || i == EditorInfo.IME_ACTION_GO) {
+            startSearch();
+            return true;
         }
+        return false;
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String s) {
+    private void startSearch() {
+        if (editText.getText() == null || editText.getText().toString().length() < 2) {
+            Toast.makeText(this, "Invalid search query...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        search = editText.getText().toString();
         if (task != null)
             task.cancel(true);
         task = null;
         task = new SearchTask();
         task.execute();
-        return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String s) {
-        return false;
-    }
-
-    private void onLoadData(@NotNull SearchResponse response) {
-        recyclerView.setAdapter(new LatestRecycler(this, response.search));
+    public void onClick(View view) {
+        if (view.getId() == R.id.imageView)
+            startSearch();
     }
 
     class SearchTask extends AsyncTask<Void, Void, Boolean> {
@@ -168,11 +164,11 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
             progressBar.setVisibility(View.GONE);
             if (i == 1) {
                 if (searchResponse == null)
-                    Toast.makeText(Search.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Search.this, "Invalid subs...", Toast.LENGTH_SHORT).show();
                 else
                     onLoadData(searchResponse);
             } else
-                Toast.makeText(Search.this, "Server Error...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Search.this, "Server error...", Toast.LENGTH_SHORT).show();
         }
     }
 }

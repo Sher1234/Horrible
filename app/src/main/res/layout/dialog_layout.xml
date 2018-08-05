@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
-    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    app:cardBackgroundColor="#ffffff"
     android:layout_gravity="center"
-    android:layout_weight="1"
-    android:layout_marginStart="30dp"
-    android:layout_marginEnd="30dp"
-    android:minWidth="300dp"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/colorPrimaryLight"
     app:cardCornerRadius="8dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minWidth="300dp"
+        android:layout_width="match_parent"
         android:orientation="vertical">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_height="match_parent"
                 android:id="@+id/imageViewBanner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher_round" />
+                android:scaleType="centerCrop" />
 
             <TextView
+                android:layout_height="match_parent"
                 android:id="@+id/textViewTitle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.65"
-                android:background="#cc000000"
+                android:alpha="0.9"
+                android:background="#95000000"
+                android:paddingStart="20dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="20dp"
                 android:gravity="center"
-                android:lines="2"
+                android:paddingBottom="14dp"
                 android:maxLines="4"
-                android:padding="20dp"
-                android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:textColor="@color/colorPrimaryLight" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                tools:text="@string/app_name" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <TextView
+            android:layout_marginTop="10dp"
             android:id="@+id/textViewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginEnd="26dp"
-            android:layout_marginBottom="14dp"
-            android:alpha="0.9"
-            android:gravity="start|center_vertical"
-            android:maxLines="9"
-            android:minLines="1"
+            android:alpha="0.8"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:text="@string/latest_releases"
             android:textColor="@color/colorText"
-            android:textSize="15sp" />
+            android:textSize="14.5sp" />
 
         <View
             android:id="@+id/viewDivider"
@@ -69,7 +64,7 @@
             android:layout_height="1dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="4dp"
             android:alpha="0.3"
             android:background="@android:color/darker_gray"
             android:gravity="start|center_vertical"
@@ -78,39 +73,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:gravity="end"
             android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
 
             <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:id="@+id/buttonNeutral"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                android:theme="@style/ThemeFHD"
                 android:layout_marginEnd="2dp"
+                tools:text="@string/refresh"
                 android:textSize="13sp"
                 app:textAllCaps="false" />
 
             <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_height="wrap_content"
                 android:id="@+id/buttonNegative"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
+                android:theme="@style/ThemeHD"
                 android:layout_marginEnd="2dp"
+                tools:text="@string/refresh"
                 android:textSize="13sp"
                 app:textAllCaps="false" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonPositive"
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:id="@+id/buttonPositive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
+                android:theme="@style/ThemeSD"
                 android:layout_marginEnd="2dp"
+                tools:text="@string/refresh"
                 android:textSize="13sp"
                 app:textAllCaps="false" />
 

@@ -5,31 +5,31 @@ Support the official site **https://horriblesubs.info**
 
 #### Tech
 Horrible Subs uses number of open source projects to work properly:
- - Retrofit Networking Libraries
- - OkHttp Library for Network Handling
- - Android Support Libraries
- - Firebase for Push Notifications ~~& Ads~~
- - Glide for Displaying Images
- - SimpleHtmlDom for PHP-HTML Parsing
+ - Androidx Libraries
+ - Glide for Displaying images
+ - SimpleHtmlDom for HTML parsing
+ - OkHttp & Retrofit networking libraries
+ - Firebase for FCM notifications & google ads
 
-> Note: Latest App Release supporting newer https://horriblesubs.info will be released soon,
-> Earlier versions won't work as HorribleSubs changed its api
+> Note: Application versions 0.3.4 and earlier won't work as expected as HorribleSubs changed various elements
 
 #### Features
  * Supports Listing
    - New Releases (80),
    - Today's Schedule (According to User Timezone)
  * Notification Support for every new release available on HorribleSubs
-   - Needs to be enabled by user
+   - Needs to be enabled by user [Quite Buggy]
    - Notifications might get delayed by 30 minutes (Max).
  * In App Search for listing available subs from Horrible Subs
  * Views All as well as Current Shows
  * Lists full weeks schedule day wise(According to User Time)
  * Show Activity for viewing previous show releases and show details
  * About Activity & Application Update Notification
+ * Now lists DDL
 
 #### Release Updates
 ```
+Updated UI, Fully support new HorribleSubs, Added support for DDL, Ads & More     Major Commit   - Aug   04, 2018
 Migrating Api to v5, Support for new HorribleSubs, & More                         Major Commit   - July  02, 2018
 Migrated App to AndroidX, Fixed Crash on Android M & below                        Major Commit   - June  29, 2018
 Updated App Icon, App Shortcuts fixed & Optimized resources                       Major Commit   - June  28, 2018
@@ -60,15 +60,12 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos
-* Migrate to Api-v5 [In-Transition]
-* Featured Shows
-* App Optimizations
 * Dark Mode
-* RSS
+* RSS [Not Required]
 * &amp; More
 
 #### Download
-> ~~Head over to releases for downloading latest release/beta/alpha: [Releases](https://github.com/Sher1234/HorribleSubs/releases)~~
+> ~~Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)~~
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

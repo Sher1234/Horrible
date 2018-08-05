@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="info.horriblesubs.sher">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,27 +9,20 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
+        android:fullBackupContent="@xml/backup_descriptor"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:name=".AppController"
         android:theme="@style/AppTheme"
-        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round">
-
-        <service
-            android:name=".service.NotifyService"
-            tools:ignore="ExportedService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true">
 
         <service
             android:name=".service.MessagingService"
-            tools:ignore="ExportedService">
+            android:permission="@null">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -44,7 +36,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="horriblesubs.info.notification.channel.new" />
+            android:value="@string/notification_channel" />
 
         <activity
             android:name=".activity.Home"
@@ -93,6 +85,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:exported="true"
             android:name=".activity.Show"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"

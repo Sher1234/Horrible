@@ -1,51 +1,39 @@
 package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.transition.ChangeTransform;
-import androidx.transition.TransitionInflater;
-import androidx.viewpager.widget.ViewPager;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.BuildConfig;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.Strings;
-import info.horriblesubs.sher.fragment.HomeFragment1;
+import info.horriblesubs.sher.fragment.Favourites;
+import info.horriblesubs.sher.fragment.Latest;
+import info.horriblesubs.sher.fragment.Today;
 import info.horriblesubs.sher.model.response.HomeResponse;
 import info.horriblesubs.sher.util.DialogX;
-import info.horriblesubs.sher.util.FragmentNavigation;
-import okhttp3.ResponseBody;
+import info.horriblesubs.sher.util.FavDBFunctions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,12 +41,14 @@ import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
 public class Home extends AppCompatActivity
-        implements FragmentNavigation, SearchView.OnQueryTextListener {
+        implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private AdView adView;
     private HomeTask task;
-    private View progressBar;
-    private ViewPager viewPager;
-    private SearchView searchView;
+    private View progressView;
+    private HomeResponse homeResponse;
+    private InterstitialAd interstitialAd;
+    private BottomNavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,43 +56,48 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        viewPager = findViewById(R.id.viewPager);
-        searchView = findViewById(R.id.searchView);
-        progressBar = findViewById(R.id.progressBar);
-        EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-        editText.setTextColor(getResources().getColor(R.color.colorText));
-        editText.setHintTextColor(getResources().getColor(R.color.colorAccent));
-        editText.setTextSize((float) 13.5);
-        searchView.setOnQueryTextListener(this);
-        if (task != null)
-            task.cancel(true);
-        task = null;
-        task = new HomeTask();
-        task.execute();
-    }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Home.this, Search.class));
+            }
+        });
 
-    @Override
-    public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0)
-            getSupportFragmentManager().popBackStack();
-        else
-            super.onBackPressed();
+        adView = findViewById(R.id.adView);
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdFailedToLoad(int e) {
+                interstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+            @Override
+            public void onAdLoaded() {
+                interstitialAd.show();
+            }
+        });
+        interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_1));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+
+        navigationView = findViewById(R.id.bottomNavigationView);
+        navigationView.setOnNavigationItemSelectedListener(this);
+        progressView = findViewById(R.id.progressBar);
+        startTask();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (searchView.getQuery() != null && !searchView.getQuery().toString().isEmpty())
-            searchView.setQuery(null, false);
-
+        adView.loadAd(new AdRequest.Builder().build());
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(F_TAG);
-        if (fragment != null)
-            getSupportFragmentManager().putFragment(outState, F_TAG, fragment);
+    private void startTask() {
+        if (task != null)
+            task.cancel(true);
+        task = null;
+        task = new HomeTask();
+        task.execute();
     }
 
     @Override
@@ -162,11 +157,7 @@ public class Home extends AppCompatActivity
                 return true;
 
             case R.id.refresh:
-                if (task != null)
-                    task.cancel(true);
-                task = null;
-                task = new HomeTask();
-                task.execute();
+                startTask();
                 return true;
 
             case R.id.about:
@@ -175,6 +166,10 @@ public class Home extends AppCompatActivity
 
             case R.id.shows:
                 startActivity(new Intent(this, Shows.class));
+                return true;
+
+            case R.id.schedule:
+                startActivity(new Intent(this, Schedule.class));
                 return true;
 
             default:
@@ -196,59 +191,36 @@ public class Home extends AppCompatActivity
         invalidateOptionsMenu();
     }
 
-    private void onLoadData(@NotNull HomeResponse homeResponse) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(F_TAG);
-        if (fragment != null)
-            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), homeResponse));
+    private void onDataRefresh(@NotNull HomeResponse homeResponse) {
+        homeResponse.favourites = FavDBFunctions.getAllFavourites(this);
+        this.homeResponse = homeResponse;
+        if (navigationView.getSelectedItemId() == R.id.favourites)
+            navigationView.setSelectedItemId(R.id.releases);
+        else
+            navigationView.setSelectedItemId(navigationView.getSelectedItemId());
+    }
+
+    private void onNavigateToFragment(@NotNull Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.bottom_enter, R.anim.bottom_exit,
+                        R.anim.bottom_enter, R.anim.bottom_exit)
+                .replace(R.id.frameLayout, fragment)
+                .commitNowAllowingStateLoss();
     }
 
     @Override
-    public void onNavigateToFragment(@NotNull Fragment fragment, View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            fragment.setEnterTransition(new ChangeTransform());
-            fragment.setExitTransition(new ChangeTransform());
-            fragment.setReturnTransition(new ChangeTransform());
-            fragment.setSharedElementEnterTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
-            fragment.setSharedElementReturnTransition(TransitionInflater.from(this).inflateTransition(android.R.transition.fade));
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.releases) {
+            onNavigateToFragment(Latest.newInstance(homeResponse));
+            return true;
+        } else if (item.getItemId() == R.id.schedule) {
+            onNavigateToFragment(Today.newInstance(homeResponse));
+            return true;
+        } else if (item.getItemId() == R.id.favourites) {
+            onNavigateToFragment(Favourites.newInstance(homeResponse));
+            return true;
         }
-        getSupportFragmentManager()
-                .beginTransaction()
-                .addSharedElement(view, "Horrible Subz")
-                .replace(R.id.frameLayout, fragment, FragmentNavigation.F_TAG)
-                .addToBackStack(F_TAG)
-                .commit();
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        if (s == null || s.isEmpty() || s.length() < 2)
-            return false;
-        Intent intent = new Intent(this, Search.class);
-        intent.putExtra(SearchManager.QUERY, s);
-        startActivity(intent);
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String s) {
         return false;
-    }
-
-    private void onUpdateAvailable(final HomeResponse update) {
-        final DialogX dialogX = new DialogX(this);
-        dialogX.setTitle("Update Available")
-                .setDescription(getResources().getString(R.string.update_text))
-                .positiveButton("Links", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DownloadTask downloadTask = new DownloadTask();
-                        downloadTask.execute(update.update.Link);
-                        dialogX.dismiss();
-                    }
-                })
-                .setCancelable(false);
-        dialogX.show();
     }
 
     class HomeTask extends AsyncTask<Void, Void, Boolean> {
@@ -259,8 +231,8 @@ public class Home extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.requestFocus();
-            progressBar.setVisibility(View.VISIBLE);
+            progressView.requestFocus();
+            progressView.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -280,14 +252,14 @@ public class Home extends AppCompatActivity
                 @Override
                 public void onFailure(@NonNull Call<HomeResponse> call, @NonNull Throwable t) {
                     t.printStackTrace();
-                    i = -1;
+                    i = 306;
                 }
             });
             while (true) {
                 if (i != 0)
                     return true;
                 if (isCancelled()) {
-                    i = -1;
+                    i = 307;
                     home = null;
                     return true;
                 }
@@ -297,134 +269,18 @@ public class Home extends AppCompatActivity
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            progressBar.setVisibility(View.GONE);
+            progressView.setVisibility(View.GONE);
             if (i == 1) {
                 if (home == null)
-                    Toast.makeText(Home.this, "Invalid Subz...", Toast.LENGTH_SHORT).show();
-                else {
-                    if (home.update != null && home.update.Version > BuildConfig.VERSION_CODE)
-                        onUpdateAvailable(home);
-                    onLoadData(home);
-                }
-            } else
-                Toast.makeText(Home.this, "Server Error...", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class PagerAdapter extends FragmentPagerAdapter {
-
-        private final HomeResponse homeResponse;
-
-        PagerAdapter(FragmentManager fragmentManager, HomeResponse homeResponse) {
-            super(fragmentManager);
-            this.homeResponse = homeResponse;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return HomeFragment1.newInstance(homeResponse);
-        }
-
-        @Override
-        public int getCount() {
-            return 1;
-        }
-    }
-
-    class DownloadTask extends AsyncTask<String, Void, Boolean> {
-
-        private File file;
-        private int i = 0;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected Boolean doInBackground(String... strings) {
-
-            Retrofit retrofit = AppController.getRetrofit(Api.Link);
-            Api api = retrofit.create(Api.class);
-            Call<ResponseBody> call = api.downloadUpdate(strings[0]);
-            call.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(@NonNull Call<ResponseBody> call,
-                                       @NonNull Response<ResponseBody> response) {
-                    if (response.body() != null && downloadFile(response.body()))
-                        i = 1;
-                    else
-                        i = -1;
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                    t.printStackTrace();
-                    i = -1;
-                }
-            });
-            while (true) {
-                if (i != 0)
-                    return true;
-                if (isCancelled()) {
-                    i = -1;
-                    return true;
-                }
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-            progressBar.setVisibility(View.GONE);
-            if (i == 1) {
-                Toast.makeText(Home.this, "Update downloaded successfully", Toast.LENGTH_SHORT).show();
-                Uri uri = FileProvider.getUriForFile(Home.this,
-                        getApplicationContext().getPackageName() + ".provider", file);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(uri, "application/vnd.android.package-archive");
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            } else
-                Toast.makeText(Home.this, "Error downloading update", Toast.LENGTH_SHORT).show();
-        }
-
-        private boolean downloadFile(@NotNull ResponseBody body) {
-            InputStream inputStream = null;
-            OutputStream outputStream = null;
-            String ESD = Environment.getExternalStorageDirectory().getPath();
-            File folder = new File(ESD, "HorribleSubz");
-            if (folder.mkdir())
-                file = new File(folder, "app_update.apk");
+                    Toast.makeText(Home.this, "Invalid subs...", Toast.LENGTH_SHORT).show();
+                else
+                    onDataRefresh(home);
+            } else if (i == 306)
+                Toast.makeText(Home.this, "Network Failure...", Toast.LENGTH_SHORT).show();
+            else if (i == 307)
+                Toast.makeText(Home.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
             else
-                file = new File(folder, "app_update.apk");
-            try {
-                byte[] bytes = new byte[4096];
-                inputStream = body.byteStream();
-                outputStream = new FileOutputStream(file);
-                while (true) {
-                    int read = inputStream.read(bytes);
-                    if (read == -1)
-                        break;
-                    outputStream.write(bytes, 0, read);
-                }
-                outputStream.flush();
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            } finally {
-                try {
-                    if (inputStream != null)
-                        inputStream.close();
-                    if (outputStream != null)
-                        outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+                Toast.makeText(Home.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
         }
     }
 }

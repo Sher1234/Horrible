@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,24 +18,12 @@ import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.LatestItem;
 
-/**
- * ReleaseRecycler
- */
-
 public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHolder> {
 
-    private final int size;
     private final Context context;
     private List<LatestItem> latestItems;
 
     public LatestRecycler(@NotNull Context context, @NotNull List<LatestItem> latestItems) {
-        this.context = context;
-        this.size = latestItems.size();
-        this.latestItems = latestItems;
-    }
-
-    public LatestRecycler(Context context, List<LatestItem> latestItems, int size) {
-        this.size = size;
         this.context = context;
         this.latestItems = latestItems;
     }
@@ -58,37 +45,37 @@ public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHold
     public void onBindViewHolder(@NonNull LatestRecycler.ViewHolder holder, int position) {
         try {
             final LatestItem latestItem = latestItems.get(position);
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        Intent intent = new Intent(context, Show.class);
+                        String[] s = latestItem.link.split("/");
+                        intent.putExtra("link", s[s.length - 1]);
+                        context.startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             holder.textView1.setText(Html.fromHtml(latestItem.title));
             holder.textView2.setText(latestItem.number);
             holder.textView3.setVisibility(View.GONE);
             holder.textView4.setVisibility(View.GONE);
             holder.textView5.setVisibility(View.GONE);
-            if (latestItem.badge != null) {
-                if (latestItem.badge.get(0).contains("SD") || latestItem.badge.get(0).contains("480"))
-                    holder.textView3.setVisibility(View.VISIBLE);
-                if (latestItem.badge.get(0).contains("720") || latestItem.badge.get(1).contains("720"))
-                    holder.textView4.setVisibility(View.VISIBLE);
-                if (latestItem.badge.get(0).contains("1080") || latestItem.badge.get(1).contains("1080")
-                        || latestItem.badge.get(2).contains("1080"))
-                    holder.textView5.setVisibility(View.VISIBLE);
+            List<String> badges = latestItem.badge;
+            if (badges != null) {
+                if (badges.get(0) != null)
+                    if (badges.get(0).contains("SD") || badges.get(0).contains("480"))
+                        holder.textView3.setVisibility(View.VISIBLE);
+                if (badges.get(0) != null && badges.get(1) != null)
+                    if (badges.get(0).contains("720") || badges.get(1).contains("720"))
+                        holder.textView4.setVisibility(View.VISIBLE);
+                if (badges.get(0) != null && badges.get(1) != null && badges.get(2) != null)
+                    if (badges.get(0).contains("1080") || badges.get(1).contains("1080")
+                            || badges.get(2).contains("1080"))
+                        holder.textView5.setVisibility(View.VISIBLE);
             }
-
-            holder.layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (latestItem.link == null) {
-                        Toast.makeText(context, "Page Unavailable", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    Intent intent = new Intent(context, Show.class);
-                    String[] s = latestItem.link.split("/");
-                    String link = s[s.length - 1];
-                    intent.putExtra("link", link);
-                    context.startActivity(intent);
-
-                }
-            });
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,7 +83,9 @@ public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHold
 
     @Override
     public int getItemCount() {
-        return size;
+        if (latestItems == null)
+            return 0;
+        return latestItems.size();
     }
 
     @Override

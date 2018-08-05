@@ -31,8 +31,8 @@ public class DialogX extends Dialog {
 
     public DialogX(@NonNull Context context) {
         super(context, R.style.AppTheme_Dialog);
-        this.context = context;
         setContentView(R.layout.dialog_layout);
+        this.context = context;
         setViewElements();
     }
 
@@ -105,8 +105,8 @@ public class DialogX extends Dialog {
     }
 
     public DialogX setDescription(String s) {
+        this.setDescriptionGravity(Gravity.CENTER_VERTICAL);
         textViewDescription.setText(s);
-        this.setDescriptionGravity(Gravity.CENTER_HORIZONTAL);
         return this;
     }
 

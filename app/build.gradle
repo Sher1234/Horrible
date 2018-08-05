@@ -7,8 +7,8 @@ android {
         applicationId "info.horriblesubs.sher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 35
-        versionName "0.3.5-release"
+        versionCode 40
+        versionName "0.4.0-release"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +33,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
 
     testImplementation 'junit:junit:4.12'
     implementation 'org.jetbrains:annotations-java5:16.0.1'

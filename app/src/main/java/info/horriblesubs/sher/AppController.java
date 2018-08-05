@@ -2,6 +2,7 @@ package info.horriblesubs.sher;
 
 import android.app.Application;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,6 +16,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppController extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        MobileAds.initialize(this, getString(R.string.ad_mob_app_id));
+    }
 
     @NonNull
     public static Retrofit getRetrofit(@NotNull String url) {
@@ -32,10 +39,5 @@ public class AppController extends Application {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
     }
 }

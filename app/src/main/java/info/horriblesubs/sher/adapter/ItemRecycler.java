@@ -26,8 +26,8 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
     private List<PageItem> pageItems;
 
     public ItemRecycler(Context context, List<PageItem> pageItems) {
-        this.context = context;
         this.pageItems = pageItems;
+        this.context = context;
     }
 
     @NonNull
@@ -58,8 +58,7 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
                     }
                     Intent intent = new Intent(context, Show.class);
                     String[] s = pageItem.link.split("/");
-                    String link = s[s.length - 1];
-                    intent.putExtra("link", link);
+                    intent.putExtra("link", s[s.length - 1]);
                     context.startActivity(intent);
                 }
             });

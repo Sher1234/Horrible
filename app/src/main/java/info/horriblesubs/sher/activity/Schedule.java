@@ -39,7 +39,6 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Schedule extends AppCompatActivity {
 
-    private AdView adView;
     private View progressBar;
     private ScheduleTask task;
     private ViewPager viewPager;
@@ -58,7 +57,9 @@ public class Schedule extends AppCompatActivity {
             }
         });
 
-        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = findViewById(R.id.adView);
+        adView.loadAd(adRequest);
 
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_2));
@@ -81,12 +82,6 @@ public class Schedule extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         startTask();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adView.loadAd(new AdRequest.Builder().build());
     }
 
     @Override

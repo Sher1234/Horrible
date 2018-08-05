@@ -36,7 +36,6 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Search extends AppCompatActivity implements TextView.OnEditorActionListener, View.OnClickListener {
 
-    private AdView adView;
     private String search;
     private SearchTask task;
     private View progressBar;
@@ -51,7 +50,9 @@ public class Search extends AppCompatActivity implements TextView.OnEditorAction
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = findViewById(R.id.adView);
+        adView.loadAd(adRequest);
 
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_3));
@@ -76,12 +77,6 @@ public class Search extends AppCompatActivity implements TextView.OnEditorAction
         findViewById(R.id.imageView).setOnClickListener(this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adView.loadAd(new AdRequest.Builder().build());
     }
 
     private void onLoadData(@NotNull SearchResponse response) {

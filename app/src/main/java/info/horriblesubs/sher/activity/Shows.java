@@ -37,7 +37,6 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Shows extends AppCompatActivity {
 
-    private AdView adView;
     private ShowsTask task;
     private View progressBar;
     private ViewPager viewPager;
@@ -56,7 +55,9 @@ public class Shows extends AppCompatActivity {
             }
         });
 
-        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = findViewById(R.id.adView);
+        adView.loadAd(adRequest);
 
         interstitialAd = new InterstitialAd(this);
         interstitialAd.setAdUnitId(getString(R.string.ad_unit_interstitial_2));
@@ -80,12 +81,6 @@ public class Shows extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         task = new ShowsTask();
         task.execute();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adView.loadAd(new AdRequest.Builder().build());
     }
 
     @Override

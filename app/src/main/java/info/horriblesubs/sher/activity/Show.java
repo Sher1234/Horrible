@@ -50,7 +50,6 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
 
     private Chip chip;
     private String link;
-    private AdView adView;
     private ShowTask task;
     private View progressBar;
     private ImageView imageView;
@@ -77,7 +76,9 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
             return;
         }
 
-        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = findViewById(R.id.adView);
+        adView.loadAd(adRequest);
 
         int i = new Random().nextInt(100);
         interstitialAd = new InterstitialAd(this);
@@ -116,12 +117,6 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
         recyclerView1 = findViewById(R.id.recyclerView1);
         recyclerView2 = findViewById(R.id.recyclerView2);
         startTask();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adView.loadAd(new AdRequest.Builder().build());
     }
 
     @Override

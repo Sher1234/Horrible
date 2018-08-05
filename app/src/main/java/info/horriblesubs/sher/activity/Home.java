@@ -41,7 +41,6 @@ import retrofit2.Retrofit;
 public class Home extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private AdView adView;
     private HomeTask task;
     private View progressView;
     private HomeResponse homeResponse;
@@ -60,18 +59,14 @@ public class Home extends AppCompatActivity
             }
         });
 
-        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = findViewById(R.id.adView);
+        adView.loadAd(adRequest);
 
         navigationView = findViewById(R.id.bottomNavigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
         progressView = findViewById(R.id.progressBar);
         startTask();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adView.loadAd(new AdRequest.Builder().build());
     }
 
     private void startTask() {

@@ -57,15 +57,15 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
             holder.textView5.setVisibility(View.GONE);
             List<String> badges = releaseItem.badge;
             if (badges != null) {
-                if (badges.get(0) != null)
-                    if (badges.get(0).contains("SD") || badges.get(0).contains("480"))
+                if (badges.size() >= 1 && badges.get(0) != null && (badges.get(0).contains("SD") ||
+                        badges.get(0).contains("480")))
                         holder.textView3.setVisibility(View.VISIBLE);
-                if (badges.get(0) != null && badges.get(1) != null)
-                    if (badges.get(0).contains("720") || badges.get(1).contains("720"))
+                if ((badges.size() >= 1 && badges.get(0) != null && badges.get(0).contains("720")) ||
+                        (badges.size() >= 2 && badges.get(1) != null || badges.get(1).contains("720")))
                         holder.textView4.setVisibility(View.VISIBLE);
-                if (badges.get(0) != null && badges.get(1) != null && badges.get(2) != null)
-                    if (badges.get(0).contains("1080") || badges.get(1).contains("1080")
-                            || badges.get(2).contains("1080"))
+                if ((badges.size() >= 1 && badges.get(0) != null && badges.get(0).contains("1080")) ||
+                        (badges.size() >= 2 && badges.get(1) != null && badges.get(1).contains("1080"))
+                        || (badges.size() >= 3 && badges.get(2) != null && badges.get(2).contains("1080")))
                     holder.textView5.setVisibility(View.VISIBLE);
             }
         } catch (Exception e) {

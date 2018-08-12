@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.1'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "info.horriblesubs.sher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 44
-        versionName "0.4.4-release"
+        versionCode 45
+        versionName "0.4.5-release"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,10 +21,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-beta01'
-    implementation 'com.google.android.material:material:1.0.0-beta01'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-rc01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc01'
+    implementation 'androidx.appcompat:appcompat:1.0.0-rc01'
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.github.bumptech.glide:glide:4.7.1'

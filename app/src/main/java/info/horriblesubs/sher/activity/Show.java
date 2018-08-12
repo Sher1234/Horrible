@@ -30,7 +30,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
@@ -64,6 +64,8 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
         setContentView(R.layout.activity_show);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,9 +161,9 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
         ReleaseRecycler releaseRecycler1 = new ReleaseRecycler(this, showResponse.batches);
         ReleaseRecycler releaseRecycler2 = new ReleaseRecycler(this, showResponse.subs);
         chip.setChecked((FavDBFunctions.checkFavourite(this, showResponse.detail.id)));
-        recyclerView1.setLayoutManager(new GridLayoutManager(this, 2));
-        recyclerView2.setLayoutManager(new GridLayoutManager(this, 2));
         Glide.with(this).load(showResponse.detail.image).into(imageView);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setNestedScrollingEnabled(false);
@@ -261,12 +263,15 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
                     Toast.makeText(Show.this, "Error loading subs, try again...", Toast.LENGTH_SHORT).show();
                 else
                     onLoadData(show);
-            } else if (i == 306)
-                Toast.makeText(Show.this, "Network failure...", Toast.LENGTH_SHORT).show();
-            else if (i == 307)
-                Toast.makeText(Show.this, "Request cancelled...", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(Show.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+            } else {
+                if (i == 306)
+                    Toast.makeText(Show.this, "Network failure...", Toast.LENGTH_SHORT).show();
+                else if (i == 307)
+                    Toast.makeText(Show.this, "Request cancelled...", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Show.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 }

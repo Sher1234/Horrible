@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Home">
+    tools:context=".activity.Show">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -14,41 +14,33 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:theme="@style/AppTheme.AppBar"
-            app:buttonGravity="top"
-            app:contentInsetEnd="60dp"
-            app:contentInsetStart="60dp"
             app:navigationIcon="@drawable/ic_search"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center|bottom">
+                android:layout_width="wrap_content"
+                android:layout_gravity="center">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="@string/horrible"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="#4285f4"
+                    android:textColor="@color/colorHD"
                     android:textSize="18sp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="@string/subs"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="#ea4335"
+                    android:textColor="@color/colorSD"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -59,10 +51,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="#ffffff"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -194,7 +186,7 @@
                 android:layout_marginBottom="4dp"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/recycler_release_item"
-                tools:targetApi="21" />
+                tools:targetApi="lollipop" />
 
             <View
                 android:layout_width="match_parent"
@@ -242,7 +234,7 @@
                 android:layout_marginBottom="100dp"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/recycler_release_item"
-                tools:targetApi="21" />
+                tools:targetApi="lollipop" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -252,8 +244,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:visibility="gone" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

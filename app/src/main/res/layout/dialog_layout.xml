@@ -56,9 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:gravity="end"
-            android:paddingEnd="8dp">
+            android:layout_gravity="end"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp">
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"

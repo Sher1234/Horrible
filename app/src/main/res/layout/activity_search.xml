@@ -13,47 +13,40 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        app:liftOnScroll="true">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:id="@+id/toolbar"
-            android:gravity="center"
             android:theme="@style/AppTheme.AppBar"
-            app:buttonGravity="top"
-            app:contentInsetEnd="0dp"
-            app:contentInsetStart="0dp"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center|bottom">
+                android:layout_gravity="center">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="@string/horrible"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="#ea4335"
+                    android:textColor="@color/colorHD"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="@string/subs"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="#4285f4"
+                    android:textColor="@color/colorSD"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -64,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -72,14 +65,16 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/search"
                 android:imeOptions="actionSearch"
-                android:lines="1"
+                android:inputType="text"
+                android:maxLines="1"
                 android:paddingStart="16dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="16dp"
                 android:paddingBottom="10dp"
                 android:textColor="@color/colorText"
                 android:textColorHint="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="Autofill" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView"
@@ -105,7 +100,7 @@
         android:paddingTop="4dp"
         android:paddingEnd="8dp"
         android:paddingBottom="100dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/recycler_release_item" />
 
     <com.google.android.gms.ads.AdView

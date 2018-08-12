@@ -9,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ListRecycler;
 import info.horriblesubs.sher.model.response.ShowsResponse;
 
-public class ShowsFragment extends Fragment {
+public class ShowsF extends Fragment {
 
     private static final String ARG_RESPONSE = "RESPONSE-SHOWS";
     private static final String ARG_NUMBER = "NUMBER-SHOWS";
@@ -24,8 +24,8 @@ public class ShowsFragment extends Fragment {
     private RecyclerView recyclerView;
     private int i;
 
-    public static ShowsFragment newInstance(ShowsResponse homeResponse, int i) {
-        ShowsFragment fragment = new ShowsFragment();
+    public static ShowsF newInstance(ShowsResponse homeResponse, int i) {
+        ShowsF fragment = new ShowsF();
         Bundle args = new Bundle();
         args.putSerializable(ARG_RESPONSE, homeResponse);
         args.putInt(ARG_NUMBER, i);
@@ -53,7 +53,7 @@ public class ShowsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         onLoadData();
     }
 

@@ -7,8 +7,8 @@
     tools:context=".activity.Shows">
 
     <View
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:background="#ffffff" />
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,44 +17,36 @@
 
         <androidx.appcompat.widget.Toolbar
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:id="@+id/toolbar"
             android:theme="@style/AppTheme.AppBar"
-            app:buttonGravity="top"
             android:layout_width="match_parent"
-            app:contentInsetEnd="60dp"
-            app:contentInsetStart="60dp"
             app:navigationIcon="@drawable/ic_search"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center|bottom">
+                android:layout_width="wrap_content"
+                android:layout_gravity="center">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="end"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="@string/horrible"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="#ea4335"
+                    android:textColor="@color/colorHD"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
                     android:paddingStart="2dp"
                     android:paddingEnd="2dp"
                     android:text="@string/subs"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                    android:textColor="#4285f4"
+                    android:textColor="@color/colorSD"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -90,7 +82,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

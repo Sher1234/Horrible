@@ -65,15 +65,20 @@ public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHold
             holder.textView5.setVisibility(View.GONE);
             List<String> badges = latestItem.badge;
             if (badges != null) {
-                if (badges.get(0) != null)
-                    if (badges.get(0).contains("SD") || badges.get(0).contains("480"))
-                        holder.textView3.setVisibility(View.VISIBLE);
-                if (badges.get(0) != null && badges.get(1) != null)
-                    if (badges.get(0).contains("720") || badges.get(1).contains("720"))
+                if (badges.get(0) != null && badges.get(0).contains("SD"))
+                    holder.textView3.setVisibility(View.VISIBLE);
+                if (badges.get(0) != null && badges.get(0).contains("720"))
+                    holder.textView4.setVisibility(View.VISIBLE);
+                if (badges.get(0) != null && badges.get(0).contains("1080"))
+                    holder.textView5.setVisibility(View.VISIBLE);
+                if (badges.size() > 1) {
+                    if (badges.get(1) != null && badges.get(1).contains("720"))
                         holder.textView4.setVisibility(View.VISIBLE);
-                if (badges.get(0) != null && badges.get(1) != null && badges.get(2) != null)
-                    if (badges.get(0).contains("1080") || badges.get(1).contains("1080")
-                            || badges.get(2).contains("1080"))
+                    if (badges.get(1) != null && badges.get(1).contains("1080"))
+                        holder.textView5.setVisibility(View.VISIBLE);
+                }
+                if (badges.size() == 3)
+                    if (badges.get(2) != null && badges.get(2).contains("1080"))
                         holder.textView5.setVisibility(View.VISIBLE);
             }
         } catch (Exception e) {

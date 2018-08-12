@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Updated UI some elements, fixed crashes while loading releases                    Minor Commit   - Aug   12, 2018
 Reduced ads, fixed some strings, updated dialog layout                            Minor Commit   - Aug   05, 2018
 Updated app icon                                                                  Minor Commit   - Aug   05, 2018
 Updated UI, Fully support new HorribleSubs, Added support for DDL, Ads & More     Major Commit   - Aug   05, 2018

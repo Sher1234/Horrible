@@ -13,14 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ScheduleRecycler;
 import info.horriblesubs.sher.model.base.ScheduleItem;
 import info.horriblesubs.sher.model.response.ScheduleResponse;
 
-public class ScheduleFragment extends Fragment {
+public class ScheduleF extends Fragment {
 
     private static final String ARG_RESPONSE = "RESPONSE-SCHEDULE";
     private static final String ARG_NUMBER = "NUMBER-SCHEDULE";
@@ -29,8 +29,8 @@ public class ScheduleFragment extends Fragment {
     private RecyclerView recyclerView;
     private int i;
 
-    public static ScheduleFragment newInstance(ScheduleResponse scheduleResponse, int i) {
-        ScheduleFragment fragment = new ScheduleFragment();
+    public static ScheduleF newInstance(ScheduleResponse scheduleResponse, int i) {
+        ScheduleF fragment = new ScheduleF();
         Bundle args = new Bundle();
         args.putSerializable(ARG_RESPONSE, scheduleResponse);
         args.putInt(ARG_NUMBER, i);
@@ -58,7 +58,7 @@ public class ScheduleFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         onLoadData();
     }
 

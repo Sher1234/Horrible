@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:focusable="true">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -115,6 +116,7 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 android:textColor="#263238"
                 android:textSize="14sp"
+                tools:visibility="visible"
                 android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView

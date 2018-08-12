@@ -27,7 +27,7 @@ import androidx.viewpager.widget.ViewPager;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.fragment.ShowsFragment;
+import info.horriblesubs.sher.fragment.ShowsF;
 import info.horriblesubs.sher.model.response.ShowsResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +48,8 @@ public class Shows extends AppCompatActivity {
         setContentView(R.layout.activity_shows);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +199,7 @@ public class Shows extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ShowsFragment.newInstance(showsResponse, position);
+            return ShowsF.newInstance(showsResponse, position);
         }
 
         @Override

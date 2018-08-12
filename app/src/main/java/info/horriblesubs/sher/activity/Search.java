@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +14,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
@@ -39,8 +39,8 @@ public class Search extends AppCompatActivity implements TextView.OnEditorAction
     private String search;
     private SearchTask task;
     private View progressBar;
+    private EditText editText;
     private RecyclerView recyclerView;
-    private TextInputEditText editText;
     private InterstitialAd interstitialAd;
 
     @Override
@@ -49,6 +49,8 @@ public class Search extends AppCompatActivity implements TextView.OnEditorAction
         setContentView(R.layout.activity_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setTitle("");
 
         AdRequest adRequest = new AdRequest.Builder().build();
         AdView adView = findViewById(R.id.adView);
@@ -76,7 +78,7 @@ public class Search extends AppCompatActivity implements TextView.OnEditorAction
         editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         findViewById(R.id.imageView).setOnClickListener(this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void onLoadData(@NotNull SearchResponse response) {

@@ -85,7 +85,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:exported="true"
             android:name=".activity.Show"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"

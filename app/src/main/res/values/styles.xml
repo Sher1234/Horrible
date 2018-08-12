@@ -4,6 +4,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryLight</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -28,9 +29,9 @@
 
     <style name="TextView.Label" parent="TextView">
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="android:layout_marginRight">2dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">9sp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textSize">10.5sp</item>
     </style>
 
     <style name="ProgressBar">

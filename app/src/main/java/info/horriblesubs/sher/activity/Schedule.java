@@ -29,7 +29,7 @@ import androidx.viewpager.widget.ViewPager;
 import info.horriblesubs.sher.Api;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.fragment.ScheduleFragment;
+import info.horriblesubs.sher.fragment.ScheduleF;
 import info.horriblesubs.sher.model.response.ScheduleResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +50,8 @@ public class Schedule extends AppCompatActivity {
         setContentView(R.layout.activity_schedule);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setTitle("");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -203,7 +205,7 @@ public class Schedule extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScheduleFragment.newInstance(scheduleResponse, position);
+            return ScheduleF.newInstance(scheduleResponse, position);
         }
 
         @Override

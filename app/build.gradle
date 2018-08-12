@@ -7,8 +7,8 @@ android {
         applicationId "info.horriblesubs.sher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 45
-        versionName "0.4.5-release"
+        versionCode 46
+        versionName "0.4.6-release"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,7 +22,6 @@ android {
 
 dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.0.0-rc01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'com.google.android.material:material:1.0.0-rc01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc01'
     implementation 'androidx.appcompat:appcompat:1.0.0-rc01'

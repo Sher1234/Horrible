@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
 
 @SuppressWarnings("all")
@@ -26,7 +27,10 @@ public class DialogX extends Dialog {
 
     public DialogX(@NonNull Context context) {
         super(context, R.style.AppTheme_Dialog);
-        setContentView(R.layout.dialog_layout);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_d_layout);
+        else
+            setContentView(R.layout.dialog_layout);
         this.context = context;
         setViewElements();
     }

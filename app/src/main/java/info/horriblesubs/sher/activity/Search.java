@@ -46,8 +46,13 @@ public class Search extends AppCompatActivity
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        if (AppController.isDark)
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_a_search);
+        else
+            setContentView(R.layout.activity_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;

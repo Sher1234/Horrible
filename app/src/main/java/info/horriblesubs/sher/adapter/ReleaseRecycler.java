@@ -12,6 +12,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.ReleaseItem;
@@ -30,7 +31,11 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.recycler_release_item, parent, false);
+        View view;
+        if (AppController.isDark)
+            view = inflater.inflate(R.layout.dark_r_release_item, parent, false);
+        else
+            view = inflater.inflate(R.layout.recycler_release_item, parent, false);
         return new ViewHolder(view);
     }
 

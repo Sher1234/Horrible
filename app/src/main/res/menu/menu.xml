@@ -25,6 +25,10 @@
         android:title="@string/view_in_browser" />
 
     <item
+        android:id="@+id/theme"
+        android:title="@string/change_theme" />
+
+    <item
         android:id="@+id/about"
         android:title="@string/about_us" />
 

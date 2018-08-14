@@ -12,11 +12,29 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppTheme.Dark.NoActionBar" parent="AppTheme.Dark">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="AppTheme.AppBar" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:textColorSecondary">#4285f4</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay.Dark" parent="ThemeOverlay.MaterialComponents.Dark" />
+
+    <style name="AppTheme.AppBar.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="android:textColorSecondary">#4285f4</item>
     </style>
 

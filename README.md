@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Added Dark Mode (Workaround/Alpha)                                                Major Commit   - Aug   14, 2018
 Fixed errors while loading 720p, 1080p releases & added view in browser option    Minor Commit   - Aug   14, 2018
 Updated UI some elements, fixed crashes while loading releases                    Minor Commit   - Aug   12, 2018
 Reduced ads, fixed some strings, updated dialog layout                            Minor Commit   - Aug   05, 2018
@@ -64,9 +65,8 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos
-* Dark Mode
-* RSS [Not Required]
-* &amp; More
+* Dark Mode [Needs Improvements]
+* PM me
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

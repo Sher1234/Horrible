@@ -45,8 +45,13 @@ public class Shows extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppController.isDark)
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shows);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_a_shows);
+        else
+            setContentView(R.layout.activity_shows);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
@@ -103,6 +108,7 @@ public class Shows extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.notifications).setVisible(false).setEnabled(false);
+        menu.findItem(R.id.theme).setVisible(false).setEnabled(false);
         menu.findItem(R.id.shows).setVisible(false).setEnabled(false);
         return super.onPrepareOptionsMenu(menu);
     }

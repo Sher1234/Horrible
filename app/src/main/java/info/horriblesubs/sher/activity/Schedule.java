@@ -47,8 +47,13 @@ public class Schedule extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppController.isDark)
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_a_schedule);
+        else
+            setContentView(R.layout.activity_schedule);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
@@ -105,6 +110,7 @@ public class Schedule extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.notifications).setVisible(false).setEnabled(false);
         menu.findItem(R.id.schedule).setVisible(false).setEnabled(false);
+        menu.findItem(R.id.theme).setVisible(false).setEnabled(false);
         return super.onPrepareOptionsMenu(menu);
     }
 

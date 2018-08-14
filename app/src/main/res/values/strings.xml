@@ -56,4 +56,6 @@
     <string name="ad_unit_footer_4">ca-app-pub-7307290547259470/8525754646</string>
     <string name="notification_channel">horrible.channel.new</string>
     <string name="view_in_browser">View in browser</string>
+    <string name="change_theme">Change theme</string>
+    <string name="theme_change">This will toggle the app\'s dark mode. \nIt will restart the application.</string>
 </resources>

@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     tools:context=".activity.Home">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffffff" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"

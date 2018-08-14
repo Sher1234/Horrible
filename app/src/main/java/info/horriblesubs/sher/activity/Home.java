@@ -49,8 +49,13 @@ public class Home extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppController.isDark)
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_a_home);
+        else
+            setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
@@ -134,6 +139,37 @@ public class Home extends AppCompatActivity
                     }
                 });
                 dialogX.show();
+                return true;
+
+            case R.id.theme:
+                final DialogX dialog = new DialogX(this);
+                if (AppController.isDark)
+                    dialog.setTitle("Disable Dark Mode")
+                            .setDescription(getResources().getString(R.string.theme_change))
+                            .positiveButton("Disable", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    AppController.setDark(false);
+                                    dialog.dismiss();
+                                }
+                            });
+                else
+                    dialog.setTitle("Enable Dark Mode")
+                            .setDescription(getResources().getString(R.string.theme_change))
+                            .positiveButton("Enable", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    AppController.setDark(true);
+                                    dialog.dismiss();
+                                }
+                            });
+                dialog.negativeButton("Cancel", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
                 return true;
 
             case R.id.refresh:

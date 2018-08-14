@@ -16,6 +16,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.ScheduleItem;
@@ -41,7 +42,11 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.recycler_schedule_item, parent, false);
+        View view;
+        if (AppController.isDark)
+            view = inflater.inflate(R.layout.dark_r_schedule_item, parent, false);
+        else
+            view = inflater.inflate(R.layout.recycler_schedule_item, parent, false);
         return new ViewHolder(view);
     }
 

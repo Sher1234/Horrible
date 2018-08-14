@@ -62,8 +62,13 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppController.isDark)
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_a_show);
+        else
+            setContentView(R.layout.activity_show);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;
@@ -133,6 +138,7 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.notifications).setVisible(false).setEnabled(false);
         menu.findItem(R.id.schedule).setVisible(false).setEnabled(false);
+        menu.findItem(R.id.theme).setVisible(false).setEnabled(false);
         menu.findItem(R.id.shows).setVisible(false).setEnabled(false);
         menu.findItem(R.id.about).setVisible(false).setEnabled(false);
         return super.onPrepareOptionsMenu(menu);

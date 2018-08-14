@@ -1,6 +1,11 @@
 package info.horriblesubs.sher;
 
+import android.app.AlarmManager;
 import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
@@ -11,16 +16,47 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
+import info.horriblesubs.sher.activity.Home;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppController extends Application {
 
+    public static boolean isDark = false;
+    private static AppController instance;
+
+    public static void setDark(boolean isDark) {
+        SharedPreferences sharedPreferences = instance.getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("theme", isDark).apply();
+        restartApp();
+    }
+
+    private static void restartApp() {
+        int i = 4869;
+        Intent intent = new Intent(instance.getApplicationContext(), Home.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(instance.getApplicationContext(), i, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) instance.getApplicationContext()
+                .getSystemService(Context.ALARM_SERVICE);
+        assert alarmManager != null;
+        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 75, pendingIntent);
+        System.exit(0);
+    }
+
     @Override
     public void onCreate() {
+        instance = this;
+        isDark();
+        if (isDark)
+            setTheme(R.style.AppTheme_Dark);
         super.onCreate();
         MobileAds.initialize(this, getString(R.string.ad_mob_app_id));
+    }
+
+    private void isDark() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
+        isDark = sharedPreferences.getBoolean("theme", false);
     }
 
     @NonNull

@@ -61,9 +61,14 @@ public class About extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppController.isDark)
+            setTheme(R.style.AppTheme_Dark_NoActionBar);
         super.onCreate(savedInstanceState);
         permissionRequest();
-        setContentView(R.layout.activity_about);
+        if (AppController.isDark)
+            setContentView(R.layout.dark_a_about);
+        else
+            setContentView(R.layout.activity_about);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         assert getSupportActionBar() != null;

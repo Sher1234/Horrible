@@ -8,9 +8,25 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents">
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="AppTheme.Dark.NoActionBar" parent="AppTheme.Dark">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

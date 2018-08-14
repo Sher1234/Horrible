@@ -1,6 +1,5 @@
 package info.horriblesubs.sher.adapter;
 
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,12 +49,13 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
                     context.viewDownloadFragment(releaseItem);
                 }
             });
-            holder.textView1.setText(Html.fromHtml(releaseItem.title));
-            holder.textView2.setText(releaseItem.number);
+            String s = "Episode - " + releaseItem.number;
+            holder.textView2.setVisibility(View.GONE);
             holder.textView3.setVisibility(View.GONE);
             holder.textView4.setVisibility(View.GONE);
             holder.textView5.setVisibility(View.GONE);
             List<String> badges = releaseItem.badge;
+            holder.textView1.setText(s);
             if (badges != null) {
                 if (badges.size() >= 1 && badges.get(0) != null && (badges.get(0).contains("SD") ||
                         badges.get(0).contains("480")))

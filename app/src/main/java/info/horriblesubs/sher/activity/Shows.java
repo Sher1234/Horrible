@@ -2,6 +2,7 @@ package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -120,6 +121,18 @@ public class Shows extends AppCompatActivity {
             case R.id.schedule:
                 startActivity(new Intent(this, Schedule.class));
                 finish();
+                return true;
+
+            case R.id.browser:
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse("http://horriblesubs.info/shows/"));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error downloading...", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
                 return true;
 
             default:

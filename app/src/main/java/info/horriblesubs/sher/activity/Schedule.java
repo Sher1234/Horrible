@@ -2,6 +2,7 @@ package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -121,6 +122,18 @@ public class Schedule extends AppCompatActivity {
 
             case R.id.about:
                 startActivity(new Intent(this, About.class));
+                return true;
+
+            case R.id.browser:
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse("https://horriblesubs.info/release-schedule/"));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error downloading...", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
                 return true;
 
             default:

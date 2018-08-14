@@ -18,7 +18,7 @@ Horrible Subs uses number of open source projects to work properly:
    - New Releases (80),
    - Today's Schedule (According to User Timezone)
  * Notification Support for every new release available on HorribleSubs
-   - Needs to be enabled by user [Quite Buggy]
+   - Needs to be enabled by user
    - Notifications might get delayed by 30 minutes (Max).
  * In App Search for listing available subs from Horrible Subs
  * Views All as well as Current Shows
@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Fixed errors while loading 720p, 1080p releases & added view in browser option    Minor Commit   - Aug   14, 2018
 Updated UI some elements, fixed crashes while loading releases                    Minor Commit   - Aug   12, 2018
 Reduced ads, fixed some strings, updated dialog layout                            Minor Commit   - Aug   05, 2018
 Updated app icon                                                                  Minor Commit   - Aug   05, 2018

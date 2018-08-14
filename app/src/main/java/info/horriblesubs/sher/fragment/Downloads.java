@@ -71,11 +71,12 @@ public class Downloads extends Fragment {
         recyclerView3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        DownloadRecycler recycler1 = null, recycler2 = null, recycler3 = null;
         recyclerView3.setItemAnimator(new DefaultItemAnimator());
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
         Glide.with(this).load(link).into(imageView);
+        DownloadRecycler recycler1, recycler2, recycler3;
+        recycler1 = recycler2 = recycler3 = null;
         textView3.setVisibility(View.VISIBLE);
         textView4.setVisibility(View.VISIBLE);
         textView5.setVisibility(View.VISIBLE);
@@ -95,21 +96,20 @@ public class Downloads extends Fragment {
             }
             if (releaseItem.downloads.size() >= 2) {
                 if (releaseItem.downloads.get(1).quality.contains("720")) {
-                    recycler2 = new DownloadRecycler(getContext(), releaseItem.downloads.get(0));
+                    recycler2 = new DownloadRecycler(getContext(), releaseItem.downloads.get(1));
                     textView4.setVisibility(View.GONE);
                 } else if (releaseItem.downloads.get(1).quality.contains("1080")) {
-                    recycler3 = new DownloadRecycler(getContext(), releaseItem.downloads.get(0));
+                    recycler3 = new DownloadRecycler(getContext(), releaseItem.downloads.get(1));
                     textView5.setVisibility(View.GONE);
                 }
                 if (releaseItem.downloads.size() == 3) {
                     if (releaseItem.downloads.get(2).quality.contains("1080")) {
-                        recycler3 = new DownloadRecycler(getContext(), releaseItem.downloads.get(0));
+                        recycler3 = new DownloadRecycler(getContext(), releaseItem.downloads.get(2));
                         textView5.setVisibility(View.GONE);
                     }
                 }
             }
         }
-
         recyclerView3.setAdapter(recycler3);
         recyclerView2.setAdapter(recycler2);
         recyclerView1.setAdapter(recycler1);

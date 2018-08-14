@@ -34,7 +34,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 @SuppressLint("StaticFieldLeak")
-public class Search extends AppCompatActivity implements TextView.OnEditorActionListener, View.OnClickListener {
+public class Search extends AppCompatActivity
+        implements TextView.OnEditorActionListener, View.OnClickListener {
 
     private String search;
     private SearchTask task;

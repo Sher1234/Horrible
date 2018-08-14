@@ -2,9 +2,11 @@ package info.horriblesubs.sher.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -151,6 +153,18 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
                 startTask();
                 return true;
 
+            case R.id.browser:
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(Html.fromHtml(showResponse.detail.link).toString()));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error downloading...", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -164,12 +178,12 @@ public class Show extends AppCompatActivity implements CompoundButton.OnCheckedC
         Glide.with(this).load(showResponse.detail.image).into(imageView);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
         recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        textView1.setText(Html.fromHtml(showResponse.detail.title));
+        textView2.setText(Html.fromHtml(showResponse.detail.body));
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setNestedScrollingEnabled(false);
         recyclerView2.setNestedScrollingEnabled(false);
-        textView1.setText(showResponse.detail.title);
-        textView2.setText(showResponse.detail.body);
         recyclerView1.setAdapter(releaseRecycler1);
         recyclerView2.setAdapter(releaseRecycler2);
         if (showResponse.batches != null && showResponse.batches.size() != 0)

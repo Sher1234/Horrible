@@ -59,11 +59,12 @@ public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHold
                 }
             });
             holder.textView1.setText(Html.fromHtml(latestItem.title));
-            holder.textView2.setText(latestItem.number);
+            String s = "Episode - " + latestItem.number;
             holder.textView3.setVisibility(View.GONE);
             holder.textView4.setVisibility(View.GONE);
             holder.textView5.setVisibility(View.GONE);
             List<String> badges = latestItem.badge;
+            holder.textView2.setText(s);
             if (badges != null) {
                 if (badges.get(0) != null && badges.get(0).contains("SD"))
                     holder.textView3.setVisibility(View.VISIBLE);

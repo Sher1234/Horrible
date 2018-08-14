@@ -69,7 +69,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 * &amp; More
 
 #### Download
-> ~~Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)~~
+> Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

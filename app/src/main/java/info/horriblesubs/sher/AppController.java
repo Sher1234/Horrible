@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.gson.Gson;
@@ -29,18 +30,21 @@ public class AppController extends Application {
     public static void setDark(boolean isDark) {
         SharedPreferences sharedPreferences = instance.getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("theme", isDark).apply();
-        restartApp();
+        if (editor.putBoolean("theme", isDark).commit())
+            restartApp();
+        else
+            Toast.makeText(instance, "Error changing theme...", Toast.LENGTH_SHORT).show();
     }
 
     private static void restartApp() {
         int i = 4869;
         Intent intent = new Intent(instance.getApplicationContext(), Home.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(instance.getApplicationContext(), i, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager) instance.getApplicationContext()
                 .getSystemService(Context.ALARM_SERVICE);
         assert alarmManager != null;
-        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 75, pendingIntent);
+        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
         System.exit(0);
     }
 

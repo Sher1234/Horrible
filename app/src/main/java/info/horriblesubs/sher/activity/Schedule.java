@@ -204,12 +204,15 @@ public class Schedule extends AppCompatActivity {
                     Toast.makeText(Schedule.this, "Invalid subs...", Toast.LENGTH_SHORT).show();
                 else
                     onLoadData(schedule);
-            } else if (i == 306)
-                Toast.makeText(Schedule.this, "Network Failure...", Toast.LENGTH_SHORT).show();
-            else if (i == 307)
-                Toast.makeText(Schedule.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(Schedule.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+            } else {
+                if (i == 306)
+                    Toast.makeText(Schedule.this, "Network Failure...", Toast.LENGTH_SHORT).show();
+                else if (i == 307)
+                    Toast.makeText(Schedule.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Schedule.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 

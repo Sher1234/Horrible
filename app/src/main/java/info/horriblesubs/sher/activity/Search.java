@@ -147,14 +147,14 @@ public class Search extends AppCompatActivity
                 @Override
                 public void onFailure(@NonNull Call<SearchResponse> call, @NonNull Throwable t) {
                     t.printStackTrace();
-                    i = -1;
+                    i = 306;
                 }
             });
             while (true) {
                 if (i != 0)
                     return true;
                 if (isCancelled()) {
-                    i = -1;
+                    i = 307;
                     searchResponse = null;
                     return true;
                 }
@@ -170,8 +170,14 @@ public class Search extends AppCompatActivity
                     Toast.makeText(Search.this, "Invalid subs...", Toast.LENGTH_SHORT).show();
                 else
                     onLoadData(searchResponse);
-            } else
-                Toast.makeText(Search.this, "Server error...", Toast.LENGTH_SHORT).show();
+            } else {
+                if (i == 306)
+                    Toast.makeText(Search.this, "Network Failure...", Toast.LENGTH_SHORT).show();
+                else if (i == 307)
+                    Toast.makeText(Search.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Search.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

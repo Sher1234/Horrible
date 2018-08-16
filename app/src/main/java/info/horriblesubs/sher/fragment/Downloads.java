@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.Strings;
 import info.horriblesubs.sher.adapter.DownloadRecycler;
@@ -28,8 +29,8 @@ public class Downloads extends Fragment {
     private String link;
     private ImageView imageView;
     private ReleaseItem releaseItem;
-    private TextView textView1, textView2, textView3, textView4, textView5;
     private RecyclerView recyclerView1, recyclerView2, recyclerView3;
+    private TextView textView1, textView2, textView3, textView4, textView5;
 
     public static Downloads newInstance(ReleaseItem releaseItem, String s) {
         Downloads fragment = new Downloads();
@@ -43,7 +44,11 @@ public class Downloads extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_downloads, container, false);
+        View rootView;
+        if (AppController.isDark)
+            rootView = inflater.inflate(R.layout.dark_f_downloads, container, false);
+        else
+            rootView = inflater.inflate(R.layout.fragment_downloads, container, false);
         recyclerView1 = rootView.findViewById(R.id.recyclerView1);
         recyclerView2 = rootView.findViewById(R.id.recyclerView2);
         recyclerView3 = rootView.findViewById(R.id.recyclerView3);

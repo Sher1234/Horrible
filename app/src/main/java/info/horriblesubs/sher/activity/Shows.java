@@ -202,8 +202,15 @@ public class Shows extends AppCompatActivity {
                     Toast.makeText(Shows.this, "Invalid subz...", Toast.LENGTH_SHORT).show();
                 else
                     onLoadData(shows);
-            } else
-                Toast.makeText(Shows.this, "Server error...", Toast.LENGTH_SHORT).show();
+            } else {
+                if (i == 306)
+                    Toast.makeText(Shows.this, "Network Failure...", Toast.LENGTH_SHORT).show();
+                else if (i == 307)
+                    Toast.makeText(Shows.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Shows.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 

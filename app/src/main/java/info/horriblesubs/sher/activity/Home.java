@@ -303,12 +303,15 @@ public class Home extends AppCompatActivity
                     Toast.makeText(Home.this, "Invalid subs...", Toast.LENGTH_SHORT).show();
                 else
                     onDataRefresh(home);
-            } else if (i == 306)
-                Toast.makeText(Home.this, "Network Failure...", Toast.LENGTH_SHORT).show();
-            else if (i == 307)
-                Toast.makeText(Home.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(Home.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+            } else {
+                if (i == 306)
+                    Toast.makeText(Home.this, "Network Failure...", Toast.LENGTH_SHORT).show();
+                else if (i == 307)
+                    Toast.makeText(Home.this, "Request Cancelled...", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Home.this, "Unknown error, try again...", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 }

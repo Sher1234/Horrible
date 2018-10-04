@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Fixed Back Icon ClickListener for Settings/About Activity                         Minor Commit   - Oct   05, 2018
 Updated UI, Improved Dark Mode, Stability Improvements & More                     Major Commit   - Oct   05, 2018
 Added Dark Mode (Workaround/Alpha)                                                Major Commit   - Aug   14, 2018
 Fixed errors while loading 720p, 1080p releases & added view in browser option    Minor Commit   - Aug   14, 2018

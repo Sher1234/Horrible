@@ -91,6 +91,12 @@ public class About extends AppCompatActivity implements View.OnClickListener, Ch
 
         onLoadCheckedDate();
         button.setOnClickListener(this);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         onThemeChange(((AppController) getApplication()).getAppTheme());
     }
 

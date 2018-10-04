@@ -14,15 +14,17 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Show;
 import info.horriblesubs.sher.model.base.ReleaseItem;
+import info.horriblesubs.sher.ui.show.Show;
 
 public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHolder> {
 
+    private boolean theme;
     private final Show context;
     private List<ReleaseItem> releaseItems;
 
     public ReleaseRecycler(@NotNull Show context, @Nullable List<ReleaseItem> releaseItems) {
+        this.theme = ((AppController) context.getApplicationContext()).getAppTheme();
         this.releaseItems = releaseItems;
         this.context = context;
     }
@@ -31,11 +33,7 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (AppController.isDark)
-            view = inflater.inflate(R.layout.dark_r_release_item, parent, false);
-        else
-            view = inflater.inflate(R.layout.recycler_release_item, parent, false);
+        View view = inflater.inflate(R.layout.recycler_release_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -72,6 +70,13 @@ public class ReleaseRecycler extends RecyclerView.Adapter<ReleaseRecycler.ViewHo
                         (badges.size() >= 2 && badges.get(1) != null && badges.get(1).contains("1080"))
                         || (badges.size() >= 3 && badges.get(2) != null && badges.get(2).contains("1080")))
                     holder.textView5.setVisibility(View.VISIBLE);
+            }
+            if (theme) {
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+                holder.textView2.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+            } else {
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
+                holder.textView2.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
             }
         } catch (Exception e) {
             e.printStackTrace();

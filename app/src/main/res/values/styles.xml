@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <item name="colorPrimaryDark">@color/colorPrimaryLight</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="fontFamily">sans-serif</item>
     </style>
@@ -12,31 +12,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.Dark" parent="Theme.MaterialComponents">
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimary">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="fontFamily">sans-serif</item>
-    </style>
-
-    <style name="AppTheme.Dark.NoActionBar" parent="AppTheme.Dark">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
-
-    <style name="AppTheme.AppBar" parent="ThemeOverlay.MaterialComponents.Light">
-        <item name="android:textColorSecondary">#4285f4</item>
-    </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents" />
 
     <style name="AppTheme.PopupOverlay.Dark" parent="ThemeOverlay.MaterialComponents.Dark" />
-
-    <style name="AppTheme.AppBar.Dark" parent="ThemeOverlay.MaterialComponents.Dark">
-        <item name="android:textColorSecondary">#4285f4</item>
-    </style>
 
     <style name="TextView">
         <item name="android:padding">3dp</item>
@@ -47,13 +27,9 @@
 
     <style name="TextView.Label" parent="TextView">
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/primary</item>
         <item name="android:padding">4dp</item>
         <item name="android:textSize">10.5sp</item>
-    </style>
-
-    <style name="ProgressBar">
-        <item name="colorAccent">#ea4335</item>
     </style>
 
     <style name="AppTheme.Dialog" parent="Theme.MaterialComponents.Dialog">

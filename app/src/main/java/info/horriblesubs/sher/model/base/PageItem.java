@@ -7,6 +7,10 @@ public class PageItem extends Item {
     public String body;
     public String image;
 
+
+    public PageItem() {
+    }
+
     @Override
     public String toString() {
         return "ShowID: " + this.sid +

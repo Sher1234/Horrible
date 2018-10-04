@@ -18,35 +18,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Show;
+import info.horriblesubs.sher.common.Change;
 import info.horriblesubs.sher.model.base.ScheduleItem;
+import info.horriblesubs.sher.ui.show.Show;
 
 /**
  * ReleaseRecycler
  */
 
 @SuppressLint("SimpleDateFormat")
-public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.ViewHolder> {
+public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.ViewHolder>
+        implements Change {
 
-    private final int size;
+    private boolean theme;
     private final Context context;
     private final List<ScheduleItem> scheduleItems;
 
-    public ScheduleRecycler(Context context, @NotNull List<ScheduleItem> scheduleItems) {
-        this.context = context;
-        size = scheduleItems.size();
+    public ScheduleRecycler(@NotNull Context context, @NotNull List<ScheduleItem> scheduleItems) {
+        this.theme = ((AppController) context.getApplicationContext()).getAppTheme();
         this.scheduleItems = scheduleItems;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (AppController.isDark)
-            view = inflater.inflate(R.layout.dark_r_schedule_item, parent, false);
-        else
-            view = inflater.inflate(R.layout.recycler_schedule_item, parent, false);
+        View view = inflater.inflate(R.layout.recycler_schedule_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -83,6 +81,15 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
                     context.startActivity(intent);
                 }
             });
+            if (theme) {
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+                holder.textView2.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+                holder.textView3.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+            } else {
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
+                holder.textView2.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
+                holder.textView3.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,12 +97,20 @@ public class ScheduleRecycler extends RecyclerView.Adapter<ScheduleRecycler.View
 
     @Override
     public int getItemCount() {
-        return size;
+        if (scheduleItems != null)
+            return scheduleItems.size();
+        return 0;
     }
 
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    @Override
+    public void onThemeChange(boolean b) {
+        theme = b;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

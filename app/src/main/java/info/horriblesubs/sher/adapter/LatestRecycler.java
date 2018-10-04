@@ -16,28 +16,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Show;
+import info.horriblesubs.sher.common.Change;
 import info.horriblesubs.sher.model.base.LatestItem;
+import info.horriblesubs.sher.ui.show.Show;
 
-public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHolder> {
+public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHolder>
+        implements Change {
 
+    private boolean theme;
     private final Context context;
     private List<LatestItem> latestItems;
 
     public LatestRecycler(@NotNull Context context, @NotNull List<LatestItem> latestItems) {
-        this.context = context;
+        this.theme = ((AppController) context.getApplicationContext()).getAppTheme();
         this.latestItems = latestItems;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (AppController.isDark)
-            view = inflater.inflate(R.layout.dark_r_release_item, parent, false);
-        else
-            view = inflater.inflate(R.layout.recycler_release_item, parent, false);
+        View view = inflater.inflate(R.layout.recycler_release_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -87,6 +87,13 @@ public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHold
                     if (badges.get(2) != null && badges.get(2).contains("1080"))
                         holder.textView5.setVisibility(View.VISIBLE);
             }
+            if (theme) {
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+                holder.textView2.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+            } else {
+                holder.textView1.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
+                holder.textView2.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,6 +109,12 @@ public class LatestRecycler extends RecyclerView.Adapter<LatestRecycler.ViewHold
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    @Override
+    public void onThemeChange(boolean b) {
+        theme = b;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

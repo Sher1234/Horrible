@@ -14,15 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Show;
+import info.horriblesubs.sher.common.Change;
 import info.horriblesubs.sher.model.base.Item;
+import info.horriblesubs.sher.ui.show.Show;
 
-public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> {
+public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> implements Change {
 
     private final Context context;
     private List<Item> items;
+    private boolean theme;
 
     public ListRecycler(Context context, List<Item> items) {
+        this.theme = ((AppController) context.getApplicationContext()).getAppTheme();
         this.context = context;
         this.items = items;
     }
@@ -31,11 +34,7 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (AppController.isDark)
-            view = inflater.inflate(R.layout.dark_r_list_item, parent, false);
-        else
-            view = inflater.inflate(R.layout.recycler_list_item, parent, false);
+        View view = inflater.inflate(R.layout.recycler_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,6 +62,10 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
                     }
                 }
             });
+            if (theme)
+                holder.textView.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+            else
+                holder.textView.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,12 +73,20 @@ public class ListRecycler extends RecyclerView.Adapter<ListRecycler.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if (items != null)
+            return items.size();
+        return 0;
     }
 
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    @Override
+    public void onThemeChange(boolean b) {
+        theme = b;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

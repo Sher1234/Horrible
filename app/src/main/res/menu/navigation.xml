@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group
+        android:id="@+id/home"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/search"
+            android:title="@string/search" />
+
+        <item
+            android:id="@+id/favourites"
+            android:title="@string/favourites"
+            tools:checked="true" />
+
+        <item
+            android:id="@+id/releases"
+            android:title="@string/new_releases" />
+
+        <item
+            android:id="@+id/schedule"
+            android:title="@string/schedule" />
+
+        <item
+            android:id="@+id/current"
+            android:title="@string/current_shows" />
+
+        <item
+            android:id="@+id/all"
+            android:title="@string/all_shows" />
+
+    </group>
+
+    <group
+        android:id="@+id/application"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/refresh"
+            android:title="@string/refresh" />
+
+        <item
+            android:id="@+id/browser"
+            android:title="@string/view_in_browser" />
+
+        <item
+            android:id="@+id/theme"
+            android:title="@string/change_theme" />
+
+        <item
+            android:id="@+id/about"
+            android:title="@string/about_us" />
+    </group>
+
+</menu>

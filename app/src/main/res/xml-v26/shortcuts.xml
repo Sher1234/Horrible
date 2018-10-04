@@ -4,12 +4,12 @@
         android:enabled="true"
         android:icon="@mipmap/ic_shortcut_schedule"
         android:shortcutDisabledMessage="@string/schedule"
-        android:shortcutId="schedule.hs"
+        android:shortcutId="schedule.all"
         android:shortcutLongLabel="@string/schedule"
         android:shortcutShortLabel="@string/schedule">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Schedule"
+            android:targetClass="info.horriblesubs.sher.ui.schedule.Schedule"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
@@ -17,12 +17,25 @@
         android:enabled="true"
         android:icon="@mipmap/ic_shortcut_shows"
         android:shortcutDisabledMessage="@string/shows"
-        android:shortcutId="season.hs"
-        android:shortcutLongLabel="@string/shows"
+        android:shortcutId="season.all"
+        android:shortcutLongLabel="@string/all_shows"
         android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.activity.Shows"
+            android:targetClass="info.horriblesubs.sher.ui.shows.All"
+            android:targetPackage="info.horriblesubs.sher" />
+        <categories android:name="android.shortcut" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_shortcut_shows"
+        android:shortcutDisabledMessage="@string/shows"
+        android:shortcutId="season.current"
+        android:shortcutLongLabel="@string/current_shows"
+        android:shortcutShortLabel="@string/shows">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="info.horriblesubs.sher.ui.shows.Current"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>

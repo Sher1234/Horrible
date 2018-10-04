@@ -12,21 +12,26 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import info.horriblesubs.sher.AppController;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.activity.Show;
+import info.horriblesubs.sher.common.Change;
 import info.horriblesubs.sher.model.base.PageItem;
+import info.horriblesubs.sher.ui.show.Show;
 
-public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> {
+public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> implements Change {
 
+    private boolean theme;
     private final Context context;
     private List<PageItem> pageItems;
 
-    public ItemRecycler(Context context, List<PageItem> pageItems) {
+    public ItemRecycler(@NotNull Context context, @NotNull List<PageItem> pageItems) {
+        this.theme = ((AppController) context.getApplicationContext()).getAppTheme();
         this.pageItems = pageItems;
         this.context = context;
     }
@@ -35,11 +40,7 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (AppController.isDark)
-            view = inflater.inflate(R.layout.dark_r_fav_item, parent, false);
-        else
-            view = inflater.inflate(R.layout.recycler_fav_item, parent, false);
+        View view = inflater.inflate(R.layout.recycler_fav_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -67,6 +68,10 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
                     context.startActivity(intent);
                 }
             });
+            if (theme)
+                holder.textView.setTextColor(context.getResources().getColor(R.color.textHeadingDark));
+            else
+                holder.textView.setTextColor(context.getResources().getColor(R.color.textHeadingLight));
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -74,7 +79,9 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return pageItems.size();
+        if (pageItems != null)
+            return pageItems.size();
+        return 0;
     }
 
     @Override
@@ -82,9 +89,15 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
         return position;
     }
 
+    @Override
+    public void onThemeChange(boolean b) {
+        theme = b;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView textView;
         final ImageView imageView;
+        final TextView textView;
         final View layout;
 
         ViewHolder(View view) {
@@ -94,4 +107,5 @@ public class ItemRecycler extends RecyclerView.Adapter<ItemRecycler.ViewHolder> 
             imageView = layout.findViewById(R.id.imageView);
         }
     }
+
 }

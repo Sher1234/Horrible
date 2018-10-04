@@ -8,10 +8,6 @@ public class Item implements Serializable {
     public String link;
     public String title;
 
-
-    Item() {
-    }
-
     @Override
     public String toString() {
         return "ID: " + this.id +

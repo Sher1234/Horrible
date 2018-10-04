@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.horriblesubs.sher.Strings;
+import info.horriblesubs.sher.common.Strings;
 import info.horriblesubs.sher.model.base.PageItem;
 
 public class FavDBFunctions implements Strings {

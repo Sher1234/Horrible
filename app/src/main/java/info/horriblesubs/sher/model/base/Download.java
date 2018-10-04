@@ -10,10 +10,4 @@ public class Download implements Serializable {
 
     Download() {
     }
-
-    @Override
-    public String toString() {
-        return "Download: " + this.quality +
-                "\n" + "Size: " + this.links.size();
-    }
 }

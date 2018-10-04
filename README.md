@@ -15,11 +15,11 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Features
  * Supports Listing
-   - New Releases (80),
+   - New Releases (40),
    - Today's Schedule (According to User Timezone)
  * Notification Support for every new release available on HorribleSubs
    - Needs to be enabled by user
-   - Notifications might get delayed by 30 minutes (Max).
+   - Notifications might get delayed by 60 minutes (Max).
  * In App Search for listing available subs from Horrible Subs
  * Views All as well as Current Shows
  * Lists full weeks schedule day wise(According to User Time)
@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Updated UI, Improved Dark Mode, Stability Improvements & More                     Major Commit   - Oct   05, 2018
 Added Dark Mode (Workaround/Alpha)                                                Major Commit   - Aug   14, 2018
 Fixed errors while loading 720p, 1080p releases & added view in browser option    Minor Commit   - Aug   14, 2018
 Updated UI some elements, fixed crashes while loading releases                    Minor Commit   - Aug   12, 2018
@@ -65,7 +66,6 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos
-* Dark Mode [Needs Improvements]
 * PM me
 
 #### Download

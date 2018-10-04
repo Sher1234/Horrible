@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    app:cardBackgroundColor="#ffffff"
     android:layout_gravity="center"
-    android:orientation="vertical"
+    android:id="@+id/materialCard"
     app:cardCornerRadius="8dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -15,35 +14,35 @@
         android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.9"
                 android:background="#05000000"
-                android:id="@+id/textViewTitle"
                 android:maxLines="4"
+                android:layout_width="match_parent"
+                android:id="@+id/textViewTitle"
                 android:paddingTop="16dp"
-                android:paddingStart="20dp"
                 android:paddingBottom="16dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:textColor="@color/textHeadingDark"
                 android:gravity="center"
                 android:textSize="24sp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-                android:textColor="@color/colorText" />
+                tools:text="@string/app_name" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:id="@+id/textViewDescription"
             android:layout_marginStart="22dp"
+            android:id="@+id/textViewDescription"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="22dp"
             android:layout_marginBottom="4dp"
             android:alpha="0.8"
-            android:gravity="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:text="@string/latest_releases"
-            android:textColor="@color/colorText"
-            android:textSize="13sp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="22dp"
+            android:textColor="@color/textHeadingDark"
+            android:gravity="center"
+            android:textSize="13sp"
+            tools:text="@string/latest_releases" />
 
         <View
             android:layout_width="match_parent"
@@ -52,7 +51,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
@@ -96,7 +95,7 @@
                 android:textSize="13sp"
                 app:textAllCaps="false" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

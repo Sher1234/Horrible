@@ -1,10 +1,6 @@
 package info.horriblesubs.sher;
 
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -17,50 +13,39 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
-import info.horriblesubs.sher.activity.Home;
+import info.horriblesubs.sher.common.Strings;
+import info.horriblesubs.sher.model.response.Data;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppController extends Application {
 
-    public static boolean isDark = false;
-    private static AppController instance;
-
-    public static void setDark(boolean isDark) {
-        SharedPreferences sharedPreferences = instance.getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        if (editor.putBoolean("theme", isDark).commit())
-            restartApp();
-        else
-            Toast.makeText(instance, "Error changing theme...", Toast.LENGTH_SHORT).show();
-    }
-
-    private static void restartApp() {
-        int i = 4869;
-        Intent intent = new Intent(instance.getApplicationContext(), Home.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(instance.getApplicationContext(), i, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) instance.getApplicationContext()
-                .getSystemService(Context.ALARM_SERVICE);
-        assert alarmManager != null;
-        alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
-        System.exit(0);
-    }
+    public static AppController instance;
+    public Data data;
 
     @Override
     public void onCreate() {
-        instance = this;
-        isDark();
-        if (isDark)
-            setTheme(R.style.AppTheme_Dark);
         super.onCreate();
+        instance = this;
+        if (data == null)
+            data = new Data();
         MobileAds.initialize(this, getString(R.string.ad_mob_app_id));
     }
 
-    private void isDark() {
+
+    public void toggleTheme() {
         SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("theme", false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (editor.putBoolean("theme", !getAppTheme()).commit())
+            Toast.makeText(this, "Changing theme...", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "Error changing theme...", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean getAppTheme() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Strings.Prefs, MODE_PRIVATE);
+        return sharedPreferences.getBoolean("theme", false);
     }
 
     @NonNull

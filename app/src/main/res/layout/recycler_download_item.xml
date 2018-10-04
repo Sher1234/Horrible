@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardBackgroundColor="@android:color/transparent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginTop="5dp"
     android:layout_gravity="center"
-    android:layout_marginEnd="12dp"
-    android:layout_marginBottom="5dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="0dp"
-    app:strokeColor="#aaaaaa"
-    app:strokeWidth="0.1dp">
+    app:cardElevation="0dp">
 
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="12dp">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:orientation="vertical"
             android:gravity="center"
-            android:padding="4dp"
-            android:text="@string/download_via"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textColor="@color/colorText"
-            android:textSize="13sp" />
+            android:padding="6dp"
+            tools:targetApi="m">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="6dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textColor="@color/colorSD"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="@string/app_name" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.5dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="4dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textColor="@color/colorSD"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            tools:text="@string/app_name" />
-    </LinearLayout>
+            android:layout_alignTop="@id/linearLayout"
+            android:layout_alignEnd="@id/linearLayout"
+            android:layout_alignBottom="@id/linearLayout"
+            android:alpha="0.4"
+            android:background="@android:color/darker_gray" />
+
+    </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

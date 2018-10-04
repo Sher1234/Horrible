@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import androidx.annotation.Nullable;
-import info.horriblesubs.sher.Strings;
+import info.horriblesubs.sher.common.Strings;
 
 @SuppressWarnings("All")
 public class Update implements Serializable {

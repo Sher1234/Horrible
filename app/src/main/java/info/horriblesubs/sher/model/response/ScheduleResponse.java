@@ -14,4 +14,8 @@ public class ScheduleResponse implements Serializable {
     public ScheduleResponse() {
 
     }
+
+    public ScheduleResponse(List<ScheduleItem> items) {
+        this.schedule = items;
+    }
 }

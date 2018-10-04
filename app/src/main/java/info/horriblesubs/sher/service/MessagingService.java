@@ -22,8 +22,8 @@ import java.util.Random;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.Strings;
-import info.horriblesubs.sher.activity.Show;
+import info.horriblesubs.sher.common.Strings;
+import info.horriblesubs.sher.ui.show.Show;
 
 public class MessagingService extends FirebaseMessagingService {
 

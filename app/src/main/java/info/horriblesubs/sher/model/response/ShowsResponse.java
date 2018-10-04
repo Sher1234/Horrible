@@ -14,4 +14,9 @@ public class ShowsResponse implements Serializable {
 
     public ShowsResponse() {
     }
+
+    public ShowsResponse(List<Item> all, List<Item> current) {
+        this.current = current;
+        this.all = all;
+    }
 }

@@ -1,7 +1,5 @@
 package info.horriblesubs.sher.model.base;
 
-import com.google.android.gms.common.util.ArrayUtils;
-
 import java.util.List;
 
 @SuppressWarnings("all")
@@ -20,6 +18,6 @@ public class LatestItem extends Item {
                 "\n" + "Link: " + this.link +
                 "\n" + "Title: " + this.title +
                 "\n" + "Number: " + this.number+
-                "\n" + "Badges: " + ArrayUtils.toStringArray(this.badge);
+                "\n" + "Badges: " + this.badge.size();
     }
 }

@@ -83,6 +83,14 @@
           }
         },
         {
+          "client_id": "1080481830157-5pb5s5c62mu0thgk6860bk0frculom5u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "603e38dcf090b69fc2eea6b3b744a450a222957e"
+          }
+        },
+        {
           "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -108,7 +116,8 @@
         "ads_service": {
           "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-7307290547259470~7830642737"
     }
   ],
   "configuration_version": "1"

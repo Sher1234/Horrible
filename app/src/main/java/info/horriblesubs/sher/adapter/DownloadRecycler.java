@@ -24,8 +24,10 @@ public class DownloadRecycler extends RecyclerView.Adapter<DownloadRecycler.View
 
     private final Download download;
     private final Context context;
+    private final boolean theme;
 
     public DownloadRecycler(@NotNull Context context, @Nullable Download download) {
+        this.theme = ((AppController) context.getApplicationContext()).getAppTheme();
         this.download = download;
         this.context = context;
     }
@@ -34,11 +36,7 @@ public class DownloadRecycler extends RecyclerView.Adapter<DownloadRecycler.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
-        if (AppController.isDark)
-            view = inflater.inflate(R.layout.dark_r_download_item, parent, false);
-        else
-            view = inflater.inflate(R.layout.recycler_download_item, parent, false);
+        View view = inflater.inflate(R.layout.recycler_download_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -67,6 +65,10 @@ public class DownloadRecycler extends RecyclerView.Adapter<DownloadRecycler.View
             assert download != null;
             final Links links = download.links.get(position);
             holder.textView.setText(links.type);
+            if (theme)
+                holder.textView.setTextColor(context.getResources().getColor(R.color.yellow));
+            else
+                holder.textView.setTextColor(context.getResources().getColor(R.color.blue));
             if (links.link == null || links.link.isEmpty())
                 holder.textView.setTextColor(context.getResources().getColor(R.color.colorHD));
             holder.layout.setOnClickListener(getOnClickListener(links.link));

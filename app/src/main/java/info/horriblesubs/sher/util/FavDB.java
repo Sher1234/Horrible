@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import info.horriblesubs.sher.Strings;
+import info.horriblesubs.sher.common.Strings;
 
 class FavDB extends SQLiteOpenHelper implements Strings {
 

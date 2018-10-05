@@ -224,14 +224,20 @@ public class Show extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.fly_in, R.animator.fade_out,
                         R.animator.fade_in, R.animator.fly_out)
-                .replace(R.id.frameLayout, Downloads.newInstance(item, showResponse.detail.image), "Download")
+                .add(R.id.frameLayout, Downloads.newInstance(item, showResponse.detail.image), "Download")
                 .commit();
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if (showResponse == null || showResponse.detail == null)
-            Toast.makeText(this, "Horrible error, try refreshing page...", Toast.LENGTH_SHORT).show();
+            Snackbar.make(view, "Server error, try again...", Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.refresh, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            fetchShow();
+                        }
+                    }).show();
         else {
             if (b) {
                 fab.setImageResource(R.drawable.ic_favorite_filled);
@@ -369,16 +375,40 @@ public class Show extends AppCompatActivity
             progress.dismiss();
             if (i == 1) {
                 if (show == null)
-                    Snackbar.make(view, "Error loading subs, try again...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Loading error, try again...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fetchShow();
+                                }
+                            }).show();
                 else
                     onDataUpdated(show);
             } else {
                 if (i == 306)
-                    Snackbar.make(view, "Network failure...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Network failure...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fetchShow();
+                                }
+                            }).show();
                 else if (i == 307)
-                    Snackbar.make(view, "Request cancelled...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fetchShow();
+                                }
+                            }).show();
                 else
-                    Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Unspecified error, try again...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    fetchShow();
+                                }
+                            }).show();
                 finish();
             }
         }

@@ -2,7 +2,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_schedule"
+        android:icon="@mipmap/ic_schedule"
         android:shortcutDisabledMessage="@string/schedule"
         android:shortcutId="schedule.all"
         android:shortcutLongLabel="@string/schedule"
@@ -15,20 +15,20 @@
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_shows"
-        android:shortcutDisabledMessage="@string/shows"
-        android:shortcutId="season.all"
-        android:shortcutLongLabel="@string/all_shows"
-        android:shortcutShortLabel="@string/shows">
+        android:icon="@mipmap/ic_fav"
+        android:shortcutDisabledMessage="@string/favourites"
+        android:shortcutId="fav.hs"
+        android:shortcutLongLabel="@string/favourites"
+        android:shortcutShortLabel="@string/favourites">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.ui.shows.All"
+            android:targetClass="info.horriblesubs.sher.ui.favourites.Favourites"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_shortcut_shows"
+        android:icon="@mipmap/ic_shows"
         android:shortcutDisabledMessage="@string/shows"
         android:shortcutId="season.current"
         android:shortcutLongLabel="@string/current_shows"

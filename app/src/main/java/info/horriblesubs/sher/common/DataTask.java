@@ -30,6 +30,7 @@ public class DataTask {
 
     private final AppCompatActivity activity;
     private final OnDataUpdate onDataUpdate;
+    private Snackbar snackbar;
     private final View view;
 
     private ShowsTask showsTask;
@@ -41,6 +42,11 @@ public class DataTask {
         this.view = activity.findViewById(R.id.drawerLayout);
         this.onDataUpdate = (OnDataUpdate) activity;
         this.activity = activity;
+    }
+
+    private void dismissBar() {
+        if (snackbar != null)
+            snackbar.dismiss();
     }
 
     public void fetchShows() {
@@ -91,7 +97,6 @@ public class DataTask {
 
     class ShowsTask extends AsyncTask<Void, Void, Boolean> {
 
-
         private int i = 0;
         private ShowsResponse data;
 
@@ -99,6 +104,7 @@ public class DataTask {
         protected void onPreExecute() {
             super.onPreExecute();
             onDataUpdate.preDataUpdate();
+            dismissBar();
         }
 
         @Override
@@ -137,17 +143,42 @@ public class DataTask {
             super.onPostExecute(aBoolean);
             if (i == 1) {
                 if (data == null) {
-                    Snackbar.make(view, "Server error...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Server error...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                     onDataUpdate.onShowsUpdated(true, null);
                 } else
                     onDataUpdate.onShowsUpdated(false, data);
             } else {
                 if (i == 306)
-                    Snackbar.make(view, "Network Failure...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Network Failure...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                 else if (i == 307)
-                    Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                 else
-                    Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
+                snackbar.show();
                 onDataUpdate.onShowsUpdated(true, null);
             }
         }
@@ -161,6 +192,7 @@ public class DataTask {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            dismissBar();
             onDataUpdate.preDataUpdate();
         }
 
@@ -200,17 +232,42 @@ public class DataTask {
             super.onPostExecute(aBoolean);
             if (i == 1) {
                 if (data == null) {
-                    Snackbar.make(view, "Server error...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Server error...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                     onDataUpdate.onLatestUpdated(true, null);
                 } else
                     onDataUpdate.onLatestUpdated(false, data.releases);
             } else {
                 if (i == 306)
-                    Snackbar.make(view, "Network Failure...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Network Failure...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                 else if (i == 307)
-                    Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                 else
-                    Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
+                snackbar.show();
                 onDataUpdate.onLatestUpdated(true, null);
             }
         }
@@ -224,6 +281,7 @@ public class DataTask {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            dismissBar();
             onDataUpdate.preDataUpdate();
         }
 
@@ -263,17 +321,42 @@ public class DataTask {
             super.onPostExecute(aBoolean);
             if (i == 1) {
                 if (data == null) {
-                    Snackbar.make(view, "Server error...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Server error...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                     onDataUpdate.onScheduleUpdated(true, null);
                 } else
                     onDataUpdate.onScheduleUpdated(false, data);
             } else {
                 if (i == 306)
-                    Snackbar.make(view, "Network Failure...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Network Failure...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                 else if (i == 307)
-                    Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(view, "Request Cancelled...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
                 else
-                    Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE).show();
+                    snackbar = Snackbar.make(view, "Unknown error, try again...", Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.refresh, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    onDataUpdate.fetchData();
+                                }
+                            });
+                snackbar.show();
                 onDataUpdate.onScheduleUpdated(true, null);
             }
         }
@@ -286,6 +369,7 @@ public class DataTask {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            dismissBar();
             onDataUpdate.preDataUpdate();
         }
 

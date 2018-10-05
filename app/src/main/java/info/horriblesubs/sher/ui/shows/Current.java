@@ -114,6 +114,7 @@ public class Current extends AppCompatActivity
     @Override
     public void preDataUpdate() {
         dialogX = new DialogX(this, true);
+        navigate.setError(View.GONE);
         dialogX.show();
     }
 

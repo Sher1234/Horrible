@@ -50,7 +50,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="99" />
+                                                <entry key="scalingPercent" value="130" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -61,7 +61,19 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="181818" />
+                                                <entry key="color" value="99e2d8" />
+                                                <entry key="scalingPercent" value="18" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="foregroundClipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio/Canary/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_favorite_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -83,8 +95,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="181818" />
-                                                <entry key="scalingPercent" value="133" />
+                                                <entry key="color" value="a60063" />
+                                                <entry key="scalingPercent" value="115" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -96,7 +108,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="fontFamily" value="Russo One" />
-                                                <entry key="text" value="horribles" />
+                                                <entry key="text" value="schedule" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -106,8 +118,13 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\ic\AR1cfjTM_400x400.png" />
+                                      <entry key="backgroundColor" value="d4e157" />
+                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\ic\maxresdefault.jpg" />
                                       <entry key="foregroundAssetType" value="TEXT" />
+                                      <entry key="generateLegacyIcon" value="false" />
+                                      <entry key="generateRoundIcon" value="false" />
+                                      <entry key="generateWebIcon" value="false" />
+                                      <entry key="outputName" value="ic_schedule" />
                                     </map>
                                   </option>
                                 </PersistentState>

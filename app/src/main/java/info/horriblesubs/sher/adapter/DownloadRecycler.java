@@ -6,8 +6,9 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -64,14 +65,19 @@ public class DownloadRecycler extends RecyclerView.Adapter<DownloadRecycler.View
         try {
             assert download != null;
             final Links links = download.links.get(position);
-            holder.textView.setText(links.type);
-            if (theme)
-                holder.textView.setTextColor(context.getResources().getColor(R.color.yellow));
-            else
-                holder.textView.setTextColor(context.getResources().getColor(R.color.blue));
-            if (links.link == null || links.link.isEmpty())
-                holder.textView.setTextColor(context.getResources().getColor(R.color.colorHD));
-            holder.layout.setOnClickListener(getOnClickListener(links.link));
+            holder.button.setText(links.type);
+            if (theme) {
+                holder.button.setTextColor(context.getResources().getColor(R.color.yellow));
+                holder.button.setRippleColorResource(R.color.yellowRipple);
+            } else {
+                holder.button.setTextColor(context.getResources().getColor(R.color.blue));
+                holder.button.setRippleColorResource(R.color.blueRipple);
+            }
+            if (links.link == null || links.link.isEmpty()) {
+                holder.button.setTextColor(context.getResources().getColor(R.color.red));
+                holder.button.setRippleColorResource(R.color.redRipple);
+            }
+            holder.button.setOnClickListener(getOnClickListener(links.link));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,13 +108,13 @@ public class DownloadRecycler extends RecyclerView.Adapter<DownloadRecycler.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView textView;
+        final MaterialButton button;
         final View layout;
 
         ViewHolder(View view) {
             super(view);
             layout = view;
-            textView = layout.findViewById(R.id.textView);
+            button = layout.findViewById(R.id.button);
         }
     }
 }

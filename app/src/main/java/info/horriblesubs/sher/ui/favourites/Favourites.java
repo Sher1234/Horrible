@@ -3,6 +3,7 @@ package info.horriblesubs.sher.ui.favourites;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.ads.AdListener;
@@ -111,6 +112,7 @@ public class Favourites extends AppCompatActivity
     @Override
     public void preDataUpdate() {
         dialogX = new DialogX(this, true);
+        navigate.setError(View.GONE);
         dialogX.show();
     }
 

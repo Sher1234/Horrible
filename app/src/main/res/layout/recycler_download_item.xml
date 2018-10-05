@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     app:cardBackgroundColor="@android:color/transparent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_gravity="center"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="0dp">
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        app:cornerRadius="6dp"
+        app:rippleColor="@color/blueRipple"
+        tools:text="@string/app_name" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:foreground="?attr/selectableItemBackground"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="6dp"
-            tools:targetApi="m">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="6dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textColor="@color/colorSD"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                tools:text="@string/app_name" />
-
-        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.25dp"
+            android:layout_weight="2.75" />
 
         <View
-            android:layout_width="0.5dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/linearLayout"
-            android:layout_alignEnd="@id/linearLayout"
-            android:layout_alignBottom="@id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0.25dp"
+            android:layout_weight="5"
             android:alpha="0.4"
             android:background="@android:color/darker_gray" />
 
-    </RelativeLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0.25dp"
+            android:layout_weight="2.75" />
 
-</com.google.android.material.card.MaterialCardView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

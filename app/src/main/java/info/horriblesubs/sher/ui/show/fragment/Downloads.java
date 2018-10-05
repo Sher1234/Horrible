@@ -16,6 +16,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -34,6 +35,7 @@ public class Downloads extends Fragment implements Change {
     private ImageView imageView;
     private CoordinatorLayout view;
     private ReleaseItem releaseItem;
+    private LinearLayoutCompat layout1, layout2, layout3;
     private RecyclerView recyclerView1, recyclerView2, recyclerView3;
     private TextView textView1, textView2, textView3, textView4, textView5;
 
@@ -53,6 +55,9 @@ public class Downloads extends Fragment implements Change {
         recyclerView1 = rootView.findViewById(R.id.recyclerView1);
         recyclerView2 = rootView.findViewById(R.id.recyclerView2);
         recyclerView3 = rootView.findViewById(R.id.recyclerView3);
+        layout1 = rootView.findViewById(R.id.linearLayout1);
+        layout2 = rootView.findViewById(R.id.linearLayout2);
+        layout3 = rootView.findViewById(R.id.linearLayout3);
         textView1 = rootView.findViewById(R.id.textView);
         textView2 = rootView.findViewById(R.id.textView0);
         textView3 = rootView.findViewById(R.id.textView1);
@@ -75,9 +80,9 @@ public class Downloads extends Fragment implements Change {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         assert getContext() != null;
-        recyclerView3.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView3.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView3.setItemAnimator(new DefaultItemAnimator());
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
@@ -107,6 +112,12 @@ public class Downloads extends Fragment implements Change {
                         recycler3 = new DownloadRecycler(getContext(), releaseItem.downloads.get(2));
             }
         }
+        if (recycler1 == null)
+            layout1.setVisibility(View.GONE);
+        if (recycler2 == null)
+            layout2.setVisibility(View.GONE);
+        if (recycler3 == null)
+            layout3.setVisibility(View.GONE);
         recyclerView3.setAdapter(recycler3);
         recyclerView2.setAdapter(recycler2);
         recyclerView1.setAdapter(recycler1);

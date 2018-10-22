@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Added Support for HTTP Requests                                                   Minor Commit   - Oct   22, 2018
 Server moved to Hostinger (temporarily)                                           Minor Commit   - Oct   22, 2018
 Updated Download UI, Fixed various loading error graphics & more                  Major Commit   - Oct   05, 2018
 Fixed Back Icon ClickListener for Settings/About Activity                         Minor Commit   - Oct   05, 2018
@@ -68,8 +69,8 @@ Added Support for Lists, Notification sometimes buggy, Show Pages, Search       
 Added Support for Schedule, Notification on New Release & Design Improvements     Major Commit   - March 05, 2018
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
-#### Todos
-* PM me
+#### Todos [All Done]
+* Any Requests...
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

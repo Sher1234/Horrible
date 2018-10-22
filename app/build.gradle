@@ -3,9 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        versionCode 54
+        versionCode 55
         minSdkVersion 21
-        versionName "0.5.4"
+        versionName "0.5.5"
         targetSdkVersion 28
         multiDexEnabled true
         applicationId "info.horriblesubs.sher"

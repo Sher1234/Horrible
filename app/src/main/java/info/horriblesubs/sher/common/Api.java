@@ -13,11 +13,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 public interface Api {
-    String Link = "https://sher1234.000webhostapp.com/api/hs/";
+    String Link = "http://udit12.esy.es/api/hs/";
 
-    //    @GET("home/{version}")
-//    Call<HomeResponse> getHome(@Path(value = "version", encoded = true) int version);
-//
     @GET("latest/0")
     Call<LatestResponse> getLatest();
 

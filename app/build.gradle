@@ -2,14 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "info.horriblesubs.sher"
+        versionCode 54
         minSdkVersion 21
+        versionName "0.5.4"
         targetSdkVersion 28
-        versionCode 53
-        versionName "0.5.3"
         multiDexEnabled true
+        applicationId "info.horriblesubs.sher"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

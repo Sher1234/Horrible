@@ -16,5 +16,4 @@ public interface Strings {
     String FavImage = "Image";
     String FavLink = "Link";
     String FavID = "ID";
-
 }

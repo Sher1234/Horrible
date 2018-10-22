@@ -357,16 +357,21 @@ public class About extends AppCompatActivity implements View.OnClickListener, Ch
             progressBar.setVisibility(View.GONE);
             layout.setVisibility(View.VISIBLE);
             if (i == 1) {
-                Toast.makeText(About.this, "Update downloaded...", Toast.LENGTH_SHORT).show();
-                Uri uri = FileProvider.getUriForFile(About.this,
-                        getApplicationContext().getPackageName() + ".provider", file);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(uri, "application/vnd.android.package-archive");
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                try {
+                    Toast.makeText(About.this, "Update downloaded", Toast.LENGTH_SHORT).show();
+                    Uri uri = FileProvider.getUriForFile(About.this,
+                            getApplicationContext().getPackageName() + ".provider", file);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(About.this, "Install the update form downloads", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             } else
-                Toast.makeText(About.this, "Error downloading update...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(About.this, "Error downloading update", Toast.LENGTH_SHORT).show();
         }
 
         @SuppressWarnings("all")

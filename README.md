@@ -29,6 +29,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Server moved to Hostinger (temporarily)                                           Minor Commit   - Oct   22, 2018
 Updated Download UI, Fixed various loading error graphics & more                  Major Commit   - Oct   05, 2018
 Fixed Back Icon ClickListener for Settings/About Activity                         Minor Commit   - Oct   05, 2018
 Updated UI, Improved Dark Mode, Stability Improvements & More                     Major Commit   - Oct   05, 2018

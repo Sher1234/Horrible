@@ -15,16 +15,16 @@ public class Update implements Serializable {
 
     public String Link;
     public int Version;
-    public String AppCode;
     public String UpdateID;
     public String Changelog;
-    public String ReleaseDate;
+    public String ApiVersion;
+    public String Date;
 
     @Nullable
     private Date getDate() {
         DateFormat dateFormat = new SimpleDateFormat(Strings.ServerDate, Locale.US);
         try {
-            return dateFormat.parse(this.ReleaseDate);
+            return dateFormat.parse(this.Date);
         } catch (ParseException e) {
             e.printStackTrace();
             return null;
@@ -37,7 +37,7 @@ public class Update implements Serializable {
 
     @Override
     public String toString() {
-        return "AppCode: " + this.AppCode +
+        return "AppCode: " + this.ApiVersion +
                 "\n" + "Version: " + this.Version +
                 "\n" + "UpdateID: " + this.UpdateID +
                 "\n" + "Changelog: " + this.Changelog +

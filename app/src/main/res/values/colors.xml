@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLight">#ffffff</color>
-    <color name="primary">#fefefe</color>
-    <color name="colorPrimaryDarkLight">#424242</color>
-    <color name="primaryDark">#212121</color>
-    <color name="colorAccent">#4285f4</color>
+    <!--Dark Theme-->
+    <color name="textHeadingDark">#fefefe</color>
+
+    <color name="colorOnSurfaceDark">#ffffff</color>
+    <color name="colorSurfaceDark">#323232</color>
+
+    <color name="blurDark">#35ffffff</color>
+
+
+    <!--Light Theme-->
+    <color name="textHeadingLight">#000000</color>
+
+    <color name="blurLight">#35000000</color>
 
     <color name="red">#ea4335</color>
     <color name="blue">#4285f4</color>
     <color name="green">#34a853</color>
     <color name="yellow">#fbbc05</color>
 
-    <color name="redRipple">#33ea4335</color>
-    <color name="blueRipple">#334285f4</color>
-    <color name="greenRipple">#3334a853</color>
-    <color name="yellowRipple">#33fbbc05</color>
-
-    <color name="textHeadingDark">#fafafa</color>
-    <color name="textHeadingLight">#292929</color>
-
-    <color name="rippleHeadingDark">#35fafafa</color>
-    <color name="rippleHeadingLight">#35292929</color>
-
+    <color name="colorItemDark">#16ffffff</color>
+    <color name="colorItemLight">#16323232</color>
     <!--#d81b60-->
     <color name="colorText">#000000</color>
-    <color name="colorTextDisabled">#606060</color>
 
-    <color name="textDisabledLight">#707070</color>
-    <color name="textDisabledDark">#a6a6a6</color>
-
-    <color name="colorSD">#4285f4</color>
-    <color name="colorHD">#ea4335</color>
-    <color name="colorFHD">#34a853</color>
 </resources>

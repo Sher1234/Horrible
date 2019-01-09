@@ -3,39 +3,24 @@
     <shortcut
         android:enabled="true"
         android:icon="@mipmap/ic_schedule"
-        android:shortcutDisabledMessage="@string/schedule"
-        android:shortcutId="schedule.all"
+        android:shortcutId="horrible.schedule"
         android:shortcutLongLabel="@string/schedule"
-        android:shortcutShortLabel="@string/schedule">
+        android:shortcutShortLabel="@string/schedule_">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.ui.schedule.Schedule"
-            android:targetPackage="info.horriblesubs.sher" />
-        <categories android:name="android.shortcut" />
-    </shortcut>
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_fav"
-        android:shortcutDisabledMessage="@string/favourites"
-        android:shortcutId="fav.hs"
-        android:shortcutLongLabel="@string/favourites"
-        android:shortcutShortLabel="@string/favourites">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.ui.favourites.Favourites"
+            android:targetClass="info.horriblesubs.sher.ui.horrible.schedule.Schedule"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
     <shortcut
         android:enabled="true"
         android:icon="@mipmap/ic_shows"
-        android:shortcutDisabledMessage="@string/shows"
-        android:shortcutId="season.current"
+        android:shortcutId="horrible.season.current"
         android:shortcutLongLabel="@string/current_shows"
         android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.ui.shows.Current"
+            android:targetClass="info.horriblesubs.sher.ui.horrible.current.Current"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>

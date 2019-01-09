@@ -1,49 +1,54 @@
 <resources>
-    <string name="app_name">horribles</string>
-    <string name="_480p">480p</string>
-    <string name="_720p">720p</string>
-    <string name="_1080p">1080p</string>
-    <string name="notifications">Notifications</string>
-    <string name="shows">Shows</string>
-    <string name="latest_releases">Latest Releases</string>
-    <string name="schedule">Schedule</string>
-    <string name="about_us">About App</string>
-    <string name="favourites">Favourites</string>
-    <string name="new_releases">New Releases</string>
-    <string name="batches">Batches</string>
-    <string name="refresh">Refresh</string>
-    <string name="no_batches_available">No batches available</string>
-    <string name="disable_notify">This will disable new release notifications, You will not be able receive notifications on any new release.</string>
-    <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
-    <string name="no_episodes_available">No episodes available</string>
-    <string name="application_updated">Your application is up to date</string>
-    <string name="application_update">New application update available</string>
-    <string name="checking_update">Checking for updates…</string>
-    <string name="downloading_update">Downloading update…</string>
-    <string name="app_ver">Application version:</string>
-    <string name="last_update_check">Last update check: </string>
-    <string name="check_for_updates">Check for updates</string>
-    <string name="update_text">A newer version of horribles is available for download. The update includes new features, various fixes &amp; performance improvements.</string>
-    <string name="releases">Releases</string>
-    <string name="search">Search</string>
+    <string name="app_name">HorribleSubs</string>
+
     <string name="ad_mob_app_id">ca-app-pub-7307290547259470~7830642737</string>
-    <string name="ad_unit_footer_1">ca-app-pub-7307290547259470/2376858278</string>
-    <string name="ad_unit_interstitial_1">ca-app-pub-7307290547259470/8912624262</string>
-    <string name="ad_unit_footer_2">ca-app-pub-7307290547259470/9001497444</string>
-    <string name="ad_unit_interstitial_2">ca-app-pub-7307290547259470/2594627922</string>
-    <string name="ad_unit_footer_3">ca-app-pub-7307290547259470/5307108097</string>
-    <string name="ad_unit_interstitial_3">ca-app-pub-7307290547259470/7455790528</string>
-    <string name="ad_unit_footer_4">ca-app-pub-7307290547259470/8525754646</string>
+
+    <array name="footer">
+        <item>ca-app-pub-7307290547259470/2376858278</item>
+        <item>ca-app-pub-7307290547259470/9001497444</item>
+        <item>ca-app-pub-7307290547259470/5307108097</item>
+        <item>ca-app-pub-7307290547259470/8525754646</item>
+    </array>
+
+    <array name="interstitial">
+        <item>ca-app-pub-7307290547259470/8912624262</item>
+        <item>ca-app-pub-7307290547259470/2594627922</item>
+        <item>ca-app-pub-7307290547259470/7455790528</item>
+    </array>
+
     <string name="notification_channel">horrible.channel.new</string>
-    <string name="view_in_browser">View in browser</string>
-    <string name="change_theme">Change theme</string>
-    <string name="account_request">\Sign in or create account to unlock this &amp; various other features.</string>
-    <string name="horriblesubs">HorribleSubs</string>
-    <string name="loading">Loading…</string>
-    <string name="error_string">Network error</string>
-    <string name="no_fav">Empty favourites…</string>
+    <string name="full_hd">FullHD</string>
+    <string name="hd">HD</string>
+    <string name="sd">SD</string>
+    <string name="horrible_subs">HorribleSubs</string>
+    <string name="home">Home</string>
+    <string name="schedule">Weekly Schedule</string>
+    <string name="schedule_">Schedule</string>
+    <string name="favourites">Favourites</string>
+    <string name="shows">Shows</string>
     <string name="all_shows">All Shows</string>
     <string name="current_shows">Current Shows</string>
+    <string name="information">Information</string>
+    <string name="batches">Batches</string>
+    <string name="episodes">Episodes</string>
+    <string name="refresh">Refresh</string>
+    <string name="latest_releases">Latest Releases</string>
+    <string name="today_s_schedule">Today\'s Schedule</string>
+    <string name="about_app">About App</string>
+    <string name="toggle_theme">Toggle Theme</string>
+    <string name="switch_to_nyaa">Switch to Nyaa</string>
+    <string name="others">Others</string>
+    <string name="search">Search</string>
+    <string name="empty_favourites">Favourite a show to be shown here.</string>
+    <string name="empty_latest_releases">Latest releases aren\'t yet updated.</string>
+    <string name="empty_today_s_schedule">Today\'s schedule aren\'t yet updated.</string>
+    <string name="empty_search">No releases available</string>
+    <string name="view_in_browser">View in Browser</string>
+    <string name="app_not_available">No application available to handle this action.</string>
+    <string name="horrible_subs_url">https://horriblesubs.info/</string>
+    <string name="disable_notify">This will disable new release notifications, You will not be able receive notifications on any new release.</string>
+    <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
+
     <string-array name="days">
         <item>Sunday</item>
         <item>Monday</item>
@@ -52,6 +57,7 @@
         <item>Thursday</item>
         <item>Friday</item>
         <item>Saturday</item>
-        <item>To be scheduled</item>
+        <item>To be Scheduled</item>
     </string-array>
+
 </resources>

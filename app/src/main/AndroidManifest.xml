@@ -1,32 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="info.horriblesubs.sher">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".AppController"
-        android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
+        android:name=".AppMe"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AniDex.Dark"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="m">
 
-        <service
-            android:name=".service.MessagingService"
-            android:permission="@null">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ad_mob_app_id" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification_new" />
@@ -36,6 +33,14 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_channel" />
+
+        <service
+            android:name=".service.MessagingService"
+            android:permission="@null">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -47,73 +52,28 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity
-            android:label="@string/app_name"
-            android:name=".ui.latest.Latest"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar">
-
+        <activity android:name=".ui.horrible.home.Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
 
-        <activity
-            android:name=".ui.search.Search"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+        <activity android:name=".ui.horrible.favourites.Favourites" />
 
-            <meta-data
-                android:name="android.app.searchable"
-                android:value="@xml/searchable" />
-        </activity>
+        <activity android:name=".ui.horrible.schedule.Schedule" />
+
+        <activity android:name=".ui.horrible.current.Current" />
+
+        <activity android:name=".ui.horrible.latest.Latest" />
+
+        <activity android:name=".ui.horrible.search.Search" />
 
         <activity
-            android:label="@string/app_name"
-            android:name=".ui.favourites.Favourites"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".ui.horrible.show.Show"
+            android:exported="true" />
 
-        <activity
-            android:label="@string/app_name"
-            android:name=".ui.schedule.Schedule"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:label="@string/app_name"
-            android:name=".ui.shows.All"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".ui.setting.About"
-            android:label="@string/app_name"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".ui.shows.Current"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".ui.show.Show"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.horrible.all.All" />
 
     </application>
 

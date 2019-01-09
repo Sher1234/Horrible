@@ -1,51 +1,99 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <item name="colorPrimaryDark">@color/colorPrimaryLight</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="fontFamily">sans-serif</item>
-    </style>
+    <!--Parent Theme-->
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
+    <style name="AniDex" />
+
+    <style name="Parent.Light" parent="Theme.MaterialComponents.Light">
+        <item name="colorPrimaryDark">@color/colorSurfaceDark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents" />
-
-    <style name="AppTheme.PopupOverlay.Dark" parent="ThemeOverlay.MaterialComponents.Dark" />
-
-    <style name="TextView">
-        <item name="android:padding">3dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="Parent.Dark" parent="Theme.MaterialComponents">
+        <item name="colorPrimaryDark">@color/colorSurfaceDark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-
-    <style name="TextView.Label" parent="TextView">
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="android:textColor">@color/primary</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:textSize">10.5sp</item>
-    </style>
-
-    <style name="AppTheme.Dialog" parent="Theme.MaterialComponents.Dialog">
+    <style name="Parent.Dialog.Light" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="ThemeSD">
-        <item name="colorAccent">@color/colorSD</item>
+    <style name="Parent.Dialog.Dark" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="ThemeHD">
-        <item name="colorAccent">@color/colorHD</item>
+    <!--Application Theme-->
+
+    <style name="AniDex.Light" parent="Parent.Light">
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorPrimary">@color/blue</item>
+
+        <item name="colorOnSecondary">@color/blue</item>
+        <item name="colorSecondary">@color/red</item>
+
+        <item name="colorOnSurface">@android:color/black</item>
+        <item name="colorSurface">@android:color/white</item>
+
+        <item name="colorAccent">@color/blue</item>
+
+        <item name="viewBackground">#f6f6f6</item>
+
+        <item name="toolbarBackground">#fbfbfb</item>
+
+        <item name="fabStyle">@style/AniDex.Light.Fab</item>
+
+        <item name="tagBackground">@color/blurLight</item>
     </style>
 
-    <style name="ThemeFHD">
-        <item name="colorAccent">@color/colorFHD</item>
+    <style name="AniDex.Dark" parent="Parent.Dark">
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorPrimary">@color/yellow</item>
+
+        <item name="colorOnSecondary">@color/yellow</item>
+        <item name="colorSecondary">@color/green</item>
+
+        <item name="colorSurface">@color/colorSurfaceDark</item>
+        <item name="colorOnSurface">@android:color/white</item>
+
+        <item name="colorAccent">@color/yellow</item>
+
+        <item name="viewBackground">#191919</item>
+
+        <item name="toolbarBackground">#202020</item>
+
+        <item name="fabStyle">@style/AniDex.Dark.Fab</item>
+
+        <item name="tagBackground">@color/blurDark</item>
+    </style>
+
+    <style name="AniDex.Dark.Fab">
+        <item name="colorAccent">@color/yellow</item>
+        <item name="colorSecondary">@color/yellow</item>
+        <item name="colorOnSecondary">@color/colorSurfaceDark</item>
+    </style>
+
+    <style name="AniDex.Light.Fab">
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorOnSecondary">#fcfcfc</item>
+        <item name="colorSecondary">@color/blue</item>
+    </style>
+
+    <style name="AniDex.Button">
+        <item name="colorPrimary">@color/red</item>
+    </style>
+
+    <style name="AniDex.Dialog.Light" parent="Parent.Dialog.Light">
+        <item name="android:colorBackground">@color/colorOnSurfaceDark</item>
+        <item name="colorAccent">@color/textHeadingLight</item>
+        <item name="dialogStyle">@style/AniDex.Light</item>
+    </style>
+
+    <style name="AniDex.Dialog.Dark" parent="Parent.Dialog.Dark">
+        <item name="android:colorBackground">@color/colorSurfaceDark</item>
+        <item name="colorAccent">@color/textHeadingDark</item>
+        <item name="dialogStyle">@style/AniDex.Dark</item>
     </style>
 
 </resources>

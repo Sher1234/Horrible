@@ -11,24 +11,26 @@ Horrible Subs uses number of open source projects to work properly:
  - OkHttp & Retrofit networking libraries
  - Firebase for FCM notifications & google ads
 
-> Note: Application versions 0.3.4 and earlier won't work as expected as HorribleSubs changed various elements
+> Note: Application versions 0.5.5 and earlier won't work as there api updated to api-v6
+> Note: Application version 0.6.5 and later will require reinstall [Changed Signing Keys]
 
 #### Features
  * Supports Listing
-   - New Releases (40),
-   - Today's Schedule (According to User Timezone)
+   - New Releases (40) [Refreshed every 2 hours],
+   - Today's Schedule (According to User Timezone) [Refreshed every 2 days]
  * Notification Support for every new release available on HorribleSubs
    - Needs to be enabled by user
-   - Notifications might get delayed by 60 minutes (Max).
+   - Notifications might get delayed by 30 minutes.
  * In App Search for listing available subs from Horrible Subs
- * Views All as well as Current Shows
- * Lists full weeks schedule day wise(According to User Time)
+ * Views All as well as Current Shows [Refreshed every 5 days]
+ * Lists full weeks schedule day wise(According to User Timezone)
  * Show Activity for viewing previous show releases and show details
  * About Activity & Application Update Notification
  * Now lists DDL
 
 #### Release Updates
 ```
+Simplified UI with ViewModel Implementation & API Updates                         Major Commit   - Jan   09, 2019
 Added Support for HTTP Requests                                                   Minor Commit   - Oct   22, 2018
 Server moved to Hostinger (temporarily)                                           Minor Commit   - Oct   22, 2018
 Updated Download UI, Fixed various loading error graphics & more                  Major Commit   - Oct   05, 2018
@@ -70,7 +72,7 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos [All Done]
-* Any Requests...
+* Nyaa Implementation
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:title="@string/horrible_subs">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/home"
+                    android:title="@string/home"
+                    tools:checked="true" />
+
+                <item
+                    android:id="@+id/search"
+                    android:title="@string/search" />
+
+                <item
+                    android:id="@+id/favourite"
+                    android:title="@string/favourites" />
+
+                <item
+                    android:id="@+id/latest"
+                    android:title="@string/latest_releases" />
+
+                <item
+                    android:id="@+id/schedule"
+                    android:title="@string/schedule" />
+
+                <item
+                    android:id="@+id/current"
+                    android:title="@string/current_shows" />
+
+                <item
+                    android:id="@+id/all"
+                    android:title="@string/all_shows" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/others">
+        <menu>
+            <group android:checkableBehavior="none">
+
+                <item
+                    android:id="@+id/change"
+                    android:title="@string/switch_to_nyaa" />
+
+                <item
+                    android:id="@+id/theme"
+                    android:title="@string/toggle_theme" />
+
+                <item
+                    android:id="@+id/about"
+                    android:title="@string/about_app" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

@@ -50,7 +50,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="130" />
+                                                <entry key="scalingPercent" value="117" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -61,19 +61,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="99e2d8" />
-                                                <entry key="scalingPercent" value="18" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
-                                      <entry key="foregroundClipartAsset">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio/Canary/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_favorite_black_24dp.xml" />
+                                                <entry key="color" value="000000" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -85,6 +73,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="53" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -95,8 +84,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="a60063" />
-                                                <entry key="scalingPercent" value="115" />
+                                                <entry key="color" value="ffffff" />
+                                                <entry key="scalingPercent" value="22" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -107,8 +96,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="fontFamily" value="Russo One" />
-                                                <entry key="text" value="schedule" />
+                                                <entry key="text" value="" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -118,13 +106,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundColor" value="d4e157" />
-                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\ic\maxresdefault.jpg" />
+                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\#Desktop\Anime Walls\765096.png" />
                                       <entry key="foregroundAssetType" value="TEXT" />
-                                      <entry key="generateLegacyIcon" value="false" />
-                                      <entry key="generateRoundIcon" value="false" />
-                                      <entry key="generateWebIcon" value="false" />
-                                      <entry key="outputName" value="ic_schedule" />
+                                      <entry key="outputName" value="ic_shows" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -167,24 +151,6 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
-                                      <entry key="image">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="color" value="000000" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
-                                    </map>
-                                  </option>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\agghu\Downloads\notification_new.png" />
-                                      <entry key="outputName" value="ic_notification_new" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -215,7 +181,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio/Canary/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_left_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Studio/canary/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_launch_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -225,8 +191,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_back" />
-                            <entry key="sourceFile" value="C:\Users\agghu\Desktop\ic\error.svg" />
+                            <entry key="outputName" value="ic_launch" />
+                            <entry key="sourceFile" value="C:\Users\agghu" />
                           </map>
                         </option>
                       </PersistentState>

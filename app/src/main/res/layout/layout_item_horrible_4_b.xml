@@ -29,8 +29,8 @@
         android:paddingBottom="8dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_marginBottom="4dp"
             app:cardBackgroundColor="@android:color/transparent"
@@ -38,12 +38,10 @@
             app:cardElevation="0dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginBottom="4dp"
+                android:id="@+id/imageView"
+                android:layout_height="185dp"
                 android:scaleType="centerCrop"
-                android:textAppearance="?textAppearanceHeadline5"
                 tools:src="@tools:sample/avatars" />
 
         </com.google.android.material.card.MaterialCardView>

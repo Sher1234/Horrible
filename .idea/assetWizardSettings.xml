@@ -50,7 +50,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="117" />
+                                                <entry key="scalingPercent" value="113" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -85,7 +85,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="ffffff" />
-                                                <entry key="scalingPercent" value="22" />
+                                                <entry key="scalingPercent" value="0" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -106,9 +106,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\#Desktop\Anime Walls\765096.png" />
+                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\#Desktop\Anime Walls\791996.png" />
                                       <entry key="foregroundAssetType" value="TEXT" />
-                                      <entry key="outputName" value="ic_shows" />
+                                      <entry key="generateRoundIcon" value="false" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -19,7 +19,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_launcher" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView"

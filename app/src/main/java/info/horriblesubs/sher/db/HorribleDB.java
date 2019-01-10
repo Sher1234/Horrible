@@ -127,7 +127,7 @@ public class HorribleDB implements Database.Horrible {
             values.put(Title, map.get("title"));
             values.put(Link, map.get("link"));
             values.put(ID, map.get("id"));
-            return db.insert(H_Favourites, null, values);
+            return db.insert(H_Notify, null, values);
         } catch (SQLiteConstraintException e) {
             e.printStackTrace();
             return -1L;

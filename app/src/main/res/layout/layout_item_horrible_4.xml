@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:layout_marginStart="2dp"
     android:layout_marginTop="2dp"
     android:layout_marginEnd="2dp"
@@ -35,9 +34,10 @@
             app:cardElevation="0dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
+                android:minHeight="210dp"
+                android:id="@+id/imageView"
                 android:scaleType="centerCrop"
                 tools:src="@tools:sample/avatars" />
 

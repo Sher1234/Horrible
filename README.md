@@ -30,6 +30,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Fixed Favourites Listing, Notification & Navigation Issues                        Minor Commit   - Jan   10, 2019
 Simplified UI with ViewModel Implementation & API Updates                         Major Commit   - Jan   09, 2019
 Added Support for HTTP Requests                                                   Minor Commit   - Oct   22, 2018
 Server moved to Hostinger (temporarily)                                           Minor Commit   - Oct   22, 2018
@@ -73,6 +74,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 ```
 #### Todos [All Done]
 * Nyaa Implementation
+* Add Support to delete favourites from Favourites Page.
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

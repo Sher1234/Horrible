@@ -46,8 +46,10 @@ public class Horrible implements NavigationView.OnNavigationItemSelectedListener
         navView.setNavigationItemSelectedListener(this);
         this.activity = activity;
 
+        if (activity instanceof Favourites) navView.setCheckedItem(R.id.favourite);
         if (activity instanceof Schedule) navView.setCheckedItem(R.id.schedule);
         if (activity instanceof Current) navView.setCheckedItem(R.id.current);
+        if (activity instanceof Search) navView.setCheckedItem(R.id.search);
         if (activity instanceof Latest) navView.setCheckedItem(R.id.latest);
         if (activity instanceof Home) navView.setCheckedItem(R.id.home);
         if (activity instanceof All) navView.setCheckedItem(R.id.all);

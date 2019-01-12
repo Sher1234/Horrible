@@ -8,10 +8,10 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_width="wrap_content"
         app:headerLayout="@layout/layout_header"
+        android:layout_gravity="start"
         app:menu="@menu/horrible_nav" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,35 +1,34 @@
-# HorribleSubs
-HorribleSubs Mobile App
-Not affiliated with **https://horriblesubs.info** in any way
+## HorribleSubs
+HorribleSubs Android Application with Notification Support <br />
+Not affiliated with **https://horriblesubs.info** in any way <br />
 Support the official site **https://horriblesubs.info**
 
 #### Tech
-Horrible Subs uses number of open source projects to work properly:
+Horrible Subs implements number of open source projects listed bellow:
  - Androidx Libraries
  - Glide for Displaying images
  - SimpleHtmlDom for HTML parsing
  - OkHttp & Retrofit networking libraries
  - Firebase for FCM notifications & google ads
 
-> Note: Application version 0.6.5 and later will require reinstall [Changed Signing Keys]
-> Note: Application versions 0.5.5 and earlier won't work as there api updated to api-v6
+> #### *Notes:*
+> - Versions 0.6.5 and later will require reinstall [Changed Signing Keys].
+> - Versions 0.5.5 and earlier are now deprecated.
 
 #### Features
- * Supports Listing
-   - New Releases (40) [Refreshed every 2 hours],
-   - Today's Schedule (According to User Timezone) [Refreshed every 2 days]
- * Notification Support for every new release available on HorribleSubs
-   - Needs to be enabled by user
-   - Notifications might get delayed by 30 minutes.
- * In App Search for listing available subs from Horrible Subs
- * Views All as well as Current Shows [Refreshed every 5 days]
- * Lists full weeks schedule day wise(According to User Timezone)
- * Show Activity for viewing previous show releases and show details
- * About Activity & Application Update Notification
- * Now lists DDL
+ * Lists New/Latest Releases from HorribleSubs Website,
+ * Lists Today's Schedule as well as Week's Schedule day wise (According to User Timezone),
+ * Notification Support for every new release available on HorribleSubs -
+   - Needs to be enabled by user from Home Page,
+ * Add a Show to Favourites for faster access,
+ * Lists Search for the shows/release.
+ * Views All as well as Current Shows with Search option.
+ * Show Activity for viewing previous show releases and show description.
+ * ~About Activity & Application Update Notification.~
 
 #### Release Updates
 ```
+Fixed Searching Issues in All/Current Shows List, Updated README                  Minor Commit   - Jan   12, 2019
 Search in Shows List                                                              Major Commit   - Jan   12, 2019
 Fixed Favourites Listing, Notification & Navigation Issues                        Minor Commit   - Jan   10, 2019
 Simplified UI with ViewModel Implementation & API Updates                         Major Commit   - Jan   09, 2019

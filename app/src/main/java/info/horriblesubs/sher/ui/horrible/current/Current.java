@@ -56,7 +56,7 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
         super.onCreate(savedInstanceState);
         if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
         else setTheme(R.style.AniDex_Light);
-        setContentView(R.layout.horrible_1_a);
+        setContentView(R.layout.horrible_4_a);
 
         model = ViewModelProviders.of(this).get(Model.class);
         new Horrible(this, this);
@@ -75,14 +75,10 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
         searchText.onEditorAction(EditorInfo.IME_ACTION_SEARCH);
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
-                        actionId == EditorInfo.IME_ACTION_GO || event.getAction() == KeyEvent.ACTION_DOWN &&
+            public boolean onEditorAction(TextView v, int id, KeyEvent event) {
+                if (id == EditorInfo.IME_ACTION_SEARCH || id == EditorInfo.IME_ACTION_DONE ||
+                        id == EditorInfo.IME_ACTION_GO || event.getAction() == KeyEvent.ACTION_DOWN &&
                         event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    if (v.getText() == null || v.getText().length() < 2) {
-                        Toast.makeText(Current.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
                     model.onSearch(v.getText().toString());
                     return true;
                 }
@@ -97,8 +93,7 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null && s.length() > 1) model.onSearch(String.valueOf(s));
-                else Toast.makeText(Current.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
+                model.onSearch(String.valueOf(s));
             }
 
             @Override
@@ -106,6 +101,8 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
 
             }
         });
+        String s = "No shows available.";
+        textView.setText(s);
     }
 
     private void onLoadViewModel() {
@@ -211,12 +208,7 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.imageSearch) {
-            if (searchText.getText() == null || searchText.getText().length() < 2) {
-                Toast.makeText(this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            model.onSearch(searchText.getText().toString());
-        }
+        if (v.getId() == R.id.imageSearch)
+            model.onSearch(searchText.getText() == null ? null : searchText.getText().toString());
     }
 }

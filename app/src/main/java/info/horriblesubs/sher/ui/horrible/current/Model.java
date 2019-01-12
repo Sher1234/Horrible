@@ -116,6 +116,7 @@ public class Model extends ViewModel {
         @Override
         protected List<Item> doInBackground(Void... voids) {
             if (itemsFull == null || itemsFull.getValue() == null) return null;
+            if (query == null || query.isEmpty()) return itemsFull.getValue();
             List<Item> items = new ArrayList<>();
             for (Item item : itemsFull.getValue())
                 if (item.title.toLowerCase().contains(query.toLowerCase()))

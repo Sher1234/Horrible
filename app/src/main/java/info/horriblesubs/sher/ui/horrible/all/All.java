@@ -79,10 +79,6 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
                 if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
                         actionId == EditorInfo.IME_ACTION_GO || event.getAction() == KeyEvent.ACTION_DOWN &&
                         event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    if (v.getText() == null || v.getText().length() < 2) {
-                        Toast.makeText(All.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
                     model.onSearch(v.getText().toString());
                     return true;
                 }
@@ -97,8 +93,7 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s != null && s.length() > 1) model.onSearch(String.valueOf(s));
-                else Toast.makeText(All.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
+                model.onSearch(String.valueOf(s));
             }
 
             @Override
@@ -106,6 +101,8 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
 
             }
         });
+        String s = "No shows available.";
+        textView.setText(s);
     }
 
     private void onLoadViewModel() {
@@ -142,7 +139,8 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
 
     @Override
     public void onPostExecute() {
-        if (loadingDialog != null) loadingDialog.dismiss();
+        if (loadingDialog != null)
+            loadingDialog.dismiss();
     }
 
     @Override
@@ -211,12 +209,7 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.imageSearch) {
-            if (searchText.getText() == null || searchText.getText().length() < 2) {
-                Toast.makeText(this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            model.onSearch(searchText.getText().toString());
-        }
+        if (v.getId() == R.id.imageSearch)
+            model.onSearch(searchText.getText() == null ? null : searchText.getText().toString());
     }
 }

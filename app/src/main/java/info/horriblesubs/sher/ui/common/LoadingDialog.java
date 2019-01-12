@@ -17,7 +17,7 @@ public class LoadingDialog extends Dialog {
     private final GifImageView imageView;
 
     public LoadingDialog(@NonNull Context context) {
-        super(context, AppMe.instance.getAppTheme() ? R.style.AniDex_Dialog_Dark : R.style.AniDex_Dialog_Light);
+        super(context, AppMe.appMe.isDark() ? R.style.AniDex_Dialog_Dark : R.style.AniDex_Dialog_Light);
         setContentView(R.layout.layout_dialog_loading);
         imageView = new GifImageView(context);
         setCancelable(false);

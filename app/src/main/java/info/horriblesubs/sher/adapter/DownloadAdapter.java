@@ -45,7 +45,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         });
         if (item.get(position).link == null || item.get(position).link.isEmpty())
             holder.button.setEnabled(false);
-        else if (AppMe.instance.getAppTheme())
+        else if (AppMe.appMe.isDark())
             holder.button.setTextColor(holder.button.getResources().getColor(android.R.color.white));
         else
             holder.button.setTextColor(holder.button.getResources().getColor(android.R.color.black));

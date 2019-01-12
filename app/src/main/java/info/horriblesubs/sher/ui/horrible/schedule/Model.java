@@ -110,7 +110,7 @@ public class Model extends ViewModel {
 
         @Override
         protected List<ScheduleItem> doInBackground(Void... voids) {
-            Retrofit retrofit = AppMe.instance.getRetrofit(Hpi.LINK);
+            Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
             Hpi api = retrofit.create(Hpi.class);
             Call<ScheduleItems> call = api.getSchedules();
             call.enqueue(new Callback<ScheduleItems>() {

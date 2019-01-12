@@ -26,7 +26,6 @@ import retrofit2.Retrofit;
 public class Model extends ViewModel {
 
     private MutableLiveData<List<Item>> items;
-
     private LoadNetwork loadN;
     private LoadData loadS;
 
@@ -116,7 +115,7 @@ public class Model extends ViewModel {
 
         @Override
         protected List<Item> doInBackground(Void... voids) {
-            Retrofit retrofit = AppMe.instance.getRetrofit(Hpi.LINK);
+            Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
             Hpi api = retrofit.create(Hpi.class);
             Call<ShowsItems> call = api.getShows();
             call.enqueue(new Callback<ShowsItems>() {

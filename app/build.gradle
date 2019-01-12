@@ -7,7 +7,6 @@ android {
         minSdkVersion 21
         versionName "0.6.5"
         targetSdkVersion 28
-//        multiDexEnabled true
         applicationId "info.horriblesubs.sher"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,12 +24,15 @@ configurations {
 }
 
 dependencies {
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0-alpha01'
+
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
     implementation 'com.google.android.material:material:1.1.0-alpha02'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-//    implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation "android.arch.persistence.room:runtime:1.1.1"
     implementation "android.arch.lifecycle:extensions:1.1.1"
@@ -49,7 +51,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'com.google.android.gms:play-services-ads:17.1.2'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13-beta-1'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     implementation 'org.jetbrains:annotations-java5:16.0.3'
     implementation fileTree(include: ['*.jar'], dir: 'libs')

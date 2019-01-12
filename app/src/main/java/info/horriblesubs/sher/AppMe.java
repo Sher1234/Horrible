@@ -21,27 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AppMe extends Application {
 
-    public static AppMe instance;
+    public static AppMe appMe;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        MobileAds.initialize(this, getString(R.string.ad_mob_app_id));
-    }
-
-    public void toggleTheme() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        if (editor.putBoolean("theme", !getAppTheme()).commit())
-            Toast.makeText(this, "Changing theme...", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "Error changing theme...", Toast.LENGTH_SHORT).show();
-    }
-
-    public boolean getAppTheme() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
-        return sharedPreferences.getBoolean("theme", false);
+        appMe = this;
+        MobileAds.initialize(appMe, getString(R.string.ad_mob_app_id));
     }
 
     @NonNull
@@ -57,5 +43,19 @@ public class AppMe extends Application {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
+    }
+
+    public void onToggleTheme() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (editor.putBoolean("theme", !isDark()).commit())
+            Toast.makeText(appMe, "Changing theme...", Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(appMe, "Error changing theme...", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean isDark() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
+        return sharedPreferences.getBoolean("theme", false);
     }
 }

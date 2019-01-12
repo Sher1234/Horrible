@@ -44,7 +44,7 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (AppMe.instance.getAppTheme()) setTheme(R.style.AniDex_Dark);
+        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
         else setTheme(R.style.AniDex_Light);
         setContentView(R.layout.horrible_1_a);
 

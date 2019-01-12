@@ -23,7 +23,7 @@ public class AlertDialog extends Dialog {
     private final MaterialButton button3;
 
     public AlertDialog(@NonNull Context context) {
-        super(context, AppMe.instance.getAppTheme() ? R.style.AniDex_Dialog_Dark : R.style.AniDex_Dialog_Light);
+        super(context, AppMe.appMe.isDark() ? R.style.AniDex_Dialog_Dark : R.style.AniDex_Dialog_Light);
         setContentView(R.layout.layout_dialog_alert);
         description = findViewById(R.id.desc);
         button3 = findViewById(R.id.button3);

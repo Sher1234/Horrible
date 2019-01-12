@@ -113,7 +113,7 @@ public class Model extends ViewModel {
 
         @Override
         protected List<ListItem> doInBackground(Void... voids) {
-            Retrofit retrofit = AppMe.instance.getRetrofit(Hpi.LINK);
+            Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
             Hpi api = retrofit.create(Hpi.class);
             Call<ListItems> call = api.getLatest();
             call.enqueue(new Callback<ListItems>() {

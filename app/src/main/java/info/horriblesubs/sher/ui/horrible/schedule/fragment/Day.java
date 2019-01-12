@@ -81,7 +81,7 @@ public class Day extends Fragment implements ScheduleAdapter.OnItemClick {
     }
 
     private void onLoadData() {
-        ScheduleAdapter scheduleRecycler = ScheduleAdapter.getAll(this, getSchedule());
+        ScheduleAdapter scheduleRecycler = ScheduleAdapter.getAdapter(this, getSchedule());
         recyclerView.setAdapter(scheduleRecycler);
     }
 

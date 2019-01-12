@@ -98,7 +98,7 @@ public class Horrible implements NavigationView.OnNavigationItemSelectedListener
                 Toast.makeText(activity, "Under Development", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.theme:
-                AppMe.instance.toggleTheme();
+                AppMe.appMe.onToggleTheme();
                 activity.recreate();
                 return true;
             case R.id.about:

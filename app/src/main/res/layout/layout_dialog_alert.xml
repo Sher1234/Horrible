@@ -49,7 +49,7 @@
             android:layout_marginTop="8dp">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button1"
+                android:id="@+id/button2"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,6 @@
                 android:textAllCaps="false"
                 android:textSize="12sp"
                 android:textStyle="normal"
-                android:theme="@style/AniDex.Button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
@@ -67,7 +66,7 @@
                 tools:text="@string/app_name" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button2"
+                android:id="@+id/button1"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,10 +76,11 @@
                 android:textAllCaps="false"
                 android:textSize="12sp"
                 android:textStyle="normal"
+                android:theme="@style/AniDex.Button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button3"
                 app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintStart_toEndOf="@id/button1"
+                app:layout_constraintStart_toEndOf="@id/button2"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/app_name" />
 

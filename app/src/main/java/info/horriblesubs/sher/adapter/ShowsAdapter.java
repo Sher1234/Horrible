@@ -44,7 +44,7 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
             }
         });
         if (items.indexOf(items.get(position)) % 2 != 0)
-            if (AppMe.instance.getAppTheme())
+            if (AppMe.appMe.isDark())
                 holder.linearLayout.setBackgroundResource(R.color.colorItemDark);
             else holder.linearLayout.setBackgroundResource(R.color.colorItemLight);
         else holder.linearLayout.setBackgroundResource(android.R.color.transparent);

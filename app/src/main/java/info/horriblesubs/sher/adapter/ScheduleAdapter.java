@@ -33,22 +33,16 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @NotNull
     @Contract("_, !null -> new; _, null -> new")
-    public static ScheduleAdapter getSome(OnItemClick itemClick, List<ScheduleItem> items) {
-        if (items != null)
-            return new ScheduleAdapter(itemClick, items, items.size() < 6 ? items.size() : 6);
-        else return new ScheduleAdapter(itemClick, null, 0);
-    }
-
-    @NotNull
-    @Contract("_, !null -> new; _, null -> new")
-    public static ScheduleAdapter getAll(OnItemClick itemClick, List<ScheduleItem> items) {
+    public static ScheduleAdapter getAdapter(OnItemClick itemClick, List<ScheduleItem> items) {
         return new ScheduleAdapter(itemClick, items, items == null ? 0 : items.size());
     }
 
     @NotNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_horrible_2, parent, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup group, int viewType) {
+        int layout = R.layout.layout_item_horrible_2;
+        View v = LayoutInflater.from(group.getContext()).inflate(layout, group, false);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -62,7 +56,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             }
         });
         if (items.indexOf(items.get(position)) % 2 != 0)
-            if (AppMe.instance.getAppTheme())
+            if (AppMe.appMe.isDark())
                 holder.linearLayout.setBackgroundResource(R.color.colorItemDark);
             else holder.linearLayout.setBackgroundResource(R.color.colorItemLight);
         else holder.linearLayout.setBackgroundResource(android.R.color.transparent);

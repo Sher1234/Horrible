@@ -61,7 +61,7 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if (AppMe.instance.getAppTheme()) setTheme(R.style.AniDex_Dark);
+        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
         else setTheme(R.style.AniDex_Light);
         setContentView(R.layout.horrible_5_a);
 
@@ -202,7 +202,7 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
                 model.onRefresh(this, link);
                 return true;
             case R.id.theme:
-                AppMe.instance.toggleTheme();
+                AppMe.appMe.onToggleTheme();
                 recreate();
                 return true;
             case R.id.browser:

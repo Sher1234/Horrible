@@ -61,20 +61,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Tas
     private Model model;
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            fab.setImageResource(R.drawable.ic_notifications_active);
-            onSubscribe();
-        } else {
-            fab.setImageResource(R.drawable.ic_notifications_off);
-            onUnsubscribe();
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (AppMe.instance.getAppTheme()) setTheme(R.style.AniDex_Dark);
+        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
         else setTheme(R.style.AniDex_Light);
         setContentView(R.layout.horrible_0_a);
 
@@ -111,6 +100,17 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Tas
         onLoadViewModel();
         onLoadAdBanner();
         model.onLoadData(this, this);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton button, boolean b) {
+        if (b) {
+            fab.setImageResource(R.drawable.ic_notifications_active);
+            onSubscribe();
+        } else {
+            fab.setImageResource(R.drawable.ic_notifications_off);
+            onUnsubscribe();
+        }
     }
 
     @Override
@@ -225,7 +225,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Tas
                     recyclerView3.setVisibility(View.GONE);
                     textViewC1.setVisibility(View.VISIBLE);
                 } else {
-                    recyclerView3.setAdapter(ScheduleAdapter.getSome(Home.this, items));
+                    recyclerView3.setAdapter(ScheduleAdapter.getAdapter(Home.this, items));
                     recyclerView3.setVisibility(View.VISIBLE);
                     textViewC1.setVisibility(View.GONE);
                 }
@@ -253,12 +253,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Tas
     }
 
     private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
-        FrameLayout layout = findViewById(R.id.adBanner);
+        String id = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
         AdRequest request = new AdRequest.Builder().build();
+        FrameLayout layout = findViewById(R.id.adBanner);
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(adId);
+        adView.setAdUnitId(id);
         layout.addView(adView);
         adView.loadAd(request);
     }

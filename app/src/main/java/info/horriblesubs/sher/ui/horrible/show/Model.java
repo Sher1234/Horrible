@@ -73,7 +73,7 @@ public class Model extends ViewModel {
 
         @Override
         protected ShowItem doInBackground(Void... voids) {
-            Retrofit retrofit = AppMe.instance.getRetrofit(Hpi.LINK);
+            Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
             Hpi api = retrofit.create(Hpi.class);
             Call<ShowItem> call = api.getShow(s);
             call.enqueue(new Callback<ShowItem>() {

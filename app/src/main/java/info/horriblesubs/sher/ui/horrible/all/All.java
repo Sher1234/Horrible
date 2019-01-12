@@ -4,12 +4,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -35,9 +42,12 @@ import info.horriblesubs.sher.ui.common.LoadingDialog;
 import info.horriblesubs.sher.ui.common.navigation.Horrible;
 import info.horriblesubs.sher.ui.horrible.show.Show;
 
-public class All extends AppCompatActivity implements TaskListener, ShowsAdapter.OnItemClick, Toolbar.OnMenuItemClickListener {
+public class All extends AppCompatActivity implements TaskListener, ShowsAdapter.OnItemClick,
+        Toolbar.OnMenuItemClickListener, View.OnClickListener {
 
+    private AppCompatEditText searchText;
     private LoadingDialog loadingDialog;
+    private AppCompatTextView textView;
     private RecyclerView recyclerView;
     private Model model;
 
@@ -46,26 +56,72 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
         super.onCreate(savedInstanceState);
         if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
         else setTheme(R.style.AniDex_Light);
-        setContentView(R.layout.horrible_1_a);
+        setContentView(R.layout.horrible_4_a);
 
         model = ViewModelProviders.of(this).get(Model.class);
         new Horrible(this, this);
 
+        textView = findViewById(R.id.textInfo);
+        searchText = findViewById(R.id.editSearch);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        findViewById(R.id.imageSearch).setOnClickListener(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         onLoadViewModel();
         onLoadAdBanner();
         model.onLoadData(this, this);
         onLoadInterstitialAd();
+        searchText.setSingleLine();
+        searchText.onEditorAction(EditorInfo.IME_ACTION_SEARCH);
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
+                        actionId == EditorInfo.IME_ACTION_GO || event.getAction() == KeyEvent.ACTION_DOWN &&
+                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                    if (v.getText() == null || v.getText().length() < 2) {
+                        Toast.makeText(All.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    model.onSearch(v.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+        searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s != null && s.length() > 1) model.onSearch(String.valueOf(s));
+                else Toast.makeText(All.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void onLoadViewModel() {
         model.getItems().observe(this, new Observer<List<Item>>() {
             @Override
             public void onChanged(List<Item> items) {
-                if (items == null || items.size() == 0) recyclerView.setVisibility(View.GONE);
-                else recyclerView.setAdapter(new ShowsAdapter(All.this, items));
+                if (items == null || items.size() == 0) {
+                    recyclerView.setVisibility(View.GONE);
+                    textView.setVisibility(View.VISIBLE);
+                } else {
+                    if (recyclerView.getAdapter() == null)
+                        recyclerView.setAdapter(new ShowsAdapter(All.this, items));
+                    else ((ShowsAdapter) recyclerView.getAdapter()).onDataUpdated(items);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    textView.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -151,5 +207,16 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
         adView.setAdUnitId(adId);
         layout.addView(adView);
         adView.loadAd(request);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.imageSearch) {
+            if (searchText.getText() == null || searchText.getText().length() < 2) {
+                Toast.makeText(this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            model.onSearch(searchText.getText().toString());
+        }
     }
 }

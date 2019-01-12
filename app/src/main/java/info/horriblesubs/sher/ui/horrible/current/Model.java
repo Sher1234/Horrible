@@ -3,12 +3,12 @@ package info.horriblesubs.sher.ui.horrible.current;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import info.horriblesubs.sher.AppMe;
@@ -25,7 +25,9 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Model extends ViewModel {
 
+    private MutableLiveData<List<Item>> itemsFull;
     private MutableLiveData<List<Item>> items;
+    private SearchData searchD;
     private LoadNetwork loadN;
     private LoadData loadS;
 
@@ -33,16 +35,32 @@ public class Model extends ViewModel {
 
     }
 
+    void onSearch(String s) {
+        onResetTask();
+        searchD = new SearchData(s);
+        searchD.execute();
+    }
+
     private void onResetTask() {
+        if (searchD != null) searchD.cancel(true);
         if (loadS != null) loadS.cancel(true);
         if (loadN != null) loadN.cancel(true);
+        searchD = null;
         loadS = null;
         loadN = null;
     }
 
     MutableLiveData<List<Item>> getItems() {
+        if (itemsFull == null) itemsFull = new MutableLiveData<>();
         if (items == null) items = new MutableLiveData<>();
         return items;
+    }
+
+    void onRefresh(Context context, TaskListener listener) {
+        onResetTask();
+        HorribleDB horribleDB = new HorribleDB(context);
+        loadN = new LoadNetwork(horribleDB, listener);
+        loadN.execute();
     }
 
     void onLoadData(Context context, TaskListener listener) {
@@ -55,13 +73,6 @@ public class Model extends ViewModel {
         } else loadN = new LoadNetwork(horribleDB, listener);
         if (loadS != null) loadS.execute();
         if (loadN != null) loadN.execute();
-    }
-
-    void onRefresh(Context context, TaskListener listener) {
-        onResetTask();
-        HorribleDB horribleDB = new HorribleDB(context);
-        loadN = new LoadNetwork(horribleDB, listener);
-        loadN.execute();
     }
 
     private class LoadData extends AsyncTask<Void, Void, List<Item>> {
@@ -78,7 +89,6 @@ public class Model extends ViewModel {
         protected void onPreExecute() {
             super.onPreExecute();
             taskListener.onPreExecute();
-            Log.e("Error.Execute", "Pre-All");
         }
 
         @Override
@@ -89,9 +99,34 @@ public class Model extends ViewModel {
         @Override
         protected void onPostExecute(List<Item> result) {
             super.onPostExecute(result);
-            Log.e("Error.Execute", "Post-All");
             items.setValue(result);
+            itemsFull.setValue(result);
             taskListener.onPostExecute();
+        }
+    }
+
+    private class SearchData extends AsyncTask<Void, Void, List<Item>> {
+
+        private String query;
+
+        SearchData(String query) {
+            this.query = query;
+        }
+
+        @Override
+        protected List<Item> doInBackground(Void... voids) {
+            if (itemsFull == null || itemsFull.getValue() == null) return null;
+            List<Item> items = new ArrayList<>();
+            for (Item item : itemsFull.getValue())
+                if (item.title.toLowerCase().contains(query.toLowerCase()))
+                    items.add(item);
+            return items;
+        }
+
+        @Override
+        protected void onPostExecute(List<Item> result) {
+            super.onPostExecute(result);
+            items.setValue(result);
         }
     }
 
@@ -110,7 +145,6 @@ public class Model extends ViewModel {
         protected void onPreExecute() {
             super.onPreExecute();
             taskListener.onPreExecute();
-            Log.e("Error.Execute", "Pre-All-Net");
         }
 
         @Override
@@ -146,8 +180,8 @@ public class Model extends ViewModel {
         @Override
         protected void onPostExecute(List<Item> result) {
             super.onPostExecute(result);
-            Log.e("Error.Execute", "Post-All-Net");
             items.setValue(result);
+            itemsFull.setValue(result);
             taskListener.onPostExecute();
         }
     }

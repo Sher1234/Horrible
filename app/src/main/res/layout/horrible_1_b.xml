@@ -47,7 +47,7 @@
         android:clipToPadding="false"
         android:paddingTop="8dp"
         android:paddingBottom="95dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/layout_item_horrible_1" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

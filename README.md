@@ -11,8 +11,8 @@ Horrible Subs uses number of open source projects to work properly:
  - OkHttp & Retrofit networking libraries
  - Firebase for FCM notifications & google ads
 
-> Note: Application versions 0.5.5 and earlier won't work as there api updated to api-v6
 > Note: Application version 0.6.5 and later will require reinstall [Changed Signing Keys]
+> Note: Application versions 0.5.5 and earlier won't work as there api updated to api-v6
 
 #### Features
  * Supports Listing
@@ -30,6 +30,7 @@ Horrible Subs uses number of open source projects to work properly:
 
 #### Release Updates
 ```
+Search in Shows List                                                              Major Commit   - Jan   12, 2019
 Fixed Favourites Listing, Notification & Navigation Issues                        Minor Commit   - Jan   10, 2019
 Simplified UI with ViewModel Implementation & API Updates                         Major Commit   - Jan   09, 2019
 Added Support for HTTP Requests                                                   Minor Commit   - Oct   22, 2018

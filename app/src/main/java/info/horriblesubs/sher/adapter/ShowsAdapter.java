@@ -21,7 +21,7 @@ import info.horriblesubs.sher.api.horrible.model.Item;
 public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> {
 
     private final OnItemClick onItemClick;
-    private final List<Item> items;
+    private List<Item> items;
 
     public ShowsAdapter(OnItemClick itemClick, List<Item> items) {
         this.onItemClick = itemClick;
@@ -58,6 +58,11 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return items != null ? items.size() : 0;
+    }
+
+    public void onDataUpdated(List<Item> items) {
+        this.items = items;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClick {

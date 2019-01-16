@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -72,6 +73,7 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
             finish();
             return;
         }
+        Log.i("show.link", link);
         horribleDB = new HorribleDB(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.horrible_menu);
@@ -116,6 +118,7 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
                     }, 600);
                     finish();
                 } else {
+                    Log.i("show.detail", detail.toString());
                     Glide.with(Show.this).load(detail.image).into(imageView);
                     checkBox.setChecked(horribleDB.isFavourite(detail.id));
                     textView1.setText(Html.fromHtml(detail.title));
@@ -136,6 +139,7 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
                     recyclerView1.setVisibility(View.GONE);
                     textView3.setVisibility(View.VISIBLE);
                 } else {
+                    Log.i("show.batches", String.valueOf(releases.size()));
                     recyclerView1.setAdapter(new ReleaseAdapter(Show.this, releases));
                     recyclerView1.setVisibility(View.VISIBLE);
                     textView3.setVisibility(View.GONE);
@@ -149,6 +153,7 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
                     recyclerView2.setVisibility(View.GONE);
                     textView4.setVisibility(View.VISIBLE);
                 } else {
+                    Log.i("show.releases", String.valueOf(releases.size()));
                     recyclerView2.setAdapter(new ReleaseAdapter(Show.this, releases));
                     recyclerView2.setVisibility(View.VISIBLE);
                     textView4.setVisibility(View.GONE);
@@ -227,9 +232,9 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
     }
 
     private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
-        FrameLayout layout = findViewById(R.id.adBanner);
+        String adId = getResources().getStringArray(R.array.footer)[3];
         AdRequest request = new AdRequest.Builder().build();
+        FrameLayout layout = findViewById(R.id.adBanner);
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.SMART_BANNER);
         adView.setAdUnitId(adId);

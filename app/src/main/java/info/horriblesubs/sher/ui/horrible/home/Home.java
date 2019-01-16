@@ -28,7 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
-import java.util.Random;
 
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
@@ -145,9 +144,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Tas
 
     @Override
     public void onItemClicked(ShowDetail item) {
-        if (item.link == null) return;
+        String link = item.link;
+        if (link == null) return;
+        if (link.contains("/shows/")) {
+            String[] arr = link.split("/shows/");
+            link = arr[arr.length - 1];
+        }
         Intent intent = new Intent(this, Show.class);
-        intent.putExtra("show.link", item.link);
+        intent.putExtra("show.link", link);
         startActivity(intent);
     }
 
@@ -253,12 +257,12 @@ public class Home extends AppCompatActivity implements View.OnClickListener, Tas
     }
 
     private void onLoadAdBanner() {
-        String id = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
+        String id = getResources().getStringArray(R.array.footer)[3];
         AdRequest request = new AdRequest.Builder().build();
         FrameLayout layout = findViewById(R.id.adBanner);
         AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
         adView.setAdUnitId(id);
+        adView.setAdSize(AdSize.SMART_BANNER);
         layout.addView(adView);
         adView.loadAd(request);
     }

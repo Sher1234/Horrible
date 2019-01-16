@@ -148,7 +148,7 @@ public class Latest extends AppCompatActivity
     }
 
     private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
+        String adId = getResources().getStringArray(R.array.footer)[0];
         FrameLayout layout = findViewById(R.id.adBanner);
         AdRequest request = new AdRequest.Builder().build();
         AdView adView = new AdView(this);

@@ -45,11 +45,15 @@
             android:textSize="14sp"
             tools:text="@string/disable_notify" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="6dp">
+            android:layout_width="match_parent"
+            android:layout_marginTop="6dp"
+            android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"

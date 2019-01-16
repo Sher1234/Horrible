@@ -153,9 +153,9 @@ public class Search extends AppCompatActivity
     }
 
     private void onAdBannerShow() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
-        FrameLayout layout = findViewById(R.id.adBanner);
+        String adId = getResources().getStringArray(R.array.footer)[2];
         AdRequest request = new AdRequest.Builder().build();
+        FrameLayout layout = findViewById(R.id.adBanner);
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.SMART_BANNER);
         adView.setAdUnitId(adId);

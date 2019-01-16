@@ -2,6 +2,7 @@ package info.horriblesubs.sher.ui.horrible.show;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -78,25 +79,23 @@ public class Model extends ViewModel {
             Call<ShowItem> call = api.getShow(s);
             call.enqueue(new Callback<ShowItem>() {
                 @Override
-                public void onResponse(@NonNull Call<ShowItem> call,
-                                       @NonNull Response<ShowItem> response) {
-                    if (response.body() != null) data = response.body();
+                public void onResponse(@NonNull Call<ShowItem> c, @NonNull Response<ShowItem> r) {
+                    if (r.body() != null) data = r.body();
+                    Log.i("show.response", r.body() != null ? r.body().toString() : "Null");
                     i = 1;
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<ShowItem> call, @NonNull Throwable t) {
                     t.printStackTrace();
+                    data = null;
                     i = -1;
                 }
             });
             while (true) {
-                if (i != 0) {
-                    return data;
-                }
+                if (i != 0) return data;
                 if (isCancelled()) {
                     i = 307;
-                    data = null;
                     return null;
                 }
             }
@@ -106,10 +105,9 @@ public class Model extends ViewModel {
         protected void onPostExecute(ShowItem result) {
             super.onPostExecute(result);
             listener.onPostExecute();
-            if (result == null) return;
-            detail.setValue(result.detail);
-            batches.setValue(result.batches);
-            episodes.setValue(result.episodes);
+            detail.setValue(result == null ? null : result.detail);
+            batches.setValue(result == null ? null : result.batches);
+            episodes.setValue(result == null ? null : result.episodes);
         }
     }
 }

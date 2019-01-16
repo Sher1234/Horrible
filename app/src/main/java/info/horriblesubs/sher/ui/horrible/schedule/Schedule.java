@@ -141,7 +141,7 @@ public class Schedule extends AppCompatActivity implements TaskListener, Toolbar
     }
 
     private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
+        String adId = getResources().getStringArray(R.array.footer)[1];
         FrameLayout layout = findViewById(R.id.adBanner);
         AdRequest request = new AdRequest.Builder().build();
         AdView adView = new AdView(this);

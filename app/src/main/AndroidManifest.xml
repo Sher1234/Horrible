@@ -72,9 +72,9 @@
 
         <activity android:name=".ui.horrible.search.Search" />
 
-        <activity
-            android:name=".ui.horrible.show.Show"
-            android:exported="true" />
+        <activity android:name=".ui.common.about.About" />
+
+        <activity android:name=".ui.horrible.show.Show" />
 
         <activity android:name=".ui.horrible.all.All" />
 

@@ -183,7 +183,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Studio/canary/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_launch_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Studio/canary/plugins/android/lib/android.jar!/images/material_design_icons/notification/ic_system_update_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -193,7 +193,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_launch" />
+                            <entry key="outputName" value="ic_update" />
                             <entry key="sourceFile" value="C:\Users\agghu" />
                           </map>
                         </option>

@@ -82,6 +82,14 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!--<com.google.android.gms.ads.AdView-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--app:adUnitId="@string/footer_0"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:id="@+id/adBanner"-->
+    <!--app:adSize="SMART_BANNER" />-->
+
     <FrameLayout
         android:id="@+id/adBanner"
         android:layout_width="match_parent"

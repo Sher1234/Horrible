@@ -63,9 +63,14 @@ public class Favourites extends AppCompatActivity
 
     @Override
     public void onItemClicked(ShowDetail item) {
-        if (item.link == null) return;
+        String link = item.link;
+        if (link == null) return;
+        if (link.contains("/shows/")) {
+            String[] arr = link.split("/shows/");
+            link = arr[arr.length - 1];
+        }
         Intent intent = new Intent(this, Show.class);
-        intent.putExtra("show.link", item.link);
+        intent.putExtra("show.link", link);
         startActivity(intent);
     }
 
@@ -116,7 +121,7 @@ public class Favourites extends AppCompatActivity
     }
 
     private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
+        String adId = getResources().getStringArray(R.array.footer)[2];
         FrameLayout layout = findViewById(R.id.adBanner);
         AdRequest request = new AdRequest.Builder().build();
         AdView adView = new AdView(this);

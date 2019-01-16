@@ -3,18 +3,18 @@
 
     <string name="ad_mob_app_id">ca-app-pub-7307290547259470~7830642737</string>
 
-    <array name="footer">
+    <string-array name="footer">
         <item>ca-app-pub-7307290547259470/2376858278</item>
         <item>ca-app-pub-7307290547259470/9001497444</item>
         <item>ca-app-pub-7307290547259470/5307108097</item>
         <item>ca-app-pub-7307290547259470/8525754646</item>
-    </array>
+    </string-array>
 
-    <array name="interstitial">
+    <string-array name="interstitial">
         <item>ca-app-pub-7307290547259470/8912624262</item>
         <item>ca-app-pub-7307290547259470/2594627922</item>
         <item>ca-app-pub-7307290547259470/7455790528</item>
-    </array>
+    </string-array>
 
     <string name="notification_channel">horrible.channel.new</string>
     <string name="full_hd">FullHD</string>
@@ -48,6 +48,11 @@
     <string name="horrible_subs_url">https://horriblesubs.info/</string>
     <string name="disable_notify">This will disable new release notifications, You will not be able receive notifications on any new release.</string>
     <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
+    <string name="check_update">Check for update</string>
+    <string name="updated">Your application is up to date</string>
+    <string name="app_ver">Application version:</string>
+    <string name="last_update_check">Last successful check for update at</string>
+    <string name="what_new">What\'s new</string>
 
     <string-array name="days">
         <item>Sunday</item>

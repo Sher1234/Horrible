@@ -104,6 +104,9 @@ public class Horrible implements NavigationView.OnNavigationItemSelectedListener
             case R.id.about:
                 Toast.makeText(activity, "Under Development", Toast.LENGTH_SHORT).show();
                 return true;
+//                if (activity instanceof About) return true;
+//                activity.startActivity(new Intent(activity, About.class));
+//                return true;
         }
         return false;
     }

@@ -197,12 +197,12 @@ public class All extends AppCompatActivity implements TaskListener, ShowsAdapter
     }
 
     private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];
-        FrameLayout layout = findViewById(R.id.adBanner);
+        String id = getResources().getStringArray(R.array.footer)[0];
         AdRequest request = new AdRequest.Builder().build();
+        FrameLayout layout = findViewById(R.id.adBanner);
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(adId);
+        adView.setAdUnitId(id);
         layout.addView(adView);
         adView.loadAd(request);
     }

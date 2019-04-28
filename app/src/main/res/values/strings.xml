@@ -21,14 +21,12 @@
     <string name="hd">HD</string>
     <string name="sd">SD</string>
     <string name="horrible_subs">HorribleSubs</string>
-    <string name="home">Home</string>
     <string name="schedule">Weekly Schedule</string>
     <string name="schedule_">Schedule</string>
     <string name="favourites">Favourites</string>
     <string name="shows">Shows</string>
     <string name="all_shows">All Shows</string>
     <string name="current_shows">Current Shows</string>
-    <string name="information">Information</string>
     <string name="batches">Batches</string>
     <string name="episodes">Episodes</string>
     <string name="refresh">Refresh</string>
@@ -36,7 +34,6 @@
     <string name="today_s_schedule">Today\'s Schedule</string>
     <string name="about_app">About App</string>
     <string name="toggle_theme">Toggle Theme</string>
-    <string name="switch_to_nyaa">Switch to Nyaa</string>
     <string name="others">Others</string>
     <string name="search">Search</string>
     <string name="empty_favourites">Favourite a show to be shown here.</string>
@@ -50,9 +47,23 @@
     <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
     <string name="check_update">Check for update</string>
     <string name="updated">Your application is up to date</string>
-    <string name="app_ver">Application version:</string>
     <string name="last_update_check">Last successful check for update at</string>
     <string name="what_new">What\'s new</string>
+    <string name="delete">Delete</string>
+    <string name="random_pick">Random Pick</string>
+    <string name="explore">Explore</string>
+    <string name="downloads">Downloads</string>
+    <string name="settings">Settings</string>
+    <string name="my_profile">My Profile</string>
+    <string name="recent">Recent</string>
+    <string name="description">Description</string>
+    <string name="stats">Stats</string>
+    <string name="views">Views</string>
+    <string name="other_facts">Other Facts</string>
+    <string name="source">Source</string>
+    <string name="last_updated">Last Updated</string>
+    <string name="view_more">View More</string>
+    <string name="notification">Notification</string>
 
     <string-array name="days">
         <item>Sunday</item>

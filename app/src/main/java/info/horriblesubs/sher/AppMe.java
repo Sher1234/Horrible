@@ -2,6 +2,7 @@ package info.horriblesubs.sher;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,10 +13,7 @@ import com.google.gson.GsonBuilder;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.TimeUnit;
-
 import info.horriblesubs.sher.common.Constants;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -33,14 +31,8 @@ public class AppMe extends Application {
     @NonNull
     public Retrofit getRetrofit(@NotNull String url) {
         Gson gson = new GsonBuilder().setLenient().create();
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout((long) 1, TimeUnit.MINUTES)
-                .readTimeout(2, TimeUnit.MINUTES)
-                .writeTimeout((long) 2, TimeUnit.MINUTES)
-                .build();
         return new Retrofit.Builder()
                 .baseUrl(url)
-                .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
@@ -57,5 +49,9 @@ public class AppMe extends Application {
     public boolean isDark() {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
         return sharedPreferences.getBoolean("theme", false);
+    }
+
+    public boolean isPortrait() {
+        return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 }

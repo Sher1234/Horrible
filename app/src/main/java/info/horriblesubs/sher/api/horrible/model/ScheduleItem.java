@@ -9,7 +9,7 @@ import java.util.Date;
 public class ScheduleItem extends Item {
 
     public boolean scheduled;
-    public String time;
+    private String time;
 
     public ScheduleItem() {
         super();
@@ -17,11 +17,11 @@ public class ScheduleItem extends Item {
 
     @Nullable
     public Date getDate() {
-        return parseDate(time);
+        return getScheduleDate(time);
     }
 
     public String getTime() {
-        return parseTimeView(time);
+        return getScheduleTime(time);
     }
 
     @NotNull

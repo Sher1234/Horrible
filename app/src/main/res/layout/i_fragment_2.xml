@@ -1,0 +1,163 @@
+<androidx.core.widget.NestedScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/nestedScrollView"
+    android:background="?colorSurface"
+    android:clipToPadding="false"
+    android:paddingBottom="32dp"
+    android:fillViewport="true"
+    android:paddingTop="32dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                tools:src="@tools:sample/avatars"
+                android:scaleType="centerCrop"
+                android:layout_height="275dp"
+                android:layout_width="215dp"
+                android:id="@+id/imageView" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textAppearance="?textAppearanceHeadline6"
+            tools:text="@tools:sample/full_names"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textViewA"
+            android:textSize="16sp"
+            android:padding="6dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textAppearance="?textAppearanceHeadline6"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:background="?colorItem"
+            android:layout_marginTop="8dp"
+            android:id="@+id/textViewB"
+            tools:text="Episode - 937"
+            android:textSize="14.5sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:padding="4dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:background="@drawable/release_bg"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_width="90dp"
+                android:paddingStart="20dp"
+                android:id="@+id/textView1"
+                android:text="@string/sd"
+                android:paddingEnd="0dp"
+                android:textSize="15sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                tools:layoutManager="LinearLayoutManager"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/recycler_f"
+                android:orientation="horizontal"
+                android:id="@+id/recyclerView1"
+                android:layout_width="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="22dp"
+                android:layout_weight="1"
+                tools:itemCount="3" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:background="@drawable/release_bg"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_width="90dp"
+                android:paddingStart="20dp"
+                android:id="@+id/textView2"
+                android:text="@string/hd"
+                android:paddingEnd="0dp"
+                android:textSize="15sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                tools:layoutManager="LinearLayoutManager"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/recycler_f"
+                android:orientation="horizontal"
+                android:id="@+id/recyclerView2"
+                android:layout_width="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="22dp"
+                android:layout_weight="1"
+                tools:itemCount="3" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:background="@drawable/release_bg"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="48dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/full_hd"
+                android:layout_width="90dp"
+                android:paddingStart="20dp"
+                android:id="@+id/textView3"
+                android:paddingEnd="0dp"
+                android:textSize="15sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                tools:layoutManager="LinearLayoutManager"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/recycler_f"
+                android:orientation="horizontal"
+                android:id="@+id/recyclerView3"
+                android:layout_width="0dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="22dp"
+                android:layout_weight="1"
+                tools:itemCount="3" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

@@ -31,7 +31,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_horrible_5, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_f, parent, false));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            button = itemView.findViewById(R.id.textView);
+            button = (MaterialButton) itemView;
         }
     }
 }

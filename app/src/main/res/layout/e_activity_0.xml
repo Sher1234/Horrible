@@ -1,0 +1,20 @@
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/drawerLayout"
+    tools:openDrawer="start">
+
+    <include layout="@layout/e_activity_1" />
+
+    <com.google.android.material.navigation.NavigationView
+        app:itemBackground="@drawable/bg_nav_item"
+        app:headerLayout="@layout/layout_header"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:id="@+id/navigationView"
+        android:layout_gravity="start"
+        app:menu="@menu/main_1" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

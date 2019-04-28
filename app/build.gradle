@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    buildToolsVersion = '29.0.0 rc2'
     compileSdkVersion 28
     defaultConfig {
         versionCode 65
@@ -24,31 +25,31 @@ configurations {
 }
 
 dependencies {
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha01'
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha04'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha04'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0-alpha04'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+//    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    implementation 'com.google.android.gms:play-services-ads:17.1.2'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+    implementation 'com.google.android.gms:play-services-ads:17.2.0'
 
-    testImplementation 'junit:junit:4.13-beta-1'
+    testImplementation 'junit:junit:4.13-beta-2'
     androidTestImplementation 'androidx.test:runner:1.1.1'
-    implementation 'org.jetbrains:annotations-java5:16.0.3'
+    implementation 'org.jetbrains:annotations-java5:17.0.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

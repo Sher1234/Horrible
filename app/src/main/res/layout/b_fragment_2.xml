@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textAppearance="?textAppearanceHeadline6"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/latest_releases"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView1"
+            android:textSize="12sp"
+            tools:ignore="SmallSp"
+            android:padding="6dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            tools:layoutManager="GridLayoutManager"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/recycler_a"
+            android:id="@+id/recyclerView"
+            android:clipToPadding="false"
+            tools:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            tools:spanCount="2"
+            tools:itemCount="4" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/last_updated"
+                android:id="@+id/textView0"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:padding="8dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                android:layout_height="wrap_content"
+                tools:text="@string/what_new"
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:gravity="end"
+                android:padding="8dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.google.android.material.card.MaterialCardView>

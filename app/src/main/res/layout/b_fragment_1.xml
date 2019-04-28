@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:paddingBottom="20dp"
+        android:paddingTop="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:textAppearance="?textAppearanceHeadline6"
+            android:fontFamily="sans-serif-smallcaps"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/random_pick"
+            android:textSize="12sp"
+            tools:ignore="SmallSp"
+            android:padding="6dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                tools:src="@tools:sample/avatars"
+                android:scaleType="centerCrop"
+                android:layout_height="170dp"
+                android:layout_width="130dp"
+                android:id="@+id/imageView" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    tools:text="Rascal does not dream of Bunny Girl Senpai"
+                    android:textAppearance="?textAppearanceHeadline5"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/textView1"
+                    android:paddingBottom="2dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    tools:text="@tools:sample/lorem/random"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:id="@+id/textView2"
+                    android:textSize="13sp"
+                    android:padding="8dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.google.android.material.card.MaterialCardView>

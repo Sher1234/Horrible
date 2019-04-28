@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="primaryDarkForLight">#6A1B9A</color>
+    <color name="primaryForLight">#8E24AA</color>
+
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="primaryDarkForDark">#7CB342</color>
+    <color name="primaryForDark">#9CCC65</color>
+
     <!--Dark Theme-->
     <color name="textHeadingDark">#fefefe</color>
 
     <color name="colorOnSurfaceDark">#ffffff</color>
     <color name="colorSurfaceDark">#323232</color>
 
-    <color name="blurDark">#35ffffff</color>
-
+    <color name="blurDark">#30ffffff</color>
+    <color name="itemDark">#35ffffff</color>
 
     <!--Light Theme-->
     <color name="textHeadingLight">#000000</color>
 
-    <color name="blurLight">#35000000</color>
+    <color name="blurLight">#30000000</color>
+    <color name="itemLight">#35000000</color>
 
     <color name="red">#ea4335</color>
     <color name="blue">#4285f4</color>
@@ -23,5 +33,6 @@
     <color name="colorItemLight">#16323232</color>
     <!--#d81b60-->
     <color name="colorText">#000000</color>
+    <color name="deep_red">#c01818</color>
 
 </resources>

@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
-public class Item extends ScheduleParse implements Serializable {
+public class Item extends DateParse implements Serializable {
 
     public String title;
     public String link;

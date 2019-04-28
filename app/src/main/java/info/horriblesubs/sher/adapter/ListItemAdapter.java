@@ -10,12 +10,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.api.horrible.model.ListItem;
 
@@ -32,23 +30,20 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
     }
 
     @NotNull
-    @Contract("_, !null -> new; _, null -> new")
-    public static ListItemAdapter getSome(OnItemClick itemClick, List<ListItem> items) {
-        if (items != null)
-            return new ListItemAdapter(itemClick, items, items.size() < 6 ? items.size() : 6);
+    public static ListItemAdapter get(OnItemClick itemClick, List<ListItem> items, int size) {
+        if (items != null) return new ListItemAdapter(itemClick, items, items.size() < size ? items.size() : size);
         else return new ListItemAdapter(itemClick, null, 0);
     }
 
     @NotNull
-    @Contract("_, !null -> new; _, null -> new")
-    public static ListItemAdapter getAll(OnItemClick itemClick, List<ListItem> items) {
-        return new ListItemAdapter(itemClick, items, items == null ? 0 : items.size());
+    public static ListItemAdapter get(OnItemClick itemClick, List<ListItem> items) {
+        return new ListItemAdapter(itemClick, items, items == null?0:items.size());
     }
 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_horrible_1, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_b, parent, false));
     }
 
     @Override
@@ -61,15 +56,10 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
                 onItemClick.onItemClicked(items.get(position));
             }
         });
-        if (items.indexOf(items.get(position)) % 2 != 0)
-            if (AppMe.appMe.isDark())
-                holder.linearLayout.setBackgroundResource(R.color.colorItemDark);
-            else holder.linearLayout.setBackgroundResource(R.color.colorItemLight);
-        else holder.linearLayout.setBackgroundResource(android.R.color.transparent);
         if (items.get(position).quality != null) {
-            if (!items.get(position).quality.get(2)) holder.textViewC.setVisibility(View.GONE);
-            if (!items.get(position).quality.get(1)) holder.textViewB.setVisibility(View.GONE);
-            if (!items.get(position).quality.get(0)) holder.textViewA.setVisibility(View.GONE);
+            if (!items.get(position).quality.get(2)) holder.mark3.setVisibility(View.GONE);
+            if (!items.get(position).quality.get(1)) holder.mark2.setVisibility(View.GONE);
+            if (!items.get(position).quality.get(0)) holder.mark1.setVisibility(View.GONE);
         }
     }
 
@@ -88,21 +78,17 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textView1, textView2, mark1, mark2, mark3;
         private final LinearLayoutCompat linearLayout;
-        private final AppCompatTextView textView1;
-        private final AppCompatTextView textView2;
-        private final AppCompatTextView textViewA;
-        private final AppCompatTextView textViewB;
-        private final AppCompatTextView textViewC;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             linearLayout = itemView.findViewById(R.id.linearLayout);
-            textViewC = itemView.findViewById(R.id.textView2C);
-            textViewB = itemView.findViewById(R.id.textView2B);
-            textViewA = itemView.findViewById(R.id.textView2A);
             textView2 = itemView.findViewById(R.id.textView2);
             textView1 = itemView.findViewById(R.id.textView1);
+            mark3 = itemView.findViewById(R.id.mark3);
+            mark2 = itemView.findViewById(R.id.mark2);
+            mark1 = itemView.findViewById(R.id.mark1);
         }
     }
 }

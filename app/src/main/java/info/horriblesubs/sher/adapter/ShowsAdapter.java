@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.api.horrible.model.Item;
 
@@ -23,7 +22,11 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
     private final OnItemClick onItemClick;
     private List<Item> items;
 
-    public ShowsAdapter(OnItemClick itemClick, List<Item> items) {
+    public static ShowsAdapter get(OnItemClick itemClick, List<Item> items) {
+        return new ShowsAdapter(itemClick, items);
+    }
+
+    private ShowsAdapter(OnItemClick itemClick, List<Item> items) {
         this.onItemClick = itemClick;
         this.items = items;
     }
@@ -31,7 +34,7 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_horrible_3, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_d, parent, false));
     }
 
     @Override
@@ -43,11 +46,6 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
                 onItemClick.onItemClicked(items.get(position));
             }
         });
-        if (items.indexOf(items.get(position)) % 2 != 0)
-            if (AppMe.appMe.isDark())
-                holder.linearLayout.setBackgroundResource(R.color.colorItemDark);
-            else holder.linearLayout.setBackgroundResource(R.color.colorItemLight);
-        else holder.linearLayout.setBackgroundResource(android.R.color.transparent);
     }
 
     @Override

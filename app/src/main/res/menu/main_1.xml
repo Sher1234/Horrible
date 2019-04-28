@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:title="@string/app_name">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:icon="@drawable/ic_explore"
+                    android:id="@+id/explore"
+                    android:title="@string/explore"
+                    tools:checked="true" />
+
+                <item
+                    android:icon="@drawable/ic_search"
+                    android:id="@+id/search"
+                    android:title="@string/search" />
+
+                <item
+                    android:icon="@drawable/ic_favorite_filled"
+                    android:id="@+id/favourite"
+                    android:title="@string/favourites" />
+
+                <item
+                    android:icon="@drawable/ic_new"
+                    android:id="@+id/recent"
+                    android:title="@string/recent" />
+
+                <item
+                    android:icon="@drawable/ic_schedule"
+                    android:title="@string/schedule"
+                    android:id="@+id/schedule" />
+
+                <item
+                    android:icon="@drawable/ic_list"
+                    android:id="@+id/all"
+                    android:title="@string/all_shows" />
+
+                <item
+                    android:icon="@drawable/ic_list"
+                    android:id="@+id/current"
+                    android:title="@string/current_shows" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/downloads" android:visible="false">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:icon="@drawable/ic_search"
+                    android:title="@string/search"
+                    android:id="@+id/list" />
+
+                <item
+                    android:icon="@drawable/ic_search"
+                    android:id="@+id/torrent_settings"
+                    android:title="@string/settings"
+                    tools:checked="true" />
+
+            </group>
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="none" android:visible="false">
+
+        <item
+            android:icon="@drawable/ic_search"
+            android:title="@string/settings"
+            android:id="@+id/settings" />
+
+        <item
+            android:icon="@drawable/ic_search"
+            android:title="@string/my_profile"
+            android:id="@+id/profile" />
+
+        <item
+            android:icon="@drawable/ic_update"
+            android:title="@string/about_app"
+            android:id="@+id/info" />
+
+    </group>
+
+    <item android:title="@string/others">
+        <menu>
+            <group android:checkableBehavior="none">
+
+                <item
+                    android:icon="@drawable/ic_notifications_active"
+                    android:title="@string/notification"
+                    android:id="@+id/notification" />
+
+                <item
+                    android:title="@string/toggle_theme"
+                    android:icon="@drawable/ic_theme"
+                    android:id="@+id/theme" />
+
+                <item
+                    android:icon="@drawable/ic_info"
+                    android:title="@string/about_app"
+                    android:id="@+id/about" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

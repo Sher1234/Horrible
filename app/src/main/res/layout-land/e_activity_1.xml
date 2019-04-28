@@ -1,0 +1,52 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        app:liftOnScrollTargetViewId="@id/recyclerView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="?colorSurface"
+        app:liftOnScroll="true">
+
+        <androidx.appcompat.widget.Toolbar
+            app:navigationIcon="@drawable/ic_menu"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/horrible_subs"
+                android:textSize="19sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/adBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/recycler_b"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
+        android:paddingBottom="95dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        app:spanCount="2" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

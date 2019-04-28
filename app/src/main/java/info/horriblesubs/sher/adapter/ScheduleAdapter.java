@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.api.horrible.model.ScheduleItem;
 
@@ -33,16 +32,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @NotNull
     @Contract("_, !null -> new; _, null -> new")
-    public static ScheduleAdapter getAdapter(OnItemClick itemClick, List<ScheduleItem> items) {
+    public static ScheduleAdapter get(OnItemClick itemClick, List<ScheduleItem> items) {
         return new ScheduleAdapter(itemClick, items, items == null ? 0 : items.size());
     }
 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup group, int viewType) {
-        int layout = R.layout.layout_item_horrible_2;
-        View v = LayoutInflater.from(group.getContext()).inflate(layout, group, false);
-        return new ViewHolder(v);
+        return new ViewHolder(LayoutInflater.from(group.getContext()).inflate(R.layout.recycler_c, group, false));
     }
 
     @Override
@@ -55,11 +52,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
                 onItemClick.onItemClicked(items.get(position));
             }
         });
-        if (items.indexOf(items.get(position)) % 2 != 0)
-            if (AppMe.appMe.isDark())
-                holder.linearLayout.setBackgroundResource(R.color.colorItemDark);
-            else holder.linearLayout.setBackgroundResource(R.color.colorItemLight);
-        else holder.linearLayout.setBackgroundResource(android.R.color.transparent);
     }
 
     @Override
@@ -77,9 +69,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textView1, textView2;
         private final LinearLayoutCompat linearLayout;
-        private final AppCompatTextView textView1;
-        private final AppCompatTextView textView2;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

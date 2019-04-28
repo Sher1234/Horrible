@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@SuppressWarnings("all")
 public class ShowRelease extends ListItem {
 
     public List<List<Download>> downloads;

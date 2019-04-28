@@ -26,8 +26,8 @@ import java.util.Random;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.common.Constants;
-import info.horriblesubs.sher.db.HorribleDB;
-import info.horriblesubs.sher.ui.horrible.show.Show;
+import info.horriblesubs.sher.db.DataMethods;
+import info.horriblesubs.sher.ui.i.Show;
 
 public class MessagingService extends FirebaseMessagingService {
 
@@ -60,9 +60,9 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     private boolean isNotified(@NotNull Map<String, String> map) {
-        HorribleDB horribleDB = new HorribleDB(this);
-        if (horribleDB.isNotified(map.get("id"))) return true;
-        if (horribleDB.onNotify(map) != -1) return false;
+        DataMethods dataMethods = new DataMethods(this);
+        if (dataMethods.isNotified(map.get("id"))) return true;
+        if (dataMethods.onNotify(map) != -1) return false;
         return false;
     }
 

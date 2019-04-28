@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.api.horrible.model.ShowRelease;
 
@@ -22,16 +21,32 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
 
     private final OnItemClick onItemClick;
     private final List<ShowRelease> items;
+    private final int size;
 
-    public ReleaseAdapter(OnItemClick itemClick, List<ShowRelease> items) {
-        this.onItemClick = itemClick;
+    public static ReleaseAdapter get(OnItemClick itemClick, List<ShowRelease> items, int s) {
+        if (items == null) return new ReleaseAdapter(itemClick, null, 0);
+        return new ReleaseAdapter(itemClick, items, items.size()<s?items.size():s);
+    }
+
+    private ReleaseAdapter(OnItemClick onItemClick, List<ShowRelease> items, int size) {
+        this.onItemClick = onItemClick;
         this.items = items;
+        this.size = size;
+    }
+
+    public static ReleaseAdapter get(OnItemClick itemClick, List<ShowRelease> items) {
+        return new ReleaseAdapter(itemClick, items, items==null?0:items.size());
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_horrible_1_b, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_e, parent, false));
     }
 
     @Override
@@ -44,26 +59,16 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
                 onItemClick.onItemClicked(items.get(position));
             }
         });
-        if (items.indexOf(items.get(position)) % 2 != 0)
-            if (AppMe.appMe.isDark())
-                holder.linearLayout.setBackgroundResource(R.color.colorItemDark);
-            else holder.linearLayout.setBackgroundResource(R.color.colorItemLight);
-        else holder.linearLayout.setBackgroundResource(android.R.color.transparent);
         if (items.get(position).quality != null) {
-            if (!items.get(position).quality.get(2)) holder.textViewC.setVisibility(View.GONE);
-            if (!items.get(position).quality.get(1)) holder.textViewB.setVisibility(View.GONE);
-            if (!items.get(position).quality.get(0)) holder.textViewA.setVisibility(View.GONE);
+            if (!items.get(position).quality.get(2)) holder.mark3.setVisibility(View.GONE);
+            if (!items.get(position).quality.get(1)) holder.mark2.setVisibility(View.GONE);
+            if (!items.get(position).quality.get(0)) holder.mark1.setVisibility(View.GONE);
         }
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }
-
-    @Override
     public int getItemCount() {
-        return items != null ? items.size() : 0;
+        return size;
     }
 
     public interface OnItemClick {
@@ -71,19 +76,16 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView mark1, mark2, mark3, textView;
         private final LinearLayoutCompat linearLayout;
-        private final AppCompatTextView textViewC;
-        private final AppCompatTextView textViewB;
-        private final AppCompatTextView textViewA;
-        private final AppCompatTextView textView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             linearLayout = itemView.findViewById(R.id.linearLayout);
-            textViewC = itemView.findViewById(R.id.textViewC);
-            textViewB = itemView.findViewById(R.id.textViewB);
-            textViewA = itemView.findViewById(R.id.textViewA);
             textView = itemView.findViewById(R.id.textView);
+            mark3 = itemView.findViewById(R.id.mark3);
+            mark2 = itemView.findViewById(R.id.mark2);
+            mark1 = itemView.findViewById(R.id.mark1);
         }
     }
 }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <attr name="toolbarBackground" format="color" />
-    <attr name="dialogStyle" format="reference" />
-    <attr name="viewBackground" format="color" />
-    <attr name="tagBackground" format="color" />
-    <attr name="fabStyle" format="reference" />
-</resources>

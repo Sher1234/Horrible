@@ -8,7 +8,7 @@
         android:shortcutShortLabel="@string/schedule_">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.ui.horrible.schedule.Schedule"
+            android:targetClass="info.horriblesubs.sher.ui.f.Schedule"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>
@@ -20,7 +20,7 @@
         android:shortcutShortLabel="@string/shows">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="info.horriblesubs.sher.ui.horrible.current.Current"
+            android:targetClass="info.horriblesubs.sher.ui.h.Current"
             android:targetPackage="info.horriblesubs.sher" />
         <categories android:name="android.shortcut" />
     </shortcut>

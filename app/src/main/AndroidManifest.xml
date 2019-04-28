@@ -11,14 +11,14 @@
 
     <application
         android:fullBackupContent="@xml/backup_descriptor"
-        android:name=".AppMe"
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
-        android:supportsRtl="true"
-        android:theme="@style/AniDex.Dark"
         tools:ignore="GoogleAppIndexingWarning"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/AniDex.Dark"
+        android:label="@string/app_name"
+        android:allowBackup="true"
+        android:supportsRtl="true"
+        android:name=".AppMe"
         tools:targetApi="m">
 
         <meta-data
@@ -52,7 +52,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".ui.horrible.home.Home">
+        <activity android:name=".ui.b.Explore">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -62,21 +62,21 @@
                 android:resource="@xml/shortcuts" />
         </activity>
 
-        <activity android:name=".ui.horrible.favourites.Favourites" />
+        <activity android:name=".ui.d.Favourites" />
 
-        <activity android:name=".ui.horrible.schedule.Schedule" />
+        <activity android:name=".ui.f.Schedule" />
 
-        <activity android:name=".ui.horrible.current.Current" />
+        <activity android:name=".ui.h.Current" />
 
-        <activity android:name=".ui.horrible.latest.Latest" />
+        <activity android:name=".ui.e.Recent" />
 
-        <activity android:name=".ui.horrible.search.Search" />
+        <activity android:name=".ui.c.Search" />
 
-        <activity android:name=".ui.common.about.About" />
+        <activity android:name=".ui.z.about.About" />
 
-        <activity android:name=".ui.horrible.show.Show" />
+        <activity android:name=".ui.i.Show" />
 
-        <activity android:name=".ui.horrible.all.All" />
+        <activity android:name=".ui.g.All" />
 
     </application>
 

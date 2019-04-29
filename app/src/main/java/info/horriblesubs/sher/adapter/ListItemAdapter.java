@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -79,11 +78,9 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatTextView textView1, textView2, mark1, mark2, mark3;
-        private final LinearLayoutCompat linearLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            linearLayout = itemView.findViewById(R.id.linearLayout);
             textView2 = itemView.findViewById(R.id.textView2);
             textView1 = itemView.findViewById(R.id.textView1);
             mark3 = itemView.findViewById(R.id.mark3);

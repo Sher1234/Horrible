@@ -50,11 +50,6 @@ public class Model extends ViewModel {
         }
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
         protected ShowDetail doInBackground(Void... voids) {
             Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
             Hpi api = retrofit.create(Hpi.class);

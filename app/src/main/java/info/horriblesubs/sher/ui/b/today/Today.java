@@ -20,7 +20,6 @@ import org.jetbrains.annotations.NotNull;
 
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ScheduleAdapter;
-import info.horriblesubs.sher.api.horrible.model.DateParse;
 import info.horriblesubs.sher.api.horrible.model.ScheduleItem;
 import info.horriblesubs.sher.api.horrible.response.Result;
 import info.horriblesubs.sher.common.FragmentRefresh;
@@ -69,7 +68,6 @@ public class Today extends Fragment implements Observer<Result<ScheduleItem>>, F
             return;
         }
         recyclerView.setAdapter(ScheduleAdapter.get(this, model.getToday(result.items)));
-        textView2.setText(DateParse.getNetworkDate(DateParse.getNetworkDate(result.time)));
         textView2.setText(result.getTime());
     }
 

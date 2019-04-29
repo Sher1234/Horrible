@@ -46,9 +46,9 @@ public class Model extends ViewModel {
 
     private class Refresh extends AsyncTask<Void, Void, ShowItem> {
 
+        private final boolean b;
         private final String s;
         private ShowItem data;
-        private boolean b;
         private int i = 0;
 
         Refresh(String s, boolean b) {

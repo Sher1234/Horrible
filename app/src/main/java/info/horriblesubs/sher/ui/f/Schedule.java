@@ -37,6 +37,7 @@ import info.horriblesubs.sher.ui.f.fragment.Day;
 import info.horriblesubs.sher.ui.z.LoadingDialog;
 import info.horriblesubs.sher.ui.z.navigation.Navigation;
 
+@SuppressWarnings("all")
 public class Schedule extends AppCompatActivity implements TaskListener,
         Toolbar.OnMenuItemClickListener, Observer<Result<ScheduleItem>> {
 
@@ -146,10 +147,9 @@ public class Schedule extends AppCompatActivity implements TaskListener,
             Toast.makeText(this, "No Data Received", Toast.LENGTH_SHORT).show();
             return;
         }
+        viewPager.setAdapter(new Pager(getSupportFragmentManager(), result));
         viewPager.setCurrentItem(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
-        Pager pager = new Pager(getSupportFragmentManager(), result);
-        viewPager.setAdapter(pager);
-        pager.notifyDataSetChanged();
+        viewPager.getAdapter().notifyDataSetChanged();
     }
 
     private class Pager extends FragmentPagerAdapter {

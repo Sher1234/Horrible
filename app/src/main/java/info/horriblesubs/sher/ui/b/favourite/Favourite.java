@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -43,9 +42,11 @@ public class Favourite extends Fragment
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.b_fragment_2, container, false);
-        recyclerView = view.findViewById(R.id.recyclerView);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        view.findViewById(R.id.textView0).setVisibility(View.GONE);
         return view;
     }
 
@@ -70,7 +71,6 @@ public class Favourite extends Fragment
     @Override
     public void onChanged(List<ShowDetail> result) {
         if (result == null || result.size() == 0) {
-            Toast.makeText(getContext(), "No Data Received", Toast.LENGTH_SHORT).show();
             textView2.setVisibility(View.VISIBLE);
             return;
         }

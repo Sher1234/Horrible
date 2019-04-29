@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -68,6 +69,10 @@ public class Random extends Fragment
 
     @Override
     public void onChanged(ShowDetail result) {
+        if (result == null) {
+            Toast.makeText(getContext(), "No data received.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Glide.with(this).load(result.image).into(imageView);
         textView1.setText(result.title);
         textView2.setText(result.body);

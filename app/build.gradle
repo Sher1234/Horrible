@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    buildToolsVersion = '29.0.0 rc2'
     compileSdkVersion 28
     defaultConfig {
-        versionCode 65
+        versionCode 70
         minSdkVersion 21
-        versionName "0.6.5"
+        versionName "0.7.0"
         targetSdkVersion 28
         applicationId "info.horriblesubs.sher"
         vectorDrawables.useSupportLibrary = true
@@ -29,19 +28,16 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha04'
     implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0-alpha04'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
     implementation 'com.google.android.material:material:1.1.0-alpha05'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-//    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
 
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-messaging:17.6.0'

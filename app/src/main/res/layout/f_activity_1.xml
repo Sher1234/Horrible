@@ -26,10 +26,13 @@
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
-            app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:tabTextAppearance="?textAppearanceBody2"
+            app:tabSelectedTextColor="?colorPrimary"
+            app:tabIndicatorColor="?colorPrimary"
             android:layout_width="match_parent"
             android:background="?colorSurface"
             app:tabIndicatorFullWidth="false"
+            app:tabTextColor="?tabTextColor"
             app:tabUnboundedRipple="false"
             android:layout_height="42dp"
             app:tabIndicatorHeight="4dp"

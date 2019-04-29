@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
@@ -51,8 +50,7 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        String s = items.get(position).title + " - " + items.get(position).release;
-        holder.textView.setText(Html.fromHtml(s));
+        holder.textView.setText(Html.fromHtml(items.get(position).release));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,11 +75,9 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatTextView mark1, mark2, mark3, textView;
-        private final LinearLayoutCompat linearLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            linearLayout = itemView.findViewById(R.id.linearLayout);
             textView = itemView.findViewById(R.id.textView);
             mark3 = itemView.findViewById(R.id.mark3);
             mark2 = itemView.findViewById(R.id.mark2);

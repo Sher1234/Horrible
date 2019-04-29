@@ -25,8 +25,10 @@ public class LoadingDialog extends Dialog {
     }
 
     private void setLoadingGif() {
-        if (new Random().nextInt(100) % 2 == 0) imageView.setImageResource(R.drawable.loading_1);
-        else imageView.setImageResource(R.drawable.loading_2);
+        if (new Random().nextInt(100) % 2 == 0)
+            imageView.setImageResource(R.drawable.loading_1);
+        else
+            imageView.setImageResource(R.drawable.loading_2);
         ((FrameLayout) findViewById(R.id.frameLayout)).addView(imageView);
     }
 }

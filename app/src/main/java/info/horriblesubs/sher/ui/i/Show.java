@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -113,8 +114,8 @@ public class Show extends AppCompatActivity implements TaskListener, ReleaseAdap
         recyclerView2.setItemAnimator(new DefaultItemAnimator());
         recyclerView1.setItemAnimator(new DefaultItemAnimator());
         model.getResult(this).observe(this, this);
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView2.setLayoutManager(new GridLayoutManager(this, 2));
         if (model.result.getValue() == null) model.onRefresh(link, false);
     }
 

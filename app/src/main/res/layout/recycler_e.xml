@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cardBackgroundColor="@android:color/transparent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_margin="4dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp"
+    app:strokeColor="?colorItem"
+    android:layout_margin="5dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="0dp">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:src="?attr/selectableItemBackground"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+    app:cardElevation="0dp"
+    app:strokeWidth="0.5dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:background="?selectableItemBackground"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:id="@+id/linearLayout">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:textAppearance="?textAppearanceHeadline5"
             android:fontFamily="sans-serif-medium"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingBottom="8dp"
             android:paddingStart="16dp"
-            android:id="@+id/textView"
-            android:layout_width="0dp"
             tools:text="Episode - 977"
-            android:paddingEnd="12dp"
+            android:id="@+id/textView"
+            android:paddingEnd="16dp"
+            android:paddingTop="12dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:textSize="12sp"
-            android:padding="12dp"
             android:maxLines="8" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="horizontal"
             android:background="?colorItem"
-            android:paddingStart="10dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:paddingTop="4dp"
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -83,5 +86,10 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:src="?attr/selectableItemBackground"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 
 </com.google.android.material.card.MaterialCardView>

@@ -48,7 +48,7 @@ public class Model extends ViewModel {
     private class Refresh extends AsyncTask<Void, Void, Result<ScheduleItem>> {
 
         private Result<ScheduleItem> data;
-        private boolean b;
+        private final boolean b;
         private int i = 0;
 
         Refresh(boolean b) {

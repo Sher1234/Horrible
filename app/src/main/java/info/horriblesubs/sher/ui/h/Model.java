@@ -61,7 +61,7 @@ public class Model extends ViewModel {
 
     private class SearchData extends AsyncTask<Void, Void, List<Item>> {
 
-        private String query;
+        private final String query;
 
         SearchData(String query) {
             this.query = query;
@@ -88,7 +88,7 @@ public class Model extends ViewModel {
     private class Refresh extends AsyncTask<Void, Void, List<Item>> {
 
         private ShowsItems showsItems;
-        private boolean b;
+        private final boolean b;
         private int i = 0;
 
         Refresh(boolean b) {

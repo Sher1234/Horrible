@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.Contract;
@@ -70,11 +69,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatTextView textView1, textView2;
-        private final LinearLayoutCompat linearLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            linearLayout = itemView.findViewById(R.id.linearLayout);
             textView2 = itemView.findViewById(R.id.textView2);
             textView1 = itemView.findViewById(R.id.textView1);
         }

@@ -7,13 +7,15 @@ Support the official site **https://horriblesubs.info**
 Horrible Subs implements number of open source projects listed bellow:
  - Androidx Libraries
  - Glide for Displaying images
+ - Retrofit networking libraries
  - SimpleHtmlDom for HTML parsing
- - OkHttp & Retrofit networking libraries
  - Firebase for FCM notifications & google ads
 
 > #### *Notes:*
-> - Versions 0.6.5 and later will require reinstall [Changed Signing Keys].
-> - Versions 0.5.5 and earlier are now deprecated.
+> - Versions 0.7.0 and later will require reinstall [Changed Signing Keys]. [Supported Till Major Revision]
+> - Versions 0.6.5 will require reinstall [Changed Signing Keys]. [Support will end on 25th May 2019]
+> - Versions 0.5.5 and earlier are now deprecated. [Support Ended]
+
 
 #### Features
  * Lists New/Latest Releases from HorribleSubs Website,
@@ -28,6 +30,8 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Various Bug Fixes & Performance Improvements                                      Major Commit   - April 29, 2019
+Updated UI, Added Network Cache Options, Updated Gradle                           Major Commit   - April 28, 2019
 Fixed Searching Issues in All/Current Shows List, Updated README                  Minor Commit   - Jan   12, 2019
 Search in Shows List                                                              Major Commit   - Jan   12, 2019
 Fixed Favourites Listing, Notification & Navigation Issues                        Minor Commit   - Jan   10, 2019
@@ -72,9 +76,12 @@ Added Support for Lists, Notification sometimes buggy, Show Pages, Search       
 Added Support for Schedule, Notification on New Release & Design Improvements     Major Commit   - March 05, 2018
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
-#### Todos [All Done]
-* Nyaa Implementation
-* Add Support to delete favourites from Favourites Page.
+#### Todos
+* nyaa.si Implementation
+* App Load Time Improvements.
+* Load More Release result Options & Refine Show User Interface [REWORK]
+* Rework Ad Support
+* User Registration & Cloud Sync of Favourites
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

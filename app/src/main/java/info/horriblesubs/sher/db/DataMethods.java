@@ -1,11 +1,13 @@
 package info.horriblesubs.sher.db;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -41,18 +43,16 @@ public class DataMethods implements Database.Horrible {
     }
 
     public void onAddToFavourite(ShowDetail detail) {
-        Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
-        Hpi api = retrofit.create(Hpi.class);
         try (SQLiteDatabase db = new Database(context).getWritableDatabase()) {
+            Log.d(Favourites, "Add To" + Favourites + " + " + detail.sid);
             ContentValues values = new ContentValues();
             values.put(Title, detail.title);
             values.put(Image, detail.image);
             values.put(ShowID, detail.sid);
             values.put(Link, detail.link);
             values.put(ID, detail.id);
-            Log.d(Favourites, "Add To" + Favourites + " + " + detail.sid);
             db.insert(Favourites, null, values);
-            api.onFavouriteShow(detail.sid).execute();
+            new AddFav().execute(detail.sid);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,6 +124,24 @@ public class DataMethods implements Database.Horrible {
     public boolean isFavExists() {
         try (SQLiteDatabase database = new Database(context).getReadableDatabase()) {
             return DatabaseUtils.queryNumEntries(database, Favourites) != 0;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class AddFav extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                if (strings != null && strings.length == 1) {
+                    Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
+                    Hpi api = retrofit.create(Hpi.class);
+                    return api.onFavouriteShow(strings[0]).execute().body();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

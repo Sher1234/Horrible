@@ -133,6 +133,7 @@ public class Model extends ViewModel {
         protected void onPostExecute(List<Item> result) {
             super.onPostExecute(result);
             Model.this.result.setValue(result);
+            listener.onPostExecute();
             search.setValue(result);
         }
     }

@@ -64,6 +64,7 @@
     <string name="last_updated">Last Updated</string>
     <string name="view_more">View More</string>
     <string name="notification">Notification</string>
+    <string name="menu">Menu</string>
 
     <string-array name="days">
         <item>Sunday</item>

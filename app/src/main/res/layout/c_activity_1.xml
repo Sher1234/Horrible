@@ -4,36 +4,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        app:liftOnScrollTargetViewId="@id/recyclerView"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:background="?colorSurface"
-        app:liftOnScroll="true">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_menu"
+        <FrameLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:id="@+id/toolbar">
+            android:layout_gravity="bottom"
+            android:id="@+id/adBanner" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/horrible_subs"
-                android:textAppearance="?textAppearanceHeadline6"
-                android:textSize="19sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/recycler_b"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerView"
+            android:clipToPadding="false"
+            android:paddingBottom="95dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="8dp" />
 
-        </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:textAppearance="?textAppearanceBody1"
+        android:alpha="?android:disabledAlpha"
+        android:layout_height="match_parent"
+        android:text="@string/empty_search"
+        android:layout_width="match_parent"
+        android:paddingStart="20dp"
+        android:paddingBottom="6dp"
+        android:id="@+id/textView"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:textSize="12sp" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        app:layout_behavior="com.google.android.material.bottomappbar.BottomAppBar$Behavior"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_menu"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        app:contentInsetEnd="64dp"
+        android:id="@+id/toolbar">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:background="@drawable/search_bg"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:paddingBottom="10dp"
+            android:layout_gravity="center"
+            android:paddingBottom="6dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:paddingTop="6dp"
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -41,7 +68,7 @@
                 android:background="@android:color/transparent"
                 android:textAppearance="?textAppearanceBody1"
                 android:hint="@android:string/search_go"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textColor="?colorOnSurface"
                 android:inputType="textFilter"
                 android:autofillHints="Anime"
@@ -60,7 +87,7 @@
 
             <com.google.android.material.button.MaterialButton
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 app:iconTint="?colorOnSurface"
                 app:icon="@drawable/ic_search"
@@ -75,39 +102,6 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:id="@+id/adBanner" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/recycler_b"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/recyclerView"
-        android:clipToPadding="false"
-        android:paddingBottom="95dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="8dp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:textAppearance="?textAppearanceBody1"
-        android:alpha="?android:disabledAlpha"
-        android:layout_height="match_parent"
-        android:text="@string/empty_search"
-        android:layout_width="match_parent"
-        android:paddingStart="20dp"
-        android:paddingBottom="6dp"
-        android:id="@+id/textView"
-        android:paddingEnd="16dp"
-        android:paddingTop="8dp"
-        android:gravity="center"
-        android:textSize="12sp" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

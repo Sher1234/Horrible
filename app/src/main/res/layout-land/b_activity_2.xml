@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="95dp"
+        android:paddingBottom="72dp"
         android:paddingTop="8dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -22,7 +22,7 @@
             android:layout_marginBottom="12dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:clipToPadding="false"
             android:layout_weight="0.25"
@@ -45,7 +45,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:layout_weight="0.5"
             android:layout_width="0dp">

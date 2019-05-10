@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -35,10 +36,10 @@ public class Navigation implements NavigationView.OnNavigationItemSelectedListen
 
     private final AppCompatActivity activity;
 
-    public Navigation(@NotNull AppCompatActivity activity, @Nullable Toolbar.OnMenuItemClickListener listener) {
+    public Navigation(@NotNull final AppCompatActivity activity, @Nullable Toolbar.OnMenuItemClickListener listener) {
         final NavigationView navView = activity.findViewById(R.id.navigationView);
         final DrawerLayout drawer = activity.findViewById(R.id.drawerLayout);
-        final Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        final BottomAppBar toolbar = activity.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +52,15 @@ public class Navigation implements NavigationView.OnNavigationItemSelectedListen
         navView.setNavigationItemSelectedListener(this);
         toolbar.setOnMenuItemClickListener(listener);
         this.activity = activity;
+
+        if (activity.findViewById(R.id.fab) != null)
+            activity.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.startActivity(new Intent(activity, Search.class));
+                    activity.finish();
+                }
+            });
 
         if (activity instanceof Favourites) navView.setCheckedItem(R.id.favourite);
         if (activity instanceof Schedule) navView.setCheckedItem(R.id.schedule);

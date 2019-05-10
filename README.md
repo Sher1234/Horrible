@@ -30,7 +30,10 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
-Various Bug Fixes & Performance Improvements                                      Major Commit   - April 29, 2019
+Updated Toolbar Position to Bottom for Android Q Gesture                          Minor Commit   - May   10, 2019
+Fixed Issues with Random Anime Name, Updated Gradle                               Minor Commit   - May   10, 2019
+Fixed Shows Listing Issues                                                        Minor Commit   - April 29, 2019
+Various Bug Fixes & Performance Improvements                                      Minor Commit   - April 29, 2019
 Updated UI, Added Network Cache Options, Updated Gradle                           Major Commit   - April 28, 2019
 Fixed Searching Issues in All/Current Shows List, Updated README                  Minor Commit   - Jan   12, 2019
 Search in Shows List                                                              Major Commit   - Jan   12, 2019
@@ -78,10 +81,12 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 ```
 #### Todos
 * nyaa.si Implementation
+* Improve Application Design
 * App Load Time Improvements.
 * Load More Release result Options & Refine Show User Interface [REWORK]
 * Rework Ad Support
 * User Registration & Cloud Sync of Favourites
+* Migrate to Kotlin
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

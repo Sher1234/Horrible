@@ -5,8 +5,8 @@ android {
     defaultConfig {
         versionCode 70
         minSdkVersion 21
-        versionName "0.7.0"
         targetSdkVersion 28
+        versionName "0.7.0-rc3"
         applicationId "info.horriblesubs.sher"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,13 +24,13 @@ configurations {
 }
 
 dependencies {
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0-alpha04'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.1.0-alpha04'
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.1.0-alpha04'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0-alpha04'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0-alpha01'
 
-    implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha05'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0-beta01'
+    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'com.github.bumptech.glide:glide:4.9.0'
@@ -39,8 +39,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
 
-    implementation 'com.google.firebase:firebase-core:16.0.8'
-    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-messaging:18.0.0'
     implementation 'com.google.android.gms:play-services-ads:17.2.0'
 
     testImplementation 'junit:junit:4.13-beta-2'

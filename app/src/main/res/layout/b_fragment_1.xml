@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    app:cardCornerRadius="8dp">
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="4dp"
+    app:strokeColor="?colorItem"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0.5dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        tools:background="@android:color/black"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"

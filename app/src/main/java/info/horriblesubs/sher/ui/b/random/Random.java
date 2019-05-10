@@ -2,6 +2,7 @@ package info.horriblesubs.sher.ui.b.random;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,8 +75,8 @@ public class Random extends Fragment
             return;
         }
         Glide.with(this).load(result.image).into(imageView);
-        textView1.setText(result.title);
-        textView2.setText(result.body);
+        textView1.setText(Html.fromHtml(result.title));
+        textView2.setText(Html.fromHtml(result.body));
         this.result = result;
     }
 

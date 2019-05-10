@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    app:cardCornerRadius="8dp">
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="4dp"
+    app:strokeColor="?colorItem"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0.5dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        tools:background="@android:color/black"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -36,7 +42,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             tools:spanCount="2"
-            tools:itemCount="4" />
+            tools:itemCount="2" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_height="wrap_content"
@@ -50,19 +56,21 @@
                 android:text="@string/last_updated"
                 android:id="@+id/textView0"
                 android:gravity="center"
-                android:textSize="12sp"
-                android:padding="8dp" />
+                android:textSize="10sp"
+                android:padding="8dp"
+                tools:ignore="SmallSp" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:textAppearance="?textAppearanceHeadline6"
+                android:textAppearance="?textAppearanceHeadline5"
                 android:layout_height="wrap_content"
                 tools:text="@string/what_new"
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:gravity="end"
-                android:padding="8dp" />
+                android:padding="8dp"
+                tools:ignore="SmallSp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

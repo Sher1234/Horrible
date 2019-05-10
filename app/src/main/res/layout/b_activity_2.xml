@@ -21,6 +21,9 @@
             android:layout_width="match_parent"
             tools:layout="@layout/b_fragment_2"
             android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:id="@+id/fragment1" />
 
         <fragment
@@ -29,6 +32,8 @@
             android:layout_width="match_parent"
             tools:layout="@layout/b_fragment_1"
             android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:id="@+id/fragment2" />
 
         <fragment
@@ -37,6 +42,8 @@
             android:layout_width="match_parent"
             tools:layout="@layout/b_fragment_2"
             android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:id="@+id/fragment3" />
 
         <fragment
@@ -45,6 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:id="@+id/fragment4" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

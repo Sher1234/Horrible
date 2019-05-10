@@ -1,66 +1,91 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        app:liftOnScrollTargetViewId="@id/nestedScrollView"
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        app:liftOnScrollTargetViewId="@id/nestedScrollView"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="?colorSurface"-->
+<!--        android:id="@+id/appBarLayout"-->
+<!--        app:liftOnScroll="true">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            app:navigationIcon="@drawable/ic_menu"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:id="@+id/toolbar">-->
+
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:textAppearance="?textAppearanceHeadline6"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:text="@string/horrible_subs"-->
+<!--        android:textSize="19sp" />-->
+
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--            android:background="@drawable/search_bg"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:paddingEnd="16dp"-->
+<!--            android:gravity="center">-->
+
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:background="?attr/selectableItemBackground"-->
+<!--                android:imeActionLabel="@android:string/search_go"-->
+<!--                android:textAppearance="?textAppearanceBody1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:id="@+id/editSearch"-->
+<!--                android:paddingStart="16dp"-->
+<!--                android:paddingEnd="16dp"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:textSize="15sp"-->
+<!--                android:padding="10dp"-->
+<!--                android:hint="@string/search" />-->
+
+<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="?colorSurface"
-        android:id="@+id/appBarLayout"
-        app:liftOnScroll="true">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_menu"
-            android:layout_width="match_parent"
-            android:id="@+id/toolbar">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:textAppearance="?textAppearanceHeadline6"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/horrible_subs"
-                android:textSize="19sp" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:background="@drawable/search_bg"
+        <FrameLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:paddingBottom="10dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:gravity="center">
+            android:layout_gravity="top"
+            android:id="@+id/adBanner" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:background="?attr/selectableItemBackground"
-                android:imeActionLabel="@android:string/search_go"
-                android:textAppearance="?textAppearanceBody1"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:id="@+id/editSearch"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:textSize="15sp"
-                android:padding="10dp"
-                android:hint="@string/search" />
+        <include layout="@layout/b_activity_2" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/adBanner"
-        android:layout_width="match_parent"
+    <com.google.android.material.bottomappbar.BottomAppBar
+        app:layout_behavior="com.google.android.material.bottomappbar.BottomAppBar$Behavior"
+        app:navigationIcon="@drawable/ic_menu"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        app:fabAlignmentMode="end"
+        android:id="@+id/toolbar" />
 
-    <include layout="@layout/b_activity_2" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_search"
+        app:layout_anchor="@id/toolbar"
+        android:theme="?fabStyle"
+        android:id="@+id/fab"
+        app:fabSize="mini" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

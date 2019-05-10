@@ -6,7 +6,7 @@ android {
         versionCode 70
         minSdkVersion 21
         targetSdkVersion 28
-        versionName "0.7.0-rc3"
+        versionName "0.7.0-rc4"
         applicationId "info.horriblesubs.sher"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

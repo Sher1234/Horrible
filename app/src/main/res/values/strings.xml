@@ -47,7 +47,6 @@
     <string name="enable_notify">This will enable new release notifications, You will receive notifications on every new release.</string>
     <string name="check_update">Check for update</string>
     <string name="updated">Your application is up to date</string>
-    <string name="last_update_check">Last successful check for update at</string>
     <string name="what_new">What\'s new</string>
     <string name="delete">Delete</string>
     <string name="random_pick">Random Pick</string>
@@ -64,7 +63,6 @@
     <string name="last_updated">Last Updated</string>
     <string name="view_more">View More</string>
     <string name="notification">Notification</string>
-    <string name="menu">Menu</string>
 
     <string-array name="days">
         <item>Sunday</item>

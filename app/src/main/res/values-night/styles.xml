@@ -1,9 +1,24 @@
 <resources>
-    <!--ParentX Theme-->
+    <!--Parent Theme-->
 
-    <style name="ParentX" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="ParentX.Light" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorSurfaceDark</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ParentX.Dark" parent="Theme.MaterialComponents">
+        <!--        <item name="colorPrimaryDark">@color/colorSurfaceDark</item>-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ParentX.Dialog.Light" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="ParentX.Dialog.Dark" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <!--Parent Theme-->

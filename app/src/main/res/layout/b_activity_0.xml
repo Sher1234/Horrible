@@ -6,7 +6,7 @@
     android:id="@+id/drawerLayout"
     tools:openDrawer="start">
 
-    <include layout="@layout/b_activity_1" />
+<!--    <include layout="@layout/b_activity_1" />-->
 
     <com.google.android.material.navigation.NavigationView
         app:itemBackground="@drawable/bg_nav_item"

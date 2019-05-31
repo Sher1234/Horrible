@@ -12,7 +12,6 @@
     app:strokeWidth="0.5dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        tools:background="@android:color/black"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"

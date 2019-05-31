@@ -6,7 +6,7 @@ android {
         versionCode 70
         minSdkVersion 21
         targetSdkVersion 28
-        versionName "0.7.0-rc4"
+        versionName "0.7.2-rc1"
         applicationId "info.horriblesubs.sher"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,7 +29,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0-alpha01'
 
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-beta01'
-    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'com.google.android.material:material:1.1.0-alpha07'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
@@ -41,12 +41,12 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-messaging:18.0.0'
-    implementation 'com.google.android.gms:play-services-ads:17.2.0'
+    implementation 'com.google.android.gms:play-services-ads:17.2.1'
 
     testImplementation 'junit:junit:4.13-beta-2'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
     implementation 'org.jetbrains:annotations-java5:17.0.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

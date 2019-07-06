@@ -1,10 +1,57 @@
 <resources>
-    <!--ParentX Theme-->
+    <!--Theme2.0-->
 
-    <style name="ParentX" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <!--Common Styles-->
+    <style name="Theme.Parent" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+    <style name="Theme.Parent.Dialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <!--Different Styles-->
+    <style name="Theme" parent="Theme.Parent">
+        <item name="colorPrimaryDark">@color/primaryDarkForLight</item>
+        <item name="colorOnSecondary">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryForLight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fabStyle">@style/Theme.Fab</item>
+        <item name="tabTextColor">#85000000</item>
+        <item name="colorItem">#25000000</item>
+    </style>
+
+    <style name="Theme.Fab">
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorOnSecondary">#fcfcfc</item>
+        <item name="colorAccent">@color/blue</item>
+    </style>
+
+    <style name="Theme.Button.Error">
+        <item name="colorPrimary">@color/red</item>
+    </style>
+
+    <style name="Theme.Button" parent="Theme">
+        <item name="colorPrimary">?colorAccent</item>
+    </style>
+
+    <style name="Theme.Dialog" parent="Theme.Parent.Dialog">
+        <item name="android:colorBackground">@color/colorOnSurfaceDark</item>
+        <item name="colorAccent">@color/textHeadingLight</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!--Parent Theme-->
 
@@ -30,63 +77,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <!--Attrs-->
-
-    <attr name="dialogStyle" format="reference" />
     <attr name="tabTextColor" format="color" />
     <attr name="fabStyle" format="reference" />
     <attr name="colorItem" format="color" />
-
-    <!--Application Theme-->
-
-    <style name="AniDex" parent="Parent" />
-
-    <style name="AniDex.Light" parent="Parent.Light">
-        <item name="colorPrimaryDark">@color/primaryDarkForLight</item>
-        <item name="colorOnSecondary">@color/colorAccent</item>
-        <item name="colorPrimary">@color/primaryForLight</item>
-        <item name="fabStyle">@style/AniDex.Light.Fab</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="tabTextColor">#85000000</item>
-        <item name="colorItem">#25000000</item>
-    </style>
-
-    <style name="AniDex.Dark" parent="Parent.Dark">
-        <item name="colorPrimaryDark">@color/primaryDarkForDark</item>
-        <item name="colorOnSecondary">@color/colorAccent</item>
-        <item name="colorPrimary">@color/primaryForDark</item>
-        <item name="fabStyle">@style/AniDex.Dark.Fab</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="tabTextColor">#85ffffff</item>
-        <item name="colorItem">#25ffffff</item>
-    </style>
-
-    <style name="AniDex.Dark.Fab">
-        <item name="colorAccent">@color/yellow</item>
-        <item name="colorSecondary">@color/yellow</item>
-        <item name="colorOnSecondary">@color/colorSurfaceDark</item>
-    </style>
-
-    <style name="AniDex.Light.Fab">
-        <item name="colorAccent">@color/blue</item>
-        <item name="colorOnSecondary">#fcfcfc</item>
-        <item name="colorSecondary">@color/blue</item>
-    </style>
-
-    <style name="AniDex.Button">
-        <item name="colorPrimary">@color/red</item>
-    </style>
-
-    <style name="AniDex.Dialog.Light" parent="Parent.Dialog.Light">
-        <item name="android:colorBackground">@color/colorOnSurfaceDark</item>
-        <item name="colorAccent">@color/textHeadingLight</item>
-        <item name="dialogStyle">@style/AniDex.Light</item>
-    </style>
-
-    <style name="AniDex.Dialog.Dark" parent="Parent.Dialog.Dark">
-        <item name="android:colorBackground">@color/colorSurfaceDark</item>
-        <item name="colorAccent">@color/textHeadingDark</item>
-        <item name="dialogStyle">@style/AniDex.Dark</item>
-    </style>
 
 </resources>

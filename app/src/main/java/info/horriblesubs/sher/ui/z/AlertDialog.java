@@ -10,7 +10,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import com.google.android.material.button.MaterialButton;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 
 @SuppressWarnings("all")
@@ -22,7 +21,7 @@ public class AlertDialog extends Dialog {
     private final MaterialButton negative;
 
     public AlertDialog(@NonNull Context context) {
-        super(context, AppMe.appMe.isDark() ? R.style.AniDex_Dialog_Dark : R.style.AniDex_Dialog_Light);
+        super(context, R.style.Theme_Dialog);
         setContentView(R.layout.layout_dialog_alert);
         positive = findViewById(R.id.positive);
         negative = findViewById(R.id.negative);

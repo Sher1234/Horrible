@@ -38,22 +38,32 @@ public abstract class DateParse {
         }
     }
 
+    String getShowShort(String s) {
+        try {
+            Date date = getNetworkDate(s);
+            return getTimeString(date == null?-1L :date.getTime());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Never";
+        }
+    }
+
     @NotNull
-    public static String getTimeString(long time) {
-        long minutes = Math.round((double) time / 60000);
-        long hours = Math.round((double) time / 3600000);
-        long days = Math.round((double) time / 86400000);
-        if (time == -1L) return "never.";
+    private static String getTimeString(long time) {
+        long today = new Date().getTime();
+        long minutes = Math.round((double) (today - time) / 60000);
+        long hours = Math.round((double) (today - time) / 3600000);
+        long days = Math.round((double) (today - time) / 86400000);
+        if (time == -1L) return "Never";
         else if (days > 0)
-            if (days == 1) return "a day ago.";
-            else return days + " days ago.";
+            if (days == 1) return "Yesterday";
+            else return days + "  Days";
         else if (hours > 0)
-            if (hours == 1) return "an hours ago.";
-            else return hours + " hours ago.";
-        else if (minutes > 0)
-            if (minutes == 1) return "a minutes ago.";
-            else return minutes + " minutes ago.";
-        return "few seconds ago.";
+            if (hours == 1) return "1 Hour";
+            else return hours + " Hours";
+        else if (minutes > 5)
+            return minutes + " Minutes";
+        return "Now";
     }
 
     String getScheduleTime(String date) {

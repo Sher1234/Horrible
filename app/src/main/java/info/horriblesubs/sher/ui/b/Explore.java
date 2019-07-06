@@ -4,35 +4,41 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.common.FragmentRefresh;
-import info.horriblesubs.sher.ui.z.navigation.Navigation;
+import info.horriblesubs.sher.ui.a.Ads;
+import info.horriblesubs.sher.ui.a.Menu;
 
-public class Explore extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
+public class Explore extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+
+    private SwipeRefreshLayout refreshLayout;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
-        else setTheme(R.style.AniDex_Light);
+        AppMe.appMe.setTheme();
         setContentView(R.layout.b_activity_0);
-        new Navigation(this, this);
-        onLoadAdBanner();
+        refreshLayout = findViewById(R.id.swipeRefreshLayout);
+        findViewById(R.id.fab).setOnClickListener(this);
+        refreshLayout.setOnRefreshListener(this);
+        Ads.BannerAd.load(this);
+        menu = Menu.all();
     }
 
-    @Override
+    public void onEndRefresh() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Deprecated
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refresh:
@@ -56,14 +62,17 @@ public class Explore extends AppCompatActivity implements Toolbar.OnMenuItemClic
         return false;
     }
 
-    private void onLoadAdBanner() {
-        String id = getResources().getStringArray(R.array.footer)[3];
-        AdRequest request = new AdRequest.Builder().build();
-        FrameLayout layout = findViewById(R.id.adBanner);
-        AdView adView = new AdView(this);
-        adView.setAdUnitId(id);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        layout.addView(adView);
-        adView.loadAd(request);
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab)
+            menu.show(getSupportFragmentManager());
+    }
+
+    @Override
+    public void onRefresh() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment3);
+        if (fragment instanceof FragmentRefresh) ((FragmentRefresh) fragment).onRefresh();
+        fragment = getSupportFragmentManager().findFragmentById(R.id.fragment1);
+        if (fragment instanceof FragmentRefresh) ((FragmentRefresh) fragment).onRefresh();
     }
 }

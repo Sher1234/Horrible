@@ -52,6 +52,7 @@ public class Model extends ViewModel {
         List<ScheduleItem> scheduleItems = new ArrayList<>();
         Calendar cal0 = Calendar.getInstance(), cal1 = Calendar.getInstance();
         for (ScheduleItem item : items) {
+            if (item.getDate() == null) continue;
             cal1.setTime(item.getDate());
             if (cal0.get(Calendar.DAY_OF_WEEK) == cal1.get(Calendar.DAY_OF_WEEK) && item.scheduled)
                 scheduleItems.add(item);

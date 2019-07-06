@@ -13,10 +13,19 @@
         android:id="@+id/browser" />
 
     <item
+        android:icon="@drawable/ic_theme"
+        android:title="@string/toggle_theme"
         android:id="@+id/theme"
         android:enabled="false"
-        android:title="@string/toggle_theme"
         android:visible="false"
+        tools:visible="true" />
+
+    <item
+        android:icon="@drawable/ic_left"
+        android:enabled="false"
+        android:visible="false"
+        android:id="@+id/exit"
+        android:title="@string/back"
         tools:visible="true" />
 
 </menu>

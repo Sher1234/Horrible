@@ -1,45 +1,38 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        app:liftOnScrollTargetViewId="@id/nestedScrollView"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:background="?colorSurface"
-        app:liftOnScroll="true">
-
-        <androidx.appcompat.widget.Toolbar
-            app:navigationIcon="@drawable/ic_left"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:id="@+id/toolbar">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:textAppearance="?textAppearanceHeadline6"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/horrible_subs"
-                android:textSize="19sp" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/adBanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
-
-    <include layout="@layout/i_activity_1" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <include layout="@layout/i_activity_1" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <FrameLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/adBanner" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/frameLayout" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

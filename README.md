@@ -12,16 +12,17 @@ Horrible Subs implements number of open source projects listed bellow:
  - Firebase for FCM notifications & google ads
 
 > #### *Notes:*
-> - Versions 0.7.0 and later will require reinstall [Changed Signing Keys]. [Supported Till Major Revision]
-> - Versions 0.6.5 will require reinstall [Changed Signing Keys]. [Support will end on 25th May 2019]
-> - Versions 0.5.5 and earlier are now deprecated. [Support Ended]
+> - Versions 0.7.5 and later    [Reinstall Required/Changed Signing Keys/Supported]
+> - Versions 0.7.0 to 0.7.4     [Reinstall Required/Changed Signing Keys/Supported]
+> - Versions 0.6.5 and earlier  [Deprecated]
 
 
 #### Features
  * Lists New/Latest Releases from HorribleSubs Website,
  * Lists Today's Schedule as well as Week's Schedule day wise (According to User Timezone),
- * Notification Support for every new release available on HorribleSubs -
+ * Notification Support for every new release available on HorribleSubs
    - Needs to be enabled by user from Home Page,
+   - Notification might get delayed (30 min at max),
  * Add a Show to Favourites for faster access,
  * Lists Search for the shows/release.
  * Views All as well as Current Shows with Search option.
@@ -30,6 +31,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Upaded UI Design with some added Features & Improvements                          Major Commit   - July  07, 2019
 Updated Toolbar Position to Bottom for Android Q Gesture                          Minor Commit   - May   10, 2019
 Fixed Issues with Random Anime Name, Updated Gradle                               Minor Commit   - May   10, 2019
 Fixed Shows Listing Issues                                                        Minor Commit   - April 29, 2019
@@ -80,12 +82,11 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todos
-* nyaa.si Implementation
-* Improve Application Design
-* App Load Time Improvements.
-* Load More Release result Options & Refine Show User Interface [REWORK]
-* Rework Ad Support
 * User Registration & Cloud Sync of Favourites
+* App Load Time Improvements.
+* Load more release options
+* nyaa.si Implementation
+* MAL Implementation
 * Migrate to Kotlin
 
 #### Download

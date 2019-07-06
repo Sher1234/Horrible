@@ -25,7 +25,7 @@ public class Model extends ViewModel {
 
     }
 
-    MutableLiveData<List<ShowDetail>> getItems(Context context, TaskListener listener) {
+    MutableLiveData<List<ShowDetail>> items(Context context, TaskListener listener) {
         if (items == null) items = new MutableLiveData<>();
         functions = new DataMethods(context);
         this.listener = listener;

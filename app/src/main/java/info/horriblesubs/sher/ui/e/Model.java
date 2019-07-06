@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Model extends ViewModel {
 
-    MutableLiveData<Result<ListItem>> result;
+    private MutableLiveData<Result<ListItem>> result;
     private TaskListener listener;
     private LoadNetwork loadN;
 
@@ -33,10 +33,14 @@ public class Model extends ViewModel {
         loadN = null;
     }
 
-    MutableLiveData<Result<ListItem>> getItems(TaskListener listener) {
+    MutableLiveData<Result<ListItem>> items(TaskListener listener) {
         if (result == null) result = new MutableLiveData<>();
         this.listener = listener;
         return result;
+    }
+
+    boolean isExecuted() {
+        return result.getValue() != null;
     }
 
     void onRefresh(boolean b) {

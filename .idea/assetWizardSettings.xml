@@ -50,7 +50,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="113" />
+                                                <entry key="scalingPercent" value="75" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -106,11 +106,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\#Desktop\Anime Walls\791996.png" />
+                                      <entry key="backgroundImage" value="C:\Users\agghu\Desktop\Group 128.png" />
                                       <entry key="foregroundAssetType" value="TEXT" />
+                                      <entry key="generateLegacyIcon" value="false" />
                                       <entry key="generateRoundIcon" value="false" />
-                                      <entry key="legacyIconShape" value="CIRCLE" />
-                                      <entry key="webIconShape" value="CIRCLE" />
+                                      <entry key="generateWebIcon" value="false" />
+                                      <entry key="outputName" value="ic_shows" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -183,7 +184,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_open_in_browser_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BCanary%5D/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_open_in_new_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -193,7 +194,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_open_in_browser" />
+                            <entry key="outputName" value="ic_open" />
                             <entry key="sourceFile" value="C:\Users\agghu" />
                           </map>
                         </option>

@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    app:cardBackgroundColor="@android:color/transparent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    app:strokeColor="?colorItem"
-    android:layout_margin="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="0.5dp">
+    android:layout_width="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textAppearance="?textAppearanceHeadline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/linearLayout"
-        android:orientation="vertical">
+        android:layout_marginStart="16dp"
+        tools:text="@tools:sample/lorem"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/textView1"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:minLines="2" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            tools:text="Rascal does not dream of Bunny Girl Senpai"
-            android:textAppearance="?textAppearanceHeadline5"
-            android:fontFamily="sans-serif-medium"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingBottom="6dp"
-            android:paddingStart="16dp"
-            android:id="@+id/textView1"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="12sp"
-            tools:ignore="SmallSp"
-            android:maxLines="8" />
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        android:textAppearance="?textAppearanceHeadline6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="sans-serif-medium"
+        tools:text="@tools:sample/date/hhmm"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/textView2"
+        android:gravity="center"
+        android:textSize="13sp"
+        android:padding="4dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:textAppearance="?textAppearanceHeadline6"
-            android:fontFamily="sans-serif-medium"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:background="?colorItem"
-            android:paddingBottom="12dp"
-            android:id="@+id/textView2"
-            android:paddingTop="6dp"
-            android:gravity="center"
-            android:textSize="12sp"
-            tools:text="20:45"
-            android:maxLines="8" />
+    <View
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="?colorOnSurface"
+        android:layout_marginTop="8dp"
+        android:layout_height="0.36dp"
+        android:layout_width="0dp"
+        android:alpha="0.36" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <View
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:src="?attr/selectableItemBackground"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

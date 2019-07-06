@@ -25,6 +25,7 @@ import info.horriblesubs.sher.api.horrible.response.Result;
 import info.horriblesubs.sher.common.FragmentRefresh;
 import info.horriblesubs.sher.common.TaskListener;
 import info.horriblesubs.sher.db.DataMethods;
+import info.horriblesubs.sher.ui.b.Explore;
 import info.horriblesubs.sher.ui.i.Show;
 import info.horriblesubs.sher.ui.z.LoadingDialog;
 
@@ -36,13 +37,12 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
     private LoadingDialog dialog;
     private Model model;
 
-    public Latest() {
-    }
+    public Latest() {}
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.b_fragment_2, container, false);
+        View view = inflater.inflate(R.layout.b_fragment_3, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
@@ -70,10 +70,11 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
     public void onChanged(Result<ListItem> result) {
         if (result == null || result.items == null || result.items.size() == 0) {
             Toast.makeText(getContext(), "No Data Received", Toast.LENGTH_SHORT).show();
+            recyclerView.setAdapter(null);
             return;
         }
         new DataMethods(getContext()).onResetNotifications(result.items);
-        recyclerView.setAdapter(ListItemAdapter.get(this, result.items, 5));
+        recyclerView.setAdapter(ListItemAdapter.get(this, result.items, 6));
         textView2.setText(result.getTime());
     }
 
@@ -84,14 +85,15 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (dialog != null) dialog.dismiss();
         model.onStopTask();
+        super.onDestroy();
         dialog = null;
     }
 
     @Override
     public void onPostExecute() {
+        if (getActivity() instanceof Explore) ((Explore) getActivity()).onEndRefresh();
         if (dialog != null) dialog.dismiss();
         dialog = null;
     }

@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <item
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete"
+        android:id="@+id/delete"
+        android:visible="false"
+        android:enabled="false" />
+
     <item android:title="@string/app_name">
         <menu>
             <group android:checkableBehavior="single">
@@ -34,13 +41,20 @@
 
                 <item
                     android:icon="@drawable/ic_list"
-                    android:id="@+id/all"
-                    android:title="@string/all_shows" />
+                    android:title="@string/all_shows"
+                    android:id="@+id/all" />
 
                 <item
                     android:icon="@drawable/ic_list"
                     android:id="@+id/current"
                     android:title="@string/current_shows" />
+
+                <item
+                    android:icon="@drawable/ic_list"
+                    android:id="@+id/shows"
+                    android:enabled="false"
+                    android:visible="false"
+                    android:title="@string/shows" />
 
             </group>
         </menu>
@@ -70,7 +84,7 @@
         <item
             android:icon="@drawable/ic_search"
             android:title="@string/settings"
-            android:id="@+id/settings" />
+            android:id="@+id/settingsX" />
 
         <item
             android:icon="@drawable/ic_search"
@@ -90,18 +104,27 @@
 
                 <item
                     android:icon="@drawable/ic_notifications_active"
-                    android:title="@string/notification"
-                    android:id="@+id/notification" />
+                    android:id="@+id/notification"
+                    android:title="@string/notification" />
 
                 <item
-                    android:title="@string/toggle_theme"
                     android:icon="@drawable/ic_theme"
+                    android:title="@string/toggle_theme"
                     android:id="@+id/theme" />
 
                 <item
                     android:icon="@drawable/ic_info"
                     android:title="@string/about_app"
+                    android:enabled="false"
+                    android:visible="false"
                     android:id="@+id/about" />
+
+                <item
+                    android:icon="@drawable/ic_settings"
+                    android:id="@+id/settings"
+                    android:title="@string/settings"
+                    android:enabled="false"
+                    android:visible="false" />
 
             </group>
         </menu>

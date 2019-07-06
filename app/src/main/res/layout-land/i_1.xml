@@ -1,0 +1,135 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintEnd_toStartOf="@id/textView1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_weight="0.6"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        tools:src="@tools:sample/avatars"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:layout_height="365dp"
+        android:id="@+id/imageView"
+        android:layout_width="0dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintStart_toEndOf="@id/imageView"
+        android:textAppearance="?textAppearanceHeadline6"
+        app:layout_constraintTop_toTopOf="@id/imageView"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/full_names"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/textView1"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:textSize="19sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:layout_constraintStart_toStartOf="@id/textView1"
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        android:drawableTop="@drawable/ic_views"
+        tools:text="@tools:sample/us_zipcodes"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurface"
+        app:drawableTint="?colorOnSurface"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        android:layout_width="0dp"
+        android:id="@+id/button1"
+        android:gravity="center"
+        android:padding="6dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        android:drawableTop="@drawable/ic_favorite_filled"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintEnd_toStartOf="@id/button3"
+        tools:text="@tools:sample/us_zipcodes"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurface"
+        app:drawableTint="?colorOnSurface"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        android:layout_width="0dp"
+        android:id="@+id/button2"
+        android:gravity="center"
+        android:padding="6dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintEnd_toEndOf="@id/textView1"
+        app:layout_constraintStart_toEndOf="@id/button2"
+        android:drawableTop="@drawable/ic_refresh"
+        tools:text="@tools:sample/us_zipcodes"
+        android:layout_height="wrap_content"
+        android:textColor="?colorOnSurface"
+        app:drawableTint="?colorOnSurface"
+        android:layout_marginTop="8dp"
+        android:drawablePadding="8dp"
+        android:textAllCaps="false"
+        android:layout_width="0dp"
+        android:id="@+id/button3"
+        android:gravity="center"
+        android:padding="6dp" />
+
+    <androidx.appcompat.widget.AppCompatCheckedTextView
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        app:layout_constraintStart_toStartOf="@id/textView1"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        app:layout_constraintEnd_toEndOf="@id/textView2"
+        android:background="?selectableItemBackground"
+        android:drawableEnd="@drawable/sel_fav"
+        android:checkMarkTint="?colorPrimary"
+        android:layout_height="wrap_content"
+        android:textColor="?colorPrimary"
+        android:gravity="center_vertical"
+        android:text="@string/add_fav"
+        app:drawableTint="?colorPrimary"
+        android:textAllCaps="false"
+        android:paddingStart="20dp"
+        android:layout_width="0dp"
+        android:paddingEnd="20dp"
+        android:id="@+id/button4"
+        android:padding="14dp"
+        tools:checked="false" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintStart_toStartOf="@id/textView1"
+        app:layout_constraintTop_toBottomOf="@id/button4"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/description"
+        android:id="@+id/view" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintStart_toStartOf="@id/textView1"
+        app:layout_constraintEnd_toEndOf="@id/textView1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        android:textAppearance="?textAppearanceBody1"
+        tools:text="@tools:sample/lorem/random"
+        app:layout_constraintVertical_bias="0"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="4dp"
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:padding="3dp"
+        tools:lines="5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

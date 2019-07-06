@@ -1,78 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:layout_marginBottom="8dp"
-    android:layout_marginTop="4dp"
-    app:strokeColor="?colorItem"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="0.5dp">
+    android:layout_width="match_parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/favourites"
+        android:layout_marginTop="8dp"
+        android:id="@+id/textView1"
+        android:textSize="12sp"
+        android:padding="4dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layoutManager="LinearLayoutManager"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="12dp"
-        android:paddingTop="12dp">
+        tools:listitem="@layout/recycler_a_0"
+        android:orientation="horizontal"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        tools:visibility="gone"
+        tools:itemCount="3" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:textAppearance="?textAppearanceHeadline6"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="@string/latest_releases"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginStart="20dp"
-            android:id="@+id/textView1"
-            android:textSize="12sp"
-            tools:ignore="SmallSp"
-            android:padding="6dp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
+        android:textAppearance="?textAppearanceHeadline5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/empty_favourites"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="4dp"
+        app:layout_goneMarginTop="8dp"
+        android:id="@+id/textView2"
+        android:textStyle="italic"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        android:padding="4dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            tools:layoutManager="GridLayoutManager"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            tools:listitem="@layout/recycler_a"
-            android:id="@+id/recyclerView"
-            android:clipToPadding="false"
-            tools:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            tools:spanCount="2"
-            tools:itemCount="2" />
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingStart="32dp"
-            android:paddingEnd="32dp">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/last_updated"
-                android:id="@+id/textView0"
-                android:gravity="center"
-                android:textSize="10sp"
-                android:padding="8dp"
-                tools:ignore="SmallSp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:textAppearance="?textAppearanceHeadline5"
-                android:layout_height="wrap_content"
-                tools:text="@string/what_new"
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="10sp"
-                android:gravity="end"
-                android:padding="8dp"
-                tools:ignore="SmallSp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

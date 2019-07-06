@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
@@ -18,11 +19,14 @@ import info.horriblesubs.sher.api.horrible.model.ListItem;
 
 public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHolder> {
 
+    private final List<ListItem> listItems;
     private final OnItemClick onItemClick;
-    private final List<ListItem> items;
-    private final int size;
+    private List<ListItem> items;
+    private int size;
 
     private ListItemAdapter(OnItemClick itemClick, List<ListItem> items, int size) {
+        if (items != null) this.listItems = new ArrayList<>(items);
+        else this.listItems = new ArrayList<>();
         this.onItemClick = itemClick;
         this.items = items;
         this.size = size;
@@ -70,6 +74,24 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
     @Override
     public int getItemCount() {
         return size;
+    }
+
+    public void onSearch(String s) {
+        if (items == null) items = new ArrayList<>();
+        if (s == null || s.isEmpty()) {
+            items.addAll(listItems);
+            size = listItems.size();
+            notifyDataSetChanged();
+            return;
+        }
+        if (listItems == null) return;
+        items.clear();
+        for (ListItem item: listItems) {
+            if (item.title.toLowerCase().contains(s.toLowerCase()))
+                items.add(item);
+        }
+        size = items.size();
+        notifyDataSetChanged();
     }
 
     public interface OnItemClick {

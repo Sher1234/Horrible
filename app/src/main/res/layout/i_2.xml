@@ -1,0 +1,76 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/external_links"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/view" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/view_in_browser"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="8dp"
+        android:gravity="start|center"
+        android:paddingBottom="12dp"
+        app:icon="@drawable/ic_open"
+        android:textAllCaps="false"
+        android:layout_width="0dp"
+        android:paddingTop="12dp"
+        android:id="@+id/button1"
+        app:iconPadding="12dp"
+        app:iconSize="21dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_on_mal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="start|center"
+        android:paddingBottom="12dp"
+        app:icon="@drawable/ic_open"
+        android:textAllCaps="false"
+        android:layout_width="0dp"
+        android:paddingTop="12dp"
+        android:id="@+id/button2"
+        app:iconPadding="12dp"
+        app:iconSize="21dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/button2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/search_on_nyaa"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="start|center"
+        android:paddingBottom="12dp"
+        app:icon="@drawable/ic_open"
+        android:textAllCaps="false"
+        android:layout_width="0dp"
+        android:paddingTop="12dp"
+        android:id="@+id/button3"
+        app:iconPadding="12dp"
+        app:iconSize="21dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,26 @@
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:id="@+id/drawerLayout"
-    tools:openDrawer="start">
+    android:layout_width="match_parent">
 
-    <include layout="@layout/d_activity_1" />
-
-    <com.google.android.material.navigation.NavigationView
-        app:itemBackground="@drawable/bg_nav_item"
-        app:headerLayout="@layout/layout_header"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:id="@+id/navigationView"
-        android:layout_gravity="start"
-        app:menu="@menu/main_1" />
+        android:layout_width="match_parent">
 
-</androidx.drawerlayout.widget.DrawerLayout>
+        <include layout="@layout/d_activity_1" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_anchor="@id/adBanner"
+            android:src="@drawable/ic_menu"
+            app:layout_anchorGravity="end"
+            android:layout_margin="20dp"
+            android:theme="?fabStyle"
+            android:id="@+id/fab"
+            app:fabSize="mini" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

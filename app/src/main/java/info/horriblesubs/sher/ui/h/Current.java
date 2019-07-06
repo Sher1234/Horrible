@@ -3,107 +3,66 @@ package info.horriblesubs.sher.ui.h;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
-import java.util.Random;
 
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ShowsAdapter;
+import info.horriblesubs.sher.adapter.ShowsAdapter.OnItemClick;
 import info.horriblesubs.sher.api.horrible.model.Item;
 import info.horriblesubs.sher.common.TaskListener;
+import info.horriblesubs.sher.ui.a.Ads;
+import info.horriblesubs.sher.ui.a.Menu;
+import info.horriblesubs.sher.ui.a.SearchChange;
+import info.horriblesubs.sher.ui.a.SearchChange.SearchListener;
 import info.horriblesubs.sher.ui.i.Show;
 import info.horriblesubs.sher.ui.z.LoadingDialog;
-import info.horriblesubs.sher.ui.z.navigation.Navigation;
 
-public class Current extends AppCompatActivity implements TaskListener, ShowsAdapter.OnItemClick,
-        Toolbar.OnMenuItemClickListener, View.OnClickListener, Observer<List<Item>> {
+import static info.horriblesubs.sher.AppMe.appMe;
 
-    private AppCompatEditText searchText;
+public class Current extends AppCompatActivity implements TaskListener, OnItemClick, SearchListener,
+        View.OnClickListener, Observer<List<Item>>, SwipeRefreshLayout.OnRefreshListener {
+
+    private SwipeRefreshLayout refreshLayout;
     private AppCompatTextView textView;
     private RecyclerView recyclerView;
     private LoadingDialog dialog;
     private ShowsAdapter adapter;
     private Model model;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
-        else setTheme(R.style.AniDex_Light);
+        AppMe.appMe.setTheme();
         setContentView(R.layout.c_activity_0);
-        new Navigation(this, this);
-
         model = ViewModelProviders.of(this).get(Model.class);
         model.getItems(this).observe(this, this);
-
-        textView = findViewById(R.id.textView);
-        searchText = findViewById(R.id.editSearch);
+        refreshLayout = findViewById(R.id.swipeRefreshLayout);
+        findViewById(R.id.fab).setOnClickListener(this);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        findViewById(R.id.imageSearch).setOnClickListener(this);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, AppMe.appMe.isPortrait()?1:2));
-        searchText.setSingleLine();
-        searchText.onEditorAction(EditorInfo.IME_ACTION_SEARCH);
-        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
-                        actionId == EditorInfo.IME_ACTION_GO || event.getAction() == KeyEvent.ACTION_DOWN &&
-                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    model.onSearch(v.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
-        searchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                model.onSearch(String.valueOf(s));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        if (model.result.getValue() == null) model.onRefresh(false);
+        new SearchChange(this, this);
+        refreshLayout.setOnRefreshListener(this);
+        textView = findViewById(R.id.textView);
+        Ads.InterstitialAd.load(this);
         String s = "No shows available.";
-        onLoadInterstitialAd();
+        Ads.BannerAd.load(this);
         textView.setText(s);
-        onLoadAdBanner();
+        menu = Menu.all();
+        if (model.result.getValue() == null) model.onRefresh(false);
     }
 
     @Override
@@ -115,26 +74,35 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
     }
 
     @Override
-    public void onPreExecute() {
-        dialog = new LoadingDialog(this);
-        dialog.show();
+    public void onPostExecute() {
+        refreshLayout.setRefreshing(false);
+        if (dialog != null)
+            dialog.dismiss();
     }
 
     @Override
-    public void onPostExecute() {
-        if (dialog != null) dialog.dismiss();
-        dialog = null;
+    public void onPreExecute() {
+        if (dialog == null)
+            dialog = new LoadingDialog(this);
+        dialog.show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialog != null) dialog.dismiss();
         model.onStopTask();
+        onPostExecute();
         dialog = null;
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        recyclerView.setLayoutManager(new GridLayoutManager(this, appMe.isPortrait()?1:2));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    @Deprecated
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refresh:
@@ -156,47 +124,6 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
         return false;
     }
 
-    private void onLoadInterstitialAd() {
-        String adId = getResources().getStringArray(R.array.interstitial)[new Random().nextInt(3)];
-        final InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int e) {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-            @Override
-            public void onAdLoaded() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        interstitialAd.show();
-                    }
-                }, 500);
-            }
-        });
-        AdRequest request = new AdRequest.Builder().build();
-        interstitialAd.setAdUnitId(adId);
-        interstitialAd.loadAd(request);
-    }
-
-    private void onLoadAdBanner() {
-        String id = getResources().getStringArray(R.array.footer)[0];
-        AdRequest request = new AdRequest.Builder().build();
-        FrameLayout layout = findViewById(R.id.adBanner);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(id);
-        layout.addView(adView);
-        adView.loadAd(request);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.imageSearch)
-            model.onSearch(searchText.getText() == null ? null : searchText.getText().toString());
-    }
-
     @Override
     public void onChanged(List<Item> items) {
         if (items == null || items.size() == 0) {
@@ -211,5 +138,28 @@ public class Current extends AppCompatActivity implements TaskListener, ShowsAda
             else adapter.onDataUpdated(items);
             textView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onTermChange(String s) {
+        if (recyclerView.getAdapter() instanceof ShowsAdapter)
+            ((ShowsAdapter) recyclerView.getAdapter()).onSearch(s);
+    }
+
+    @Override
+    public void onSearch(String s) {
+        if (recyclerView.getAdapter() instanceof ShowsAdapter)
+            ((ShowsAdapter) recyclerView.getAdapter()).onSearch(s);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fab)
+            menu.show(getSupportFragmentManager());
+    }
+
+    @Override
+    public void onRefresh() {
+        model.onRefresh(true);
     }
 }

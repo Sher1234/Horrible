@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HorribleSubs</string>
+    <string name="app_name">HorribleMobile</string>
 
     <string name="ad_mob_app_id">ca-app-pub-7307290547259470~7830642737</string>
 
@@ -56,13 +56,17 @@
     <string name="my_profile">My Profile</string>
     <string name="recent">Recent</string>
     <string name="description">Description</string>
-    <string name="stats">Stats</string>
-    <string name="views">Views</string>
     <string name="other_facts">Other Facts</string>
     <string name="source">Source</string>
     <string name="last_updated">Last Updated</string>
     <string name="view_more">View More</string>
     <string name="notification">Notification</string>
+    <string name="back">Back</string>
+    <string name="add_fav">Add to Favourites</string>
+    <string name="external_links">External Links</string>
+    <string name="search_on_mal">Search on MyAnimeList</string>
+    <string name="search_on_nyaa">Search on Nyaa</string>
+    <string name="remove_fav">Remove from Favourites</string>
 
     <string-array name="days">
         <item>Sunday</item>

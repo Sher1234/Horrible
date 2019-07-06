@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import info.horriblesubs.sher.R;
@@ -19,6 +20,7 @@ import info.horriblesubs.sher.api.horrible.model.Item;
 public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> {
 
     private final OnItemClick onItemClick;
+    private final List<Item> listItems;
     private List<Item> items;
 
     public static ShowsAdapter get(OnItemClick itemClick, List<Item> items) {
@@ -26,6 +28,8 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
     }
 
     private ShowsAdapter(OnItemClick itemClick, List<Item> items) {
+        if (items != null) this.listItems = new ArrayList<>(items);
+        else this.listItems = new ArrayList<>();
         this.onItemClick = itemClick;
         this.items = items;
     }
@@ -45,6 +49,23 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
                 onItemClick.onItemClicked(items.get(position));
             }
         });
+    }
+
+    public void onSearch(String s) {
+        if (items == null) items = new ArrayList<>();
+        if (s == null || s.isEmpty()) {
+            items.clear();
+            items.addAll(listItems);
+            notifyDataSetChanged();
+            return;
+        }
+        if (listItems == null) return;
+        items.clear();
+        for (Item item: listItems) {
+            if (item.title.toLowerCase().contains(s.toLowerCase()))
+                items.add(item);
+        }
+        notifyDataSetChanged();
     }
 
     @Override

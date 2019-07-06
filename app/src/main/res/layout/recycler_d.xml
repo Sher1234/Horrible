@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    app:cardBackgroundColor="@android:color/transparent"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    app:strokeColor="?colorItem"
-    android:layout_margin="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="0dp"
-    app:strokeWidth="0.5dp">
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textAppearance="?textAppearanceHeadline5"
+        android:fontFamily="sans-serif-medium"
+        tools:text="@tools:sample/full_names"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:id="@+id/linearLayout"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:gravity="center_vertical"
+        android:paddingStart="24dp"
+        android:id="@+id/textView"
+        android:paddingEnd="24dp"
+        android:textSize="13sp"
+        android:padding="5dp"
+        android:minLines="2"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            tools:text="Rascal does not dream of Bunny Girl Senpai"
-            android:textAppearance="?textAppearanceHeadline5"
-            android:fontFamily="sans-serif-medium"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:padding="4dp"
-            android:maxLines="8" />
+    <View
+        android:layout_width="match_parent"
+        android:background="?colorSurface"
+        android:layout_height="0.36dp"
+        android:alpha="0.36" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <View
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="?selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:src="?attr/selectableItemBackground"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.appcompat.widget.LinearLayoutCompat>

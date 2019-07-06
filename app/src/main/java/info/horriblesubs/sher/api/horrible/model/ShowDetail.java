@@ -22,6 +22,14 @@ public class ShowDetail extends Item implements Serializable {
         return getNetworkDate(time + " +00:00");
     }
 
+    public String time() {
+        return getShowShort(time + " +00:00");
+    }
+
+    public String time2() {
+        return getNetworkDate(getNetworkDate(time + " +00:00"));
+    }
+
     @NotNull
     @Override
     public String toString() {

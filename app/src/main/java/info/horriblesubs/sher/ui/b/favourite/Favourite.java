@@ -19,13 +19,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.FavouriteAdapter;
 import info.horriblesubs.sher.api.horrible.model.ShowDetail;
 import info.horriblesubs.sher.common.FragmentRefresh;
 import info.horriblesubs.sher.db.DataMethods;
 import info.horriblesubs.sher.ui.i.Show;
+
+import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
+import static androidx.recyclerview.widget.RecyclerView.VERTICAL;
+import static info.horriblesubs.sher.AppMe.appMe;
 
 public class Favourite extends Fragment
         implements Observer<List<ShowDetail>>, FragmentRefresh, FavouriteAdapter.OnItemClick {
@@ -42,11 +45,9 @@ public class Favourite extends Fragment
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.b_fragment_2, container, false);
-        textView1 = view.findViewById(R.id.textView1);
-        textView2 = view.findViewById(R.id.textView2);
         recyclerView = view.findViewById(R.id.recyclerView);
-        textView2.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        view.findViewById(R.id.textView0).setVisibility(View.GONE);
+        textView2 = view.findViewById(R.id.textView2);
+        textView1 = view.findViewById(R.id.textView1);
         return view;
     }
 
@@ -60,7 +61,7 @@ public class Favourite extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
-                AppMe.appMe.isPortrait()?RecyclerView.HORIZONTAL:RecyclerView.VERTICAL, false));
+                appMe.isPortrait()?HORIZONTAL: VERTICAL, false));
         model.getResult(getContext()).observe(this, this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         textView2.setText(R.string.empty_favourites);
@@ -72,9 +73,12 @@ public class Favourite extends Fragment
     public void onChanged(List<ShowDetail> result) {
         if (result == null || result.size() == 0) {
             textView2.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            recyclerView.setAdapter(null);
             return;
         }
-        adapter = FavouriteAdapter.get(this, result, 5);
+        adapter = FavouriteAdapter.get(this, result, 6);
+        recyclerView.setVisibility(View.VISIBLE);
         textView2.setVisibility(View.GONE);
         recyclerView.setAdapter(adapter);
     }

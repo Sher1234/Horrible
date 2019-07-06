@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import java.util.Random;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import pl.droidsonroids.gif.GifImageView;
 
@@ -17,7 +16,7 @@ public class LoadingDialog extends Dialog {
     private final GifImageView imageView;
 
     public LoadingDialog(@NonNull Context context) {
-        super(context, AppMe.appMe.isDark() ? R.style.AniDex_Dialog_Dark : R.style.AniDex_Dialog_Light);
+        super(context, R.style.Theme_Dialog);
         setContentView(R.layout.layout_dialog_loading);
         imageView = new GifImageView(context);
         setCancelable(false);

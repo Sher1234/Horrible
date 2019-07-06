@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -25,7 +24,8 @@ import info.horriblesubs.sher.api.horrible.response.Result;
 import info.horriblesubs.sher.common.FragmentRefresh;
 import info.horriblesubs.sher.ui.i.Show;
 
-public class Today extends Fragment implements Observer<Result<ScheduleItem>>, FragmentRefresh, ScheduleAdapter.OnItemClick {
+public class Today extends Fragment
+        implements Observer<Result<ScheduleItem>>, FragmentRefresh, ScheduleAdapter.OnItemClick {
 
     private AppCompatTextView textView1, textView2;
     private RecyclerView recyclerView;
@@ -37,7 +37,7 @@ public class Today extends Fragment implements Observer<Result<ScheduleItem>>, F
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.b_fragment_2, container, false);
+        View view = inflater.inflate(R.layout.b_fragment_3, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
@@ -64,7 +64,7 @@ public class Today extends Fragment implements Observer<Result<ScheduleItem>>, F
     @Override
     public void onChanged(Result<ScheduleItem> result) {
         if (result == null || result.items == null || result.items.size() == 0) {
-            Toast.makeText(getContext(), "No Data Received", Toast.LENGTH_SHORT).show();
+            recyclerView.setAdapter(null);
             return;
         }
         recyclerView.setAdapter(ScheduleAdapter.get(this, model.getToday(result.items)));

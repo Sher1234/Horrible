@@ -1,32 +1,44 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_height="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:layout_marginBottom="14dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:hint="@string/app_name">
 
-        <FrameLayout
+        <com.google.android.material.textfield.TextInputEditText
+            android:drawableEnd="@drawable/ic_search"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_gravity="bottom"
-            android:id="@+id/adBanner" />
+            tools:text="@string/app_name"
+            android:id="@+id/editText" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/recycler_b"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/recyclerView"
-            android:clipToPadding="false"
-            android:paddingBottom="95dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    <View
+        android:background="?colorOnSurface"
+        android:layout_width="match_parent"
+        android:layout_height="0.36dp"
+        android:alpha="0.36" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/recycler_b"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
+        android:paddingBottom="72dp"
+        android:paddingTop="6dp"
+        tools:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatTextView
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
@@ -43,65 +55,10 @@
         android:gravity="center"
         android:textSize="12sp" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        app:layout_behavior="com.google.android.material.bottomappbar.BottomAppBar$Behavior"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_menu"
+    <FrameLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
-        app:contentInsetEnd="64dp"
-        android:id="@+id/toolbar">
+        android:id="@+id/adBanner" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:background="@drawable/search_bg"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:paddingBottom="6dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="6dp"
-            android:gravity="center">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:imeActionLabel="@android:string/search_go"
-                android:background="@android:color/transparent"
-                android:textAppearance="?textAppearanceBody1"
-                android:hint="@android:string/search_go"
-                android:layout_height="match_parent"
-                android:textColor="?colorOnSurface"
-                android:inputType="textFilter"
-                android:autofillHints="Anime"
-                android:imeOptions="actionGo"
-                android:id="@+id/editSearch"
-                android:paddingStart="16dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:paddingEnd="8dp"
-                android:textSize="15sp"
-                android:padding="10dp"
-                android:maxLines="1"
-                tools:targetApi="o"
-                android:lines="1" />
-
-            <com.google.android.material.button.MaterialButton
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                app:iconTint="?colorOnSurface"
-                app:icon="@drawable/ic_search"
-                android:id="@+id/imageSearch"
-                android:paddingBottom="2dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingTop="2dp"
-                android:minHeight="0dp"
-                android:minWidth="0dp"
-                app:iconSize="24dp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </com.google.android.material.bottomappbar.BottomAppBar>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

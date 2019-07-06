@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,21 +16,24 @@ import com.google.android.material.button.MaterialButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.api.horrible.model.ShowDetail;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.ViewHolder> {
 
     private final OnItemClick onItemClick;
+    private final List<ShowDetail> listItems;
     private List<ShowDetail> items;
     private final boolean isHome;
     private boolean delete;
     private int size;
 
     private FavouriteAdapter(OnItemClick itemClick, List<ShowDetail> items, int size, boolean isHome) {
+        if (items != null) this.listItems = new ArrayList<>(items);
+        else this.listItems = new ArrayList<>();
         this.onItemClick = itemClick;
         this.isHome = isHome;
         this.items = items;
@@ -47,37 +51,27 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         return new FavouriteAdapter(itemClick, items, items == null ? 0 : items.size(), false);
     }
 
-    public void setDelete(boolean enable) {
+    public void delete(boolean enable) {
         delete = enable;
         notifyDataSetChanged();
     }
 
     public boolean isDeleteDisabled() {
-        notifyDataSetChanged();
         return !delete;
     }
 
     @NotNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (isHome && AppMe.appMe.isPortrait())
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_a_home, parent, false));
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_a, parent, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup group, int viewType) {
+        View view = LayoutInflater.from(group.getContext()).inflate(isHome?R.layout.recycler_a_0:R.layout.recycler_a_1, group, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ShowDetail item = items.get(position);
         Glide.with(holder.imageView).load(item.image).into(holder.imageView);
-        holder.button.setVisibility(delete ?View.VISIBLE:View.GONE);
         holder.textView.setText(Html.fromHtml(item.title));
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClick.onDeleteClicked(item);
-                notifyDataSetChanged();
-            }
-        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +79,34 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
                 notifyDataSetChanged();
             }
         });
+        if (holder.button != null) {
+            holder.button.setVisibility(delete ?View.VISIBLE:View.GONE);
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClick.onDeleteClicked(item);
+                    notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
+    public void onSearch(String s) {
+        if (items == null) items = new ArrayList<>();
+        if (s == null || s.isEmpty()) {
+            items.addAll(listItems);
+            size = listItems.size();
+            notifyDataSetChanged();
+            return;
+        }
+        if (listItems == null) return;
+        items.clear();
+        for (ShowDetail item: listItems) {
+            if (item.title.toLowerCase().contains(s.toLowerCase()))
+                items.add(item);
+        }
+        size = items.size();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -108,9 +130,9 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        @Nullable private final MaterialButton button;
         private final AppCompatImageView imageView;
         private final AppCompatTextView textView;
-        private final MaterialButton button;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

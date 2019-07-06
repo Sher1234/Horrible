@@ -6,7 +6,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -39,7 +38,7 @@ public class Random extends Fragment
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.b_fragment_1, container, false);
-        view.findViewById(R.id.linearLayout).setOnClickListener(this);
+        view.findViewById(R.id.view).setOnClickListener(this);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
         imageView = view.findViewById(R.id.imageView);
@@ -61,7 +60,7 @@ public class Random extends Fragment
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.linearLayout && result != null && result.link != null) {
+        if (v.getId() == R.id.view && result != null && result.link != null) {
             Intent intent = new Intent(getActivity(), Show.class);
             intent.putExtra("show.link", result.link);
             startActivity(intent);
@@ -71,19 +70,22 @@ public class Random extends Fragment
     @Override
     public void onChanged(ShowDetail result) {
         if (result == null) {
-            Toast.makeText(getContext(), "No data received.", Toast.LENGTH_SHORT).show();
-            return;
+            imageView.setImageResource(R.drawable.ic_theme);
+            textView1.setText(Html.fromHtml(null));
+            textView2.setText(Html.fromHtml(null));
+            this.result = null;
+        } else {
+            Glide.with(this).load(result.image).into(imageView);
+            textView1.setText(Html.fromHtml(result.title));
+            textView2.setText(Html.fromHtml(result.body));
+            this.result = result;
         }
-        Glide.with(this).load(result.image).into(imageView);
-        textView1.setText(Html.fromHtml(result.title));
-        textView2.setText(Html.fromHtml(result.body));
-        this.result = result;
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         model.onStopTask();
+        super.onDestroy();
     }
 
     @Override

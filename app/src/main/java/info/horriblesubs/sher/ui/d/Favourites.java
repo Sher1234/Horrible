@@ -2,28 +2,19 @@ package info.horriblesubs.sher.ui.d;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
-import java.util.Random;
 
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
@@ -31,44 +22,62 @@ import info.horriblesubs.sher.adapter.FavouriteAdapter;
 import info.horriblesubs.sher.api.horrible.model.ShowDetail;
 import info.horriblesubs.sher.common.TaskListener;
 import info.horriblesubs.sher.db.DataMethods;
+import info.horriblesubs.sher.ui.a.Ads;
+import info.horriblesubs.sher.ui.a.Menu;
+import info.horriblesubs.sher.ui.a.Menu.Delete;
+import info.horriblesubs.sher.ui.a.SearchChange;
+import info.horriblesubs.sher.ui.a.SearchChange.SearchListener;
 import info.horriblesubs.sher.ui.i.Show;
 import info.horriblesubs.sher.ui.z.LoadingDialog;
-import info.horriblesubs.sher.ui.z.navigation.Navigation;
 
-public class Favourites extends AppCompatActivity
-        implements TaskListener, FavouriteAdapter.OnItemClick, Observer<List<ShowDetail>>, Toolbar.OnMenuItemClickListener {
+import static android.view.View.GONE;
+import static android.view.View.OnClickListener;
+import static android.view.View.VISIBLE;
+import static info.horriblesubs.sher.AppMe.appMe;
+import static info.horriblesubs.sher.adapter.FavouriteAdapter.OnItemClick;
+import static info.horriblesubs.sher.adapter.FavouriteAdapter.get;
+
+public class Favourites extends AppCompatActivity implements TaskListener, SearchListener,
+        OnItemClick, Observer<List<ShowDetail>>, OnClickListener, Delete, SwipeRefreshLayout.OnRefreshListener {
 
     private AppCompatTextView textView;
     private RecyclerView recyclerView;
     private FavouriteAdapter adapter;
     private LoadingDialog dialog;
     private Model model;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
-        else setTheme(R.style.AniDex_Light);
+        AppMe.appMe.setTheme();
         setContentView(R.layout.d_activity_0);
-        new Navigation(this, this);
-
         model = ViewModelProviders.of(this).get(Model.class);
+        SwipeRefreshLayout refreshLayout = findViewById(R.id.swipeRefreshLayout);
+        model.items(this, this).observe(this, this);
+        findViewById(R.id.fab).setOnClickListener(this);
         recyclerView = findViewById(R.id.recyclerView);
+        new SearchChange(this, this);
+        refreshLayout.setOnRefreshListener(this);
         textView = findViewById(R.id.textView);
-
-        recyclerView.setLayoutManager(new GridLayoutManager(this, AppMe.appMe.isPortrait()?2:4));
-        model.getItems(this, this).observe(this, this);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        onLoadInterstitialAd();
-        model.onRefresh();
-        onLoadAdBanner();
+        Ads.InterstitialAd.load(this);
+        Ads.BannerAd.load(this);
+        menu = Menu.favs(this);
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        recyclerView.setLayoutManager(new GridLayoutManager(this, appMe.isPortrait()?2:4));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        textView.setText(R.string.empty_favourites);
+        model.onRefresh();
+    }
+
+    @Deprecated
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.delete) {
-            adapter.setDelete(adapter.isDeleteDisabled());
+            adapter.delete(adapter.isDeleteDisabled());
             return true;
         }
         return false;
@@ -77,19 +86,19 @@ public class Favourites extends AppCompatActivity
     @Override
     public void onChanged(List<ShowDetail> items) {
         if (items == null || items.size() == 0 || model.isEmpty(Favourites.this)) {
-            recyclerView.setVisibility(View.GONE);
-            textView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(GONE);
+            textView.setVisibility(VISIBLE);
             adapter = null;
         } else {
-            recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(VISIBLE);
             if (adapter == null) {
-                adapter = FavouriteAdapter.get(this, items);
+                adapter = get(this, items);
                 recyclerView.setAdapter(adapter);
             } else {
                 adapter.onUpdateFavourites(items);
                 adapter.notifyDataSetChanged();
             }
-            textView.setVisibility(View.GONE);
+            textView.setVisibility(GONE);
         }
     }
 
@@ -113,42 +122,6 @@ public class Favourites extends AppCompatActivity
         startActivity(intent);
     }
 
-    private void onLoadInterstitialAd() {
-        String adId = getResources().getStringArray(R.array.interstitial)[new Random().nextInt(3)];
-        final InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int e) {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-            @Override
-            public void onAdLoaded() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        interstitialAd.show();
-                    }
-                }, 500);
-            }
-        });
-        AdRequest request = new AdRequest.Builder().build();
-        interstitialAd.setAdUnitId(adId);
-        interstitialAd.loadAd(request);
-    }
-
-    private void onLoadAdBanner() {
-        String adId = getResources().getStringArray(R.array.footer)[2];
-        AdRequest request = new AdRequest.Builder().build();
-        FrameLayout layout = findViewById(R.id.adBanner);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(adId);
-        layout.addView(adView);
-        adView.loadAd(request);
-    }
-
-    @Override
     public void onPostExecute() {
         if (dialog != null) dialog.dismiss();
         dialog = null;
@@ -156,15 +129,44 @@ public class Favourites extends AppCompatActivity
 
     @Override
     public void onPreExecute() {
-        dialog = new LoadingDialog(this);
+        if (dialog == null)
+            dialog = new LoadingDialog(this);
         dialog.show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialog != null) dialog.dismiss();
         model.onStopTask();
+        onPostExecute();
         dialog = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab)
+            menu.show(getSupportFragmentManager());
+    }
+
+    @Override
+    public void onTermChange(String s) {
+        if (adapter != null)
+            adapter.onSearch(s);
+    }
+
+    @Override
+    public void onSearch(String s) {
+        if (adapter != null)
+            adapter.onSearch(s);
+    }
+
+    @Override
+    public void onDelete() {
+        adapter.delete(adapter.isDeleteDisabled());
+    }
+
+    @Override
+    public void onRefresh() {
+        model.onRefresh();
     }
 }

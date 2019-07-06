@@ -2,87 +2,61 @@ package info.horriblesubs.sher.ui.c;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
-import java.util.Random;
 
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.ListItemAdapter;
+import info.horriblesubs.sher.adapter.ListItemAdapter.OnItemClick;
 import info.horriblesubs.sher.api.horrible.model.ListItem;
 import info.horriblesubs.sher.common.TaskListener;
+import info.horriblesubs.sher.ui.a.Ads;
+import info.horriblesubs.sher.ui.a.Menu;
+import info.horriblesubs.sher.ui.a.SearchChange;
+import info.horriblesubs.sher.ui.a.SearchChange.SearchListener;
 import info.horriblesubs.sher.ui.i.Show;
 import info.horriblesubs.sher.ui.z.LoadingDialog;
-import info.horriblesubs.sher.ui.z.navigation.Navigation;
 
-public class Search extends AppCompatActivity implements TaskListener, ListItemAdapter.OnItemClick,
-        View.OnClickListener, Observer<List<ListItem>> {
+import static info.horriblesubs.sher.AppMe.appMe;
 
-    private AppCompatEditText searchText;
-    private LoadingDialog dialog;
+public class Search extends AppCompatActivity implements TaskListener, OnItemClick,
+        OnClickListener, Observer<List<ListItem>>, SearchListener {
+
+    private SwipeRefreshLayout refreshLayout;
     private AppCompatTextView textView;
     private RecyclerView recyclerView;
+    private LoadingDialog dialog;
     private Model model;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (AppMe.appMe.isDark()) setTheme(R.style.AniDex_Dark);
-        else setTheme(R.style.AniDex_Light);
+        AppMe.appMe.setTheme();
         setContentView(R.layout.c_activity_0);
-        new Navigation(this, null);
-
         model = ViewModelProviders.of(this).get(Model.class);
-
-        textView = findViewById(R.id.textView);
-        searchText = findViewById(R.id.editSearch);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        findViewById(R.id.imageSearch).setOnClickListener(this);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, AppMe.appMe.isPortrait()?1:2));
-        searchText.onEditorAction(EditorInfo.IME_ACTION_SEARCH);
+        refreshLayout = findViewById(R.id.swipeRefreshLayout);
         model.getItems().observe(this, this);
-        searchText.setSingleLine();
-        onLoadInterstitialAd();
-        onAdBannerShow();
-        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE ||
-                        actionId == EditorInfo.IME_ACTION_GO || event.getAction() == KeyEvent.ACTION_DOWN &&
-                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                    if (v.getText() == null || v.getText().length() < 2) {
-                        Toast.makeText(Search.this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                    model.onSearch(Search.this, v.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });
+        findViewById(R.id.fab).setOnClickListener(this);
+        recyclerView = findViewById(R.id.recyclerView);
+        new SearchChange(this, this);
+        textView = findViewById(R.id.textView);
+        Ads.InterstitialAd.load(this);
+        Ads.BannerAd.load(this);
+        menu = Menu.all();
     }
 
     @Override
@@ -94,68 +68,35 @@ public class Search extends AppCompatActivity implements TaskListener, ListItemA
     }
 
     @Override
-    public void onPreExecute() {
-        dialog = new LoadingDialog(this);
-        dialog.show();
+    public void onPostExecute() {
+        refreshLayout.setRefreshing(false);
+        if (dialog != null)
+            dialog.dismiss();
     }
 
     @Override
-    public void onPostExecute() {
-        if (dialog != null) dialog.dismiss();
+    public void onPreExecute() {
+        refreshLayout.setRefreshing(true);
+        if (dialog == null)
+            dialog = new LoadingDialog(this);
+        dialog.show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialog != null) dialog.dismiss();
         model.onStopTask();
+        onPostExecute();
         dialog = null;
     }
 
-    private void onLoadInterstitialAd() {
-        String adId = getResources().getStringArray(R.array.interstitial)[new Random().nextInt(3)];
-        final InterstitialAd interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int e) {
-                interstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-            @Override
-            public void onAdLoaded() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        interstitialAd.show();
-                    }
-                }, 500);
-            }
-        });
-        AdRequest request = new AdRequest.Builder().build();
-        interstitialAd.setAdUnitId(adId);
-        interstitialAd.loadAd(request);
-    }
-
-    private void onAdBannerShow() {
-        String adId = getResources().getStringArray(R.array.footer)[2];
-        AdRequest request = new AdRequest.Builder().build();
-        FrameLayout layout = findViewById(R.id.adBanner);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.SMART_BANNER);
-        adView.setAdUnitId(adId);
-        layout.addView(adView);
-        adView.loadAd(request);
-    }
-
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.imageSearch) {
-            if (searchText.getText() == null || searchText.getText().length() < 2) {
-                Toast.makeText(this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            model.onSearch(this, searchText.getText().toString());
-        }
+    protected void onStart() {
+        super.onStart();
+        recyclerView.setLayoutManager(new GridLayoutManager(this, appMe.isPortrait()?1:2));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        String s = getIntent().getStringExtra("search");
+        if (s != null && !s.isEmpty()) model.onSearch(this, s);
     }
 
     @Override
@@ -163,10 +104,32 @@ public class Search extends AppCompatActivity implements TaskListener, ListItemA
         if (items == null || items.size() == 0) {
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.VISIBLE);
+            recyclerView.setAdapter(null);
         } else {
             recyclerView.setAdapter(ListItemAdapter.get(Search.this, items));
             recyclerView.setVisibility(View.VISIBLE);
             textView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.fab)
+            menu.show(getSupportFragmentManager());
+    }
+
+    @Override
+    public void onTermChange(String s) {
+        if (recyclerView.getAdapter() instanceof ListItemAdapter)
+            ((ListItemAdapter) recyclerView.getAdapter()).onSearch(s);
+    }
+
+    @Override
+    public void onSearch(String s) {
+        if (s == null || s.length() < 2) {
+            Toast.makeText(this, "Invalid Search Term", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        model.onSearch(this, s);
     }
 }

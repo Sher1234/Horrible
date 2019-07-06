@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import info.horriblesubs.sher.AppMe;
@@ -23,66 +22,29 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Model extends ViewModel {
 
-    private MutableLiveData<List<Item>> search;
     MutableLiveData<List<Item>> result;
     private TaskListener listener;
-    private SearchData searchD;
     private Refresh refresh;
 
     public Model() {
 
     }
 
-    void onSearch(String s) {
-        onStopTask();
-        searchD = new SearchData(s);
-        searchD.execute();
-    }
-
     void onStopTask() {
-        if (searchD != null) searchD.cancel(true);
         if (refresh != null) refresh.cancel(true);
-        searchD = null;
         refresh = null;
     }
 
     MutableLiveData<List<Item>> getItems(TaskListener listener) {
         if (result == null) result = new MutableLiveData<>();
-        if (search == null) search = new MutableLiveData<>();
         this.listener = listener;
-        return search;
+        return result;
     }
 
     void onRefresh(boolean b) {
         onStopTask();
         refresh = new Refresh(b);
         refresh.execute();
-    }
-
-    private class SearchData extends AsyncTask<Void, Void, List<Item>> {
-
-        private final String query;
-
-        SearchData(String query) {
-            this.query = query;
-        }
-
-        @Override
-        protected List<Item> doInBackground(Void... voids) {
-            if (result == null || result.getValue() == null) return null;
-            if (query == null || query.isEmpty()) return result.getValue();
-            List<Item> items = new ArrayList<>();
-            for (Item item : result.getValue())
-                if (item.title.toLowerCase().contains(query.toLowerCase()))
-                    items.add(item);
-            return items;
-        }
-
-        @Override
-        protected void onPostExecute(List<Item> result) {
-            super.onPostExecute(result);
-            search.setValue(result);
-        }
     }
 
     private class Refresh extends AsyncTask<Void, Void, List<Item>> {
@@ -132,9 +94,8 @@ public class Model extends ViewModel {
         @Override
         protected void onPostExecute(List<Item> result) {
             super.onPostExecute(result);
-            Model.this.result.setValue(result);
             listener.onPostExecute();
-            search.setValue(result);
+            Model.this.result.setValue(result);
         }
     }
 }

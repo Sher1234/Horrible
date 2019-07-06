@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -30,7 +29,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     @NotNull
-    @Contract("_, !null -> new; _, null -> new")
     public static ScheduleAdapter get(OnItemClick itemClick, List<ScheduleItem> items) {
         return new ScheduleAdapter(itemClick, items, items == null ? 0 : items.size());
     }

@@ -1,12 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\creators_lab.jks')
+            storePassword '12041997'
+            keyAlias = 'sher1234'
+            keyPassword '12041997'
+        }
+        debug {
+            storeFile file('D:\\creators_lab.jks')
+            storePassword '12041997'
+            keyAlias = 'sher1234'
+            keyPassword '12041997'
+        }
+    }
     compileSdkVersion 29
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         applicationId "info.horriblesubs.sher"
-        versionName "0.7.5"
+        versionName "0.7.5-r1"
         targetSdkVersion 29
         minSdkVersion 21
         versionCode 75

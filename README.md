@@ -31,6 +31,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Fixed issue enabling notifications                                                Minor Commit   - July  07, 2019
 Upaded UI Design with some added Features & Improvements                          Major Commit   - July  07, 2019
 Updated Toolbar Position to Bottom for Android Q Gesture                          Minor Commit   - May   10, 2019
 Fixed Issues with Random Anime Name, Updated Gradle                               Minor Commit   - May   10, 2019
@@ -91,6 +92,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)
+> Releases after 0.7.0 [Downloads](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

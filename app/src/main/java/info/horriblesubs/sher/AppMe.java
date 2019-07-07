@@ -29,7 +29,7 @@ public class AppMe extends Application {
         super.onCreate();
         appMe = this;
         MobileAds.initialize(appMe, getString(R.string.ad_mob_app_id));
-        onSubscribe();
+        onReview();
         setTheme();
     }
 
@@ -71,10 +71,26 @@ public class AppMe extends Application {
         return getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
-    private void onSubscribe() {
+    private void onReview() {
+        if(isSubscribed())
+            onSubscribe();
+    }
+
+    public boolean isSubscribed() {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
-        if (!sharedPreferences.getBoolean("notifications", false)) return;
+        return sharedPreferences.getBoolean("notifications", false);
+    }
+
+    public void onUnsubscribe() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
+        sharedPreferences.edit().putBoolean("notifications", false).apply();
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("hs.new.rls");
+    }
+
+    public void onSubscribe() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("notifications", true).apply();
         FirebaseMessaging.getInstance().subscribeToTopic("hs.new.rls");
     }
+
 }

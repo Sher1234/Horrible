@@ -1,7 +1,6 @@
 package info.horriblesubs.sher.ui.a;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,13 +18,11 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.jetbrains.annotations.NotNull;
 
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
-import info.horriblesubs.sher.common.Constants;
 import info.horriblesubs.sher.ui.b.Explore;
 import info.horriblesubs.sher.ui.c.Search;
 import info.horriblesubs.sher.ui.d.Favourites;
@@ -35,15 +32,12 @@ import info.horriblesubs.sher.ui.g.All;
 import info.horriblesubs.sher.ui.h.Current;
 import info.horriblesubs.sher.ui.z.AlertDialog;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class Menu extends BottomSheetDialogFragment implements OnNavigationItemSelectedListener {
 
     private final OnNavigationItemSelectedListener listener;
     private NavigationView navigationView;
     @MenuRes private final int menu;
     private final Delete delete;
-    private boolean b = false;
 
     private Menu(Delete delete) {
         this.menu = R.menu.main_1;
@@ -186,39 +180,16 @@ public class Menu extends BottomSheetDialogFragment implements OnNavigationItemS
         super.show(manager, "menu-a");
     }
 
-    private boolean isSubscribed() {
-        if (getActivity() != null)  {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
-            return sharedPreferences.getBoolean("notifications", false);
-        } else return false;
-    }
-
-    private void onUnsubscribe() {
-        if (getActivity() != null) {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("hs.new.rls");
-            sharedPreferences.edit().putBoolean("notifications", false).apply();
-        }
-    }
-
-    private void onSubscribe() {
-        if (getActivity() != null) {
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.PREFS, MODE_PRIVATE);
-            sharedPreferences.edit().putBoolean("notifications", true).apply();
-            FirebaseMessaging.getInstance().subscribeToTopic("hs.new.rls");
-        }
-    }
-
     private void onSubscribeChange() {
         assert getActivity() != null;
         AlertDialog dialog = new AlertDialog(getActivity());
-        if (isSubscribed()) {
+        if (AppMe.appMe.isSubscribed()) {
             dialog.setDescription(R.string.disable_notify);
             dialog.setTitle("Unsubscribe Notifications");
             dialog.setPositiveButton("Unsubscribe", new AlertDialog.DialogClick() {
                 @Override
                 public void onClick(AlertDialog dialog, View v) {
-                    onUnsubscribe();
+                    AppMe.appMe.onUnsubscribe();
                 }
             });
         } else {
@@ -227,7 +198,7 @@ public class Menu extends BottomSheetDialogFragment implements OnNavigationItemS
             dialog.setPositiveButton("Subscribe", new AlertDialog.DialogClick() {
                 @Override
                 public void onClick(AlertDialog dialog, View v) {
-                    onSubscribe();
+                    AppMe.appMe.onSubscribe();
                 }
             });
         }

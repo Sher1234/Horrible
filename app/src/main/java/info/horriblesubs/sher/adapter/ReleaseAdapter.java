@@ -80,7 +80,6 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
     }
 
     public void onSearch(String s) {
-        if (listItems == null) return;
         if (items == null) items = new ArrayList<>();
         if (s == null || s.isEmpty()) {
             items.clear();

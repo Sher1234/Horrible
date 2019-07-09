@@ -79,12 +79,12 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
     public void onSearch(String s) {
         if (items == null) items = new ArrayList<>();
         if (s == null || s.isEmpty()) {
+            items.clear();
             items.addAll(listItems);
             size = listItems.size();
             notifyDataSetChanged();
             return;
         }
-        if (listItems == null) return;
         items.clear();
         for (ListItem item: listItems) {
             if (item.title.toLowerCase().contains(s.toLowerCase()))

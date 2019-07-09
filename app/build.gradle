@@ -20,10 +20,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         applicationId "info.horriblesubs.sher"
-        versionName "0.7.5-r1"
+        versionName "0.7.6"
         targetSdkVersion 29
         minSdkVersion 21
-        versionCode 75
+        versionCode 76
     }
     buildTypes {
         release {

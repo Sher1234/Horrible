@@ -12,6 +12,7 @@ Horrible Subs implements number of open source projects listed bellow:
  - Firebase for FCM notifications & google ads
 
 > #### *Notes:*
+> - Both major revisions i.e. 0.7.0 & 0.7.5 are based on Same API [Supported Till Major Revision]
 > - Versions 0.7.5 and later    [Reinstall Required/Changed Signing Keys/Supported]
 > - Versions 0.7.0 to 0.7.4     [Reinstall Required/Changed Signing Keys/Supported]
 > - Versions 0.6.5 and earlier  [Deprecated]
@@ -31,6 +32,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Fixed search issues in various activities                                         Minor Commit   - July  09, 2019
 Fixed issue enabling notifications                                                Minor Commit   - July  07, 2019
 Upaded UI Design with some added Features & Improvements                          Major Commit   - July  07, 2019
 Updated Toolbar Position to Bottom for Android Q Gesture                          Minor Commit   - May   10, 2019
@@ -82,7 +84,7 @@ Added Support for Lists, Notification sometimes buggy, Show Pages, Search       
 Added Support for Schedule, Notification on New Release & Design Improvements     Major Commit   - March 05, 2018
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
-#### Todos
+#### Todo
 * User Registration & Cloud Sync of Favourites
 * App Load Time Improvements.
 * Load more release options
@@ -92,7 +94,6 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)
-> Releases after 0.7.0 [Downloads](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

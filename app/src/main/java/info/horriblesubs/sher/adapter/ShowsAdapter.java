@@ -59,7 +59,6 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
             notifyDataSetChanged();
             return;
         }
-        if (listItems == null) return;
         items.clear();
         for (Item item: listItems) {
             if (item.title.toLowerCase().contains(s.toLowerCase()))

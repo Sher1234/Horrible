@@ -94,12 +94,12 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
     public void onSearch(String s) {
         if (items == null) items = new ArrayList<>();
         if (s == null || s.isEmpty()) {
+            items.clear();
             items.addAll(listItems);
             size = listItems.size();
             notifyDataSetChanged();
             return;
         }
-        if (listItems == null) return;
         items.clear();
         for (ShowDetail item: listItems) {
             if (item.title.toLowerCase().contains(s.toLowerCase()))

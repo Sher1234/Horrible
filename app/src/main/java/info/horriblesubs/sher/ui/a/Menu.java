@@ -1,6 +1,7 @@
 package info.horriblesubs.sher.ui.a;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -108,6 +109,13 @@ public class Menu extends BottomSheetDialogFragment implements OnNavigationItemS
             case R.id.delete:
                 if (delete != null) delete.onDelete();
                 this.dismiss();
+                return true;
+            case R.id.privacy:
+                String s = "https://github.com/Sher1234/Horrible/blob/master/PrivacyPolicy.md";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(s));
+                startActivity(intent);
                 return true;
             case R.id.explore:
                 if (getActivity() instanceof Explore || getActivity() == null) return true;

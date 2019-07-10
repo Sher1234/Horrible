@@ -67,6 +67,7 @@
     <string name="search_on_mal">Search on MyAnimeList</string>
     <string name="search_on_nyaa">Search on Nyaa</string>
     <string name="remove_fav">Remove from Favourites</string>
+    <string name="privacy_policy">Privacy Policy</string>
 
     <string-array name="days">
         <item>Sunday</item>

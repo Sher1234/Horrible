@@ -29,7 +29,6 @@ import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.adapter.DownloadAdapter;
 import info.horriblesubs.sher.api.horrible.model.ShowDetail;
 import info.horriblesubs.sher.api.horrible.model.ShowRelease;
-import info.horriblesubs.sher.ui.a.Ads;
 
 public class ReleaseUI extends Fragment implements DownloadAdapter.OnItemClick {
 
@@ -71,7 +70,6 @@ public class ReleaseUI extends Fragment implements DownloadAdapter.OnItemClick {
         sd.load(release.quality.get(0), release.downloads.get(0));
         textView2.setText(Html.fromHtml(release.release));
         textView1.setText(Html.fromHtml(detail.title));
-        Ads.InterstitialAd.load(getActivity());
     }
 
     @Override

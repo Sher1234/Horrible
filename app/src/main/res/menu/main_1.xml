@@ -113,6 +113,11 @@
                     android:id="@+id/theme" />
 
                 <item
+                    android:title="@string/privacy_policy"
+                    android:icon="@drawable/ic_info"
+                    android:id="@+id/privacy" />
+
+                <item
                     android:icon="@drawable/ic_info"
                     android:title="@string/about_app"
                     android:enabled="false"

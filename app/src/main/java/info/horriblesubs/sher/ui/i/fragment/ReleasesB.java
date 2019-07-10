@@ -49,7 +49,6 @@ public class ReleasesB extends Fragment implements OnItemClick, SearchListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         recyclerView = view.findViewById(R.id.recyclerView);
         super.onViewCreated(view, savedInstanceState);
-        Ads.InterstitialAd.load(getActivity());
         new SearchChange((TextInputEditText) view.findViewById(R.id.editText), this);
     }
 

@@ -73,7 +73,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="53" />
+                                                <entry key="scalingPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -106,12 +106,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                       <entry key="backgroundImage" value="C:\Users\agghu\Desktop\Group 128.png" />
-                                      <entry key="foregroundAssetType" value="TEXT" />
-                                      <entry key="generateLegacyIcon" value="false" />
-                                      <entry key="generateRoundIcon" value="false" />
-                                      <entry key="generateWebIcon" value="false" />
-                                      <entry key="outputName" value="ic_shows" />
+                                      <entry key="foregroundImage" value="C:\Users\agghu\Desktop\Logo\Logo.png" />
                                     </map>
                                   </option>
                                 </PersistentState>

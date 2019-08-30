@@ -26,7 +26,7 @@
     <string name="favourites">Favourites</string>
     <string name="shows">Shows</string>
     <string name="all_shows">All Shows</string>
-    <string name="current_shows">Current Shows</string>
+    <string name="current_shows">Ongoing</string>
     <string name="batches">Batches</string>
     <string name="episodes">Episodes</string>
     <string name="refresh">Refresh</string>

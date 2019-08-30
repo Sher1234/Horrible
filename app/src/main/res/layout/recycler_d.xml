@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -8,6 +7,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:textAppearance="?textAppearanceHeadline5"
+        android:background="?selectableItemBackground"
         android:fontFamily="sans-serif-medium"
         tools:text="@tools:sample/full_names"
         android:layout_height="wrap_content"
@@ -17,22 +17,13 @@
         android:id="@+id/textView"
         android:paddingEnd="24dp"
         android:textSize="13sp"
-        android:padding="5dp"
+        android:padding="7dp"
         android:minLines="2"/>
 
     <View
+        android:background="?colorOnSurface"
         android:layout_width="match_parent"
-        android:background="?colorSurface"
-        android:layout_height="0.36dp"
-        android:alpha="0.36" />
-
-    <View
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="?selectableItemBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="0dp"
-        android:layout_width="0dp" />
+        android:layout_height="0.3dp"
+        android:alpha="0.24" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

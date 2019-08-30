@@ -1,21 +1,21 @@
 ## HorribleSubs
 HorribleSubs Android Application with Notification Support <br />
-Not affiliated with **https://horriblesubs.info** in any way <br />
-Support the official site **https://horriblesubs.info**
+Not affiliated with **[horriblesubs.info](https://horriblesubs.info)** in any way <br />
+Support the official site **[horriblesubs.info](https://horriblesubs.info)**
 
 #### Tech
 Horrible Subs implements number of open source projects listed bellow:
- - Androidx Libraries
- - Glide for Displaying images
- - Retrofit networking libraries
- - SimpleHtmlDom for HTML parsing
- - Firebase for FCM notifications & google ads
+- Androidx Libraries
+- Glide for Displaying images
+- Retrofit networking libraries
+- SimpleHtmlDom for HTML parsing
+- Firebase for FCM notifications & google ads
 
-> #### *Notes:*
-> - Both major revisions i.e. 0.7.0 & 0.7.5 are based on Same API [Supported Till Major Revision]
-> - Versions 0.7.5 and later    [Reinstall Required/Changed Signing Keys/Supported]
-> - Versions 0.7.0 to 0.7.4     [Reinstall Required/Changed Signing Keys/Supported]
-> - Versions 0.6.5 and earlier  [Deprecated]
+#### *Notes:*
+- Both major revisions i.e. 0.7.0 & 0.7.5 are based on Same API ***[Supported Till Major Revision]***
+- Versions 0.7.5 and later    ***[Reinstall Required/Changed Signing Keys/Supported]***
+- Versions 0.7.0 to 0.7.4     [Reinstall Required/Changed Signing Keys/Supported]
+- Versions 0.6.5 and earlier  [Deprecated]
 
 
 #### Features
@@ -32,6 +32,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Fixed UI Bugs, Updated Dependencies & Redesigned App Icon                         Minor Commit   - Aug   30, 2019
 Added User Data Policy (Privacy Policy) & Minimised Ads in Show Page              Minor Commit   - July  10, 2019
 Fixed search issues in various activities                                         Minor Commit   - July  09, 2019
 Fixed issue enabling notifications                                                Minor Commit   - July  07, 2019
@@ -87,6 +88,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 ```
 #### Todo
 * User Registration & Cloud Sync of Favourites
+* XDCC-IRC Download Tutorial for older episodes
 * App Load Time Improvements.
 * Load more release options
 * nyaa.si Implementation

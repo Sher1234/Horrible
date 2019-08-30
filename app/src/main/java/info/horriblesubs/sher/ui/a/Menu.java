@@ -25,7 +25,6 @@ import org.jetbrains.annotations.NotNull;
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.ui.b.Explore;
-import info.horriblesubs.sher.ui.c.Search;
 import info.horriblesubs.sher.ui.d.Favourites;
 import info.horriblesubs.sher.ui.e.Recent;
 import info.horriblesubs.sher.ui.f.Schedule;
@@ -94,7 +93,7 @@ public class Menu extends BottomSheetDialogFragment implements OnNavigationItemS
         if (getActivity() instanceof Schedule) navigationView.setCheckedItem(R.id.schedule);
         if (getActivity() instanceof Current) navigationView.setCheckedItem(R.id.current);
         if (getActivity() instanceof Explore) navigationView.setCheckedItem(R.id.explore);
-        if (getActivity() instanceof Search) navigationView.setCheckedItem(R.id.search);
+//        if (getActivity() instanceof Search) navigationView.setCheckedItem(R.id.search);
         if (getActivity() instanceof Recent) navigationView.setCheckedItem(R.id.recent);
         if (getActivity() instanceof All) navigationView.setCheckedItem(R.id.all);
         if (getActivity() instanceof Favourites) {
@@ -123,12 +122,12 @@ public class Menu extends BottomSheetDialogFragment implements OnNavigationItemS
                 getActivity().finish();
                 this.dismiss();
                 return true;
-            case R.id.search:
-                if (getActivity() instanceof Search || getActivity() == null) return true;
-                startActivity(new Intent(getActivity(), Search.class));
-                getActivity().finish();
-                this.dismiss();
-                return true;
+//            case R.id.search:
+//                if (getActivity() instanceof Search || getActivity() == null) return true;
+//                startActivity(new Intent(getActivity(), Search.class));
+//                getActivity().finish();
+//                this.dismiss();
+//                return true;
             case R.id.favourite:
                 if (getActivity() instanceof Favourites || getActivity() == null) return true;
                 startActivity(new Intent(getActivity(), Favourites.class));

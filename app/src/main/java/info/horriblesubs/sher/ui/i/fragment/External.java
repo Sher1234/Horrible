@@ -52,11 +52,13 @@ public class External extends Fragment implements View.OnClickListener {
 
     public void onRefresh(ShowDetail detail) {
         if (detail != null) {
+            button2.setText(detail.mal_id != null && !detail.mal_id.isEmpty() ? R.string.view_on_mal : R.string.search_on_mal);
             button1.setOnClickListener(this);
             button2.setOnClickListener(this);
             button3.setOnClickListener(this);
             this.detail = detail;
         } else {
+            button2.setText(R.string.search_on_mal);
             button1.setOnClickListener(listener);
             button2.setOnClickListener(listener);
             button3.setOnClickListener(listener);
@@ -76,8 +78,11 @@ public class External extends Fragment implements View.OnClickListener {
             return;
         }
         if (view.getId() == R.id.button2) {
+            String s;
             if (detail == null) return;
-            String s = "https://myanimelist.net/anime.php?q="+Uri.encode(detail.title);
+            if (detail.mal_id != null && !detail.mal_id.isEmpty())
+                s = "https://myanimelist.net/anime/" + detail.mal_id;
+            else s = "https://myanimelist.net/anime.php?q=" + Uri.encode(detail.title);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.addCategory(Intent.CATEGORY_BROWSABLE);
             intent.setData(Uri.parse(s));

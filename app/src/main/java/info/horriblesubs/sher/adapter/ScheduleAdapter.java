@@ -20,17 +20,26 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     private final List<ScheduleItem> items;
     private final OnItemClick onItemClick;
+    private final boolean isHome;
     private final int size;
+    private boolean a;
 
-    private ScheduleAdapter(OnItemClick itemClick, List<ScheduleItem> items, int size) {
+    private ScheduleAdapter(OnItemClick itemClick, List<ScheduleItem> items, int size, boolean isHome) {
         this.onItemClick = itemClick;
         this.items = items;
         this.size = size;
+        this.isHome = isHome;
+        a = isHome;
     }
 
     @NotNull
     public static ScheduleAdapter get(OnItemClick itemClick, List<ScheduleItem> items) {
-        return new ScheduleAdapter(itemClick, items, items == null ? 0 : items.size());
+        return new ScheduleAdapter(itemClick, items, items == null ? 0 : items.size(), false);
+    }
+
+    @NotNull
+    public static ScheduleAdapter home(OnItemClick itemClick, List<ScheduleItem> items) {
+        return new ScheduleAdapter(itemClick, items, items == null ? 0 : items.size(), true);
     }
 
     @NotNull
@@ -41,14 +50,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        if (a && isHome) holder.textView2.setText(items.get(position).getLeftTime());
+        else holder.textView2.setText(items.get(position).getTime());
         holder.textView1.setText(Html.fromHtml(items.get(position).title));
-        holder.textView2.setText(items.get(position).getTime());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemClick.onItemClicked(items.get(position));
             }
         });
+    }
+
+    public void onToggle(boolean b) {
+        a = b;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -65,7 +80,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
         void onItemClicked(ScheduleItem item);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatTextView textView1, textView2;
 
         ViewHolder(@NonNull View itemView) {

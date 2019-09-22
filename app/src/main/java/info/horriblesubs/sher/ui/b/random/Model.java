@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.api.horrible.Hpi;
 import info.horriblesubs.sher.api.horrible.model.ShowDetail;
@@ -18,11 +20,10 @@ import retrofit2.Retrofit;
 @SuppressLint("StaticFieldLeak")
 public class Model extends ViewModel {
 
-    MutableLiveData<ShowDetail> result;
+    MutableLiveData<List<ShowDetail>> result;
     private Refresh refresh;
 
     public Model() {
-
     }
 
     public void onStopTask() {
@@ -30,7 +31,7 @@ public class Model extends ViewModel {
         refresh = null;
     }
 
-    MutableLiveData<ShowDetail> getResult() {
+    MutableLiveData<List<ShowDetail>> getResult() {
         if (this.result == null) this.result = new MutableLiveData<>();
         return result;
     }
@@ -41,28 +42,28 @@ public class Model extends ViewModel {
         refresh.execute();
     }
 
-    private class Refresh extends AsyncTask<Void, Void, ShowDetail> {
+    private class Refresh extends AsyncTask<Void, Void, List<ShowDetail>> {
 
-        private ShowDetail data;
+        private List<ShowDetail> data;
         private int i = 0;
 
         Refresh() {
         }
 
         @Override
-        protected ShowDetail doInBackground(Void... voids) {
+        protected List<ShowDetail> doInBackground(Void... voids) {
             Retrofit retrofit = AppMe.appMe.getRetrofit(Hpi.LINK);
             Hpi api = retrofit.create(Hpi.class);
-            Call<ShowDetail> call = api.getRandomShow();
-            call.enqueue(new Callback<ShowDetail>() {
+            Call<List<ShowDetail>> call = api.getHomeTab();
+            call.enqueue(new Callback<List<ShowDetail>>() {
                 @Override
-                public void onResponse(@NonNull Call<ShowDetail> call, @NonNull Response<ShowDetail> response) {
+                public void onResponse(@NonNull Call<List<ShowDetail>> call, @NonNull Response<List<ShowDetail>> response) {
                     if (response.body() != null) data = response.body();
                     i = 1;
                 }
 
                 @Override
-                public void onFailure(@NonNull Call<ShowDetail> call, @NonNull Throwable t) {
+                public void onFailure(@NonNull Call<List<ShowDetail>> call, @NonNull Throwable t) {
                     t.printStackTrace();
                     i = -1;
                 }
@@ -78,7 +79,7 @@ public class Model extends ViewModel {
         }
 
         @Override
-        protected void onPostExecute(ShowDetail result) {
+        protected void onPostExecute(List<ShowDetail> result) {
             super.onPostExecute(result);
             Model.this.result.setValue(result);
         }

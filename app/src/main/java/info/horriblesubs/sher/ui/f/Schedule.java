@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
@@ -52,7 +52,7 @@ public class Schedule extends AppCompatActivity implements TaskListener, OnClick
         findViewById(R.id.fab).setOnClickListener(this);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         refreshLayout = findViewById(R.id.swipeRefreshLayout);
-        model = ViewModelProviders.of(this).get(Model.class);
+        model = new ViewModelProvider(this).get(Model.class);
         for (String s : getResources().getStringArray(R.array.days)) tabLayout.addTab(tabLayout.newTab().setText(s));
         viewPager.registerOnPageChangeCallback(Listener.listener(tabLayout));
         tabLayout.addOnTabSelectedListener(Listener.listener(viewPager));

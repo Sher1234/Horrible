@@ -1,6 +1,9 @@
 package info.horriblesubs.sher.api.horrible.model;
 
+import android.util.Log;
+
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +21,7 @@ public abstract class DateParse {
         }
     }
 
+    @Nullable
     public static Date getNetworkDate(String date) {
         try {
             String format = "yyyy-MM-d HH:mm:ss Z";
@@ -28,6 +32,7 @@ public abstract class DateParse {
         }
     }
 
+    @Nullable
     public static String getNetworkDate(Date date) {
         try {
             String format = "MMMM dd, yyyy @ hh:mm a";
@@ -51,9 +56,9 @@ public abstract class DateParse {
     @NotNull
     private static String getTimeString(long time) {
         long today = new Date().getTime();
-        long minutes = Math.round((double) (today - time) / 60000);
-        long hours = Math.round((double) (today - time) / 3600000);
-        long days = Math.round((double) (today - time) / 86400000);
+        int minutes = (int) ((today - time) / 60000);
+        int hours = (int) ((today - time) / 3600000);
+        int days = (int) ((today - time) / 86400000);
         if (time == -1L) return "Never";
         else if (days > 0)
             if (days == 1) return "Yesterday";
@@ -73,5 +78,31 @@ public abstract class DateParse {
             e.printStackTrace();
             return null;
         }
+    }
+
+    String getScheduleLeftTime(String date) {
+        String s = new SimpleDateFormat("dd-MM-yyyy", Locale.US).format(new Date()) + " " + getScheduleTime(date);
+        try {
+            Date d = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US).parse(s);
+            return getTimeLeft(d);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @NotNull
+    private static String getTimeLeft(Date date) {
+        long time = date == null ? -1L : date.getTime();
+        long today = new Date().getTime();
+        if (today > time) return "Aired";
+        int hours = (int) ((today - time) / 3600000);
+        int minutes = (int) ((today - time) / 60000);
+        minutes = minutes - (hours * 60);
+        minutes = minutes >= 0 ? minutes : -minutes;
+        hours = hours >= 0 ? hours : -hours;
+        Log.e("ABC-D", "Today: " + today + " Time: " + time + " Diff: " + (today - time) + " H: " + hours + " M: " + minutes);
+        if (time == -1L) return "Error";
+        return "in " + (hours > 0 ? hours + "h " : "") + (minutes > 0 ? minutes + "m" : "");
     }
 }

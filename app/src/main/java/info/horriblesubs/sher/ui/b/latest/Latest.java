@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +42,7 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.b_fragment_3, container, false);
+        View view = inflater.inflate(R.layout.b_x_fragment_3, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         textView1 = view.findViewById(R.id.textView1);
         textView2 = view.findViewById(R.id.textView2);
@@ -52,7 +52,7 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = ViewModelProviders.of(this).get(Model.class);
+        model = new ViewModelProvider(this).get(Model.class);
     }
 
     @Override
@@ -75,7 +75,8 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
         }
         new DataMethods(getContext()).onResetNotifications(result.items);
         recyclerView.setAdapter(ListItemAdapter.get(this, result.items, 6));
-        textView2.setText(result.getTime());
+        String s = "Last refreshed on " + result.getTime();
+        textView2.setText(s);
     }
 
     @Override
@@ -106,7 +107,7 @@ public class Latest extends Fragment implements Observer<Result<ListItem>>, Frag
     }
 
     @Override
-    public void onItemClicked(ListItem item) {
+    public void onItemClicked(@NotNull ListItem item) {
         if (item.link == null) return;
         Intent intent = new Intent(getActivity(), Show.class);
         intent.putExtra("show.link", item.link);

@@ -1,6 +1,5 @@
 package info.horriblesubs.sher.ui.b.favourite;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +10,6 @@ import java.util.List;
 import info.horriblesubs.sher.api.horrible.model.ShowDetail;
 import info.horriblesubs.sher.db.DataMethods;
 
-@SuppressLint("StaticFieldLeak")
 public class Model extends ViewModel {
 
     private MutableLiveData<List<ShowDetail>> detail;

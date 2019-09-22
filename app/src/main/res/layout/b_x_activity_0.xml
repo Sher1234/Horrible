@@ -1,0 +1,36 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="64dp">
+
+        <include layout="@layout/b_activity_1" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:id="@+id/adBanner" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:shapeAppearanceOverlay="@style/CutX"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/adBanner"
+        android:src="@drawable/ic_menu"
+        app:layout_anchorGravity="end"
+        android:layout_margin="20dp"
+        android:theme="?fabStyle"
+        app:fabCustomSize="50dp"
+        android:id="@+id/fab"
+        app:fabSize="mini" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

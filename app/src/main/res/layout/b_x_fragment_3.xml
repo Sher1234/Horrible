@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textAppearance="?textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:text="@string/latest_releases"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="6dp"
+        android:id="@+id/textView1"
+        android:textAllCaps="true"
+        android:textSize="12sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/recycler_b"
+        android:id="@+id/recyclerView"
+        android:paddingBottom="2dp"
+        android:paddingTop="4dp"
+        tools:itemCount="5" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="end|center"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:id="@+id/layout"
+        android:padding="4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/a_q_sd"
+            android:layout_height="10dp"
+            android:layout_width="10dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/sd"
+            android:textSize="11sp"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:textAppearance="?textAppearanceHeadline6"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/a_q_hd"
+            android:layout_height="10dp"
+            android:layout_width="10dp"
+            android:id="@+id/mark2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hd"
+            android:textSize="11sp"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:textAppearance="?textAppearanceHeadline6"
+            android:src="@drawable/a_q_fhd"
+            android:layout_marginEnd="5dp"
+            android:layout_height="10dp"
+            android:layout_width="10dp"
+            android:id="@+id/mark3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="11sp"
+            android:text="@string/full_hd"
+            tools:ignore="SmallSp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textAppearance="?textAppearanceHeadline6"
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/a_info"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="7dp"
+        android:paddingStart="16dp"
+        android:id="@+id/textView2"
+        android:paddingEnd="16dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="7dp"
+        tools:text="@string/what_new"
+        android:textSize="12sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

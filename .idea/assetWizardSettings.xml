@@ -182,7 +182,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BCanary%5D/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_open_in_new_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BCanary%5D/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_chevron_right_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -192,8 +192,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_open" />
-                            <entry key="sourceFile" value="C:\Users\agghu" />
+                            <entry key="outputName" value="ic_right" />
+                            <entry key="sourceFile" value="C:\Users\agghu\Desktop\24px.svg" />
                           </map>
                         </option>
                       </PersistentState>

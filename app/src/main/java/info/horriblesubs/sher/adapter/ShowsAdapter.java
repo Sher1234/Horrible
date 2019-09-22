@@ -86,7 +86,7 @@ public class ShowsAdapter extends RecyclerView.Adapter<ShowsAdapter.ViewHolder> 
         void onItemClicked(Item item);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private final AppCompatTextView textView;
 
         ViewHolder(@NonNull View itemView) {

@@ -1,4 +1,27 @@
 <resources>
+
+    <style name="CutX">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">23dp</item>
+    </style>
+
+    <style name="CutY" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="CutZ" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <attr name="recyclerAccent2" format="color" />
+    <attr name="recyclerAccent" format="color" />
+    <attr name="accentFullHd" format="color" />
+    <attr name="accentSd" format="color" />
+    <attr name="accentHd" format="color" />
+
+
     <!--Theme2.0-->
 
     <!--Common Styles-->
@@ -17,6 +40,12 @@
         <item name="fabStyle">@style/Theme.Fab</item>
         <item name="tabTextColor">#85000000</item>
         <item name="colorItem">#25000000</item>
+
+        <item name="recyclerAccent2">#99000000</item>
+        <item name="recyclerAccent">#08000000</item>
+        <item name="accentFullHd">#0097A7</item>
+        <item name="accentHd">#C2185B</item>
+        <item name="accentSd">#1B5E20</item>
     </style>
 
     <style name="Theme.Fab">

@@ -24,6 +24,10 @@ public class ScheduleItem extends Item {
         return getScheduleTime(time);
     }
 
+    public String getLeftTime() {
+        return getScheduleLeftTime(time);
+    }
+
     @NotNull
     @Override
     public String toString() {

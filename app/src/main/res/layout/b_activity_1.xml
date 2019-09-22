@@ -4,59 +4,87 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:clipToPadding="false"
-    android:paddingBottom="72dp"
-    android:paddingTop="12dp">
+    android:paddingBottom="96dp"
+    android:paddingTop="14dp">
+
+    <!--    <fragment-->
+    <!--        android:name="info.horriblesubs.sher.ui.b.featured.Featured"-->
+    <!--        tools:layout="@layout/b_x_fragment_0"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:id="@+id/fragment0" />-->
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_marginBottom="8dp"-->
+    <!--        android:layout_marginStart="24dp"-->
+    <!--        android:layout_marginEnd="24dp"-->
+    <!--        android:layout_marginTop="8dp"-->
+    <!--        android:layout_height="0.5dp"-->
+    <!--        android:src="?colorItem" />-->
 
     <fragment
         android:name="info.horriblesubs.sher.ui.b.favourite.Favourite"
+        tools:layout="@layout/b_x_fragment_2"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        tools:layout="@layout/b_fragment_2"
         android:id="@+id/fragment1" />
 
-    <View
-        android:background="?colorOnSurface"
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="8dp"
-        android:layout_height="0.35dp"
-        android:alpha="0.35" />
+        android:layout_height="0.5dp"
+        android:src="?colorItem" />
 
     <fragment
-        android:name="info.horriblesubs.sher.ui.b.random.Random"
+        android:name="info.horriblesubs.sher.ui.b.random.HomeTab"
+        tools:layout="@layout/b_x_fragment_1"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        tools:layout="@layout/b_fragment_1"
         android:id="@+id/fragment2" />
 
-    <View
-        android:background="?colorOnSurface"
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="8dp"
-        android:layout_height="0.35dp"
-        android:alpha="0.35" />
+        android:layout_height="0.5dp"
+        android:src="?colorItem" />
 
     <fragment
         android:name="info.horriblesubs.sher.ui.b.latest.Latest"
+        tools:layout="@layout/b_x_fragment_3"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        tools:layout="@layout/b_fragment_3"
         android:id="@+id/fragment3" />
 
-    <View
-        android:background="?colorOnSurface"
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="8dp"
-        android:layout_height="0.35dp"
-        android:alpha="0.35" />
+        android:layout_height="0.5dp"
+        android:src="?colorItem" />
 
     <fragment
         android:name="info.horriblesubs.sher.ui.b.today.Today"
+        tools:layout="@layout/b_x_fragment_4"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        tools:layout="@layout/b_fragment_3"
         android:id="@+id/fragment4" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="0.5dp"
+        android:src="?colorItem" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

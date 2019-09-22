@@ -17,11 +17,7 @@ import info.horriblesubs.sher.R;
 import static com.google.android.gms.ads.AdSize.SMART_BANNER;
 
 public enum Ads {
-
     BannerAd, InterstitialAd;
-
-    Ads() {}
-
     public void load(FragmentActivity activity) {
         if (this == BannerAd) {
             String id = activity.getResources().getStringArray(R.array.footer)[new Random().nextInt(4)];

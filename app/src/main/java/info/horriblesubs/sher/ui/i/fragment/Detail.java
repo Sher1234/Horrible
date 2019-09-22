@@ -14,6 +14,9 @@ import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,11 +28,14 @@ public class Detail extends Fragment implements View.OnClickListener {
 
     private AppCompatTextView textView1, textView2, textView3, textView4, textView5;
     private AppCompatCheckedTextView textView6;
+    private final RequestOptions options;
     private AppCompatImageView imageView;
     private DataMethods methods;
     private ShowDetail detail;
 
-    public Detail() {}
+    public Detail() {
+        options = new RequestOptions().transform(new CenterCrop(), new RoundedCorners(10));
+    }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup group, Bundle bundle) {
@@ -60,13 +66,14 @@ public class Detail extends Fragment implements View.OnClickListener {
             textView6.setText(methods.isFavourite(detail.sid)?R.string.remove_fav:R.string.add_fav);
             textView1.setText(HtmlCompat.fromHtml(detail.title, HtmlCompat.FROM_HTML_MODE_LEGACY));
             textView2.setText(HtmlCompat.fromHtml(detail.body, HtmlCompat.FROM_HTML_MODE_LEGACY));
-            Glide.with(imageView).load(detail.image).into(imageView);
+            Glide.with(imageView).load(detail.image).apply(options).into(imageView);
             textView6.setChecked(methods.isFavourite(detail.sid));
             textView3.setText(String.valueOf(detail.views));
             textView4.setText(String.valueOf(detail.favs));
             textView5.setText(detail.time());
             this.detail = detail;
         } else {
+            imageView.setImageResource(R.drawable.ic_error);
             textView1.setText(null);
             textView2.setText(null);
             textView3.setText(null);
@@ -91,7 +98,7 @@ public class Detail extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(@NotNull View view) {
         if (view.getId() == R.id.button4) {
             onCheckedChanged(!textView6.isChecked());
         }

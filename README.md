@@ -32,6 +32,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Updated Dependencies, UI, Api-v5 & More.                                          Major Commit   - Sept  22, 2019
 Fixed UI Bugs, Updated Dependencies & Redesigned App Icon                         Minor Commit   - Aug   30, 2019
 Added User Data Policy (Privacy Policy) & Minimised Ads in Show Page              Minor Commit   - July  10, 2019
 Fixed search issues in various activities                                         Minor Commit   - July  09, 2019

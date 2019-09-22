@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +48,7 @@ public class Recent extends AppCompatActivity implements TaskListener, OnItemCli
         super.onCreate(savedInstanceState);
         AppMe.appMe.setTheme();
         setContentView(R.layout.c_activity_0);
-        model = ViewModelProviders.of(this).get(Model.class);
+        model = new ViewModelProvider(this).get(Model.class);
         model.items(this).observe(this, this);
         refreshLayout = findViewById(R.id.swipeRefreshLayout);
         findViewById(R.id.fab).setOnClickListener(this);

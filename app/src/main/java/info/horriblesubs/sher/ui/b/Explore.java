@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import org.jetbrains.annotations.NotNull;
+
 import info.horriblesubs.sher.AppMe;
 import info.horriblesubs.sher.R;
 import info.horriblesubs.sher.common.FragmentRefresh;
@@ -39,7 +41,7 @@ public class Explore extends AppCompatActivity implements View.OnClickListener, 
     }
 
     @Deprecated
-    public boolean onMenuItemClick(MenuItem item) {
+    public boolean onMenuItemClick(@NotNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refresh:
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment3);
@@ -63,7 +65,7 @@ public class Explore extends AppCompatActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(@NotNull View view) {
         if (view.getId() == R.id.fab)
             menu.show(getSupportFragmentManager());
     }

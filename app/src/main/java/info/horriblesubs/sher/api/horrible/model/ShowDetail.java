@@ -11,9 +11,8 @@ public class ShowDetail extends Item implements Serializable {
     private String time;
     public String body;
     public String sid;
-    public int views;
-    public int favs;
-
+    public String mal_id;
+    public boolean featured;
 
     public ShowDetail() {
     }
@@ -27,7 +26,7 @@ public class ShowDetail extends Item implements Serializable {
     }
 
     public String time2() {
-        return getNetworkDate(getNetworkDate(time + " +00:00"));
+        return getNetworkDate(getTime());
     }
 
     @NotNull
@@ -35,10 +34,8 @@ public class ShowDetail extends Item implements Serializable {
     public String toString() {
         return super.toString() +
                 "\n" + "Image: " + this.image +
-                "\n" + "Views: " + this.views +
                 "\n" + "ShowID: " + this.sid +
                 "\n" + "Time: " + this.time +
-                "\n" + "Favs: " + this.favs +
                 "\n" + "Body: " + this.body;
     }
 }

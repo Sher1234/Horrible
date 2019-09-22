@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.jetbrains.annotations.NotNull;
+
 import info.horriblesubs.sher.R;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
@@ -42,7 +44,7 @@ public class SearchChange implements TextWatcher {
         });
     }
 
-    public SearchChange(AppCompatActivity activity, SearchListener listener) {
+    public SearchChange(@NotNull AppCompatActivity activity, SearchListener listener) {
         this((TextInputEditText) activity.findViewById(R.id.editText), listener);
         editText.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
     }

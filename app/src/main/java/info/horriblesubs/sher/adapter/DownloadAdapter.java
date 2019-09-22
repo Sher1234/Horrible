@@ -65,7 +65,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.ViewHo
         void onItemClicked(ShowRelease.Download link);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private final MaterialButton button;
 
         ViewHolder(@NonNull View itemView) {

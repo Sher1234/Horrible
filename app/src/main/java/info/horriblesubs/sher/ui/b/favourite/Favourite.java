@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,7 +44,7 @@ public class Favourite extends Fragment
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.b_fragment_2, container, false);
+        View view = inflater.inflate(R.layout.b_x_fragment_2, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         textView2 = view.findViewById(R.id.textView2);
         textView1 = view.findViewById(R.id.textView1);
@@ -54,7 +54,7 @@ public class Favourite extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        model = ViewModelProviders.of(this).get(Model.class);
+        model = new ViewModelProvider(this).get(Model.class);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Favourite extends Fragment
     }
 
     @Override
-    public void onItemClicked(ShowDetail item) {
+    public void onItemClicked(@NotNull ShowDetail item) {
         if (item.link == null) return;
         Intent intent = new Intent(getActivity(), Show.class);
         intent.putExtra("show.link", item.link);

@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,7 +52,7 @@ public class Favourites extends AppCompatActivity implements TaskListener, Searc
         super.onCreate(savedInstanceState);
         AppMe.appMe.setTheme();
         setContentView(R.layout.d_activity_0);
-        model = ViewModelProviders.of(this).get(Model.class);
+        model = new ViewModelProvider(this).get(Model.class);
         SwipeRefreshLayout refreshLayout = findViewById(R.id.swipeRefreshLayout);
         model.items(this, this).observe(this, this);
         findViewById(R.id.fab).setOnClickListener(this);

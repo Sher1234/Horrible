@@ -28,7 +28,7 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
 
     public static ReleaseAdapter get(OnItemClick itemClick, List<ShowRelease> items, int s) {
         if (items == null) return new ReleaseAdapter(itemClick, null, 0);
-        return new ReleaseAdapter(itemClick, items, items.size()<s?items.size():s);
+        return new ReleaseAdapter(itemClick, items, Math.min(items.size(), s));
     }
 
     private ReleaseAdapter(OnItemClick onItemClick, @Nullable List<ShowRelease> items, int size) {
@@ -99,8 +99,9 @@ public class ReleaseAdapter extends RecyclerView.Adapter<ReleaseAdapter.ViewHold
         Log.e("rls2.0", s + ", " + size);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView mark1, mark2, mark3, textView;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textView;
+        private final View mark1, mark2, mark3;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -37,7 +37,7 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     @Override
-    public void onNewToken(String s) {
+    public void onNewToken(@NotNull String s) {
         super.onNewToken(s);
         Log.d(TAG, "Refreshed token: " + s);
         Intent intent = new Intent("notification.horrible.latest");
@@ -52,7 +52,7 @@ public class MessagingService extends FirebaseMessagingService {
     }
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(@NotNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         if (remoteMessage.getData().size() > 0)
             if (!isNotified(remoteMessage.getData()))

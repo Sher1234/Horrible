@@ -12,6 +12,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.button.MaterialButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,14 +27,16 @@ import info.horriblesubs.sher.api.horrible.model.ShowDetail;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.ViewHolder> {
 
-    private final OnItemClick onItemClick;
     private final List<ShowDetail> listItems;
+    private final OnItemClick onItemClick;
+    private final RequestOptions options;
     private List<ShowDetail> items;
     private final boolean isHome;
     private boolean delete;
     private int size;
 
     private FavouriteAdapter(OnItemClick itemClick, List<ShowDetail> items, int size, boolean isHome) {
+        options = new RequestOptions().transform(new CenterCrop(), new RoundedCorners(10));
         if (items != null) this.listItems = new ArrayList<>(items);
         else this.listItems = new ArrayList<>();
         this.onItemClick = itemClick;
@@ -42,7 +47,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
 
     @NotNull
     public static FavouriteAdapter get(OnItemClick itemClick, List<ShowDetail> items, int size) {
-        if (items != null) return new FavouriteAdapter(itemClick, items, items.size() < size?items.size():size, true);
+        if (items != null)
+            return new FavouriteAdapter(itemClick, items, Math.min(items.size(), size), true);
         else return new FavouriteAdapter(itemClick, null, 0, true);
     }
 
@@ -70,7 +76,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final ShowDetail item = items.get(position);
-        Glide.with(holder.imageView).load(item.image).into(holder.imageView);
+        Glide.with(holder.imageView).load(item.image).apply(options).into(holder.imageView);
         holder.textView.setText(Html.fromHtml(item.title));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +125,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         return size;
     }
 
-    public void onUpdateFavourites(List<ShowDetail> items) {
+    public void onUpdateFavourites(@NotNull List<ShowDetail> items) {
         this.size = items.size();
         this.items = items;
     }
@@ -129,7 +135,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
         void onItemClicked(ShowDetail item);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable private final MaterialButton button;
         private final AppCompatImageView imageView;
         private final AppCompatTextView textView;

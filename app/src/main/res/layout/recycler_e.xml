@@ -6,75 +6,59 @@
     android:layout_width="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:textAppearance="?textAppearanceHeadline6"
-        app:layout_constraintEnd_toStartOf="@id/layout"
+        android:textAppearance="?textAppearanceHeadline5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        android:background="@drawable/a_info"
         tools:text="@tools:sample/full_names"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginTop="8dp"
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:textSize="14sp"
-        android:padding="4dp"
-        android:minLines="2" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        app:layout_constraintBottom_toBottomOf="@id/textView"
-        app:layout_constraintStart_toEndOf="@id/textView"
-        app:layout_constraintTop_toTopOf="@id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginEnd="22dp"
-        android:id="@+id/layout">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:textAppearance="?textAppearanceHeadline6"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/mark1"
-            android:textSize="12sp"
-            android:gravity="end"
-            android:padding="4dp"
-            android:text="@string/sd" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            app:layout_constraintTop_toBottomOf="@id/textView2"
-            android:textAppearance="?textAppearanceHeadline6"
-            app:layout_constraintEnd_toStartOf="@id/mark3"
-            app:layout_constraintStart_toEndOf="@id/mark1"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/mark2"
-            android:textSize="12sp"
-            android:padding="4dp"
-            android:text="@string/hd" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            app:layout_constraintTop_toBottomOf="@id/textView2"
-            android:textAppearance="?textAppearanceHeadline6"
-            app:layout_constraintStart_toEndOf="@id/mark2"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/mark3"
-            android:textSize="12sp"
-            android:text="@string/full_hd"
-            android:padding="4dp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <View
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        android:background="?colorOnSurface"
-        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="8dp"
-        android:layout_height="0.36dp"
-        android:alpha="0.36" />
+        android:paddingBottom="4dp"
+        android:paddingStart="8dp"
+        android:id="@+id/textView"
+        android:paddingEnd="8dp"
+        android:paddingTop="4dp"
+        android:textSize="14sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintBottom_toTopOf="@id/mark3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/a_q_sd"
+        android:layout_height="10dp"
+        android:layout_width="10dp"
+        android:id="@+id/mark1" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:textAppearance="?textAppearanceHeadline6"
+        app:layout_constraintBottom_toTopOf="@id/mark3"
+        app:layout_constraintTop_toBottomOf="@id/mark1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/a_q_hd"
+        android:layout_height="10dp"
+        android:layout_width="10dp"
+        android:id="@+id/mark2" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:textAppearance="?textAppearanceHeadline6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mark1"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/a_q_fhd"
+        android:layout_marginEnd="32dp"
+        android:layout_height="10dp"
+        android:layout_width="10dp"
+        android:id="@+id/mark3" />
 
     <View
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,6 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="0dp"
-        android:layout_width="0dp" />
+        android:layout_width="0dp"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

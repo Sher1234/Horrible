@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
@@ -40,7 +40,7 @@ public class Show extends AppCompatActivity
         super.onCreate(bundle);
         AppMe.appMe.setTheme();
         setContentView(R.layout.i_activity_0);
-        model = ViewModelProviders.of(this).get(Model.class);
+        model = new ViewModelProvider(this).get(Model.class);
         link = getIntent().getStringExtra("show.link");
         refreshLayout = findViewById(R.id.swipeRefreshLayout);
         refreshLayout.setOnRefreshListener(this);

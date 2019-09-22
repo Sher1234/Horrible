@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HorribleMobile</string>
+    <string name="app_name">An!me</string>
 
     <string name="ad_mob_app_id">ca-app-pub-7307290547259470~7830642737</string>
 
@@ -17,9 +17,9 @@
     </string-array>
 
     <string name="notification_channel">horrible.channel.new</string>
-    <string name="full_hd">FullHD</string>
-    <string name="hd">HD</string>
-    <string name="sd">SD</string>
+    <string name="full_hd">FullHD [1080p]</string>
+    <string name="hd">HD [720p]</string>
+    <string name="sd">SD [360p/480p]</string>
     <string name="horrible_subs">HorribleSubs</string>
     <string name="schedule">Weekly Schedule</string>
     <string name="schedule_">Schedule</string>
@@ -31,7 +31,7 @@
     <string name="episodes">Episodes</string>
     <string name="refresh">Refresh</string>
     <string name="latest_releases">Latest Releases</string>
-    <string name="today_s_schedule">Today\'s Schedule</string>
+    <string name="today_schedule">Today\'s Schedule</string>
     <string name="about_app">About App</string>
     <string name="toggle_theme">Toggle Theme</string>
     <string name="others">Others</string>
@@ -49,7 +49,7 @@
     <string name="updated">Your application is up to date</string>
     <string name="what_new">What\'s new</string>
     <string name="delete">Delete</string>
-    <string name="random_pick">Random Pick</string>
+    <string name="random_pick">Random</string>
     <string name="explore">Explore</string>
     <string name="downloads">Downloads</string>
     <string name="settings">Settings</string>
@@ -68,6 +68,33 @@
     <string name="search_on_nyaa">Search on Nyaa</string>
     <string name="remove_fav">Remove from Favourites</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="top_anime">Top Anime</string>
+    <string name="most_watched">Most Watched</string>
+    <string name="accept_continue">Accept &amp; Continue</string>
+    <string name="privacy_policy_tnc">Read privacy policy before continuing the app &amp; requesting permission.</string>
+    <string name="tag_line">A Better Ongoing</string>
+    <string name="welcome_text">Welcome to An!me, a key to Anime World\nIntuitive way of Streaming &amp; Downloading Anime\nDesigned to provide better ongoing experience\nWith Added Support to MyAnimeList.</string>
+    <string name="member_exclusive_feature">Member Exclusive Feature</string>
+    <string name="exclusive_feature">This feature is only available for logged in users.\nLogin or Register to An!me &amp; experience whole bunch of features including torrent streaming, list management, favourites &amp; more.</string>
+    <string name="sign_in_or_register">Sign in or Register</string>
+    <string name="app_notifications">Latest News &amp; Notifications</string>
+    <string name="help_text_1">Tap once to open or Touch &amp; hold to view more.</string>
+    <string name="release_time">Release Time</string>
+    <string name="time_left">Time Left</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="top_viewed">Top Viewed</string>
+    <string name="top_favourite">Top Favourite</string>
+    <string name="most_members">Most Members</string>
+    <string name="trending">Trending</string>
+    <string name="view_on_mal">View on MyAnimeList</string>
+
+    <string-array name="type">
+        <item>Random</item>
+        <item>Top Rated</item>
+        <item>Top Viewed</item>
+        <item>Top Favourite</item>
+        <item>Most Members</item>
+    </string-array>
 
     <string-array name="days">
         <item>Sunday</item>

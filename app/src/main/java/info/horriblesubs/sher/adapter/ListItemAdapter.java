@@ -34,7 +34,8 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
 
     @NotNull
     public static ListItemAdapter get(OnItemClick itemClick, List<ListItem> items, int size) {
-        if (items != null) return new ListItemAdapter(itemClick, items, items.size() < size ? items.size() : size);
+        if (items != null)
+            return new ListItemAdapter(itemClick, items, Math.min(items.size(), size));
         else return new ListItemAdapter(itemClick, null, 0);
     }
 
@@ -98,8 +99,9 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.ViewHo
         void onItemClicked(ListItem listItem);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView textView1, textView2, mark1, mark2, mark3;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textView1, textView2;
+        private final View mark1, mark2, mark3;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

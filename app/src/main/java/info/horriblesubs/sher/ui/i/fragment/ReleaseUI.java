@@ -20,6 +20,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,15 +37,21 @@ public class ReleaseUI extends Fragment implements DownloadAdapter.OnItemClick {
 
     private AppCompatTextView textView1, textView2;
     private AppCompatImageView imageView;
+    private final RequestOptions options;
     private ShowRelease release;
     private ShowDetail detail;
     private Group sd, hd, fhd;
 
+    @NotNull
     public static ReleaseUI get(ShowRelease release, ShowDetail detail) {
         ReleaseUI fragment = new ReleaseUI();
         fragment.release = release;
         fragment.detail = detail;
         return fragment;
+    }
+
+    public ReleaseUI() {
+        options = new RequestOptions().transform(new CenterCrop(), new RoundedCorners(10));
     }
 
     @Override
@@ -64,7 +73,7 @@ public class ReleaseUI extends Fragment implements DownloadAdapter.OnItemClick {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Glide.with(this).load(detail.image).into(imageView);
+        Glide.with(this).load(detail.image).apply(options).into(imageView);
         fhd.load(release.quality.get(2), release.downloads.get(2));
         hd.load(release.quality.get(1), release.downloads.get(1));
         sd.load(release.quality.get(0), release.downloads.get(0));
@@ -89,7 +98,8 @@ public class ReleaseUI extends Fragment implements DownloadAdapter.OnItemClick {
         private final AppCompatTextView textView;
         private final RecyclerView recyclerView;
         private final View view;
-        Group(View view, @IdRes int tv, @IdRes int rv, @IdRes int v) {
+
+        Group(@NotNull View view, @IdRes int tv, @IdRes int rv, @IdRes int v) {
             recyclerView = view.findViewById(rv);
             textView = view.findViewById(tv);
             this.view = view.findViewById(v);

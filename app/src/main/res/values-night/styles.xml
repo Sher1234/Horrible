@@ -19,6 +19,12 @@
         <item name="fabStyle">@style/Theme.Fab</item>
         <item name="tabTextColor">#85ffffff</item>
         <item name="colorItem">#18ffffff</item>
+
+        <item name="recyclerAccent2">#a8ffffff</item>
+        <item name="recyclerAccent">#12ffffff</item>
+        <item name="accentFullHd">#00E5FF</item>
+        <item name="accentHd">#FF80AB</item>
+        <item name="accentSd">#B2FF59</item>
     </style>
 
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="marker" format="color" />
+
+    <attr name="qFHD" format="color" />
+    <attr name="qHD" format="color" />
+    <attr name="qSD" format="color" />
+
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:text="@string/random_text"
+        app:layout_constraintBottom_toBottomOf="@id/button"
+        app:layout_constraintEnd_toStartOf="@id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/button"
+        android:textAppearance="?textAppearanceBody2"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="0dp"
+        android:id="@+id/textView"
+        android:textSize="12.5sp"
+        android:minLines="2" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:shapeAppearanceOverlay="@style/Shape.Rounded8.Diagonal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="4dp"
+        android:textAllCaps="false"
+        android:textSize="12.5sp"
+        android:minHeight="46dp"
+        android:textStyle="bold"
+        android:id="@+id/button"
+        android:text="@string/random" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

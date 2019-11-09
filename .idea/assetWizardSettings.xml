@@ -73,7 +73,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="60" />
+                                                <entry key="scalingPercent" value="50" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -107,9 +107,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="backgroundColor" value="fdfdfd" />
                                       <entry key="backgroundImage" value="C:\Users\agghu\Desktop\Group 128.png" />
-                                      <entry key="foregroundImage" value="C:\Users\agghu\Desktop\Logo\Logo.png" />
+                                      <entry key="foregroundImage" value="C:\Users\agghu\Desktop\#Desktop\Logo\drawable-xxxhdpi\logo_light.png" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -182,7 +183,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BCanary%5D/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_chevron_right_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BStable%5D/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_more_vert_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -192,8 +193,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_right" />
-                            <entry key="sourceFile" value="C:\Users\agghu\Desktop\24px.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_fhd" />
+                            <entry key="sourceFile" value="C:\Users\agghu\Desktop\svgs\fhd.svg" />
                           </map>
                         </option>
                       </PersistentState>

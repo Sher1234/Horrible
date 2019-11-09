@@ -7,62 +7,63 @@
 
     <application
         android:fullBackupContent="@xml/backup_descriptor"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         tools:ignore="GoogleAppIndexingWarning"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:theme="@style/Theme"
-        android:allowBackup="true"
         android:supportsRtl="true"
-        android:name=".AppMe">
+        android:allowBackup="true"
+        android:multiArch="true"
+        android:label="@string/app_name"
+        android:name=".App">
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ad_mob_app_id" />
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--            android:value="@string/ad_mob_app_id" />-->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification_new" />
+            android:resource="@drawable/ic_bookmark" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorText" />
+            android:resource="@android:color/black" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/notification_channel" />
+            android:value="An!me" />
 
         <service
-            android:name=".service.MessagingService"
-            tools:ignore="ExportedService"
-            android:exported="true">
+            android:permission="android.permission.INTERNET"
+            android:name=".service.NotificationX">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.b.Explore" android:configChanges="uiMode">
+        <activity android:name=".service.IntentHandler">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="horriblesubs.info" />
+                <data android:scheme="https" />
+                <data android:scheme="app" />
+<!--                <data android:scheme="app" android:host="an!me.xyz" />-->
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:screenOrientation="sensorPortrait"
+            tools:ignore="LockedOrientationActivity"
+            android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
 
-        <activity android:name=".ui.z.about.About" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.d.Favourites" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.f.Schedule" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.h.Current" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.e.Recent" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.c.Search" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.i.Show" android:configChanges="uiMode" />
-
-        <activity android:name=".ui.g.All" android:configChanges="uiMode" />
+        <activity
+            android:screenOrientation="sensorPortrait"
+            tools:ignore="LockedOrientationActivity"
+            android:name=".ui.show.Show" />
 
     </application>
 

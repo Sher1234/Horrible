@@ -1,0 +1,135 @@
+{
+  "project_info": {
+    "project_number": "1080481830157",
+    "firebase_url": "https://anime-sher1234.firebaseio.com",
+    "project_id": "anime-sher1234",
+    "storage_bucket": "anime-sher1234.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080481830157:android:440581095e2ab252",
+        "android_client_info": {
+          "package_name": "info.horriblesubs.sher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080481830157-c50pue0805jm896fvfcnv5u9hbnfgc3g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "dfe1c63c328cf19f23c8fca151439fabdd866fb0"
+          }
+        },
+        {
+          "client_id": "1080481830157-i51n0fe2ud4mpf6pool6tmj4spsetbls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "1b9b7e0affb77f6fdd74ea79dfa2925dec123f1b"
+          }
+        },
+        {
+          "client_id": "1080481830157-urfh26nlh01rqrsopf5k40oidjiaqj89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "8d5e6ce98067f2d92eac0f1338ad5e23ba17f184"
+          }
+        },
+        {
+          "client_id": "1080481830157-qnr1ptos93dk3cdk4rqe5p2jrveu746f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "008138582e3fdf4e499219c37c1a881838437780"
+          }
+        },
+        {
+          "client_id": "1080481830157-1qnci6qr39nfi0e4682n9b7raklcmpfv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "c51f01ac20c1e76e98b8887c43000c7588f37269"
+          }
+        },
+        {
+          "client_id": "1080481830157-5pb5s5c62mu0thgk6860bk0frculom5u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "603e38dcf090b69fc2eea6b3b744a450a222957e"
+          }
+        },
+        {
+          "client_id": "1080481830157-mjcgi9p2apmr8crjjh6pkdpae8n31psi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "info.horriblesubs.sher",
+            "certificate_hash": "bb680431e08284e7e4cbcb74676ef73914c073b2"
+          }
+        },
+        {
+          "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjj0MgqH4vYS_iKQAiIT9z1-tvNx3bQlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7307290547259470~7830642737"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080481830157:android:b2304903ca5068a4",
+        "android_client_info": {
+          "package_name": "io.github.sher1234.anime.stream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080481830157-dd8isc0tsl4nsj58lk3dsnass2ui4tis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.github.sher1234.anime.stream",
+            "certificate_hash": "008138582e3fdf4e499219c37c1a881838437780"
+          }
+        },
+        {
+          "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjj0MgqH4vYS_iKQAiIT9z1-tvNx3bQlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080481830157-epmd8brdhsmh9boa1dn6ue4r46gueej5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7307290547259470~4095978054"
+    }
+  ],
+  "configuration_version": "1"
+}

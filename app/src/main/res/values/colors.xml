@@ -1,27 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="primaryDarkForLight">#6A1B9A</color>
-    <color name="primaryForLight">#8E24AA</color>
-
-    <color name="colorAccent">#D81B60</color>
-
-    <color name="primaryDarkForDark">#7CB342</color>
-    <color name="primaryForDark">#9CCC65</color>
-
-    <!--Dark Theme-->
-    <color name="textHeadingDark">#fefefe</color>
-
-    <color name="colorOnSurfaceDark">#ffffff</color>
-    <color name="colorSurfaceDark">#323232</color>
-
-    <!--Light Theme-->
-    <color name="textHeadingLight">#000000</color>
-
-    <color name="red">#ea4335</color>
-    <color name="blue">#4285f4</color>
-    <color name="yellow">#fbbc05</color>
-
-    <!--#d81b60-->
-    <color name="colorText">#000000</color>
 </resources>

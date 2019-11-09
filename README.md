@@ -12,19 +12,21 @@ Horrible Subs implements number of open source projects listed bellow:
 - Firebase for FCM notifications & google ads
 
 #### *Notes:*
+- Versions 0.8.0 (+) Based on Api-6      ***[Supported]***
 - Both major revisions i.e. 0.7.0 & 0.7.5 are based on Same API ***[Supported Till Major Revision]***
-- Versions 0.7.5 and later    ***[Reinstall Required/Changed Signing Keys/Supported]***
-- Versions 0.7.0 to 0.7.4     [Reinstall Required/Changed Signing Keys/Supported]
-- Versions 0.6.5 and earlier  [Deprecated]
+- Versions 0.7.5                         ***[Reinstall Required/Changed Signing Keys/Supported]***
+- Versions 0.7.0 to 0.7.4                   [Reinstall Required/Changed Signing Keys/Supported]
+- Versions 0.6.5 and earlier                [Deprecated]
 
 
 #### Features
  * Lists New/Latest Releases from HorribleSubs Website,
  * Lists Today's Schedule as well as Week's Schedule day wise (According to User Timezone),
  * Notification Support for every new release available on HorribleSubs
-   - Needs to be enabled by user from Home Page,
+   - Needs to be enabled in the Settings,
    - Notification might get delayed (30 min at max),
- * Add a Show to Favourites for faster access,
+ * Bookmark a Show for faster & easier access,
+ * Detailed Show page,
  * Lists Search for the shows/release.
  * Views All as well as Current Shows with Search option.
  * Show Activity for viewing previous show releases and show description.
@@ -32,6 +34,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Migrated to Kotlin with updated features, UI & API.                               Major Commit   - Nov   09, 2019
 Updated Dependencies, UI, Api-v5 & More.                                          Major Commit   - Sept  22, 2019
 Fixed UI Bugs, Updated Dependencies & Redesigned App Icon                         Minor Commit   - Aug   30, 2019
 Added User Data Policy (Privacy Policy) & Minimised Ads in Show Page              Minor Commit   - July  10, 2019
@@ -90,11 +93,9 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 #### Todo
 * User Registration & Cloud Sync of Favourites
 * XDCC-IRC Download Tutorial for older episodes
-* App Load Time Improvements.
+* Minimal nyaa.si Implementation
 * Load more release options
-* nyaa.si Implementation
 * MAL Implementation
-* Migrate to Kotlin
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

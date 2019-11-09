@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/refresh"
+        android:title="@string/refresh" />
+
+    <item
+        android:id="@+id/toggle_a"
+        android:title="@string/toggle_trending_limit" />
+
+    <item
+        android:id="@+id/toggle_b"
+        android:title="@string/toggle_recent_limit" />
+
+</menu>

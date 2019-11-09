@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:id="@+id/appBarLayout"
+    app:cardCornerRadius="8dp"
+    app:strokeColor="?marker"
+    app:strokeWidth="0.5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@id/button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:drawableEnd="@drawable/ic_search"
+            android:layout_height="match_parent"
+            android:drawablePadding="8dp"
+            android:id="@+id/searchBar"
+            android:paddingStart="16dp"
+            android:layout_width="0dp"
+            android:paddingEnd="14dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:src="@drawable/app_logo"
+            android:scaleType="fitCenter"
+            android:id="@+id/logo_"
+            android:padding="8dp"
+            android:alpha="0.9" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:icon="@drawable/ic_menu_vert"
+            app:iconTint="?colorOnSurface"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            app:iconGravity="textStart"
+            android:layout_margin="0dp"
+            android:id="@+id/button"
+            android:padding="0dp"
+            app:iconPadding="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

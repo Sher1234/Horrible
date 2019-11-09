@@ -1,30 +1,24 @@
 <resources>
 
-    <style name="Theme.Fab">
-        <item name="colorOnSecondary">@color/colorSurfaceDark</item>
-        <item name="colorSecondary">@color/yellow</item>
-        <item name="colorAccent">@color/yellow</item>
+    <style name="Theme" parent="Theme.MaterialComponents.NoActionBar">
+
+        <item name="colorAccent">#EA80FC</item>
+
+        <!-- App Defined Attrs -->
+        <item name="marker">#333333</item>
+        <item name="qFHD">#64FFDA</item>
+        <item name="qHD">#FF4081</item>
+        <item name="qSD">#FFD740</item>
     </style>
 
-    <style name="Theme.Dialog" parent="Theme.Parent.Dialog">
-        <item name="android:colorBackground">@color/colorSurfaceDark</item>
-        <item name="colorAccent">@color/textHeadingDark</item>
+    <style name="Theme.Dialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+<!--        <item name="colorSurface">#FF424242</item>-->
+        <item name="colorAccent">#EA80FC</item>
     </style>
 
-    <style name="Theme" parent="Theme.Parent">
-        <item name="colorPrimaryDark">@color/primaryDarkForDark</item>
-        <item name="colorOnSecondary">@color/colorAccent</item>
-        <item name="colorPrimary">@color/primaryForDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="fabStyle">@style/Theme.Fab</item>
-        <item name="tabTextColor">#85ffffff</item>
-        <item name="colorItem">#18ffffff</item>
-
-        <item name="recyclerAccent2">#a8ffffff</item>
-        <item name="recyclerAccent">#12ffffff</item>
-        <item name="accentFullHd">#00E5FF</item>
-        <item name="accentHd">#FF80AB</item>
-        <item name="accentSd">#B2FF59</item>
+    <style name="Theme.Divider" parent="Theme">
+        <item name="android:src">#29ffffff</item>
     </style>
 
 </resources>

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.api.horrible.model.Release
 import info.horriblesubs.sher.common.Constants
+import info.horriblesubs.sher.common.GoogleAds
 import info.horriblesubs.sher.common.LoadingListener
 import info.horriblesubs.sher.dialog.LoadingDialog
 import info.horriblesubs.sher.ui.show.detail.ShowDetail
@@ -38,6 +39,7 @@ class Show: AppCompatActivity(), LoadingListener {
         model = ViewModelProvider(this).get(ShowVM::class.java)
         model.initialize(this, link)
         swapFragment(ShowKey.Detail)
+        GoogleAds.INTERSTITIAL.ad()
         model.refresh()
     }
 

@@ -23,15 +23,15 @@ enum class GoogleAds {
         }
         return array[Random.nextInt(if(this == BANNER) 4 else 3)]
     }
-    fun ad(view: View) {
+    fun ad(view: View? = null) {
         when(this) {
             BANNER -> {
-                val layout: FrameLayout = view.findViewById(R.id.adLayout)
+                val layout: FrameLayout? = view?.findViewById(R.id.adLayout)
                 val request = Builder().build()
                 val adView = AdView(context)
                 adView.adUnitId = id
                 adView.adSize = AdSize.SMART_BANNER
-                layout.addView(adView)
+                layout?.addView(adView)
                 adView.loadAd(request)
             }
             INTERSTITIAL -> {

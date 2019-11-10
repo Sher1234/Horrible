@@ -23,7 +23,6 @@ class ShowDetail: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        GoogleAds.INTERSTITIAL.ad(view)
         GoogleAds.BANNER.ad(view)
         fragment(R.id.fragment1,
             Keys.FragA

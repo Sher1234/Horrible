@@ -12,7 +12,9 @@ import info.horriblesubs.sher.ui.main.settings.KeySettings
 import java.time.ZonedDateTime
 
 class ScheduleAdapter (click: ItemClick<ItemSchedule>?, items: List<ItemSchedule>?):
-    BaseAdapter<ItemSchedule>(items?.toMutableList(), click) {
+    BaseAdapter<ItemSchedule>(click) {
+
+    init {reset(items?.toMutableList())}
 
     private var time: ZonedDateTime = ZonedDateTime.now()
 

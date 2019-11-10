@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">an!me</string>
-
-<!--    <string name="ad_mob_app_id">ca-app-pub-7307290547259470~7830642737</string>-->
+    <string name="ad_mob_app_id">ca-app-pub-7307290547259470~7830642737</string>
     <string name="recent_releases">Recent Releases</string>
     <string name="random_text">Feeling bored, Try a random show from the library.</string>
     <string name="random">Random</string>
@@ -9,21 +8,6 @@
     <string name="trending_text">Trending this season</string>
     <string name="more_info">For more info tap \'?\'</string>
     <string name="weekly_schedule">Weekly Schedule</string>
-
-<!--    <string-array name="footer">-->
-<!--        <item>ca-app-pub-7307290547259470/2376858278</item>-->
-<!--        <item>ca-app-pub-7307290547259470/9001497444</item>-->
-<!--        <item>ca-app-pub-7307290547259470/5307108097</item>-->
-<!--        <item>ca-app-pub-7307290547259470/8525754646</item>-->
-<!--    </string-array>-->
-
-<!--    <string-array name="interstitial">-->
-<!--        <item>ca-app-pub-7307290547259470/8912624262</item>-->
-<!--        <item>ca-app-pub-7307290547259470/2594627922</item>-->
-<!--        <item>ca-app-pub-7307290547259470/7455790528</item>-->
-<!--    </string-array>-->
-
-
     <string name="notify_off">Enabling notifications will notify you for every new release available on HorribleSubs. Enable it for better experience.</string>
     <string name="notify_on">Disabling notifications will stop app from receiving new release notifications.</string>
     <string name="theme_desc">Helps in viewing app in darker environments &amp; saving battery various devices.</string>
@@ -69,4 +53,11 @@
     <string name="hq">360p/480p</string>
     <string name="hd">720p</string>
     <string name="fhd">1080p</string>
+    <string name="error_text">Error occurred while fetching data from server, Use the below button to open it in WebView/browser or try again after some time.</string>
+    <string name="error_title">Network/Database Error</string>
+    <string name="migrate_title">Upgrade to Newer API</string>
+    <string name="migrate_text">Thanks for updating to An!me (v8.0) it\'s an over haul of previous HorribleMobile app. The newer version is features improved UI as well as performance. Tap on migrate to migrate your older app settings to newer or cancel for a fresh start.
+        \n\nNote: All your favourites will be migrated to bookmarks.</string>
+    <string name="migrate">Migrate</string>
+    <string name="share">Share</string>
 </resources>

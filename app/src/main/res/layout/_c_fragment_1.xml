@@ -44,6 +44,11 @@
             android:layout_marginBottom="32dp"
             android:id="@+id/fragment4" />
 
+        <FrameLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/adLayout" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.core.widget.NestedScrollView>

@@ -19,6 +19,11 @@
         <item name="colorSecondary">?colorAccent</item>
     </style>
 
+    <style name="Theme.Error" parent="Theme">
+        <item name="colorPrimary">?colorError</item>
+        <item name="colorOnPrimary">?colorOnError</item>
+    </style>
+
     <style name="Theme.TabText.2" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textSize">12.5sp</item>
     </style>

@@ -63,5 +63,6 @@ enum class KeySettings(val key: String, val defaultValue: Any) {
     MarkedFav("marked_fav", true),
     TimeLeft("time_left", true),
     Theme("theme", "default"),
+    Version("version", 0),
     Token("token", "")
 }

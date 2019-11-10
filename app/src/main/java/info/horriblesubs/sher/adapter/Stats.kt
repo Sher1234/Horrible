@@ -5,7 +5,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import info.horriblesubs.sher.R
 
-class StatsAdapter (listItems: MutableList<ItemStat>?): BaseAdapter<ItemStat>(listItems, null) {
+class StatsAdapter: BaseAdapter<ItemStat>(null) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<ItemStat> {
         return StatsHolder(this, parent)
@@ -18,6 +18,11 @@ class StatsAdapter (listItems: MutableList<ItemStat>?): BaseAdapter<ItemStat>(li
     fun add(l: ItemStat) {
         if (listItems != null) listItems?.add(l)
         else listItems = mutableListOf(l)
+        reset()
+    }
+
+    fun removeAll() {
+        listItems?.clear()
         reset()
     }
 }

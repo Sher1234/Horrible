@@ -34,6 +34,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+UI fixes, UX Improvements, Migration Support, & more.                             Major Commit   - Nov   10, 2019
 Migrated to Kotlin with updated features, UI & API.                               Major Commit   - Nov   09, 2019
 Updated Dependencies, UI, Api-v5 & More.                                          Major Commit   - Sept  22, 2019
 Fixed UI Bugs, Updated Dependencies & Redesigned App Icon                         Minor Commit   - Aug   30, 2019

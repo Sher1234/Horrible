@@ -46,6 +46,7 @@ class Bookmarked: Fragment(), LoadingListener, Observer<List<ItemShow>?>, Bookma
 
     override fun onViewCreated(view: View, bundle: Bundle?) {
         super.onViewCreated(view, bundle)
+        GoogleAds.BANNER.ad(view)
         eHandler = ErrorHandler(this, view)
         recyclerView = view.findViewById(R.id.recyclerView)
         smHandler = SearchMenuHandler(this, this, view, R.menu.menu_b)

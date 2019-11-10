@@ -8,7 +8,7 @@ import info.horriblesubs.sher.api.horrible.model.ItemShow
 import info.horriblesubs.sher.common.fromHtml
 import info.horriblesubs.sher.common.load
 
-class ShowsAdapter (click: ItemClick<ItemShow>?): BaseAdapter<ItemShow>(null, click) {
+class ShowsAdapter (click: ItemClick<ItemShow>?): BaseAdapter<ItemShow>(click) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<ItemShow> {
         return ShowsHolder(

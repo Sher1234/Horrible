@@ -27,12 +27,14 @@ import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.db.DataAccess
 import info.horriblesubs.sher.dialog.InfoDialog
 import info.horriblesubs.sher.dialog.LoadingDialog
+import info.horriblesubs.sher.dialog.NetworkErrorDialog
 import info.horriblesubs.sher.ui.show.Show
 
 class Recent: Fragment(), LoadingListener, Observer<Result<ItemRecent>?>, ItemClick<ItemRecent>,
     PopupMenu.OnMenuItemClickListener {
 
     private val adapter: RecentAdapter = RecentAdapter(this)
+    private var errorDialog: NetworkErrorDialog? = null
     private var textView: AppCompatTextView? = null
     private var recyclerView: RecyclerView? = null
     private var dialog: LoadingDialog? = null
@@ -51,6 +53,7 @@ class Recent: Fragment(), LoadingListener, Observer<Result<ItemRecent>?>, ItemCl
     override fun onViewCreated(view: View, bundle: Bundle?) {
         super.onViewCreated(view, bundle)
         textView = view.findViewById(R.id.textView2)
+        errorDialog = context?.let{NetworkErrorDialog(it)}
         recyclerView = view.findViewById(R.id.recyclerView)
         val info:InfoDialog? = context?.let{InfoDialog(it)}
         view.findViewById<View>(R.id.button).setOnClickListener{
@@ -72,6 +75,7 @@ class Recent: Fragment(), LoadingListener, Observer<Result<ItemRecent>?>, ItemCl
         when {
             result == null || result.items.isNullOrEmpty() -> {
                 Toast.makeText(context, "Server Error", Toast.LENGTH_SHORT).show()
+                errorDialog?.show("https://horriblesubs.info")
                 recyclerView?.visibility = View.GONE
                 textView?.text = ("Never")
             }
@@ -96,6 +100,7 @@ class Recent: Fragment(), LoadingListener, Observer<Result<ItemRecent>?>, ItemCl
     }
 
     override fun onDestroy() {
+        errorDialog?.dismiss()
         super.onDestroy()
         vm?.stop()
         stop()

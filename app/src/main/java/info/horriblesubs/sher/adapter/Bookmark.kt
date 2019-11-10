@@ -9,7 +9,7 @@ import info.horriblesubs.sher.api.horrible.model.ItemShow
 import info.horriblesubs.sher.common.fromHtml
 import info.horriblesubs.sher.common.load
 
-class BookmarkAdapter (private val click: BookmarkClick<ItemShow>?): BaseAdapter<ItemShow>(null, click) {
+class BookmarkAdapter (private val click: BookmarkClick<ItemShow>?): BaseAdapter<ItemShow>(click) {
 
     var toggle: Boolean = false
 

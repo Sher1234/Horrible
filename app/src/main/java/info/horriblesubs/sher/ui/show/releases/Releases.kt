@@ -25,8 +25,8 @@ import info.horriblesubs.sher.ui.show.ShowVM
 class Releases: Fragment(), Observer<ItemShow?>, ItemClick<Release>,
     PopupMenu.OnMenuItemClickListener, SearchListener, ErrorListener {
 
-    private var adapter: ReleaseAdapter = ReleaseAdapter(this, null)
     private var smHandler: SearchMenuHandler? = null
+    private var adapter = ReleaseAdapter(this)
     private var recyclerView: RecyclerView? = null
     private var eHandler: ErrorHandler? = null
     private var model: ShowVM? = null
@@ -43,6 +43,7 @@ class Releases: Fragment(), Observer<ItemShow?>, ItemClick<Release>,
 
     override fun onViewCreated(view: View, bundle: Bundle?) {
         super.onViewCreated(view, bundle)
+        GoogleAds.BANNER.ad(view)
         eHandler = ErrorHandler(this, view)
         recyclerView = view.findViewById(R.id.recyclerView)
         smHandler = SearchMenuHandler(this, this, view, R.menu.menu_f, true)

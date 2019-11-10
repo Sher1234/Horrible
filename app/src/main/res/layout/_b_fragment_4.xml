@@ -7,8 +7,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintBottom_toTopOf="@id/adLayout"
         tools:layoutManager="StaggeredGridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0"
@@ -23,6 +23,14 @@
         android:paddingTop="4.5dp"
         tools:spanCount="3"
         tools:itemCount="8" />
+
+    <FrameLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/adLayout" />
 
     <FrameLayout
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"

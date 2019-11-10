@@ -9,6 +9,7 @@ import android.widget.PopupMenu
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
+import info.horriblesubs.sher.common.GoogleAds
 import info.horriblesubs.sher.common.MenuHandler
 import info.horriblesubs.sher.ui.main.explore.Explore.Keys.*
 import info.horriblesubs.sher.ui.main.explore.random.Random
@@ -28,6 +29,7 @@ class Explore: Fragment(), PopupMenu.OnMenuItemClickListener {
         fragment(R.id.fragment1, TRENDING)
         fragment(R.id.fragment2, RANDOM)
         fragment(R.id.fragment3, RECENT)
+        GoogleAds.BANNER.ad(view)
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {

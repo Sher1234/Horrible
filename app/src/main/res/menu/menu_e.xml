@@ -6,7 +6,7 @@
         android:title="@string/refresh" />
 
     <item
-        android:id="@+id/report"
-        android:title="@string/report_error" />
+        android:id="@+id/share"
+        android:title="@string/share" />
 
 </menu>

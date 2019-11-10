@@ -6,7 +6,6 @@ import info.horriblesubs.sher.common.Constants
 import info.horriblesubs.sher.db.DataAccess
 import info.horriblesubs.sher.ui.main.settings.KeySettings
 
-
 class NotificationX : FirebaseMessagingService() {
 
     private val b = Constants.value(KeySettings.FavNotifications) as Boolean

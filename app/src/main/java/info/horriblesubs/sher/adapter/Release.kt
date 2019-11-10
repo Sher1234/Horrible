@@ -7,10 +7,7 @@ import info.horriblesubs.sher.R
 import info.horriblesubs.sher.api.horrible.model.Release
 import info.horriblesubs.sher.common.fromHtml
 
-class ReleaseAdapter (
-    itemClick: ItemClick<Release>?,
-    listItems: MutableList<Release>?
-): BaseAdapter<Release>(listItems, itemClick) {
+class ReleaseAdapter(click: ItemClick<Release>?): BaseAdapter<Release>(click) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Release> {
         return ReleaseHolder(this, itemClick, parent)
@@ -24,18 +21,6 @@ class ReleaseAdapter (
         items = listItems?.searchRelease(x)
         size = items?.size ?:0
         notifyDataSetChanged()
-    }
-
-    fun add(r: Release) {
-        if (listItems == null) listItems = mutableListOf()
-        listItems?.add(r)
-        reset()
-    }
-
-    fun addAll(r: MutableList<Release>) {
-        if (listItems == null) listItems = mutableListOf()
-        listItems?.addAll(r)
-        reset()
     }
 }
 

@@ -17,6 +17,7 @@ import info.horriblesubs.sher.R
 import info.horriblesubs.sher.api.horrible.model.ItemShow
 import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.ui.show.ShowVM
+import info.horriblesubs.sher.ui.web.WebX
 
 class D : Fragment(), OnClickListener, Observer<ItemShow?> {
 
@@ -70,14 +71,15 @@ class D : Fragment(), OnClickListener, Observer<ItemShow?> {
 
     override fun onClick(v: View) {
         val link: String?
-        val intent = Intent(Intent.ACTION_VIEW)
+        var intent = Intent(Intent.ACTION_VIEW)
         intent.addCategory(Intent.CATEGORY_BROWSABLE)
         when (v.id) {
             R.id.button1 -> {
-                if (show == null) return
+                if (show?.link == null) return
+                intent = Intent(context, WebX::class.java)
                 link = if(show?.link?.contains("shows") == true)show?.link
                 else "https://horriblesubs.info/shows/${show?.link}"
-                intent.data = Uri.parse(link)
+                intent.putExtra("link", link)
                 startActivity(intent)
             }
             R.id.button2 -> {
@@ -95,7 +97,7 @@ class D : Fragment(), OnClickListener, Observer<ItemShow?> {
             }
             R.id.button4 -> {
                 if (show == null) return
-                link = "https://old.animekaizoku.com//?s=${Uri.encode(show?.title)}"
+                link = "https://animekaizoku.com//?s=${Uri.encode(show?.title)}"
                 intent.data = Uri.parse(link)
                 startActivity(intent)
             }

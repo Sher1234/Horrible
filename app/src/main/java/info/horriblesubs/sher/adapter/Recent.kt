@@ -8,7 +8,7 @@ import info.horriblesubs.sher.api.horrible.model.ItemRecent
 import info.horriblesubs.sher.common.fromHtml
 import info.horriblesubs.sher.db.DataAccess
 
-class RecentAdapter (click: ItemClick<ItemRecent>?): BaseAdapter<ItemRecent>(null, click) {
+class RecentAdapter (click: ItemClick<ItemRecent>?): BaseAdapter<ItemRecent>(click) {
 
     private var limiter: Boolean = true
 

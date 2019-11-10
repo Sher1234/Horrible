@@ -18,11 +18,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.adapter.ItemClick
 import info.horriblesubs.sher.api.horrible.model.ItemSchedule
+import info.horriblesubs.sher.api.horrible.result.isNull
+import info.horriblesubs.sher.common.GoogleAds
 import info.horriblesubs.sher.common.Info
 import info.horriblesubs.sher.common.LoadingListener
 import info.horriblesubs.sher.common.MenuHandler
 import info.horriblesubs.sher.dialog.InfoDialog
 import info.horriblesubs.sher.dialog.LoadingDialog
+import info.horriblesubs.sher.dialog.NetworkErrorDialog
 import info.horriblesubs.sher.ui.show.Show
 import java.util.*
 import kotlin.collections.ArrayList
@@ -31,14 +34,15 @@ class Schedule: Fragment(), LoadingListener, Observer<Map<String, List<ItemSched
     PopupMenu.OnMenuItemClickListener, ItemClick<ItemSchedule> {
 
     private val dayAdapter: DaysAdapter = DaysAdapter(this)
+    private var errorDialog: NetworkErrorDialog? = null
     private var dLoading: LoadingDialog? = null
     private var handler: MenuHandler? = null
-    private var vm: ScheduleVM? = null
+    private lateinit var vm: ScheduleVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm = ViewModelProvider(activity as AppCompatActivity).get(ScheduleVM::class.java)
-        vm?.initialize(this)
+        vm.initialize(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?, bundle: Bundle?): View? {
@@ -49,28 +53,33 @@ class Schedule: Fragment(), LoadingListener, Observer<Map<String, List<ItemSched
         super.onViewCreated(view, bundle)
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
+        errorDialog = context?.let{NetworkErrorDialog(it)}
         viewPager.adapter = dayAdapter
         TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy{t, p ->
             t.text = dayAdapter.days[p].day
         }).attach()
         handler = MenuHandler(this, view, R.menu.menu_c)
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        GoogleAds.BANNER.ad(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm?.schedule?.observe(viewLifecycleOwner, this)
-        vm?.refresh()
+        vm.schedule.observe(viewLifecycleOwner, this)
+        vm.refresh()
     }
 
     override fun onChanged(result: Map<String, List<ItemSchedule>>?) {
+        if (result == null || vm.result.value.isNull())
+            errorDialog?.show("https://horriblesubs.info/release-schedule")
         dayAdapter.result = result
         stop()
     }
 
     override fun onDestroy() {
+        errorDialog?.dismiss()
         super.onDestroy()
-        vm?.stop()
+        vm.stop()
         stop()
     }
 
@@ -88,8 +97,8 @@ class Schedule: Fragment(), LoadingListener, Observer<Map<String, List<ItemSched
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         val info: InfoDialog? = context?.let{InfoDialog(it)}
         when(item?.itemId) {
-            R.id.info -> info?.show(Info.SCHEDULE, vm?.result?.value)
-            R.id.refresh -> vm?.refresh(true)
+            R.id.info -> info?.show(Info.SCHEDULE, vm.result.value)
+            R.id.refresh -> vm.refresh(true)
             else -> return false
         }
         return true

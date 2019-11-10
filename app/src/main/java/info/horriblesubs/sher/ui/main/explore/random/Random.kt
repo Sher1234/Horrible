@@ -48,7 +48,8 @@ class Random : Fragment(), View.OnClickListener, Observer<ItemShow?> {
 
     override fun onChanged(t: ItemShow?) {
         destroy()
-        dialog = context?.let{RandomDialog(it, t)}
+        if (t != null)
+            dialog = context?.let{RandomDialog(it, t)}
         dialog?.show()
     }
 

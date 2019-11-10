@@ -19,25 +19,28 @@ import info.horriblesubs.sher.adapter.ItemClick
 import info.horriblesubs.sher.adapter.ShowsAdapter
 import info.horriblesubs.sher.api.horrible.model.ItemShow
 import info.horriblesubs.sher.api.horrible.result.ResultShows
+import info.horriblesubs.sher.api.horrible.result.isNull
 import info.horriblesubs.sher.common.*
 import info.horriblesubs.sher.dialog.InfoDialog
 import info.horriblesubs.sher.dialog.LoadingDialog
+import info.horriblesubs.sher.dialog.NetworkErrorDialog
 import info.horriblesubs.sher.ui.show.Show
 
 class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<ItemShow>,
     PopupMenu.OnMenuItemClickListener, SearchListener, ErrorListener {
 
-    private val adapter = ShowsAdapter(this)
+    private var errorDialog: NetworkErrorDialog? = null
     private var smHandler: SearchMenuHandler? = null
+    private val adapter = ShowsAdapter(this)
     private var recyclerView: RecyclerView? = null
     private var eHandler: ErrorHandler? = null
     private var dialog: LoadingDialog? = null
-    private var vm: ShowsVM? = null
+    private lateinit var vm: ShowsVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm = ViewModelProvider(activity as AppCompatActivity).get(ShowsVM::class.java)
-        vm?.initialize(this)
+        vm.initialize(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?, bundle: Bundle?): View? {
@@ -46,7 +49,9 @@ class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<Item
 
     override fun onViewCreated(view: View, bundle: Bundle?) {
         super.onViewCreated(view, bundle)
+        GoogleAds.BANNER.ad(view)
         eHandler = ErrorHandler(this, view)
+        errorDialog = context?.let{NetworkErrorDialog(it)}
         recyclerView = view.findViewById(R.id.recyclerView)
         smHandler = SearchMenuHandler(this, this, view, R.menu.menu_d)
     }
@@ -54,19 +59,19 @@ class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<Item
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recyclerView?.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        vm?.allShowing?.observe(viewLifecycleOwner, Observer {
+        vm.allShowing.observe(viewLifecycleOwner, Observer {
             val item = smHandler?.menuHandler?.popupMenu?.menu?.findItem(R.id.toggle)
             item?.title = getString(if(it == true) R.string.current_season else R.string.all_shows)
             toggleShows(b = it?:false)
         })
-        vm?.result?.observe(viewLifecycleOwner, this)
+        vm.result.observe(viewLifecycleOwner, this)
         recyclerView?.itemAnimator = DefaultItemAnimator()
         recyclerView?.adapter = adapter
-        vm?.refresh()
+        vm.refresh()
     }
 
-    private fun toggleShows(v: ResultShows? = vm?.result?.value,
-                            b: Boolean = vm?.allShowing?.value?:false) {
+    private fun toggleShows(v: ResultShows? = vm.result.value,
+                            b: Boolean = vm.allShowing.value?:false) {
         val list = if (b) v?.items else v?.current
         when {
             list.isNullOrEmpty() -> eHandler?.show()
@@ -78,12 +83,16 @@ class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<Item
     }
 
     override fun onChanged(result: ResultShows?) {
+        if (result.isNull())
+            errorDialog?.show("https://horriblesubs.info/"
+                    + if(vm.allShowing.value == true)"shows" else "current-season")
         toggleShows(v = result)
     }
 
     override fun onDestroy() {
+        errorDialog?.dismiss()
         super.onDestroy()
-        vm?.stop()
+        vm.stop()
         stop()
     }
 
@@ -108,9 +117,9 @@ class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<Item
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         val info: InfoDialog? = context?.let{InfoDialog(it)}
         when(item?.itemId) {
-            R.id.info -> info?.show(Info.SHOWS, vm?.result?.value)
-            R.id.refresh -> vm?.refresh(true)
-            R.id.toggle -> vm?.toggle()
+            R.id.info -> info?.show(Info.SHOWS, vm.result.value)
+            R.id.refresh -> vm.refresh(true)
+            R.id.toggle -> vm.toggle()
             else -> return false
         }
         return true

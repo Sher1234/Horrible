@@ -8,7 +8,7 @@ import info.horriblesubs.sher.api.horrible.model.ItemShow
 import info.horriblesubs.sher.common.fromHtml
 import info.horriblesubs.sher.common.load
 
-class TrendingAdapter(click: ItemClick<ItemShow>?): BaseAdapter<ItemShow>(null, click) {
+class TrendingAdapter(click: ItemClick<ItemShow>?): BaseAdapter<ItemShow>(click) {
 
     private var limiter: Boolean = true
 

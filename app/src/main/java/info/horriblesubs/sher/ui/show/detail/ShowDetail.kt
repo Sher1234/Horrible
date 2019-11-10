@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
+import info.horriblesubs.sher.common.GoogleAds
 import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.ui.show.detail.a.A
 import info.horriblesubs.sher.ui.show.detail.b.B
@@ -22,6 +23,8 @@ class ShowDetail: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        GoogleAds.INTERSTITIAL.ad(view)
+        GoogleAds.BANNER.ad(view)
         fragment(R.id.fragment1,
             Keys.FragA
         )

@@ -18,11 +18,11 @@ import info.horriblesubs.sher.ui.show.view.ReleaseView
 class Show: AppCompatActivity(), LoadingListener {
     
     private var dialog: LoadingDialog? = null
-    private var model: ShowVM? = null
+    private lateinit var model: ShowVM
 
     fun viewReleases(release: Release? = null) {
         swapFragment(if (release == null) ShowKey.ReleaseList else ShowKey.Release)
-        model?.release?.value = release
+        model.release.value = release
     }
 
     override fun onCreate(bundle: Bundle?) {
@@ -36,9 +36,9 @@ class Show: AppCompatActivity(), LoadingListener {
             return
         }
         model = ViewModelProvider(this).get(ShowVM::class.java)
-        model?.initialize(this, link)
+        model.initialize(this, link)
         swapFragment(ShowKey.Detail)
-        model?.refresh()
+        model.refresh()
     }
 
     private fun swapFragment(key: ShowKey) {
@@ -57,7 +57,7 @@ class Show: AppCompatActivity(), LoadingListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        model?.stop()
+        model.stop()
         stop()
     }
 

@@ -1,5 +1,6 @@
 package info.horriblesubs.sher.ui.show.detail.a
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -23,6 +24,7 @@ import info.horriblesubs.sher.common.fromHtml
 import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.common.load
 import info.horriblesubs.sher.db.DataAccess
+import info.horriblesubs.sher.dialog.NetworkErrorDialog
 import info.horriblesubs.sher.ui.show.Show
 import info.horriblesubs.sher.ui.show.ShowVM
 import java.time.format.TextStyle
@@ -30,6 +32,7 @@ import java.util.*
 
 class A : Fragment(), OnClickListener, PopupMenu.OnMenuItemClickListener {
     private var button2: AppCompatCheckedTextView? = null
+    private var errorDialog: NetworkErrorDialog? = null
     private var imageView: AppCompatImageView? = null
     private var textView1: AppCompatTextView? = null
     private var textView2: AppCompatTextView? = null
@@ -47,10 +50,16 @@ class A : Fragment(), OnClickListener, PopupMenu.OnMenuItemClickListener {
         return group?.inflate(R.layout._c_fragment_1_a, inflater)
     }
 
+    override fun onDestroy() {
+        errorDialog?.dismiss()
+        super.onDestroy()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MenuHandler(this, view, R.menu.menu_e, R.id.button3)
         view.findViewById<View>(R.id.button1).setOnClickListener(this)
+        errorDialog = context?.let{NetworkErrorDialog(it)}
         imageView = view.findViewById(R.id.imageView)
         textView4 = view.findViewById(R.id.textView4)
         textView3 = view.findViewById(R.id.textView3)
@@ -64,13 +73,32 @@ class A : Fragment(), OnClickListener, PopupMenu.OnMenuItemClickListener {
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         when(item?.itemId) {
-            R.id.report -> Toast.makeText(context, "Report Error", Toast.LENGTH_SHORT).show()
             R.id.refresh -> model.refresh(true)
+            R.id.share -> {
+                if(show?.title == null || show?.link == null)
+                    Toast.makeText(context, "Invalid info", Toast.LENGTH_SHORT).show()
+                else {
+                    val link = if(show?.link?.contains("shows") == true) show?.link
+                    else "https://horriblesubs.info/shows/${show?.link}"
+                    val text = "Title: ${show?.title}\nLink: $link"
+                    val sendIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT,text)
+                        type = "text/plain"
+                    }
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
+                }
+            }
         }
         return true
     }
 
     private fun observeShow(t: ItemShow?) {
+        if (t?.title == null || t.link == null) {
+            if (model.link2.isNullOrEmpty()) Toast.makeText(context, "Undefined URL", Toast.LENGTH_SHORT).show()
+            else errorDialog?.show("https://horriblesubs.info/show/${model.link2}")
+        }
         textView3?.text = if(t?.ongoing == true) "Currently Airing" else "Airing Completed"
         button2?.setText(if (DataAccess.bookmarked(t?.sid)) R.string.bookmarked else R.string.bookmark)
         button2?.isChecked = DataAccess.bookmarked(t?.sid)

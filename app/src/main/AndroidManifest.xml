@@ -17,9 +17,9 @@
         android:label="@string/app_name"
         android:name=".App">
 
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
-<!--            android:value="@string/ad_mob_app_id" />-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ad_mob_app_id" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_bookmark" />
@@ -64,6 +64,8 @@
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity"
             android:name=".ui.show.Show" />
+
+        <activity android:name=".ui.web.WebX" />
 
     </application>
 

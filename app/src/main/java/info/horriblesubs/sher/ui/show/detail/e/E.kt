@@ -22,7 +22,7 @@ import info.horriblesubs.sher.ui.show.Show
 import info.horriblesubs.sher.ui.show.ShowVM
 
 class E : Fragment(), ItemClick<Release>, Observer<ItemShow?> {
-    private val adapter: ReleaseAdapter = ReleaseAdapter(this, null)
+    private val adapter = ReleaseAdapter(this)
     private var textView: AppCompatTextView? = null
     private var recyclerView: RecyclerView? = null
     private var model: ShowVM? = null
@@ -41,9 +41,9 @@ class E : Fragment(), ItemClick<Release>, Observer<ItemShow?> {
         textView = view.findViewById(R.id.textView)
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView?.layoutManager = GridLayoutManager(context, 4)
+        model?.result?.observe(viewLifecycleOwner, this)
         recyclerView?.itemAnimator = DefaultItemAnimator()
         recyclerView?.adapter = adapter
-        model?.result?.observe(viewLifecycleOwner, this)
     }
 
     override fun onClick(e: Release?) {
@@ -55,24 +55,20 @@ class E : Fragment(), ItemClick<Release>, Observer<ItemShow?> {
             t == null || (t.episodes.isNullOrEmpty()) && (t.batches.isNullOrEmpty()) -> {
                 recyclerView?.visibility = View.GONE
                 textView?.visibility = View.VISIBLE
-                recyclerView?.adapter = null
             }
             else -> {
-                val size = if (!t.batches.isNullOrEmpty()) {
-                    recyclerView?.layoutManager = GridLayoutManager(context, 3)
-                    3
-                } else 4
+                val size = if (!t.batches.isNullOrEmpty()) 3 else 4
                 var list: MutableList<Release> = mutableListOf()
                 t.batches?.forEach {
                     it.batch = true
                     list.add(it)
                 }
                 t.episodes?.let {list.addAll(it)}
+                (recyclerView?.layoutManager as GridLayoutManager?)?.spanCount = size
                 list = list.subList(0, if(list.size > size) size else list.size)
                 recyclerView?.visibility = View.VISIBLE
                 textView?.visibility = View.GONE
-                recyclerView?.adapter = adapter
-                adapter.addAll(list)
+                adapter.reset(list)
             }
         }
     }

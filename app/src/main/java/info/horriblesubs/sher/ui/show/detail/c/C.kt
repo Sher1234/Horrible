@@ -20,8 +20,8 @@ import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.ui.show.ShowVM
 
 class C : Fragment(), Observer<ItemShow?> {
-    private val adapter: StatsAdapter = StatsAdapter(null)
     private var recyclerView: RecyclerView? = null
+    private val adapter = StatsAdapter()
     private var model: ShowVM? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +43,7 @@ class C : Fragment(), Observer<ItemShow?> {
     }
 
     override fun onChanged(t: ItemShow?) {
+        adapter.removeAll()
         adapter.add(ItemStat(R.drawable.ic_views, "Views", t?.views.toString()))
         adapter.add(ItemStat(R.drawable.ic_bookmarks, "Bookmarks", t?.favs.toString()))
         adapter.add(ItemStat(R.drawable.ic_rating, "Rating", t?.rating.toString()))

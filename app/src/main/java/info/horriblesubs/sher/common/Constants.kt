@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
@@ -17,14 +18,19 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.messaging.FirebaseMessaging
 import info.horriblesubs.sher.App
+import info.horriblesubs.sher.BuildConfig
 import info.horriblesubs.sher.R
+import info.horriblesubs.sher.dialog.MigrateDialog
 import info.horriblesubs.sher.ui.main.settings.KeySettings
 import info.horriblesubs.sher.ui.show.Show
 import java.util.*
 
+
 object Constants {
     val imageOptions = RequestOptions().transform(FitCenter(), RoundedCorners(10))
+    private val old: SharedPreferences get() = App.instance.getSharedPreferences(oldFile, Context.MODE_PRIVATE)
     val preferences: SharedPreferences get() = PreferenceManager.getDefaultSharedPreferences(App.instance)
+    private const val oldFile = "com.github.sher1234.horrible.settings"
 
     fun subscribe(b: Boolean = value(KeySettings.Notifications) as Boolean) {
         if (!b) FirebaseMessaging.getInstance().unsubscribeFromTopic("anime.ongoing")
@@ -67,5 +73,42 @@ object Constants {
                 )
             notify(code, builder.build())
         }
+    }
+
+    fun migrate() {
+        val theme = if (old.getBoolean("theme", false)) "dark" else "default"
+        val notifications = old.getBoolean("notifications", false)
+        val token = old.getString("token", null)
+        preferences.edit().putString(KeySettings.Token.key, token).apply()
+        preferences.edit().putString(KeySettings.Theme.key, theme).apply()
+        preferences.edit().putBoolean(KeySettings.Notifications.key, notifications).apply()
+        preferences.edit().putInt(KeySettings.Version.key, BuildConfig.VERSION_CODE).apply()
+        old.edit().putBoolean("notifications", false).apply()
+        old.edit().putBoolean("theme", false).apply()
+        old.edit().putString("token", null).apply()
+        subscribe()
+        theme()
+    }
+
+    fun cancelMigrate() {
+        preferences.edit().putInt(KeySettings.Version.key, BuildConfig.VERSION_CODE).apply()
+        val token = old.getString("token", null)
+        preferences.edit().putString(KeySettings.Token.key, token).apply()
+        old.edit().putBoolean("notifications", false).apply()
+        old.edit().putBoolean("theme", false).apply()
+        old.edit().putString("token", null).apply()
+        subscribe()
+        theme()
+    }
+
+    private fun isMigrateAble(): Boolean {
+        val b = preferences.getInt(KeySettings.Version.key, KeySettings.Version.defaultValue as Int)
+        val a = old.getString("token", null).isNullOrEmpty()
+        return !a && b < BuildConfig.VERSION_CODE
+    }
+
+    fun requestMigrate(context: Context) {
+        if (isMigrateAble())
+            MigrateDialog(context).show()
     }
 }

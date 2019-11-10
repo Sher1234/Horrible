@@ -3,22 +3,21 @@ package info.horriblesubs.sher.adapter
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import info.horriblesubs.sher.api.horrible.model.ItemBase
 import info.horriblesubs.sher.api.horrible.model.Release
 import info.horriblesubs.sher.common.Constants
 import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.ui.main.settings.KeySettings
-import java.util.*
 
-abstract class BaseAdapter<E> (
-    protected var listItems: MutableList<E>?,
-    val itemClick: ItemClick<E>?
-): RecyclerView.Adapter<BaseHolder<E>>() {
+abstract class BaseAdapter<E>(val itemClick: ItemClick<E>?): Adapter<BaseHolder<E>>() {
 
+    protected var listItems: MutableList<E>?
     protected var items: MutableList<E>?
     protected var size: Int?
 
     init {
+        listItems = null
         items = listItems?.toMutableList()
         size = items?.size
     }
@@ -62,9 +61,8 @@ fun <E: ItemBase> MutableList<E>.search(x: String?): MutableList<E>? {
     else {
         val list: MutableList<E> = mutableListOf()
         forEach {
-            val a = it.title?.toLowerCase(Locale.ROOT) ?: ""
-            val b = x.toLowerCase(Locale.ROOT)
-            if (a.contains(b)) list.add(it)
+            if ((it.title?:"").contains(x, true))
+                list.add(it)
         }
         list
     }
@@ -75,9 +73,8 @@ fun MutableList<Release>.searchRelease(x: String?): MutableList<Release>? {
     else {
         val list: MutableList<Release> = mutableListOf()
         forEach {
-            val a = it.release?.toLowerCase(Locale.ROOT) ?: ""
-            val b = x.toLowerCase(Locale.ROOT)
-            if (a.contains(b)) list.add(it)
+            if ((it.release?:"").contains(x, true))
+                list.add(it)
         }
         list
     }

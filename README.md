@@ -1,10 +1,10 @@
-## HorribleSubs
-HorribleSubs Android Application with Notification Support <br />
-Not affiliated with **[horriblesubs.info](https://horriblesubs.info)** in any way <br />
+## an!me
+an!me - better ongoing is an android application with *notification support* for newer releases <br />
+Not affiliated to source i.e. **[horriblesubs.info](https://horriblesubs.info)** in any way <br />
 Support the official site **[horriblesubs.info](https://horriblesubs.info)**
 
 #### Tech
-Horrible Subs implements number of open source projects listed bellow:
+an!me implements number of open source projects listed bellow:
 - Androidx Libraries
 - Glide for Displaying images
 - Retrofit networking libraries
@@ -34,6 +34,7 @@ Horrible Subs implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Tablet Support & Updated Privacy Policy.                                          Major Commit   - Nov   10, 2019
 UI fixes, UX Improvements, Migration Support, & more.                             Major Commit   - Nov   10, 2019
 Migrated to Kotlin with updated features, UI & API.                               Major Commit   - Nov   09, 2019
 Updated Dependencies, UI, Api-v5 & More.                                          Major Commit   - Sept  22, 2019

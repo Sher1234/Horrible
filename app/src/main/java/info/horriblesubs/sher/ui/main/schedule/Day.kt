@@ -10,6 +10,7 @@ import info.horriblesubs.sher.R
 import info.horriblesubs.sher.adapter.ItemClick
 import info.horriblesubs.sher.adapter.ScheduleAdapter
 import info.horriblesubs.sher.api.horrible.model.ItemSchedule
+import info.horriblesubs.sher.common.Constants
 import info.horriblesubs.sher.common.ErrorHandler
 import info.horriblesubs.sher.common.ErrorListener
 import info.horriblesubs.sher.common.inflate
@@ -20,7 +21,7 @@ class Day (group: ViewGroup): ViewHolder(group.inflate(R.layout._b_fragment_3_a)
 
     fun load(list: List<ItemSchedule>?, itemClick: ItemClick<ItemSchedule>?) {
         if(list.isNullOrEmpty()) errorHandler.show() else errorHandler.hide()
-        recyclerView.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(Constants.orientation(3, 5), StaggeredGridLayoutManager.VERTICAL)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = ScheduleAdapter(itemClick, list)
     }

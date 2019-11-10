@@ -14,10 +14,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.adapter.ItemClick
 import info.horriblesubs.sher.adapter.TrendingAdapter
 import info.horriblesubs.sher.api.horrible.model.ItemShow
+import info.horriblesubs.sher.common.Constants
 import info.horriblesubs.sher.common.Info
 import info.horriblesubs.sher.common.inflate
 import info.horriblesubs.sher.dialog.InfoDialog
@@ -47,7 +50,7 @@ class Trending: Fragment(), Observer<List<ItemShow>?>, ItemClick<ItemShow>, OnMe
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView?.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        recyclerView?.layoutManager = LinearLayoutManager(context, Constants.orientation(HORIZONTAL, VERTICAL), false)
         vm?.result?.observe(viewLifecycleOwner, this)
         recyclerView?.itemAnimator = DefaultItemAnimator()
         recyclerView?.adapter = adapter

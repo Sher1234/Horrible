@@ -22,9 +22,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         applicationId "info.horriblesubs.sher"
         targetSdkVersion 29
-        versionName "0.8.1"
+        versionName "0.8.2"
         minSdkVersion 21
-        versionCode 81
+        versionCode 82
     }
     buildTypes {
         release {

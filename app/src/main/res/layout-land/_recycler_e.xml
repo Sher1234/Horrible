@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginEnd="4dp">
+    android:layout_width="match_parent"
+    android:layout_margin="4.5dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:src="@drawable/app_placeholder"
-        android:layout_height="178dp"
-        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         tools:scaleType="fitCenter"
-        android:id="@+id/imageView" />
+        android:id="@+id/imageView"
+        android:maxHeight="168dp"
+        android:minHeight="150dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         app:layout_constraintStart_toStartOf="@id/imageView"
@@ -25,13 +26,13 @@
         android:textAppearance="?textAppearanceBody1"
         tools:text="@tools:sample/full_names"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_width="0dp"
+        android:layout_marginTop="2dp"
         android:id="@+id/textView"
-        android:textSize="11.5sp"
+        android:layout_width="0dp"
+        android:textSize="11.25sp"
         android:gravity="center"
-        tools:ignore="SmallSp"
-        android:padding="4dp" />
+        android:padding="4.75dp"
+        tools:ignore="SmallSp" />
 
     <View
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="0dp"
-        android:layout_width="0dp" />
+        android:layout_width="0dp"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

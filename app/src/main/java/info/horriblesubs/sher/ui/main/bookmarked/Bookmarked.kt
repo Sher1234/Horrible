@@ -54,7 +54,7 @@ class Bookmarked: Fragment(), LoadingListener, Observer<List<ItemShow>?>, Bookma
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView?.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView?.layoutManager = StaggeredGridLayoutManager(Constants.orientation(3, 5), StaggeredGridLayoutManager.VERTICAL)
         vm?.result?.observe(viewLifecycleOwner, this)
         recyclerView?.itemAnimator = DefaultItemAnimator()
         recyclerView?.adapter = adapter

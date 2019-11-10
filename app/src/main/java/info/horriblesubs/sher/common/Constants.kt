@@ -7,6 +7,7 @@ import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import androidx.appcompat.app.AppCompatDelegate.*
@@ -110,5 +111,10 @@ object Constants {
     fun requestMigrate(context: Context) {
         if (isMigrateAble())
             MigrateDialog(context).show()
+    }
+
+    fun <T> orientation(p: T, l: T): T {
+        val orientation: Int = App.instance.resources.configuration.orientation
+        return if (orientation == Configuration.ORIENTATION_LANDSCAPE) l else p
     }
 }

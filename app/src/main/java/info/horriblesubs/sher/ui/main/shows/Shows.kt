@@ -58,7 +58,7 @@ class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<Item
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView?.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView?.layoutManager = StaggeredGridLayoutManager(Constants.orientation(3, 5), StaggeredGridLayoutManager.VERTICAL)
         vm.allShowing.observe(viewLifecycleOwner, Observer {
             val item = smHandler?.menuHandler?.popupMenu?.menu?.findItem(R.id.toggle)
             item?.title = getString(if(it == true) R.string.current_season else R.string.all_shows)

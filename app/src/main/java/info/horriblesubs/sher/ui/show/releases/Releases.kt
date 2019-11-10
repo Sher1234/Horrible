@@ -65,15 +65,15 @@ class Releases: Fragment(), Observer<ItemShow?>, ItemClick<Release>,
 
     private fun adapterReset(t: ItemShow? = model?.result?.value, isAll: Int = this.isAll) {
         val list: MutableList<Release> = mutableListOf()
+        var span = Constants.orientation(4, 6)
         this.isAll = isAll
-        var span = 4
         when(isAll) {
             -1 -> {
                 t?.batches?.forEach {
                     it.batch = true
                     list.add(it)
                 }
-                span = 3
+                span = Constants.orientation(3, 5)
             }
             0 -> {
                 t?.batches?.forEach {
@@ -81,10 +81,10 @@ class Releases: Fragment(), Observer<ItemShow?>, ItemClick<Release>,
                     list.add(it)
                 }
                 t?.episodes?.let {list.addAll(it)}
-                span = if(t?.batches.isNullOrEmpty()) 4 else 3
+                span = if(t?.batches.isNullOrEmpty()) 4 else Constants.orientation(3, 5)
             }
             1 -> {
-                span = 4
+                span = Constants.orientation(4, 6)
                 t?.episodes?.let{list.addAll(it)}
             }
         }

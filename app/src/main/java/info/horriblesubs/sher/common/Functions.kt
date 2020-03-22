@@ -14,18 +14,33 @@ import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit.*
 
 fun ZonedDateTime?.timePassed(now: ZonedDateTime): String {
-    if (this == null) return "Never"
-    var m = MINUTES.between(this, now)
-    var h = HOURS.between(this, now)
-    val d = DAYS.between(this, now)
-    m -= ((d*24*60) + (h*60))
-    h -= (d*24)
-    var s = ""
-    s += if (d > 0) d+"d " else ""
-    s += if (h > 0) h+"h " else ""
-    s += if (m > 0) m+"m " else ""
+    if (this == null) return "?"
+    val centuries = CENTURIES.between(this, now)
+    var minutes = MINUTES.between(this, now)
+    var seconds = SECONDS.between(this, now)
+    var months = MONTHS.between(this, now)
+    var weeks = WEEKS.between(this, now)
+    var hours = HOURS.between(this, now)
+    var years = YEARS.between(this, now)
+    var days = DAYS.between(this, now)
+    seconds -= (minutes*60)
+    minutes -= (hours*60)
+    hours -= (days*24)
+    days -= (weeks*7)
+    weeks -= (months*4.348214).toLong()
+    months -= (years*12)
+    years -= (centuries*100)
+    var str = ""
+    str += if (centuries > 0) centuries+"C " else ""
+    str += if (years > 0) years+"Y " else ""
+    str += if (months > 0) months+"M " else ""
+    str += if (weeks > 0) weeks+"w " else ""
+    str += if (days > 0) days+"d " else ""
+    str += if (hours > 0) hours+"h " else ""
+    str += if (minutes > 0) minutes+"m " else ""
+    str += if (seconds > 0) seconds+"s " else ""
     return when {
-        d > 0 || h > 0 || m > 0 -> s+"ago"
+        centuries > 0 || years > 0 || months > 0 || weeks > 0 || days > 0 || hours > 0 || minutes > 0 || seconds > 0 -> str+"ago"
         else -> return "Just Now"
     }
 }
@@ -34,19 +49,30 @@ private operator fun Long.plus(s: String): String {
     return "$this$s"
 }
 fun ZonedDateTime?.timeLeft(now: ZonedDateTime): String {
-    if(this == null) return "Aired | Error"
-    var m = MINUTES.between(now, this)
-    var h = HOURS.between(now, this)
-    val d = DAYS.between(now, this)
-    m -= ((d*24*60) + (h*60))
-    h -= (d*24)
-    var s = "in"
-    s += if (d > 0) " $d d" else ""
-    s += if (h > 0) " $h h" else ""
-    s += if (m > 0) " $m m" else ""
+    if(this == null) return "?"
+    var minutes = MINUTES.between(now, this)
+    var seconds = SECONDS.between(now, this)
+    var months = MONTHS.between(now, this)
+    var hours = HOURS.between(now, this)
+    val years = YEARS.between(now, this)
+    var weeks = WEEKS.between(now, this)
+    var days = DAYS.between(now, this)
+    seconds -= (minutes*60)
+    minutes -= (hours*60)
+    hours -= (days*24)
+    days -= (weeks*7)
+    weeks -= (months*4.348214).toLong()
+    months -= (years*12)
+    var str = "in"
+    str += if (years > 0) " $years Y" else ""
+    str += if (months > 0) " $months M" else ""
+    str += if (weeks > 0) " $weeks w" else ""
+    str += if (days > 0) " $days d" else ""
+    str += if (hours > 0) " $hours h" else ""
+    str += if (minutes > 0) " $minutes m" else ""
     return when {
-        d > 0 || h > 0 || m > 0 -> s
-        m <= 0 -> "Aired"
+        years > 0 || months > 0 || weeks > 0 || days > 0 || hours > 0 || minutes > 0 || seconds > 0  -> str
+        minutes <= 0 -> "Aired"
         else -> return "Aired | Error"
     }
 }

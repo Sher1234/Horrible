@@ -1,5 +1,6 @@
 package info.horriblesubs.sher.api.horrible
 
+import android.annotation.SuppressLint
 import com.google.gson.GsonBuilder
 import info.horriblesubs.sher.api.horrible.model.ItemRecent
 import info.horriblesubs.sher.api.horrible.model.ItemSchedule
@@ -7,10 +8,19 @@ import info.horriblesubs.sher.api.horrible.model.ItemShow
 import info.horriblesubs.sher.api.horrible.model.Release
 import info.horriblesubs.sher.api.horrible.result.Result
 import info.horriblesubs.sher.api.horrible.result.ResultShows
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import java.security.SecureRandom
+import java.security.cert.X509Certificate
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
+import javax.security.cert.CertificateException
+
 
 /* Network API v6
 * Improved loading speeds faster, Minimised API design, More Scalable, etc
@@ -21,10 +31,52 @@ interface Horrible {
 
     companion object {
         val service: Horrible get() {
-            return Retrofit.Builder()
+            val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
                 .baseUrl("https://sher1234.000webhostapp.com/api/v6/hs/")
-                .build().create(Horrible::class.java)
+            return try {
+                retrofit.client(getUnsafeOkHttpClient()?:throw RuntimeException())
+                    .build().create(Horrible::class.java)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                retrofit.build().create(Horrible::class.java)
+            }
+        }
+
+        @SuppressLint("TrustAllX509TrustManager")
+        private fun getUnsafeOkHttpClient(): OkHttpClient? {
+            return try { // Create a trust manager that does not validate certificate chains
+                val certificate = object : X509TrustManager {
+                    @Throws(CertificateException::class)
+                    override fun checkClientTrusted(
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
+                    ) {
+                    }
+
+                    @Throws(CertificateException::class)
+                    override fun checkServerTrusted(
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
+                    ) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> {
+                        return arrayOf()
+                    }
+                }
+                val trustAllCerts: Array<TrustManager> = arrayOf(certificate)
+                val sslContext: SSLContext = SSLContext.getInstance("SSL")
+                sslContext.init(null, trustAllCerts, SecureRandom())
+                val sslSocketFactory: SSLSocketFactory = sslContext.socketFactory
+                val builder = OkHttpClient.Builder()
+                builder.sslSocketFactory(sslSocketFactory, certificate)
+                builder.hostnameVerifier { _, _ -> true }
+                builder.build()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return null
+            }
         }
     }
 

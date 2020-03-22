@@ -34,6 +34,7 @@ an!me implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Updated dependecies & Kotlin 1.4.                                                 Minor Commit   - Mar   22, 2020
 Fixed Ads Support.                                                                Minor Commit   - Nov   10, 2019
 Tablet Support & Updated Privacy Policy.                                          Major Commit   - Nov   10, 2019
 UI fixes, UX Improvements, Migration Support, & more.                             Major Commit   - Nov   10, 2019

@@ -47,7 +47,7 @@ class ShowDetail: Fragment() {
 
     private enum class Keys {
         FragA, FragB, FragC, FragD, FragE;
-        internal val fragment: Fragment
+        val fragment: Fragment
             get() = when (this) {
                 FragA -> A()
                 FragB -> B()

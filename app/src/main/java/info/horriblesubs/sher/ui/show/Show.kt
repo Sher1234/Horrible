@@ -76,8 +76,8 @@ class Show: AppCompatActivity(), LoadingListener {
 
     private enum class ShowKey {
         Detail, ReleaseList, Release;
-        internal val stackName: String = "Fragment Show Stack"
-        internal val fragment: Fragment get() = when (this) {
+        val stackName: String = "Fragment Show Stack"
+        val fragment: Fragment get() = when (this) {
             ReleaseList -> Releases()
             Release -> ReleaseView()
             Detail -> ShowDetail()

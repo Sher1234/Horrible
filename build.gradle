@@ -2,13 +2,14 @@ buildscript {
     ext.kotlin_version = '1.4-M1'
     repositories {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         jcenter()
         google()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:4.0.0-beta03'
+        classpath 'com.android.tools.build:gradle:4.0.0-beta04'
         classpath 'com.google.gms:google-services:4.3.3'
     }
 }
@@ -16,6 +17,7 @@ buildscript {
 allprojects {
     repositories {
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://maven.google.com' }
         mavenCentral()
         jcenter()
         google()

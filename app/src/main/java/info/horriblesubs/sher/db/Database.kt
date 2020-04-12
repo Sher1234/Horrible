@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class Database(c: Context): SQLiteOpenHelper(c, "FavDB", null, 4), Horrible {
+class Database(c: Context): SQLiteOpenHelper(c, "FavDB", null, 4) {
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             "CREATE TABLE " + Horrible.Favourites + " (" +
@@ -28,10 +28,8 @@ class Database(c: Context): SQLiteOpenHelper(c, "FavDB", null, 4), Horrible {
         db.execSQL("DROP TABLE IF EXISTS " + Horrible.Notify)
         onCreate(db)
     }
-}
 
-interface Horrible {
-    companion object {
+    object Horrible {
         const val Favourites = "Favourites_Horrible"
         const val Notify = "Notifications_Horrible"
         const val Release = "Number"

@@ -183,7 +183,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BCanary%5D/plugins/android/lib/android.jar!/images/material/icons/materialiconsoutlined/refresh/outline_refresh_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BBeta%5D/plugins/android/lib/android.jar!/images/material/icons/materialiconsoutlined/offline_pin/outline_offline_pin_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -193,7 +193,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_refresh" />
+                            <entry key="outputName" value="ic_offline" />
                             <entry key="sourceFile" value="C:\Users\agghu\Desktop\svgs\fhd.svg" />
                           </map>
                         </option>

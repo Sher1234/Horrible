@@ -75,7 +75,7 @@ class MainActivity: AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
     private enum class Keys {
         EXPLORE, BOOKMARKED, SHOWS, SCHEDULE, SETTINGS;
-        internal val fragment: Fragment
+        val fragment: Fragment
             get() = when (this) {
                 BOOKMARKED -> Bookmarked()
                 SCHEDULE -> Schedule()

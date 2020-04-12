@@ -70,8 +70,10 @@ class Shows: Fragment(), LoadingListener, Observer<ResultShows?>, ItemClick<Item
         vm.refresh()
     }
 
-    private fun toggleShows(v: ResultShows? = vm.result.value,
-                            b: Boolean = vm.allShowing.value?:false) {
+    private fun toggleShows(
+        v: ResultShows? = vm.result.value,
+        b: Boolean = vm.allShowing.value?:false
+    ) {
         val list = if (b) v?.items else v?.current
         when {
             list.isNullOrEmpty() -> eHandler?.show()

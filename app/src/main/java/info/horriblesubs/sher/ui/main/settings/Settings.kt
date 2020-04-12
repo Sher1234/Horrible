@@ -32,7 +32,7 @@ class Settings : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListen
             Snackbar.make(view, "Device specific notification ID", Snackbar.LENGTH_SHORT).show()
             true
         }
-        notification = findPreference<SwitchPreferenceCompat>(Notifications.key)
+        notification = findPreference(Notifications.key)
         Log.i("TAG", "onViewCreated: " + Constants.value(Token))
         toggleIcon(Constants.value(Notifications) as Boolean)
         notification?.onPreferenceChangeListener = this

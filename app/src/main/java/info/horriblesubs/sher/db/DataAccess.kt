@@ -7,6 +7,7 @@ import info.horriblesubs.sher.App
 import info.horriblesubs.sher.api.horrible.Horrible.Companion.service
 import info.horriblesubs.sher.api.horrible.model.ItemRecent
 import info.horriblesubs.sher.api.horrible.model.ItemShow
+import info.horriblesubs.sher.db.Database.Horrible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

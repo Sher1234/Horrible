@@ -28,9 +28,9 @@ import java.util.*
 
 
 object Constants {
-    val imageOptions = RequestOptions().transform(FitCenter(), RoundedCorners(10))
     private val old: SharedPreferences get() = App.instance.getSharedPreferences(oldFile, Context.MODE_PRIVATE)
     val preferences: SharedPreferences get() = PreferenceManager.getDefaultSharedPreferences(App.instance)
+    val imageOptions = RequestOptions().transform(FitCenter(), RoundedCorners(10))
     private const val oldFile = "com.github.sher1234.horrible.settings"
 
     fun subscribe(b: Boolean = value(KeySettings.Notifications) as Boolean) {
@@ -55,8 +55,11 @@ object Constants {
         }
     }
 
-    fun notify(title: String, desc: String = "New release available...", link: String? = null,
-               channel: String = "Ongoing Notifications") {
+    fun notify(
+        title: String, desc: String = "New release available...",
+        link: String? = null,
+        channel: String = "Ongoing Notifications"
+    ) {
         val intent = Intent(App.instance, Show::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("link", link)
         val code = Random().nextInt(99999)

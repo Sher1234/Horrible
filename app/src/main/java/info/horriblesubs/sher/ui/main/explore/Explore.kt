@@ -44,7 +44,7 @@ class Explore: Fragment(), PopupMenu.OnMenuItemClickListener {
 
     private enum class Keys {
         RECENT, RANDOM, TRENDING;
-        internal val fragment: Fragment
+        val fragment: Fragment
             get() = when (this) {
                 TRENDING -> Trending()
                 RECENT -> Recent()

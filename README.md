@@ -12,11 +12,11 @@ an!me implements number of open source projects listed bellow:
 - Firebase for FCM notifications & google ads
 
 #### *Notes:*
-- Versions 0.8.0 (+) Based on Api-6      ***[Supported]***
-- Both major revisions i.e. 0.7.0 & 0.7.5 are based on Same API ***[Supported Till Major Revision]***
-- Versions 0.7.5                         ***[Reinstall Required/Changed Signing Keys/Supported]***
-- Versions 0.7.0 to 0.7.4                   [Reinstall Required/Changed Signing Keys/Supported]
-- Versions 0.6.5 and earlier                [Deprecated]
+- ***[Supported]*** Versions 0.8.0 (and above) (Api-v6)
+- ***[Supported]*** Versions 0.7.0 - 0.7.9 (Api-v5)
+  - [Changed Signing Keys] Versions 0.7.5 - 0.7.9
+  - [Changed Signing Keys] Versions 0.7.0 - 0.7.4
+- [Unsupported] Versions 0.6.5 and earlier
 
 
 #### Features
@@ -34,6 +34,7 @@ an!me implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Added support for TV [Alpha], Updated dependecies                                 Major Commit   - April 12, 2020
 Updated dependecies & Kotlin 1.4.                                                 Minor Commit   - Mar   22, 2020
 Fixed Ads Support.                                                                Minor Commit   - Nov   10, 2019
 Tablet Support & Updated Privacy Policy.                                          Major Commit   - Nov   10, 2019

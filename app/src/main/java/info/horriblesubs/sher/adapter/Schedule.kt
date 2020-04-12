@@ -48,9 +48,10 @@ class ScheduleAdapter (click: ItemClick<ItemSchedule>?, items: List<ItemSchedule
     }
 }
 
-class ScheduleHolder (private val time: ZonedDateTime, itemClick: ItemClick<ItemSchedule>?,
-                      adapter: ScheduleAdapter, group: ViewGroup):
-    BaseHolder<ItemSchedule>(itemClick, adapter, R.layout._recycler_d, group) {
+class ScheduleHolder (
+    private val time: ZonedDateTime, itemClick: ItemClick<ItemSchedule>?,
+    adapter: ScheduleAdapter, group: ViewGroup
+): BaseHolder<ItemSchedule>(itemClick, adapter, R.layout._recycler_d, group) {
 
     private val imageView: AppCompatImageView = itemView.findViewById(R.id.imageView)
     private val textView1: AppCompatTextView = itemView.findViewById(R.id.textView1)

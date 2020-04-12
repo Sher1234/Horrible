@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.api.horrible.model.ItemShow
@@ -37,10 +38,8 @@ class RandomDialog(context: Context, private val s: ItemShow?): BaseDialog(conte
         toggle()
     }
     private fun toggle() {
+        button2.icon = ContextCompat.getDrawable(context, if (bookmarked) R.drawable.ic_bookmarked else R.drawable.ic_bookmark)
         button2.text = if(bookmarked) "Bookmarked" else "Bookmark"
-        button2.icon =
-            if(bookmarked) context.getDrawable(R.drawable.ic_bookmarked)
-            else context.getDrawable(R.drawable.ic_bookmark)
     }
     init {
         setCancelable(true)

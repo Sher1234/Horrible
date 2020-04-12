@@ -1,20 +1,20 @@
-[
-  {
-    "outputType": {
-      "type": "APK"
-    },
-    "apkData": {
-      "type": "MAIN",
-      "splits": [],
-      "versionCode": 79,
-      "versionName": "0.8.0",
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "info.horriblesubs.sher",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 85,
+      "versionName": "85",
       "enabled": true,
-      "outputFile": "app-release.apk",
-      "fullName": "release",
-      "baseName": "release",
-      "dirName": ""
-    },
-    "path": "app-release.apk",
-    "properties": {}
-  }
-]
+      "outputFile": "app-release.apk"
+    }
+  ]
+}

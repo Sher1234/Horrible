@@ -76,7 +76,7 @@ object ShowsRepository {
 
     init {
         cachedData.apply {
-            if (isCacheInvalid { plusDays(3) }) {
+            if (isCacheInvalid { plusDays(10) }) {
                 refreshFromServer(cResult = this)
             } else {
                 GlobalScope.launch(Dispatchers.IO) {

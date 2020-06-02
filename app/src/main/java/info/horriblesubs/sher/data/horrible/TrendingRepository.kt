@@ -54,7 +54,7 @@ object TrendingRepository {
 
     init {
         cachedData.apply {
-            if (isCacheInvalid { plusHours(3) }) refreshFromServer(this)
+            if (isCacheInvalid { plusHours(4) }) refreshFromServer(this)
             else liveResource.value = RepositoryResult.getSuccess(this?.value)
         }
     }

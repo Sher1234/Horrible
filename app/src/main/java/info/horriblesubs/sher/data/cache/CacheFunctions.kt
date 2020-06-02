@@ -5,10 +5,10 @@ package info.horriblesubs.sher.data.cache
 import info.horriblesubs.sher.data.RepositoryData
 import java.time.ZonedDateTime
 
-inline fun <E, T: RepositoryData<E>> T?.isCacheInvalid(after: ZonedDateTime.() -> ZonedDateTime?): Boolean {
-    val cVTime2 = this?.time?.zonedDateTimeISO?.after() ?: return true
+inline fun <E, T: RepositoryData<E>> T?.isCacheInvalid(crossinline after: ZonedDateTime.() -> ZonedDateTime?): Boolean {
+    val cVTime = this?.time?.zonedDateTimeISO?.after() ?: return true
     val nTime = ZonedDateTime.now() ?: return true
-    return cVTime2 < nTime
+    return cVTime < nTime
 }
 
 val String?.zonedDateTimeISO: ZonedDateTime? get() {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingTop="14dp"
+        app:elevation="0dp">
+
+        <info.horriblesubs.sher.libs.toolbar.Toolbar
+            app:placeholderImage="@drawable/app_icon"
+            android:layout_marginHorizontal="26dp"
+            app:strokeColor="?colorControlNormal"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/toolbar"
+            app:menu="@menu/menu_a"
+            app:strokeWidth="1dp"
+            app:hint="@string/search" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:background="@drawable/recycler_item_f_grad"
+            tools:text="@tools:sample/lorem/random"
+            android:layout_marginHorizontal="24dp"
+            style="@style/TextAppearance.Medium"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/messageTextView"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="12dp"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textSize="12sp"
+            tools:lines="1" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/recycler_item_a"
+        android:scrollbarStyle="outsideOverlay"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="24dp"
+        android:overScrollMode="always"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true"
+        android:paddingBottom="96dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

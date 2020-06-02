@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="marker" format="color" />
+    <attr name="qualityColorFullHD" format="color" />
+    <attr name="qualityColorHD" format="color" />
+    <attr name="qualityColorSD" format="color" />
 
-    <attr name="qFHD" format="color" />
-    <attr name="qHD" format="color" />
-    <attr name="qSD" format="color" />
+    <declare-styleable name="Toolbar">
+        <attr name="placeholderImage" format="reference" />
+        <attr name="placeholderTextColor" format="color" />
+        <attr name="navigationIcon" format="reference" />
+        <attr name="placeholderText" format="string" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="searchTextColor" format="color" />
+        <attr name="backgroundColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="enabled" format="boolean" />
+        <attr name="hintColor" format="color" />
+        <attr name="menu" format="reference" />
+        <attr name="query" format="string" />
+        <attr name="hint" format="string" />
+    </declare-styleable>
 
 </resources>

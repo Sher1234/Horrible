@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.a.StartUp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_marginHorizontal="72dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:src="@drawable/app_icon"
+        android:layout_gravity="center"
+        android:paddingBottom="72dp"
+        android:id="@+id/imageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:textAppearance="?textAppearanceBody1"
+        app:layout_anchorGravity="bottom|center"
+        tools:text="@tools:sample/lorem/random"
+        android:layout_marginHorizontal="24dp"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.Medium"
+        android:layout_width="match_parent"
+        app:layout_anchor="@id/imageView"
+        android:layout_gravity="bottom"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textSize="13sp"
+        tools:lines="2" />
+
+    <ProgressBar
+        style="?android:progressBarStyleHorizontal"
+        android:theme="@style/Theme.Secondary"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_anchorGravity="bottom"
+        app:layout_anchor="@id/textView"
+        android:layout_gravity="bottom"
+        android:id="@+id/progressBar"
+        android:layout_margin="148dp"
+        android:indeterminate="true"
+        android:paddingTop="12dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

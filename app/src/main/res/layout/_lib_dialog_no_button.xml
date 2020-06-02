@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="32dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?textAppearanceBody1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginHorizontal="24dp"
+            tools:text="@tools:sample/full_names"
+            style="@style/TextAppearance.Medium"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:layout_marginTop="16dp"
+            android:paddingVertical="4dp"
+            android:id="@+id/textView1"
+            android:textSize="14.5sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintTop_toBottomOf="@id/textView1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?textAppearanceBody1"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@tools:sample/lorem/random"
+            android:layout_marginHorizontal="24dp"
+            style="@style/TextAppearance.Regular"
+            android:lineSpacingMultiplier="1.215"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:paddingVertical="6dp"
+            android:id="@+id/textView2"
+            android:textSize="12.5sp"
+            tools:maxLines="12" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            android:text="@string/close_dialog_desc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            android:layout_marginHorizontal="24dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            tools:ignore="SmallSp"
+            android:gravity="end" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

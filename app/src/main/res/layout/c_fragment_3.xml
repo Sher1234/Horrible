@@ -1,0 +1,234 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="@id/releaseText"
+            app:layout_constraintStart_toStartOf="@id/releaseText"
+            app:layout_constraintTop_toTopOf="@id/releaseText"
+            app:layout_constraintEnd_toEndOf="@id/releaseText"
+            android:src="@drawable/recycler_item_f_grad"
+            android:tint="?qualityColorSD"
+            android:id="@+id/selectedSD1"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="@id/releaseText"
+            app:layout_constraintStart_toStartOf="@id/releaseText"
+            app:layout_constraintTop_toTopOf="@id/releaseText"
+            app:layout_constraintEnd_toEndOf="@id/releaseText"
+            android:src="@drawable/recycler_item_f_grad"
+            android:tint="?qualityColorHD"
+            android:id="@+id/selectedHD1"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="@id/releaseText"
+            app:layout_constraintStart_toStartOf="@id/releaseText"
+            app:layout_constraintTop_toTopOf="@id/releaseText"
+            app:layout_constraintEnd_toEndOf="@id/releaseText"
+            android:src="@drawable/recycler_item_f_grad"
+            android:tint="?qualityColorFullHD"
+            android:id="@+id/selectedFullHD1"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintEnd_toStartOf="@id/releaseText"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            tools:text="@tools:sample/full_names"
+            style="@style/TextAppearance.Medium"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="4dp"
+            android:id="@+id/titleText"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintBottom_toBottomOf="@id/lastUpdatedText"
+            app:layout_constraintTop_toTopOf="@id/titleText"
+            android:textAppearance="?textAppearanceBody1"
+            android:theme="@style/TextAppearance.Medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            tools:text="@tools:sample/us_zipcodes"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:paddingHorizontal="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="4dp"
+            android:id="@+id/releaseText"
+            android:paddingVertical="6dp"
+            android:textSize="13.5sp"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintEnd_toStartOf="@id/releaseText"
+            app:layout_constraintTop_toBottomOf="@id/titleText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?textAppearanceBody1"
+            tools:text="Last updated on 7hr 35m 57s ago"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:id="@+id/lastUpdatedText"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="4dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="4dp"
+            android:textSize="12sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="@id/sdText"
+            app:layout_constraintStart_toStartOf="@id/sdText"
+            app:layout_constraintTop_toTopOf="@id/sdText"
+            app:layout_constraintEnd_toEndOf="@id/sdText"
+            android:src="@drawable/recycler_item_f_grad"
+            android:layout_marginVertical="5dp"
+            android:tint="?qualityColorSD"
+            android:id="@+id/selectedSD2"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+            app:layout_constraintEnd_toStartOf="@id/hdText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:theme="@style/AppBar.Button"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_goneMarginStart="20dp"
+            style="@style/Theme.Button.Text"
+            app:layout_goneMarginEnd="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="4dp"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:text="@string/hq"
+            android:textStyle="bold"
+            android:id="@+id/sdText"
+            android:minHeight="36dp"
+            android:textSize="11sp"
+            app:barrierMargin="0dp"
+            app:cornerRadius="0dp"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="@id/hdText"
+            app:layout_constraintStart_toStartOf="@id/hdText"
+            app:layout_constraintTop_toTopOf="@id/hdText"
+            app:layout_constraintEnd_toEndOf="@id/hdText"
+            android:src="@drawable/recycler_item_f_grad"
+            android:layout_marginVertical="5dp"
+            android:tint="?qualityColorHD"
+            android:id="@+id/selectedHD2"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+            app:layout_constraintEnd_toStartOf="@id/fhdText"
+            app:layout_constraintStart_toEndOf="@id/sdText"
+            android:theme="@style/AppBar.Button"
+            android:layout_height="wrap_content"
+            app:layout_goneMarginStart="20dp"
+            style="@style/Theme.Button.Text"
+            app:layout_goneMarginEnd="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="4dp"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:text="@string/hd"
+            android:id="@+id/hdText"
+            android:minHeight="36dp"
+            android:textSize="11sp"
+            app:cornerRadius="0dp"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="@id/fhdText"
+            app:layout_constraintStart_toStartOf="@id/fhdText"
+            app:layout_constraintTop_toTopOf="@id/fhdText"
+            app:layout_constraintEnd_toEndOf="@id/fhdText"
+            android:src="@drawable/recycler_item_f_grad"
+            android:layout_marginVertical="5dp"
+            android:tint="?qualityColorFullHD"
+            android:id="@+id/selectedFullHD2"
+            android:layout_height="0dp"
+            android:layout_width="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+            app:layout_constraintStart_toEndOf="@id/hdText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/AppBar.Button"
+            android:layout_height="wrap_content"
+            app:layout_goneMarginStart="20dp"
+            style="@style/Theme.Button.Text"
+            app:layout_goneMarginEnd="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="4dp"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:id="@+id/fhdText"
+            android:text="@string/fhd"
+            android:minHeight="36dp"
+            android:textSize="11sp"
+            app:cornerRadius="0dp"
+            tools:ignore="SmallSp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/recycler_item_g"
+            tools:layoutManager="GridLayoutManager"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="14dp"
+            android:layout_marginTop="44dp"
+            android:id="@+id/recyclerView"
+            android:clipToPadding="false"
+            tools:spanCount="2"
+            tools:itemCount="6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintTop_toBottomOf="@id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@id/recyclerView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/selectedButtonText"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            tools:text="@string/hq"
+            android:textSize="9sp"
+            tools:ignore="SmallSp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:listitem="@layout/recycler_item_d"
+    android:scrollbarStyle="outsideOverlay"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="18dp"
+    android:id="@+id/recyclerView"
+    android:scrollbars="vertical"
+    android:clipToPadding="false"
+    android:fadeScrollbars="true"
+    android:paddingBottom="96dp"
+    android:paddingTop="2dp" />

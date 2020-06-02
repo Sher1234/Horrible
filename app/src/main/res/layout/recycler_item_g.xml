@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="6dp"
+    android:theme="@style/AppBar.Button"
+    style="@style/Theme.Button.Outlined"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:text="@string/view_more"
+    android:layout_gravity="end"
+    android:textAllCaps="false"
+    android:textSize="11.5sp"
+    android:id="@+id/button"
+    android:gravity="center"
+    android:minHeight="42dp"
+    android:minWidth="80dp"
+    tools:ignore="SmallSp" />

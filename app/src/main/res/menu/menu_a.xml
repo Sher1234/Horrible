@@ -2,15 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/refresh"
-        android:title="@string/refresh" />
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings"
+        android:id="@+id/settings" />
 
     <item
-        android:id="@+id/toggle_a"
-        android:title="@string/toggle_trending_limit" />
+        android:title="@string/refresh_from_server"
+        android:icon="@drawable/ic_refresh"
+        android:id="@+id/refresh" />
 
     <item
-        android:id="@+id/toggle_b"
-        android:title="@string/toggle_recent_limit" />
+        android:title="@string/delete_bookmarks"
+        android:icon="@drawable/ic_delete"
+        android:id="@+id/toggle" />
+
+    <item
+        android:title="@string/about_library"
+        android:icon="@drawable/ic_info"
+        android:id="@+id/info" />
 
 </menu>

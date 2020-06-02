@@ -1,0 +1,69 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:strokeColor="?colorControlHighlight"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="18dp"
+        android:orientation="vertical"
+        android:paddingVertical="8dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="4dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextAppearance.Medium"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:textSize="11.5sp"
+                android:layout_weight="1"
+                android:text="@string/releases"
+                tools:ignore="SmallSp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:background="@drawable/recycler_item_f_grad"
+                android:textAppearance="?textAppearanceSubtitle2"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/lastUpdatedText"
+                android:paddingHorizontal="12dp"
+                tools:text="2d 9h 3m 15s ago"
+                android:textSize="11sp"
+                tools:ignore="SmallSp"
+                android:padding="6dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
+            tools:listitem="@layout/recycler_item_e"
+            tools:layoutManager="GridLayoutManager"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="-4dp"
+            android:id="@+id/recyclerView"
+            android:paddingVertical="6dp"
+            tools:itemCount="2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textAppearance="?textAppearanceSubtitle1"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="@string/empty_releases"
+            android:paddingBottom="6dp"
+            android:id="@+id/textView"
+            android:paddingTop="6dp"
+            android:gravity="center"
+            android:textSize="12sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</com.google.android.material.card.MaterialCardView>

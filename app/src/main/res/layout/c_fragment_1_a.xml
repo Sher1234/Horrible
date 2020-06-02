@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="20dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_max="375dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constrainedWidth="true"
+        tools:src="@tools:sample/avatars"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="8dp"
+        tools:layout_height="375dp"
+        android:id="@+id/imageView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        android:textAppearance="?textAppearanceHeadline6"
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/TextAppearance.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/full_names"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:textSize="19sp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        android:textAppearance="?textAppearanceSubtitle2"
+        app:layout_constraintEnd_toStartOf="@id/divider"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        tools:text="Saturday's at 6:00 PM"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="6dp"
+        android:id="@+id/scheduleText"
+        android:textSize="13sp"
+        android:gravity="end" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintBottom_toBottomOf="@id/airingStatusText"
+        app:layout_constraintTop_toTopOf="@id/scheduleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="?colorControlHighlight"
+        android:layout_height="4dp"
+        android:layout_width="4dp"
+        android:id="@+id/divider" />
+
+    <com.google.android.material.textview.MaterialTextView
+        app:layout_constraintTop_toTopOf="@id/scheduleText"
+        android:textAppearance="?textAppearanceSubtitle2"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/airingStatusText"
+        android:layout_marginStart="6dp"
+        tools:text="Currently Airing"
+        android:textSize="13sp" />
+
+    <ProgressBar
+        app:layout_constraintBottom_toBottomOf="@id/imageView"
+        app:layout_constraintStart_toStartOf="@id/imageView"
+        app:layout_constraintTop_toTopOf="@id/imageView"
+        app:layout_constraintEnd_toEndOf="@id/imageView"
+        android:indeterminateTint="?colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        style="?android:progressBarStyle"
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:padding="8dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        app:layout_constraintTop_toBottomOf="@id/scheduleText"
+        android:background="@drawable/recycler_item_f_grad"
+        android:textAppearance="?textAppearanceSubtitle2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/lastUpdatedText"
+        android:paddingHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        tools:text="2d 9h 3m 15s ago"
+        android:textSize="11sp"
+        tools:ignore="SmallSp"
+        android:padding="6dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppBar.Button"
+        android:id="@+id/buttonAllReleases"
+        android:layout_marginBottom="8dp"
+        app:icon="@drawable/ic_playlist"
+        app:strokeColor="?colorPrimary"
+        android:layout_marginTop="8dp"
+        android:layout_height="52dp"
+        android:layout_width="44dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        android:padding="0dp"
+        app:iconSize="22dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintStart_toEndOf="@id/buttonAllReleases"
+        app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+        app:layout_constraintEnd_toStartOf="@id/buttonShare"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/buttonLibraryToggle"
+        android:theme="@style/AppBar.Button"
+        android:layout_marginBottom="8dp"
+        app:icon="@drawable/ic_bookmark"
+        app:strokeColor="?colorPrimary"
+        android:layout_marginTop="8dp"
+        android:layout_height="52dp"
+        android:layout_width="44dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        android:padding="0dp"
+        app:iconSize="22dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintStart_toEndOf="@id/buttonLibraryToggle"
+        app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+        app:layout_constraintEnd_toStartOf="@id/buttonOpen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:theme="@style/AppBar.Button"
+        android:layout_marginBottom="8dp"
+        app:strokeColor="?colorPrimary"
+        android:layout_marginTop="8dp"
+        app:icon="@drawable/ic_share"
+        android:id="@+id/buttonShare"
+        android:layout_height="52dp"
+        android:layout_width="44dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        android:padding="0dp"
+        app:iconSize="22dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+        app:layout_constraintEnd_toStartOf="@id/buttonRefresh"
+        app:layout_constraintStart_toEndOf="@id/buttonShare"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:icon="@drawable/ic_open_in_browser"
+        android:theme="@style/AppBar.Button"
+        android:layout_marginBottom="8dp"
+        app:strokeColor="?colorPrimary"
+        android:layout_marginTop="8dp"
+        android:id="@+id/buttonOpen"
+        android:layout_height="52dp"
+        android:layout_width="44dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        android:padding="0dp"
+        app:iconSize="22dp" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/lastUpdatedText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:theme="@style/AppBar.Button"
+        android:layout_marginBottom="8dp"
+        app:strokeColor="?colorPrimary"
+        android:id="@+id/buttonRefresh"
+        app:icon="@drawable/ic_refresh"
+        android:layout_marginTop="8dp"
+        android:layout_height="52dp"
+        android:layout_width="44dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        android:padding="0dp"
+        app:iconSize="22dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

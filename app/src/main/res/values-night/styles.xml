@@ -1,24 +1,27 @@
 <resources>
 
     <style name="Theme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimaryDark">#6B95D6</item>
+        <item name="colorPrimary">#A6C9FF</item>
 
-        <item name="colorAccent">#EA80FC</item>
-
-        <!-- App Defined Attrs -->
-        <item name="marker">#333333</item>
-        <item name="qFHD">#64FFDA</item>
-        <item name="qHD">#FF4081</item>
-        <item name="qSD">#FFD740</item>
+        <item name="fontFamily">@font/metropolis_regular</item>
+        <item name="qualityColorFullHD">#CE93D8</item>
+        <item name="qualityColorHD">#FFAB91</item>
+        <item name="qualityColorSD">#A5D6A7</item>
     </style>
 
-    <style name="Theme.Dialog" parent="Theme.MaterialComponents.Dialog">
+    <style name="Dialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="colorPrimaryDark">#6B95D6</item>
+        <item name="colorPrimary">#A6C9FF</item>
+
         <item name="android:windowBackground">@android:color/transparent</item>
-<!--        <item name="colorSurface">#FF424242</item>-->
-        <item name="colorAccent">#EA80FC</item>
+        <item name="qualityColorFullHD">#CE93D8</item>
+        <item name="qualityColorHD">#FFAB91</item>
+        <item name="qualityColorSD">#A5D6A7</item>
     </style>
 
-    <style name="Theme.Divider" parent="Theme">
-        <item name="android:src">#29ffffff</item>
+    <style name="Theme.Secondary" parent="Theme">
+        <item name="colorSecondary">#D0E3FF</item>
     </style>
 
 </resources>

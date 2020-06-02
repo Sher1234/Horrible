@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    app:layout_constrainedWidth="true"
+    android:layout_gravity="center"
+    android:layout_margin="32dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textAppearance="?textAppearanceBody1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginHorizontal="24dp"
+            tools:text="@tools:sample/full_names"
+            style="@style/TextAppearance.Medium"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:layout_marginTop="16dp"
+            android:paddingVertical="4dp"
+            android:id="@+id/textView"
+            android:textSize="14.5sp" />
+
+        <androidx.core.widget.NestedScrollView
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:paddingHorizontal="24dp"
+            android:fadeScrollbars="true"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:id="@+id/scrollView"
+            android:paddingTop="10dp">
+
+            <RadioGroup
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/radioGroup" />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/scrollView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@android:string/ok"
+            style="@style/Theme.Button.Text"
+            android:layout_marginEnd="20dp"
+            android:textAllCaps="false"
+            android:id="@+id/button1"
+            android:minHeight="44dp"
+            android:minWidth="44dp"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/scrollView"
+            app:layout_constraintEnd_toStartOf="@id/button1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            android:text="@android:string/cancel"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            style="@style/Theme.Button.Text"
+            android:layout_marginEnd="8dp"
+            android:textAllCaps="false"
+            android:id="@+id/button2"
+            android:minHeight="44dp"
+            android:minWidth="44dp"
+            android:textSize="12sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

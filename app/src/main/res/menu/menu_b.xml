@@ -2,14 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/refresh"
-        android:title="@string/refresh" />
+        android:title="@string/refresh_new_episodes"
+        android:icon="@drawable/ic_refresh"
+        android:id="@+id/refresh" />
 
     <item
-        android:id="@+id/toggle"
-        android:title="@string/toggle_delete" />
+        android:title="@string/view_batches"
+        android:icon="@drawable/ic_settings"
+        android:id="@+id/toggle" />
 
-    <item android:id="@+id/info"
-        android:title="@string/info" />
+    <item
+        android:title="@string/load_more_episodes"
+        android:icon="@drawable/ic_refresh"
+        android:id="@+id/info" />
 
 </menu>

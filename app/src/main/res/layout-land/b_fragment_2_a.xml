@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/full_names"
+        style="@style/TextAppearance.Medium"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constrainedWidth="true"
+        android:id="@+id/titleTextView"
+        android:textSize="11.5sp"
+        tools:ignore="SmallSp" />
+
+    <com.google.android.material.button.MaterialButton
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintStart_toEndOf="@id/buttonB"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Theme.Button.Outlined"
+        android:layout_marginTop="4dp"
+        android:layout_height="44dp"
+        android:layout_width="38dp"
+        android:id="@+id/buttonA"
+        android:textSize="12sp"
+        android:padding="0dp"
+        android:text="@string/info_mark"
+        tools:text="\?" />
+
+    <com.google.android.material.button.MaterialButton
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintStart_toEndOf="@id/buttonC"
+        app:layout_constraintEnd_toStartOf="@id/buttonA"
+        style="@style/Theme.Button.Outlined"
+        android:layout_marginTop="4dp"
+        android:layout_height="44dp"
+        android:layout_width="38dp"
+        android:textAllCaps="false"
+        android:id="@+id/buttonB"
+        android:textSize="12sp"
+        android:padding="0dp"
+        tools:text="54" />
+
+    <com.google.android.material.button.MaterialButton
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        app:layout_constraintEnd_toStartOf="@id/buttonB"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Theme.Button.Outlined"
+        app:icon="@drawable/ic_refresh"
+        android:layout_marginTop="4dp"
+        android:layout_height="44dp"
+        android:layout_width="38dp"
+        app:iconGravity="textStart"
+        android:id="@+id/buttonC"
+        app:iconPadding="0dp"
+        app:iconSize="18dp" />
+
+    <ProgressBar
+        app:layout_constraintBottom_toBottomOf="@id/buttonC"
+        app:layout_constraintStart_toStartOf="@id/buttonC"
+        app:layout_constraintTop_toTopOf="@id/buttonC"
+        app:layout_constraintEnd_toEndOf="@id/buttonC"
+        android:indeterminateTint="?colorPrimary"
+        style="?android:progressBarStyle"
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:padding="6dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/buttonA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/recycler_item_a"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:verticalScrollbarPosition="left"
+        android:scrollbarStyle="outsideOverlay"
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
+        tools:orientation="vertical"
+        android:paddingBottom="48dp"
+        android:layout_height="0dp"
+        android:paddingStart="20dp"
+        android:layout_width="0dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

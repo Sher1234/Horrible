@@ -1,0 +1,30 @@
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="4dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_marginHorizontal="20dp"
+        style="@style/TextAppearance.Medium"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/external_links"
+        android:textSize="11.5sp"
+        tools:ignore="SmallSp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/recycler_item_g"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="18dp"
+        android:id="@+id/recyclerView"
+        android:paddingVertical="4dp"
+        android:clipToPadding="false"
+        tools:itemCount="3"
+        tools:spanCount="2" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

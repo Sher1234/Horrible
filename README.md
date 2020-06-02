@@ -12,6 +12,7 @@ an!me implements number of open source projects listed bellow:
 - Firebase for FCM notifications & google ads
 
 #### *Notes:*
+- ***[Supported]*** Versions 0.9.0 (and above) (Api-v7)
 - ***[Supported]*** Versions 0.8.0 (and above) (Api-v6)
 - ***[Supported]*** Versions 0.7.0 - 0.7.9 (Api-v5)
   - [Changed Signing Keys] Versions 0.7.5 - 0.7.9
@@ -34,6 +35,7 @@ an!me implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Improved performance, with caching support, UI Improvements                       Major Commit   - June  01, 2020
 Added support for TV [Alpha], Updated dependecies                                 Major Commit   - April 12, 2020
 Updated dependecies & Kotlin 1.4.                                                 Minor Commit   - Mar   22, 2020
 Fixed Ads Support.                                                                Minor Commit   - Nov   10, 2019
@@ -96,11 +98,10 @@ Added Support for Schedule, Notification on New Release & Design Improvements   
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
 #### Todo
-* User Registration & Cloud Sync of Favourites
-* XDCC-IRC Download Tutorial for older episodes
-* Minimal nyaa.si Implementation
-* Load more release options
 * MAL Implementation
+* Minimal nyaa.si Implementation
+* XDCC-IRC Download Tutorial for older episodes
+* User Registration & Cloud Sync of Favourites
 
 #### Download
 > Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_centerHorizontal="true"
+        app:cardPreventCornerOverlap="false"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appBarRootLayout"
+        app:cardElevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/appBarRoot">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textAppearance="@style/TextAppearance.Regular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@tools:sample/full_names"
+                android:textColor="?editTextColor"
+                android:id="@+id/placeholderText"
+                android:layout_height="48dp"
+                android:visibility="visible"
+                android:paddingStart="96dp"
+                android:layout_width="0dp"
+                android:paddingEnd="96dp"
+                android:gravity="center"
+                android:textSize="18sp"
+                tools:visibility="gone"
+                android:maxLines="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/placeholderImage"
+                tools:src="@tools:sample/avatars"
+                android:scaleType="centerInside"
+                android:layout_height="48dp"
+                android:paddingStart="96dp"
+                android:layout_width="0dp"
+                android:paddingEnd="96dp"
+                android:padding="13dp"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:theme="@style/AppBar.Button"
+                android:id="@+id/navigationButton"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                android:layout_margin="0dp"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:minWidth="0dp"
+                app:cornerRadius="0dp"
+                android:padding="14dp"
+                app:iconSize="20dp" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:theme="@style/AppBar.Button"
+                android:id="@+id/menuButton2"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:minWidth="0dp"
+                android:padding="14dp"
+                app:cornerRadius="0dp"
+                app:iconSize="20dp" />
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                app:layout_constraintEnd_toStartOf="@id/menuButton2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:theme="@style/AppBar.Button"
+                android:id="@+id/menuButton1"
+                android:layout_height="48dp"
+                android:layout_width="48dp"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:minWidth="0dp"
+                android:padding="14dp"
+                app:cornerRadius="0dp"
+                app:iconSize="20dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                app:layout_constraintStart_toEndOf="@id/navigationButton"
+                app:layout_constraintEnd_toStartOf="@id/menuButton1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:id="@+id/searchBoxRoot"
+                android:layout_height="48dp"
+                android:layout_width="0dp"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:theme="@style/AppBar.Button"
+                    android:id="@+id/searchBackButton"
+                    app:icon="@drawable/ic_back"
+                    android:layout_height="48dp"
+                    android:layout_width="48dp"
+                    android:minWidth="0dp"
+                    android:padding="14dp"
+                    app:iconSize="20dp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:imeOptions="flagNoExtractUi|actionSearch"
+                    android:background="@android:color/transparent"
+                    tools:hint="@tools:sample/first_names"
+                    tools:text="@tools:sample/full_names"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="8dp"
+                    android:id="@+id/searchBox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:textSize="13sp"
+                    android:maxLines="1"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:theme="@style/AppBar.Button"
+                    android:id="@+id/searchClearButton"
+                    app:icon="@drawable/ic_clear"
+                    android:layout_height="48dp"
+                    android:layout_width="48dp"
+                    android:minWidth="0dp"
+                    android:padding="14dp"
+                    app:iconSize="20dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</merge>

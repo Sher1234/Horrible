@@ -2,19 +2,21 @@ package info.horriblesubs.sher
 
 import android.app.Application
 import com.google.android.gms.ads.MobileAds
-import info.horriblesubs.sher.common.Constants
+import info.horriblesubs.sher.data.database.model.DatabaseMigrationHelper
+import info.horriblesubs.sher.service.Notifications
 
 class App: Application() {
     companion object {
-        lateinit var instance: App
-            private set
+        private lateinit var instance: App
+        fun get() = instance
     }
+    init { instance = this }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
-        Constants.theme()
-        Constants.subscribe()
-        MobileAds.initialize(this, resources.getString(R.string.ad_mob_app_id))
+        MobileAds.initialize(this)
+        Notifications.createChannels(this)
+        DatabaseMigrationHelper.onMigrate()
+        SettingsMigrationHelper.onMigrate()
     }
 }

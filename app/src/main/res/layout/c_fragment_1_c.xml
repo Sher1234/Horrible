@@ -1,0 +1,44 @@
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="4dp"
+    android:paddingTop="10dp">
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.Medium"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/synopsis"
+        android:textSize="11.5sp"
+        tools:ignore="SmallSp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:textAppearance="?textAppearanceBody1"
+        tools:text="@tools:sample/lorem/random"
+        android:lineSpacingMultiplier="1.125"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/descriptionText"
+        android:layout_marginTop="3dp"
+        android:letterSpacing="0.125"
+        android:textSize="12sp"
+        tools:lines="4" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Theme.Button.UnElevated"
+        android:theme="@style/AppBar.Button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/view_more"
+        android:layout_gravity="end"
+        android:textAllCaps="false"
+        android:textSize="11.5sp"
+        android:id="@+id/button"
+        android:gravity="center"
+        android:minHeight="42dp"
+        android:minWidth="80dp"
+        tools:ignore="SmallSp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

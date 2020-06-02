@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="34dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            app:layout_constraintTop_toBottomOf="@id/imageView"
+            android:textAppearance="?textAppearanceHeadline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="24dp"
+            android:lineSpacingMultiplier="1.125"
+            tools:text="@tools:sample/full_names"
+            style="@style/TextAppearance.Medium"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="4dp"
+            android:id="@+id/textView1"
+            android:textSize="14.5sp"
+            android:gravity="center" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="211dp"
+            app:layout_constraintHeight_max="284dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            tools:src="@tools:sample/avatars"
+            android:adjustViewBounds="true"
+            android:layout_margin="20dp"
+            android:id="@+id/imageView" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintTop_toBottomOf="@id/textView1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?textAppearanceBody1"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@tools:sample/lorem/random"
+            android:layout_marginHorizontal="24dp"
+            style="@style/TextAppearance.Regular"
+            android:lineSpacingMultiplier="1.215"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:paddingVertical="6dp"
+            android:id="@+id/textView2"
+            android:textSize="12.5sp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="8" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:layout_constraintEnd_toStartOf="@id/button2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:icon="@drawable/ic_open_in_browser"
+            app:layout_constraintVertical_bias="0"
+            style="@style/Theme.Button.Outlined"
+            android:theme="@style/AppBar.Button"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            app:strokeColor="?colorPrimary"
+            android:layout_marginTop="8dp"
+            android:layout_height="52dp"
+            android:layout_width="44dp"
+            app:iconGravity="textStart"
+            android:id="@+id/button1"
+            app:iconPadding="0dp"
+            android:padding="0dp"
+            app:iconSize="22dp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0"
+            style="@style/Theme.Button.Outlined"
+            android:theme="@style/AppBar.Button"
+            android:layout_marginBottom="16dp"
+            app:icon="@drawable/ic_bookmark"
+            android:layout_marginEnd="24dp"
+            app:strokeColor="?colorPrimary"
+            android:layout_marginTop="8dp"
+            android:layout_height="52dp"
+            android:layout_width="44dp"
+            app:iconGravity="textStart"
+            android:id="@+id/button2"
+            app:iconPadding="0dp"
+            android:padding="0dp"
+            app:iconSize="22dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

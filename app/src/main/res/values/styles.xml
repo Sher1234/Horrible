@@ -1,69 +1,55 @@
 <resources>
 
     <style name="Theme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorAccent">#7C4DFF</item>
-        <!-- App Defined Attrs -->
-        <item name="marker">#CCCCCC</item>
-        <item name="qFHD">#0097A7</item>
-        <item name="qHD">#C2185B</item>
-        <item name="qSD">#FFA000</item>
+        <item name="colorPrimaryDark">#00193E</item>
+        <item name="colorPrimary">#00378a</item>
+
+        <item name="fontFamily">@font/metropolis_regular</item>
+        <item name="qualityColorFullHD">#6200EA</item>
+        <item name="qualityColorHD">#DD2C00</item>
+        <item name="qualityColorSD">#00C853</item>
     </style>
 
-    <style name="Theme.PopupMenu" parent="Theme">
-        <item name="android:itemBackground">?colorSurface</item>
-        <item name="android:textColor">?colorOnSurface</item>
+    <style name="Theme.Secondary" parent="Theme">
+        <item name="colorSecondary">#00193E</item>
     </style>
 
-    <style name="Theme.Fab" parent="Theme">
-        <item name="colorOnSecondary">?colorSurface</item>
-        <item name="colorSecondary">?colorAccent</item>
-    </style>
+    <style name="Dialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimaryDark">#00193E</item>
+        <item name="colorPrimary">#00378a</item>
 
-    <style name="Theme.Error" parent="Theme">
-        <item name="colorPrimary">?colorError</item>
-        <item name="colorOnPrimary">?colorOnError</item>
-    </style>
-
-    <style name="Theme.TabText.2" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textSize">12.5sp</item>
-    </style>
-
-    <style name="Theme.Dialog" parent="Theme.MaterialComponents.Light.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
-<!--        <item name="colorSurface">#FFFFFFFF</item>-->
-        <item name="colorAccent">#7C4DFF</item>
+        <item name="qualityColorFullHD">#6200EA</item>
+        <item name="qualityColorHD">#DD2C00</item>
+        <item name="qualityColorSD">#00C853</item>
     </style>
 
-    <style name="Theme.Divider" parent="Theme">
-        <item name="android:src">#29000000</item>
+    <style name="TextAppearance.Regular" parent="Theme">
+        <item name="fontFamily">@font/metropolis_regular</item>
     </style>
 
-    <style name="Theme.Divider.Horizontal" parent="Theme.Divider">
-        <item name="android:layout_marginBottom">8dp</item>
-        <item name="android:layout_marginStart">24dp</item>
-        <item name="android:layout_marginEnd">24dp</item>
-        <item name="android:layout_marginTop">8dp</item>
+    <style name="TextAppearance.Medium" parent="Theme">
+        <item name="fontFamily">@font/metropolis_medium</item>
     </style>
 
-    <style name="Shape.Rounded6.Diagonal" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">6dp</item>
-        <item name="cornerSizeTopRight">6dp</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerFamily">rounded</item>
+    <style name="Theme.Button.Text" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="fontFamily">@font/metropolis_medium</item>
     </style>
 
-    <style name="Shape.Rounded4.All" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">4dp</item>
+    <style name="Theme.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="fontFamily">@font/metropolis_medium</item>
     </style>
 
-    <style name="Shape.Rounded8.Diagonal" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">8dp</item>
-        <item name="cornerSizeTopRight">8dp</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerFamily">rounded</item>
+    <style name="Theme.Button.UnElevated" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="fontFamily">@font/metropolis_medium</item>
+    </style>
+
+    <style name="TextAppearance.Tab" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/metropolis_medium</item>
+    </style>
+
+    <style name="AppBar.Button" parent="Theme">
+        <item name="colorPrimary">?colorOnSurface</item>
     </style>
 
 </resources>

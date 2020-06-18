@@ -1,5 +1,6 @@
 package info.horriblesubs.sher.data.horrible.api.model
 
+@Suppress("Unused")
 open class ItemShow(
     var episodes_some_timestamp: String? = null,
     var episodes_all_timestamp: String? = null,

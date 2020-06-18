@@ -2,14 +2,12 @@ package info.horriblesubs.sher.data.horrible
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
 import info.horriblesubs.sher.data.RepositoryData
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.cache.isCacheInvalid
-import info.horriblesubs.sher.data.cache.zonedDateTimeISO
+import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
 import info.horriblesubs.sher.data.horrible.api.HorribleApi
 import info.horriblesubs.sher.data.horrible.api.HorribleApi.ApiEpisodes
@@ -56,17 +54,14 @@ class ShowRepository {
     @WorkerThread
     private suspend fun callToWebServerDetail(link: String, reset: Boolean, cDetail: ShowResult?) {
         if(isNetworkAvailable) {
-            liveResourceDetail.postValue(RepositoryResult.getLoading())
+            liveResourceDetail.setLoading()
             val detail = HorribleApi.api.getShow(link, reset.resetShowHorribleAPI)
-            Log.e("ServerDetail:", detail?.toString() ?: "NULL")
-            liveResourceDetail.postValue(RepositoryResult.getSuccess(detail))
+            liveResourceDetail.setSuccess(detail)
             ShowResult(
                 detail?.detailTimeStamp?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 detail
             ).onSaveDetail(link)
-        } else {
-            liveResourceDetail.postValue(RepositoryResult.getSuccess(cDetail?.value))
-        }
+        } else liveResourceDetail.setSuccess(cDetail?.value)
     }
 
     @WorkerThread
@@ -75,19 +70,18 @@ class ShowRepository {
         mode: ApiEpisodes, cEpisodes: ReleaseResult?
     ) {
         if(isNetworkAvailable) {
-            liveResourceEpisodesTime.postValue(null)
-            liveResourceEpisodes.postValue(RepositoryResult.getLoading())
+            liveResourceEpisodesTime.set()
+            liveResourceEpisodes.setLoading()
             val episodes = HorribleApi.api.getEpisodes(sid, mode.mode, reset.resetShowHorribleAPI)
-            Log.e("ServerEpisodes:", episodes?.toString() ?: "NULL")
-            liveResourceEpisodes.postValue(RepositoryResult.getSuccess(episodes?.items))
-            liveResourceEpisodesTime.postValue(episodes?.dateTime)
+            liveResourceEpisodes.setSuccess(episodes?.items)
+            liveResourceEpisodesTime.set(episodes?.dateTime)
             ReleaseResult(
                 episodes?.dateTime?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 episodes?.items
             ).onSaveReleases(link, FileType.EPISODES)
         } else {
-            liveResourceEpisodes.postValue(RepositoryResult.getSuccess(cEpisodes?.value))
-            liveResourceEpisodesTime.postValue(cEpisodes?.time.zonedDateTimeISO)
+            liveResourceEpisodes.setSuccess(cEpisodes?.value)
+            liveResourceEpisodesTime.set(cEpisodes?.time.zonedDateTimeISO)
         }
     }
 
@@ -97,19 +91,18 @@ class ShowRepository {
         cBatches: ReleaseResult?
     ) {
         if(isNetworkAvailable) {
-            liveResourceBatches.postValue(RepositoryResult.getLoading())
-            liveResourceBatchesTime.postValue(null)
+            liveResourceBatchesTime.set()
+            liveResourceBatches.setLoading()
             val batches = HorribleApi.api.getBatches(sid, reset.resetShowHorribleAPI)
-            Log.e("ServerBatches:", batches?.toString() ?: "NULL")
-            liveResourceBatches.postValue(RepositoryResult.getSuccess(batches?.items))
-            liveResourceBatchesTime.postValue(batches?.dateTime)
+            liveResourceBatches.setSuccess(batches?.items)
+            liveResourceBatchesTime.set(batches?.dateTime)
             ReleaseResult(
                 batches?.dateTime?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 batches?.items
             ).onSaveReleases(link, FileType.BATCHES)
         } else {
-            liveResourceBatches.postValue(RepositoryResult.getSuccess(cBatches?.value))
-            liveResourceBatchesTime.postValue(cBatches?.time.zonedDateTimeISO)
+            liveResourceBatches.setSuccess(cBatches?.value)
+            liveResourceBatchesTime.set(cBatches?.time.zonedDateTimeISO)
         }
     }
 
@@ -119,17 +112,17 @@ class ShowRepository {
         episodes: ReleaseResult?, batches: ReleaseResult?
     ) {
         if(isNetworkAvailable) {
-            liveResourceEpisodes.postValue(RepositoryResult.getLoading())
-            liveResourceBatches.postValue(RepositoryResult.getLoading())
-            liveResourceDetail.postValue(RepositoryResult.getLoading())
-            liveResourceEpisodesTime.postValue(null)
-            liveResourceBatchesTime.postValue(null)
+            liveResourceBatchesTime.set()
+            liveResourceEpisodesTime.set()
+            liveResourceDetail.setLoading()
+            liveResourceBatches.setLoading()
+            liveResourceEpisodes.setLoading()
             val result = HorribleApi.api.getFullShow(link, reset = reset.resetShowHorribleAPI)
-            liveResourceEpisodes.postValue(RepositoryResult.getSuccess(result?.episodes?.items))
-            liveResourceBatches.postValue(RepositoryResult.getSuccess(result?.batches?.items))
-            liveResourceDetail.postValue(RepositoryResult.getSuccess(result))
-            liveResourceEpisodesTime.postValue(result?.episodes?.dateTime)
-            liveResourceBatchesTime.postValue(result?.batches?.dateTime)
+            liveResourceEpisodesTime.set(result?.episodes?.dateTime)
+            liveResourceEpisodes.setSuccess(result?.episodes?.items)
+            liveResourceBatches.setSuccess(result?.batches?.items)
+            liveResourceBatchesTime.set(result?.batches?.dateTime)
+            liveResourceDetail.setSuccess(result)
             ShowResult(
                 result?.detailTimeStamp?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 result as? ItemShow
@@ -143,11 +136,11 @@ class ShowRepository {
                 result?.batches?.items
             ).onSaveReleases(link, FileType.BATCHES)
         } else {
-            liveResourceEpisodes.postValue(RepositoryResult.getSuccess(episodes?.value))
-            liveResourceBatches.postValue(RepositoryResult.getSuccess(batches?.value))
-            liveResourceDetail.postValue(RepositoryResult.getSuccess(detail?.value))
-            liveResourceEpisodesTime.postValue(episodes?.time.zonedDateTimeISO)
-            liveResourceBatchesTime.postValue(batches?.time?.zonedDateTimeISO)
+            liveResourceEpisodesTime.set(episodes?.time.zonedDateTimeISO)
+            liveResourceBatchesTime.set(batches?.time?.zonedDateTimeISO)
+            liveResourceEpisodes.setSuccess(episodes?.value)
+            liveResourceBatches.setSuccess(batches?.value)
+            liveResourceDetail.setSuccess(detail?.value)
         }
     }
 
@@ -203,19 +196,19 @@ class ShowRepository {
     }
 
     private val detailHandler = CoroutineExceptionHandler { _, t ->
-        liveResourceDetail.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while show!!!"))
+        liveResourceDetail.setFailure(t.message ?: "Error encountered while show!!!")
         t.printStackTrace()
     }
 
     private val episodesHandler = CoroutineExceptionHandler { _, t ->
-        liveResourceEpisodes.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while fetching show releases!!!"))
-        liveResourceEpisodesTime.postValue(null)
+        liveResourceEpisodes.setFailure(t.message ?: "Error encountered while fetching show releases!!!")
+        liveResourceEpisodesTime.set()
         t.printStackTrace()
     }
 
     private val batchesHandler = CoroutineExceptionHandler { _, t ->
-        liveResourceBatches.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while fetching show batches!!!"))
-        liveResourceBatchesTime.postValue(null)
+        liveResourceBatches.setFailure(t.message ?: "Error encountered while fetching show batches!!!")
+        liveResourceBatchesTime.set()
         t.printStackTrace()
     }
 
@@ -231,20 +224,20 @@ class ShowRepository {
                     onLoadEpisodes(link = link, sid = it, episodes = episodes)
                 }
             } else {
-                liveResourceEpisodes.postValue(RepositoryResult.getSuccess(episodes?.value))
-                liveResourceEpisodesTime.postValue(episodes?.time?.zonedDateTimeISO)
+                liveResourceEpisodesTime.set(episodes?.time?.zonedDateTimeISO)
+                liveResourceEpisodes.setSuccess(episodes?.value)
             }
             if (batches.isCacheInvalid { plusDays(14) }) {
                 detail?.value?.sid?.let {
                     onLoadBatches(link = link, sid = it, batches = batches)
                 }
             } else {
-                liveResourceBatches.postValue(RepositoryResult.getSuccess(batches?.value))
-                liveResourceBatchesTime.postValue(batches?.time?.zonedDateTimeISO)
+                liveResourceBatches.setSuccess(batches?.value)
+                liveResourceBatchesTime.set(batches?.time?.zonedDateTimeISO)
             }
             if (detail.isCacheInvalid { plusDays(14) }) {
                 onLoadDetail(link = link, detail = detail)
-            } else liveResourceDetail.postValue(RepositoryResult.getSuccess(detail?.value))
+            } else liveResourceDetail.setSuccess(detail?.value)
         }
     }
 

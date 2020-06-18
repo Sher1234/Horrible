@@ -2,8 +2,6 @@ package info.horriblesubs.sher.ui.b.explore.trending
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import info.horriblesubs.sher.R
@@ -43,9 +41,9 @@ class TrendingFragment: BaseFragment(), OnItemClickListener<ItemList> {
         view?.buttonC?.setOnClickListener{
             model.refreshDataFromServer
         }
-        model.resource.observe(viewLifecycleOwner, Observer {
+        model.resource.observe(viewLifecycleOwner) {
             onChanged(it)
-        })
+        }
     }
 
     private fun onChanged(t: RepositoryResult<List<ItemList>>?) = when(t?.status) {
@@ -75,9 +73,9 @@ class TrendingFragment: BaseFragment(), OnItemClickListener<ItemList> {
     }
 
     private fun onSetError(str: String) {
-        Toast.makeText(context, str, Toast.LENGTH_LONG).show()
         view?.buttonB?.text = adapter.itemCount.toString()
         onSetLoading(false)
+        context.toast(str)
     }
 
     override fun onDestroyView() {

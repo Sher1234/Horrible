@@ -33,15 +33,15 @@ android {
         }
     }
 
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         applicationId = "info.horriblesubs.sher"
-        versionName = "0.8.7"
-        targetSdkVersion(29)
+        versionName = "0.8.8"
+        targetSdkVersion(30)
         minSdkVersion(21)
-        versionCode = 87
+        versionCode = 88
 
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
     }
@@ -63,7 +63,7 @@ android {
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled = true
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -90,37 +90,36 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
 
     //kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4-M1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4-M2")
 
     //androidx.lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha03")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha03")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha03")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha04")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha04")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha04")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     //androidx.*
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0-rc01")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta6")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta7")
     implementation("androidx.recyclerview:recyclerview:1.2.0-alpha03")
     implementation("androidx.annotation:annotation:1.2.0-alpha01")
     implementation("androidx.viewpager2:viewpager2:1.1.0-alpha01")
     implementation("androidx.appcompat:appcompat:1.3.0-alpha01")
-    implementation("androidx.preference:preference:1.1.1")
-    implementation("androidx.core:core-ktx:1.4.0-alpha01")
+    implementation("androidx.core:core-ktx:1.5.0-alpha01")
 
     //androidx.room
-    implementation("androidx.room:room-runtime:2.2.5")
-    implementation("androidx.room:room-guava:2.2.5")
-    implementation("androidx.room:room-ktx:2.2.5")
-    kapt("androidx.room:room-compiler:2.2.5")
+    implementation("androidx.room:room-runtime:2.3.0-alpha01")
+    implementation("androidx.room:room-guava:2.3.0-alpha01")
+    implementation("androidx.room:room-ktx:2.3.0-alpha01")
+    kapt("androidx.room:room-compiler:2.3.0-alpha01")
 
     //com.google.android.material
-    implementation("com.google.android.material:material:1.2.0-alpha06")
+    implementation("com.google.android.material:material:1.3.0-alpha01")
 
     //com.google.firebase
-    implementation("com.google.firebase:firebase-analytics:17.4.2")
+    implementation("com.google.firebase:firebase-analytics:17.4.3")
     implementation("com.google.firebase:firebase-messaging:20.2.0")
-    implementation("com.google.firebase:firebase-core:17.4.2")
+    implementation("com.google.firebase:firebase-core:17.4.3")
 
     //com.google.android
     implementation("com.google.android.gms:play-services-ads:19.1.0")
@@ -130,17 +129,28 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.11.0")
     kapt("com.github.bumptech.glide:compiler:4.11.0")
 
-    //Coroutine Image Loader
-    //implementation("io.coil-kt:coil:0.11.0")
+//    Coroutine Image Loader
+//    implementation("io.coil-kt:coil:0.11.0")
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    //androidx.paging
+    implementation("androidx.paging:paging-guava:3.0.0-alpha01")
+    implementation("androidx.paging:paging-runtime-ktx:3.0.0-alpha01")
+    testImplementation("androidx.paging:paging-common-ktx:3.0.0-alpha01")
+
 //    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.20")
 
-    //org.jsoup
+//    org.jsoup
 //    implementation ("org.jsoup:jsoup:1.13.1")
+
+    //preference-ktx
+    implementation("androidx.preference:preference-ktx:1.1.1")
+
+    //google-flexbox
+    implementation("com.google.android:flexbox:2.0.1")
 
     /*
     * Fix for Duplicate class com.google.common.util.concurrent.ListenableFuture found in modules
@@ -150,8 +160,8 @@ dependencies {
 //    implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 
     testImplementation("junit:junit:4.13")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2-rc01")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.5")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2-beta02")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0-beta02")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0-rc01")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }

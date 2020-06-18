@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
 import info.horriblesubs.sher.data.RepositoryData
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.cache.isCacheInvalid
-import info.horriblesubs.sher.data.cache.zonedDateTimeISO
+import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
 import info.horriblesubs.sher.data.horrible.api.HorribleApi
 import info.horriblesubs.sher.data.horrible.api.dateTime
@@ -34,19 +33,19 @@ object ScheduleRepository {
     @WorkerThread
     private suspend fun callToWebServer(reset: Boolean = false, cData: ScheduleResult?) {
         if(isNetworkAvailable) {
-            liveTime.postValue(null)
-            liveResource.postValue(RepositoryResult.getLoading())
+            liveTime.set()
+            liveResource.setLoading()
             val data = HorribleApi.api.getSchedule(reset = reset.resetHorribleAPI)
             val result = ScheduleSplit.getSplit(data?.items)
-            liveResource.postValue(RepositoryResult.getSuccess(result))
-            liveTime.postValue(data?.dateTime)
+            liveResource.setSuccess(result)
+            liveTime.set(data?.dateTime)
             cachedData = ScheduleResult(
                 data?.dateTime?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 result
             )
         } else {
-            liveResource.postValue(RepositoryResult.getSuccess(cData?.value))
-            liveTime.postValue(cData?.time.zonedDateTimeISO)
+            liveTime.set(cData?.time.zonedDateTimeISO)
+            liveResource.setSuccess(cData?.value)
         }
     }
 
@@ -62,9 +61,9 @@ object ScheduleRepository {
     }
 
     private val handler = CoroutineExceptionHandler { _, t ->
-        liveResource.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while fetching weekly schedule!!!"))
-        liveTime.postValue(null)
+        liveResource.setFailure(t.message ?: "Error encountered while fetching weekly schedule!!!")
         t.printStackTrace()
+        liveTime.set()
     }
 
     init {
@@ -72,8 +71,8 @@ object ScheduleRepository {
             if (isCacheInvalid { plusDays(2) }) {
                 refreshFromServer(data = this)
             } else {
-                liveResource.postValue(RepositoryResult.getSuccess(this?.value))
-                liveTime.postValue(this?.time.zonedDateTimeISO)
+                liveResource.setSuccess(this?.value)
+                liveTime.set(this?.time.zonedDateTimeISO)
             }
         }
     }

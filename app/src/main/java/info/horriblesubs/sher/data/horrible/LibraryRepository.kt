@@ -3,6 +3,7 @@ package info.horriblesubs.sher.data.horrible
 import info.horriblesubs.sher.data.database.AppDatabase
 import info.horriblesubs.sher.data.database.model.BookmarkedShow
 
+@Suppress("MemberVisibilityCanBePrivate", "Unused")
 object LibraryRepository {
     private val library get() = AppDatabase.database.getLibrary()
 

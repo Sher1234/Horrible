@@ -1,3 +1,5 @@
+@file:Suppress("Unused")
+
 package info.horriblesubs.sher.libs.dialog
 
 import android.content.Context

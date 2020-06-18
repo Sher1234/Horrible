@@ -2,6 +2,7 @@ package info.horriblesubs.sher.functions
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.widget.FrameLayout
 import androidx.lifecycle.ViewModelStoreOwner
 import com.google.android.gms.ads.AdListener
@@ -40,12 +41,14 @@ class GoogleAds(storeOwner: ViewModelStoreOwner) {
                 interstitialAd.loadAd(AdBuilder().build())
             }
             override fun onAdLoaded() {
-                Handler().postDelayed({
-                    if (!model.isInterstitialShown) {
-                        interstitialAd.show()
-                        model.isInterstitialShown = true
-                    }
-                }, 525)
+                Looper.myLooper()?.let {
+                    Handler(it).postDelayed({
+                        if (!model.isInterstitialShown) {
+                            interstitialAd.show()
+                            model.isInterstitialShown = true
+                        }
+                    }, 525)
+                }
             }
         }
         interstitialAd.adUnitId = getAdId(INTERSTITIAL)

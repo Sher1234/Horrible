@@ -1,2 +1,2 @@
-rootProject.name="an!me2.0"
+rootProject.name="an!meZX"
 include(":app")

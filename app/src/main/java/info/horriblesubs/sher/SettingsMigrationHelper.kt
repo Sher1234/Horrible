@@ -15,8 +15,8 @@ object SettingsMigrationHelper: BasePreference<Int>() {
         set(value) { sharedPreferences?.edit()?.putInt(key, value)?.apply() }
 
     private val isAvailable = sharedPreferences?.let {
-        it.contains("marked_fav") || it.contains("notifications") || it.contains("fav_notifications")
-                || sharedPreferences.getInt(key, Int.MAX_VALUE) < value
+        it.contains("marked_fav") || it.contains("notifications") ||
+                it.contains("fav_notifications") || it.getInt(key, Int.MAX_VALUE) < value
     } ?: false
 
     fun onMigrate() {

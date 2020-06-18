@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingTop="14dp"
+        app:elevation="0dp">
+
+        <info.horriblesubs.sher.libs.toolbar.Toolbar
+            app:placeholderImage="@drawable/app_icon"
+            android:layout_marginHorizontal="20dp"
+            app:strokeColor="?colorControlNormal"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="12dp"
+            android:id="@+id/toolbar"
+            app:strokeWidth="1dp"
+            app:hint="@string/search" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:verticalScrollbarPosition="defaultPosition"
+        tools:listitem="@layout/recycler_item_a"
+        android:scrollbarStyle="outsideOverlay"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingHorizontal="18dp"
+        android:id="@+id/recyclerView"
+        android:fadeScrollbars="true"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:paddingBottom="16dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

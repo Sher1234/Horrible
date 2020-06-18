@@ -3,6 +3,7 @@ package info.horriblesubs.sher.data.horrible
 import info.horriblesubs.sher.data.database.AppDatabase
 import info.horriblesubs.sher.data.database.model.NotificationItem
 
+@Suppress("Unused")
 object NotificationRepository {
     private val horribleNotifications get() = AppDatabase.database.getHorribleNotifications()
 

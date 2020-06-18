@@ -1,4 +1,4 @@
-@file:JvmName("ModelFunctions")
+@file:JvmName("HorribleModelFunctions")
 
 package info.horriblesubs.sher.data.horrible.api
 

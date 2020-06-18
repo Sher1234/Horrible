@@ -2,8 +2,6 @@ package info.horriblesubs.sher.ui.b.explore.latest
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.horrible.api.model.ItemLatest
@@ -46,10 +44,10 @@ class LatestFragment: BaseFragment(), OnItemClickListener<ItemLatest> {
         view?.buttonC?.setOnClickListener {
             model.refreshDataFromServer
         }
-        model.resourceTimeLive.observe(viewLifecycleOwner, Observer {
+        model.resourceTimeLive.observe(viewLifecycleOwner) {
             view?.subtitleTextView?.text = it ?: "Never"
-        })
-        model.resource.observe(viewLifecycleOwner, Observer { onChanged(it) })
+        }
+        model.resource.observe(viewLifecycleOwner) { onChanged(it) }
     }
 
     override fun onDestroyView() {
@@ -76,7 +74,7 @@ class LatestFragment: BaseFragment(), OnItemClickListener<ItemLatest> {
         onSetLoading(false)
         view?.buttonB?.text = adapter.itemCount.toString()
         errorDialog?.show("https://horriblesubs.info")
-        Toast.makeText(context, str, Toast.LENGTH_LONG).show()
+        context.toast(str)
     }
 
     private fun onSetData(items: List<ItemLatest>?) {

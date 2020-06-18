@@ -3,8 +3,6 @@ package info.horriblesubs.sher.ui.b.shows
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.horrible.api.model.ItemList
@@ -18,6 +16,7 @@ import info.horriblesubs.sher.ui._extras.adapters.MediaObjectAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.b.MainActivity
 import info.horriblesubs.sher.ui.c.ShowActivity
+import info.horriblesubs.sher.ui.toast
 import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.b_fragment_4.view.*
@@ -73,13 +72,11 @@ class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
 
     override fun onResume() {
         super.onResume()
-        model.allShowing.observe(viewLifecycleOwner, Observer {
+        model.resourceCurrent.observe(viewLifecycleOwner) { onChanged(it) }
+        model.allShowing.observe(viewLifecycleOwner) {
             view?.toolbar?.runCustomizeMenu
             onSetShows(isAll = it ?: false)
-        })
-        model.resourceCurrent.observe(viewLifecycleOwner, Observer {
-            onChanged(it)
-        })
+        }
     }
 
     private fun onSetShows(
@@ -93,7 +90,7 @@ class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
 
     private fun onChanged(t: RepositoryResult<List<ItemList>>?) {
         when(t?.status) {
-            null -> Toast.makeText(context, "Internal App Error !!!", Toast.LENGTH_SHORT).show()
+            null -> context.toast("Internal app error!!!")
             RepositoryResult.SUCCESS -> {
                 t.value?.let { onSetShows(current = it) } ?: onSetShows()
                 onSetLoading(false)
@@ -101,7 +98,7 @@ class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
             RepositoryResult.LOADING -> onSetLoading(true)
             RepositoryResult.FAILURE -> {
                 errorDialog?.show("https://horriblesubs.info/release-schedule")
-                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                context.toast(t.message)
                 onSetLoading(false)
             }
         }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import info.horriblesubs.sher.R
@@ -15,6 +14,7 @@ import info.horriblesubs.sher.data.horrible.api.HD
 import info.horriblesubs.sher.data.horrible.api.SD
 import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
 import info.horriblesubs.sher.functions.getRelativeTime
+import info.horriblesubs.sher.functions.orientation
 import info.horriblesubs.sher.functions.parseAsHtml
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
@@ -47,22 +47,12 @@ class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<Item
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        model.liveSharedItem.observe(viewLifecycleOwner, Observer {
-            onChanged(it)
-        })
-        view?.recyclerView?.setGridLayoutAdapter(adapter, 2)
-        model.episodesTime.observe(viewLifecycleOwner, Observer {
-            onSetShowData()
-        })
-        view?.fhdText?.setOnClickListener {
-            onItemChange(2)
-        }
-        view?.hdText?.setOnClickListener {
-            onItemChange(1)
-        }
-        view?.sdText?.setOnClickListener {
-            onItemChange(0)
-        }
+        view?.recyclerView?.setGridLayoutAdapter(adapter, orientation(2, 3))
+        model.liveSharedItem.observe(viewLifecycleOwner) { onChanged(it) }
+        model.episodesTime.observe(viewLifecycleOwner) { onSetShowData() }
+        view?.fhdText?.setOnClickListener { onItemChange(2) }
+        view?.hdText?.setOnClickListener { onItemChange(1) }
+        view?.sdText?.setOnClickListener { onItemChange(0) }
     }
 
     override fun onDestroy() {

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="info.horriblesubs.sher">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
@@ -14,6 +15,7 @@
     <application
         android:fullBackupContent="@xml/backup_descriptor"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:autoRevokePermissions="allowed"
         android:banner="@drawable/logo_tv"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/Theme"
@@ -68,6 +70,8 @@
         <activity android:name=".ui.c.ShowActivity" />
 
         <activity android:name=".ui.q.SettingsActivity" />
+
+        <activity android:name=".ui.d.SearchAnimeActivity" />
 
     </application>
 

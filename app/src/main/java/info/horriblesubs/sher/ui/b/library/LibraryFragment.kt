@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.database.model.BookmarkedShow
 import info.horriblesubs.sher.data.database.onBookmarkChange
@@ -59,19 +58,19 @@ class LibraryFragment: BaseFragment(), OnItemClickListener<BookmarkedShow>,
             onToolbarActionListener = this@LibraryFragment
             inflateMenu(R.menu.menu_a)
         }
-        model.resource.observe(viewLifecycleOwner, Observer {
+        model.resource.observe(viewLifecycleOwner) {
             adapter.apply {
                 reset(it)
                 filter.filter("")
             }
-        })
-        model.isDeleteEnabled.observe(viewLifecycleOwner, Observer {
+        }
+        model.isDeleteEnabled.observe(viewLifecycleOwner) {
             view?.messageTextView?.apply {
                 if (it == true) visible else gone
                 view?.toolbar?.runCustomizeMenu
                 setText(R.string.delete_help)
             }
-        })
+        }
     }
 
     override fun onDestroyView() {

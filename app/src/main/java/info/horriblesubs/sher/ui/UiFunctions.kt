@@ -11,6 +11,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
@@ -24,6 +25,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.ImageViewTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexboxLayoutManager
 
 const val FRAGMENT_STACK: String = "FRAGMENT_BACK_STACK"
 
@@ -89,6 +92,12 @@ fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setL
     this.adapter = adapter
 }
 
+fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setFlexLayoutAdapter(adapter: A?) {
+    layoutManager = FlexboxLayoutManager(context).apply { alignItems = AlignItems.CENTER }
+    itemAnimator = DefaultItemAnimator()
+    this.adapter = adapter
+}
+
 fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setGridLayoutAdapter(
     adapter: A?, span: Int = 3
 ) {
@@ -125,6 +134,10 @@ fun RequestBuilder<Drawable>.into(imageView: ImageView?, progressBar: ProgressBa
         progressBar?.gone
     }
 })
+
+fun Context?.toast(msg: String) {
+    this?.let { Toast.makeText(it, msg, Toast.LENGTH_SHORT).show() }
+}
 
 fun startBrowser(context: Context?, url: String, chooserText: String = "Select browser to open") {
     context?.startActivity(Intent.createChooser(Intent().apply {

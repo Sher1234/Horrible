@@ -1,12 +1,12 @@
 package info.horriblesubs.sher.libs.toolbar
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.*
 import android.view.View.OnFocusChangeListener
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -126,9 +126,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
         isSearchEnabled = array.getBoolean(R.styleable.Toolbar_enabled, true)
         strokeColor = array.getColor(R.styleable.Toolbar_strokeColor, -1)
 
-        @SuppressLint("PrivateResource")
         navigationIconRes = array.getResourceId(R.styleable.Toolbar_navigationIcon, -1)
-        @SuppressLint("PrivateResource")
         menuResId = array.getResourceId(R.styleable.Toolbar_menu, -1)
 
         searchTextColor = array.getColor(R.styleable.Toolbar_searchTextColor, -1)
@@ -143,7 +141,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
         hint = array.getString(R.styleable.Toolbar_hint)
 
         searchBox.addTextChangedListener {
-            onToolbarActionListener?.onQueryChanged(it?.toString())
+            onToolbarActionListener?.onQueryChanged(it?.trim()?.toString())
         }
         onCloseSearchBar
         array.recycle()
@@ -226,7 +224,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
                 if (it.isVisible && it.icon != null)
                     s.add(it)
             }
-            s.sortWith(Comparator { o1, o2 ->
+            s.sortWith { o1, o2 ->
                 val order1 = o1?.order ?: 0
                 val order2 = o2?.order ?: 0
                 when {
@@ -234,7 +232,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
                     order1 > order2 -> 1
                     else -> 0
                 }
-            })
+            }
             return if (s.isEmpty()) null else s[0]
         } else return null
     }
@@ -246,7 +244,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
                 if (it.isVisible)
                     s.add(it)
             }
-            s.sortWith(Comparator { o1, o2 ->
+            s.sortWith { o1, o2 ->
                 val order1 = o1?.order ?: 0
                 val order2 = o2?.order ?: 0
                 when {
@@ -254,7 +252,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
                     order1 > order2 -> 1
                     else -> 0
                 }
-            })
+            }
             s.isNotEmpty()
         } else false
     }
@@ -345,8 +343,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
                 if (menuItem.icon != null)
                     menuItem.startAnimation(leftOut)
                 searchBoxRoot.startAnimation(leftIn)
-                if (isListenerExists)
-                    onToolbarActionListener?.onSearchStateChanged(true)
+                onToolbarActionListener?.onSearchStateChanged(true)
             } else {
                 field = value
                 val rightOut = AnimationUtils.loadAnimation(context, R.anim.fade_out_right)
@@ -363,7 +360,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
                 if (menuItem.icon != null)
                     menuItem.startAnimation(rightIn)
                 searchBoxRoot.startAnimation(rightOut)
-                if (isListenerExists) onToolbarActionListener?.onSearchStateChanged(false)
+                onToolbarActionListener?.onSearchStateChanged(false)
             }
         }
 
@@ -390,10 +387,8 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
         }
 
     var query: String?
-        get() = searchBox.text?.toString()
-        set(text) {
-            searchBox.setText(text)
-        }
+        get() = searchBox.text?.trim()?.toString()
+        set(text) { searchBox.setText(text) }
 
     private val isListenerExists: Boolean get() = onToolbarActionListener != null
 
@@ -433,9 +428,9 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
         }
     }
 
-    override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent): Boolean {
-        if (isListenerExists) onToolbarActionListener?.onQueryChanged(query)
-        query?.let { onToolbarActionListener?.onQueryChanged(it) }
+    override fun onEditorAction(v: TextView, actionId: Int, event: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH or EditorInfo.IME_ACTION_GO)
+            v.text?.trim()?.toString()?.let { onToolbarActionListener?.onQueryUpdated(it) }
         return true
     }
 
@@ -459,6 +454,7 @@ class Toolbar: FrameLayout, View.OnClickListener, Animation.AnimationListener,
     }
 
     interface OnToolbarActionListener {
+        fun onQueryUpdated(text: String?) = onQueryChanged(text)
         fun onMenuItemClickListener(item: MenuItem) = Unit
         fun onSearchStateChanged(enabled: Boolean) = Unit
         fun onQueryChanged(text: String?) = Unit

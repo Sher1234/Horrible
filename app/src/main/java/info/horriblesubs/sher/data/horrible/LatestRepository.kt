@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
 import info.horriblesubs.sher.data.RepositoryData
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.cache.isCacheInvalid
-import info.horriblesubs.sher.data.cache.zonedDateTimeISO
+import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.database.toNotifications
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
 import info.horriblesubs.sher.data.horrible.api.HorribleApi
@@ -34,12 +33,12 @@ object LatestRepository {
     @WorkerThread
     private suspend fun callToWebServer(reset: Boolean = false, cData: LatestResult?) {
         if(isNetworkAvailable) {
-            liveTime.postValue(null)
-            liveResource.postValue(RepositoryResult.getLoading())
+            liveTime.set()
+            liveResource.setLoading()
             val data = HorribleApi.api.getLatest(reset = reset.resetHorribleAPI)
-            liveResource.postValue(RepositoryResult.getSuccess(data?.items))
+            liveResource.setSuccess(data?.items)
             val time = data?.dateTime
-            liveTime.postValue(time)
+            liveTime.set(time)
             cachedData = LatestResult(
                 time?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 data?.items
@@ -51,8 +50,8 @@ object LatestRepository {
                 }
             }
         } else {
-            liveResource.postValue(RepositoryResult.getSuccess(cData?.value))
-            liveTime.postValue(cData?.time?.zonedDateTimeISO)
+            liveResource.setSuccess(cData?.value)
+            liveTime.set(cData?.time?.zonedDateTimeISO)
         }
     }
 
@@ -68,9 +67,9 @@ object LatestRepository {
     }
 
     private val handler = CoroutineExceptionHandler { _, t ->
-        liveResource.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while fetching latest releases!!!"))
-        liveTime.postValue(null)
+        liveResource.setFailure(t.message ?: "Error encountered while fetching latest releases!!!")
         t.printStackTrace()
+        liveTime.set()
     }
 
     init {
@@ -78,8 +77,8 @@ object LatestRepository {
             if (isCacheInvalid { plusMinutes(30) }) {
                 refreshFromServer(data = this)
             } else {
-                liveResource.postValue(RepositoryResult.getSuccess(this?.value))
-                liveTime.postValue(this?.time?.zonedDateTimeISO)
+                liveResource.setSuccess(this?.value)
+                liveTime.set(this?.time?.zonedDateTimeISO)
             }
         }
     }

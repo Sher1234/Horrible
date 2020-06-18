@@ -3,8 +3,6 @@ package info.horriblesubs.sher.ui.b.schedule
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.horrible.api.model.ItemSchedule
@@ -17,6 +15,7 @@ import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.b.MainActivity
 import info.horriblesubs.sher.ui.c.ShowActivity
+import info.horriblesubs.sher.ui.toast
 import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.b_fragment_3.view.*
@@ -52,7 +51,7 @@ class ScheduleFragment: BaseFragment(),
             inflateMenu(R.menu.menu_a)
             onToolbarActionListener = this@ScheduleFragment
         }
-        model.resource.observe(viewLifecycleOwner, Observer { onChanged(it) })
+        model.resource.observe(viewLifecycleOwner) { onChanged(it) }
     }
 
     private fun onChanged(t: RepositoryResult<List<List<ItemSchedule>>>?) = when(t?.status) {
@@ -63,8 +62,8 @@ class ScheduleFragment: BaseFragment(),
     }
 
     private fun onSetError(str: String) {
+        context.toast(str)
         onSetLoading(false)
-        Toast.makeText(context, str, Toast.LENGTH_LONG).show()
         errorDialog?.show("https://horriblesubs.info/release-schedule")
     }
 

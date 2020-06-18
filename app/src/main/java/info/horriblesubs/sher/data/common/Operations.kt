@@ -1,4 +1,3 @@
-@file:JvmName("CommonObjectOperations")
 @file:Suppress("Unused")
 
 package info.horriblesubs.sher.data.common

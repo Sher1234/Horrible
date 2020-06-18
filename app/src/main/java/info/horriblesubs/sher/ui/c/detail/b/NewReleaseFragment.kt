@@ -2,7 +2,6 @@ package info.horriblesubs.sher.ui.c.detail.b
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
 import info.horriblesubs.sher.functions.getRelativeTime
@@ -27,17 +26,17 @@ class NewReleaseFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.recyclerView?.setGridLayoutAdapter(adapter, 4)
-        model.episodes.observe(viewLifecycleOwner, Observer {
+        model.episodes.observe(viewLifecycleOwner) {
             it?.value?.let { list -> onResetView(episodes = list) }
-        })
-        model.batches.observe(viewLifecycleOwner, Observer {
+        }
+        model.batches.observe(viewLifecycleOwner) {
             it?.value?.let { list -> onResetView(batches = list) }
-        })
-        model.episodesTime.observe(viewLifecycleOwner, Observer {
+        }
+        model.episodesTime.observe(viewLifecycleOwner) {
             view.lastUpdatedText?.text = (if (TimeLeftPreference.value)
                 getRelativeTime(ZonedDateTime.now(), it) else
                 TimeFormatPreference.format(it)) ?: "Never"
-        })
+        }
     }
 
     private fun onResetView(

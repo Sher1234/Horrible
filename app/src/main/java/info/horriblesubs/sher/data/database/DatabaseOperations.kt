@@ -1,6 +1,3 @@
-@file:JvmName("DatabaseOperations")
-@file:Suppress("Unused")
-
 package info.horriblesubs.sher.data.database
 
 import androidx.annotation.WorkerThread

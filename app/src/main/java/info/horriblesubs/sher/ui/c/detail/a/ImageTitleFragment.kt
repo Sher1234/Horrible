@@ -2,7 +2,6 @@ package info.horriblesubs.sher.ui.c.detail.a
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,13 +23,10 @@ import info.horriblesubs.sher.data.horrible.api.shortDisplay
 import info.horriblesubs.sher.functions.parseAsHtml
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
-import info.horriblesubs.sher.ui.BaseFragment
+import info.horriblesubs.sher.ui.*
 import info.horriblesubs.sher.ui.c.ShowActivity
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.c.releases.ReleasesFragment
-import info.horriblesubs.sher.ui.into
-import info.horriblesubs.sher.ui.startBrowser
-import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_1_a.view.*
 
@@ -49,16 +45,12 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        model.detail.observe(viewLifecycleOwner, Observer {
-            onChanged(it)
-        })
+        model.detail.observe(viewLifecycleOwner) { onChanged(it) }
     }
 
     private fun onSetDetail(t: ItemShow?) {
-        if (t?.title.isNullOrBlank()) {
-            if (model.showLink.isNullOrBlank())
-                Toast.makeText(context, "Undefined URL", Toast.LENGTH_SHORT).show()
-        }
+        if (t?.title.isNullOrBlank() && model.showLink.isNullOrBlank())
+            context.toast("Undefined URL!")
         context?.let {
             Glide.with(it).load(t.imageUrl).transform().apply {
                 transform(RoundedCorners(6), FitCenter())
@@ -77,9 +69,7 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
         }
 
         view?.buttonLibraryToggle?.setOnClickListener { _ ->
-            t?.toBookmarkedShow()?.let {
-                onBookmarkChange(it)
-            }
+            t?.toBookmarkedShow()?.let { onBookmarkChange(it) }
         }
 
         view?.buttonRefresh?.setOnClickListener {
@@ -89,7 +79,7 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
         view?.buttonOpen?.setOnClickListener {
             val link  = t?.link ?: model.showLink
             if(link.isNullOrBlank())
-                Toast.makeText(context, "Internal app error, Unable to share.", Toast.LENGTH_SHORT).show()
+                context.toast("Internal app error, Unable to open link..")
             else
                 startBrowser(context, if (link.contains("shows")) link else
                     "https://horriblesubs.info/shows/$link")
@@ -108,9 +98,8 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
                     },
                     "Select Sharing App"
                 ))
-            } else {
-                Toast.makeText(context, "Internal app error, Unable to share.", Toast.LENGTH_SHORT).show()
-            }
+            } else
+                context.toast("Internal app error, Unable to share.")
         }
         t?.toBookmarkedShow()?.let {
             liveBookmark = LibraryRepository.getByIdLive(it)
@@ -118,8 +107,8 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
     }
 
     private fun onChanged(t: RepositoryResult<ItemShow>?) = when(t?.status) {
-        null -> Toast.makeText(context, "Internal App Error !!!", Toast.LENGTH_SHORT).show()
-        RepositoryResult.FAILURE -> Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+        RepositoryResult.FAILURE -> context.toast(t.message)
+        null -> context.toast("Internal app error!!!")
         RepositoryResult.SUCCESS -> onSetDetail(t.value)
         else -> {}
     }

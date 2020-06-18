@@ -1,4 +1,5 @@
 @file:JvmName("DatabaseConverters")
+@file:Suppress("Unused")
 
 package info.horriblesubs.sher.data.database
 

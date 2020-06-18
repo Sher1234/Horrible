@@ -8,6 +8,9 @@ import info.horriblesubs.sher.App
 import info.horriblesubs.sher.data.RepositoryData
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.isCacheInvalid
+import info.horriblesubs.sher.data.cache.setFailure
+import info.horriblesubs.sher.data.cache.setLoading
+import info.horriblesubs.sher.data.cache.setSuccess
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
 import info.horriblesubs.sher.data.horrible.api.HorribleApi
 import info.horriblesubs.sher.data.horrible.api.model.ItemList
@@ -29,11 +32,11 @@ object TrendingRepository {
     @WorkerThread
     private suspend fun callToWebServer(cResult: TrendingResult?) {
         if(isNetworkAvailable) {
-            liveResource.postValue(RepositoryResult.getLoading())
+            liveResource.setLoading()
             val data = HorribleApi.api.getTrending()
-            liveResource.postValue(RepositoryResult.getSuccess(data))
+            liveResource.setSuccess(data)
             cachedData = TrendingResult(data)
-        } else liveResource.postValue(RepositoryResult.getSuccess(cResult?.value))
+        } else liveResource.setSuccess(cResult?.value)
     }
 
     fun refreshFromServer(cResult: TrendingResult? = cachedData) {
@@ -48,14 +51,14 @@ object TrendingRepository {
     }
 
     private val handler = CoroutineExceptionHandler { _, t ->
-        liveResource.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while fetching trending!!!"))
+        liveResource.setFailure(t.message ?: "Error encountered while fetching trending!!!")
         t.printStackTrace()
     }
 
     init {
         cachedData.apply {
             if (isCacheInvalid { plusHours(4) }) refreshFromServer(this)
-            else liveResource.value = RepositoryResult.getSuccess(this?.value)
+            else liveResource.setSuccess(this?.value)
         }
     }
 

@@ -1,19 +1,18 @@
 package info.horriblesubs.sher.ui.c.detail.e
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.ui.BaseFragment
+import info.horriblesubs.sher.ui.*
 import info.horriblesubs.sher.ui._extras.adapters.horrible.DownloadAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.c.ShowModel
-import info.horriblesubs.sher.ui.setGridLayoutAdapter
-import info.horriblesubs.sher.ui.startBrowser
-import info.horriblesubs.sher.ui.viewModels
+import info.horriblesubs.sher.ui.d.SearchAnimeActivity
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_1_e.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import info.horriblesubs.sher.data.horrible.api.model.ItemRelease.Download as Link
 
 class ExternalLinksFragment: BaseFragment(), OnItemClickListener<Link> {
@@ -26,13 +25,12 @@ class ExternalLinksFragment: BaseFragment(), OnItemClickListener<Link> {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         view?.recyclerView?.setGridLayoutAdapter(adapter, 2)
-        model.detail.observe(viewLifecycleOwner, Observer {
+        model.detail.observe(viewLifecycleOwner) {
             it.value?.apply {
                 adapter.reset(
                     Link(
-                        source = if (mal_id.isNullOrBlank()) "Search" else "View in" + "  MyAnimeList",
-                        link = "https://myanimelist.net/anime" + if (mal_id.isNullOrBlank())
-                            ".php?q=${Uri.encode(title)}" else "/$mal_id"
+                        source = (if (mal_id.isNullOrBlank()) "Search" else "View in") + " MyAnimeList",
+                        link = if (mal_id.isNullOrBlank()) title else "https://myanimelist.net/anime/$mal_id"
                     ),
                     Link(
                         source = "Search Nyaa.si",
@@ -45,13 +43,21 @@ class ExternalLinksFragment: BaseFragment(), OnItemClickListener<Link> {
                     clear = true
                 )
             }
-        })
+        }
     }
 
+    @ExperimentalCoroutinesApi
     override fun onItemClick(view: View, t: Link?, position: Int) {
-        val url = t?.link
-        if (!url.isNullOrBlank())
-            startBrowser(context, url)
+        if (t?.source == "Search MyAnimeList") {
+            startActivity(
+                Intent(context, SearchAnimeActivity::class.java)
+                    .apply { putExtra(EXTRA_DATA, t.link) }
+            )
+        } else {
+            val url = t?.link
+            if (!url.isNullOrBlank())
+                startBrowser(context, url)
+        }
     }
 
     override fun onDestroy() {

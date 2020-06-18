@@ -3,22 +3,17 @@ package info.horriblesubs.sher.ui.c
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
 import info.horriblesubs.sher.functions.GoogleAds
 import info.horriblesubs.sher.libs.dialog.LoadingDialog
 import info.horriblesubs.sher.libs.dialog.NetworkErrorDialog
-import info.horriblesubs.sher.ui.BaseFragment
-import info.horriblesubs.sher.ui.EXTRA_DATA
-import info.horriblesubs.sher.ui.FRAGMENT_STACK
+import info.horriblesubs.sher.ui.*
 import info.horriblesubs.sher.ui._extras.listeners.OnBackPressedListener
 import info.horriblesubs.sher.ui.c.detail.ShowDetailFragment
 import info.horriblesubs.sher.ui.c.releases.ReleasesFragment
-import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_activity.*
 
@@ -43,11 +38,9 @@ class ShowActivity: AppCompatActivity() {
     private val model by viewModels<ShowModel> {
         val link = intent?.getStringExtra(EXTRA_DATA)
         if (link.isNullOrBlank()) {
-            Toast.makeText(this@ShowActivity, "Internal App Error!!!", Toast.LENGTH_SHORT).show()
+            this@ShowActivity.toast("Internal app error!!!")
             finish()
-            return@viewModels this
-        }
-        showLink = link
+        } else showLink = link
         this
     }
 
@@ -57,9 +50,9 @@ class ShowActivity: AppCompatActivity() {
 
         errorDialog = NetworkErrorDialog(this)
 
-        model.episodes.observe(this, Observer { onLoadListener(it) })
-        model.batches.observe(this, Observer { onLoadListener(it) })
-        model.detail.observe(this, Observer { onLoadListener(it) })
+        model.episodes.observe(this) { onLoadListener(it) }
+        model.batches.observe(this) { onLoadListener(it) }
+        model.detail.observe(this) { onLoadListener(it) }
         GoogleAds(this).apply {
             getBannerAd(this@ShowActivity, adBannerLayout)
             getInterstitialAd(this@ShowActivity)
@@ -83,10 +76,8 @@ class ShowActivity: AppCompatActivity() {
 
     private fun onSetError() {
         onSetLoading(false)
-        if (model.showLink.isNullOrEmpty())
-            Toast.makeText(this, "Undefined URL", Toast.LENGTH_SHORT).show()
-        else
-            errorDialog?.show("https://horriblesubs.info/show/${model.showLink}")
+        if (model.showLink.isNullOrEmpty()) toast("Undefined URL!")
+        else errorDialog?.show("https://horriblesubs.info/show/${model.showLink}")
     }
 
     private fun onSetLoading(b: Boolean) {

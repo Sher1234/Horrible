@@ -2,7 +2,6 @@ package info.horriblesubs.sher.ui.c.detail.c
 
 import android.os.Bundle
 import androidx.core.text.parseAsHtml
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui.c.ShowModel
@@ -26,7 +25,7 @@ class DescriptionFragment: BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        model.detail.observe(viewLifecycleOwner, Observer {
+        model.detail.observe(viewLifecycleOwner) {
             view?.button?.apply { if ((it?.value?.body?.length ?: 0) > 150) visible else gone }
             view?.descriptionText?.text = it?.value?.body.short.parseAsHtml()
             view?.button?.setText(R.string.view_more)
@@ -36,7 +35,7 @@ class DescriptionFragment: BaseFragment() {
                 view?.descriptionText?.text = (if (b) it?.value?.body else it?.value?.body?.short)?.parseAsHtml()
                 view?.button?.setText(if (b) R.string.view_less else R.string.view_more)
             }
-        })
+        }
     }
 
     override fun onDestroy() {
@@ -44,8 +43,6 @@ class DescriptionFragment: BaseFragment() {
         super.onDestroy()
     }
 
-    private val String?.short: String get() {
-        return if (this.isNullOrBlank()) "" else
-            this.substring(0, if (length > 150) 150 else length) + if (length > 150) "..." else ""
-    }
+    private val String?.short get() = if (this.isNullOrBlank()) "" else
+        substring(0, if (length > 150) 150 else length) + if (length > 150) "..." else ""
 }

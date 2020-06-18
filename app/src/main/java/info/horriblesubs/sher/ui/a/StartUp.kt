@@ -26,9 +26,7 @@ import androidx.core.content.ContextCompat.checkSelfPermission as isAvailable
 
 class StartUp: AppCompatActivity(), InstallStateUpdatedListener {
 
-    private val manager by lazy {
-        AppUpdateManagerFactory.create(this)
-    }
+    private val manager by lazy { AppUpdateManagerFactory.create(this) }
 
     private val texts by lazy {
         arrayListOf(
@@ -87,7 +85,7 @@ class StartUp: AppCompatActivity(), InstallStateUpdatedListener {
         if (isAvailable(this, Permission.INTERNET) == PackageManager.PERMISSION_GRANTED) {
             checks++
         } else ActivityCompat.requestPermissions(
-            this@StartUp,
+            this,
             arrayOf(Permission.INTERNET),
             PERMISSION_REQUEST
         )

@@ -1,8 +1,6 @@
 package info.horriblesubs.sher.ui.c.detail.d
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.horrible.api.detailAgo
@@ -14,7 +12,7 @@ import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
 import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui._extras.adapters.ShowInfoAdapter
 import info.horriblesubs.sher.ui.c.ShowModel
-import info.horriblesubs.sher.ui.setLinearLayoutAdapter
+import info.horriblesubs.sher.ui.setFlexLayoutAdapter
 import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_1_d.view.*
@@ -30,7 +28,7 @@ class ShowInfoFragment: BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        view?.recyclerView?.setLinearLayoutAdapter(adapter, RecyclerView.HORIZONTAL)
+        view?.recyclerView?.setFlexLayoutAdapter(adapter)
         adapter.apply {
             adapter.removeAll()
             adapter.add(
@@ -42,9 +40,9 @@ class ShowInfoFragment: BaseFragment() {
                 ShowInfoAdapter.ShowInfo("Episodes Cache Time", "Never")
             )
         }
-        model.episodesTime.observe(viewLifecycleOwner, Observer { onEpisodesChanged(it) })
-        model.batchesTime.observe(viewLifecycleOwner, Observer { onBatchesChanged(it) })
-        model.detail.observe(viewLifecycleOwner, Observer { onDetailChanged(it) })
+        model.episodesTime.observe(viewLifecycleOwner) { onEpisodesChanged(it) }
+        model.batchesTime.observe(viewLifecycleOwner) { onBatchesChanged(it) }
+        model.detail.observe(viewLifecycleOwner) { onDetailChanged(it) }
     }
 
     override fun onDestroy() {

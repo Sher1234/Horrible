@@ -8,6 +8,7 @@ import info.horriblesubs.sher.ui.pxToDp
 import kotlin.math.max
 import kotlin.math.roundToInt
 
+@Suppress("Unused")
 class AutoFitRecyclerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null

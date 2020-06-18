@@ -3,9 +3,7 @@ package info.horriblesubs.sher.ui.c.releases
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.horrible.api.allEpisodesTimeStamp
@@ -17,6 +15,7 @@ import info.horriblesubs.sher.ui._extras.adapters.horrible.ReleaseAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.c.view.ReleaseViewFragment
+import info.horriblesubs.sher.ui.toast
 import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_2.view.*
@@ -68,15 +67,15 @@ class ReleasesFragment: BaseFragment(),
 
     override fun onResume() {
         super.onResume()
-        isEpisodesShowing.observe(viewLifecycleOwner, Observer {
+        isEpisodesShowing.observe(viewLifecycleOwner) {
             view?.recyclerView?.columnWidth = if (it == false) 1.45f else 1f
             onSetReleases(isEpisodesShowing = it ?: true)
             view?.toolbar?.runCustomizeMenu
-        })
-        model.episodes.observe(viewLifecycleOwner, Observer {
+        }
+        model.episodes.observe(viewLifecycleOwner) {
             view?.toolbar?.runCustomizeMenu
             onChanged(it)
-        })
+        }
     }
 
     private fun onSetReleases(
@@ -90,14 +89,14 @@ class ReleasesFragment: BaseFragment(),
 
     private fun onChanged(t: RepositoryResult<List<ItemRelease>>?) {
         when(t?.status) {
-            null -> Toast.makeText(context, "Internal App Error !!!", Toast.LENGTH_SHORT).show()
+            null -> context.toast("Internal app error!!!")
             RepositoryResult.SUCCESS -> {
                 t.value?.let { onSetReleases(episodes = it) } ?: onSetReleases()
                 onSetLoading(false)
             }
             RepositoryResult.LOADING -> onSetLoading(true)
             RepositoryResult.FAILURE -> {
-                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                context.toast(t.message)
                 onSetLoading(false)
             }
         }

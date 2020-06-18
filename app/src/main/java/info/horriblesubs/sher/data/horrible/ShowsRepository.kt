@@ -7,8 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
 import info.horriblesubs.sher.data.RepositoryData
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.cache.isCacheInvalid
-import info.horriblesubs.sher.data.cache.zonedDateTimeISO
+import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
 import info.horriblesubs.sher.data.horrible.api.HorribleApi
 import info.horriblesubs.sher.data.horrible.api.current
@@ -38,20 +37,20 @@ object ShowsRepository {
         cResult: ShowsResult?
     ) {
         if(isNetworkAvailable) {
-            liveCurrent.postValue(RepositoryResult.getLoading())
-            liveAllShows.postValue(RepositoryResult.getLoading())
+            liveCurrent.setLoading()
+            liveAllShows.setLoading()
             val data = HorribleApi.api.getShows(reset = reset.resetHorribleAPI)
-            liveCurrent.postValue(RepositoryResult.getSuccess(data?.items.current()))
-            liveAllShows.postValue(RepositoryResult.getSuccess(data?.items))
-            liveTime.postValue(data?.dateTime)
+            liveCurrent.setSuccess(data?.items.current())
+            liveAllShows.setSuccess(data?.items)
+            liveTime.set(data?.dateTime)
             cachedData = ShowsResult(
                 data?.dateTime?.format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 data?.items ?: emptyList()
             )
         } else {
-            liveAllShows.postValue(RepositoryResult.getSuccess(cResult?.value ?: emptyList()))
-            liveCurrent.postValue(RepositoryResult.getSuccess(cResult?.value.current()))
-            liveTime.postValue(cResult?.time.zonedDateTimeISO)
+            liveAllShows.setSuccess(cResult?.value ?: emptyList())
+            liveCurrent.setSuccess(cResult?.value.current())
+            liveTime.set(cResult?.time.zonedDateTimeISO)
         }
     }
 
@@ -70,7 +69,7 @@ object ShowsRepository {
     }
 
     private val handler = CoroutineExceptionHandler { _, t ->
-        liveCurrent.postValue(RepositoryResult.getFailure(t.message ?: "Error encountered while fetching shows!!!"))
+        liveCurrent.setFailure(t.message ?: "Error encountered while fetching shows!!!")
         t.printStackTrace()
     }
 
@@ -80,9 +79,9 @@ object ShowsRepository {
                 refreshFromServer(cResult = this)
             } else {
                 GlobalScope.launch(Dispatchers.IO) {
-                    liveAllShows.postValue(RepositoryResult.getSuccess(this@apply?.value ?: emptyList()))
-                    liveCurrent.postValue(RepositoryResult.getSuccess(this@apply?.value.current()))
-                    liveTime.postValue(this@apply?.time.zonedDateTimeISO)
+                    liveAllShows.setSuccess(this@apply?.value ?: emptyList())
+                    liveCurrent.setSuccess(this@apply?.value.current())
+                    liveTime.set(this@apply?.time.zonedDateTimeISO)
                 }
             }
         }

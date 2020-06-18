@@ -1,7 +1,6 @@
 package info.horriblesubs.sher.ui.b.explore.random
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.database.toBookmarkedShow
 import info.horriblesubs.sher.libs.dialog.RandomDialog
@@ -18,11 +17,11 @@ class RandomFragment: BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        model.result.observe(viewLifecycleOwner, Observer { show ->
+        model.result.observe(viewLifecycleOwner) { show ->
             if (show != null)
                 dialog = context?.let{RandomDialog(it, show.toBookmarkedShow())}
             dialog?.show()
-        })
+        }
         button?.setOnClickListener {
             model.refresh()
         }

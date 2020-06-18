@@ -19,10 +19,11 @@ class LinkSpan (private val listener: OnLinkClickListener): LinkMovementMethod()
             val line: Int = widget.layout.getLineForVertical(y)
             val off: Int = widget.layout.getOffsetForHorizontal(line, x.toFloat())
             val link = buffer.getSpans(off, off, URLSpan::class.java)
-            if (listener.onLinkClick(link?.get(0)?.url)) true else super.onTouchEvent(widget, buffer, event)
+            if (listener(link?.get(0)?.url)) true else super.onTouchEvent(widget, buffer, event)
         } else super.onTouchEvent(widget, buffer, event)
     }
     interface OnLinkClickListener {
         fun onLinkClick(url: String?): Boolean
+        operator fun invoke(url: String?) = onLinkClick(url)
     }
 }

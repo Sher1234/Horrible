@@ -20,8 +20,6 @@ class ListDialog<T>(
     }
 
     init {
-//        View.inflate(context, R.layout._lib_dialog_list, this.layoutInflater)
-//        LayoutInflater.from(context).inflate(R.layout._lib_dialog_list_item, pa, false)
         val textView: AppCompatTextView? = findViewById(R.id.textView)
         val radioGroup: RadioGroup? = findViewById(R.id.radioGroup)
         val button2: MaterialButton? = findViewById(R.id.button2)

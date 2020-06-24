@@ -1,11 +1,16 @@
 package info.horriblesubs.sher.data.mal.api.model.common
 
 import com.google.gson.annotations.SerializedName
+import info.horriblesubs.sher.data.mal.api.model.common.base.BaseWithImage
 
-data class VoiceActor (
-    @SerializedName("url") var url: String? = null,
-    @SerializedName("name") var name: String? = null,
-    @SerializedName("mal_id") var malId: Int? = null,
+class VoiceActor (
+    malId: Int? = null,
+    url: String? = null,
+    name: String? = null,
+    imageUrl: String? = null,
     @SerializedName("language") var language: String? = null,
-    @SerializedName("image_url") var imageUrl: String? = null,
-)
+): BaseWithImage(imageUrl = imageUrl, name = name, url = url, malId = malId) {
+    override fun toString(): String {
+        return name ?: ""
+    }
+}

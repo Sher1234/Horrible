@@ -1,5 +1,7 @@
 package info.horriblesubs.sher.ui.d
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +15,7 @@ import info.horriblesubs.sher.libs.toolbar.Toolbar
 import info.horriblesubs.sher.ui.EXTRA_DATA
 import info.horriblesubs.sher.ui._extras.adapters.mal.SearchAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
-import info.horriblesubs.sher.ui.startBrowser
+import info.horriblesubs.sher.ui.e.AnimeMalActivity
 import info.horriblesubs.sher.ui.toast
 import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
@@ -25,10 +27,21 @@ import kotlinx.coroutines.FlowPreview
 class SearchAnimeActivity: AppCompatActivity(), Toolbar.OnToolbarActionListener,
     OnItemClickListener<AnimeSearchItem> {
 
+    companion object {
+        fun startSearchAnimeActivity(context: Context?, query: String?, executeAtEnd: () -> Unit = {}) {
+            context?.startActivity(getSearchAnimeActivityIntent(context, query))
+            executeAtEnd()
+        }
+        private fun getSearchAnimeActivityIntent(context: Context?, query: String?): Intent {
+            return Intent(context, SearchAnimeActivity::class.java).apply {
+                putExtra(EXTRA_DATA, query)
+            }
+        }
+    }
+
     private val viewModel by viewModels<SearchAnimeModel>()
-    private val adapter =
-        SearchAdapter(this)
     private var loadingDialog: LoadingDialog? = null
+    private val adapter = SearchAdapter(this)
 
     @FlowPreview
     override fun onCreate(state: Bundle?) {
@@ -73,7 +86,7 @@ class SearchAnimeActivity: AppCompatActivity(), Toolbar.OnToolbarActionListener,
     }
 
     override fun onItemClick(view: View, t: AnimeSearchItem?, position: Int) {
-        t?.url?.let { startBrowser(this, it) }
+        t?.malId?.let { AnimeMalActivity.startAnimeMalActivity(this, it) }
     }
 
     override fun onDestroy() {

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".ui.a.StartUp">
+
+    <com.google.android.material.appbar.AppBarLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingTop="14dp"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            >
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="parent"
+                android:theme="@style/TextAppearance.Medium"
+                android:text="@string/characters_staff"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textIsSelectable="true"
+                android:id="@+id/titleText"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:padding="2dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.google.android.material.tabs.TabLayout
+            app:tabTextAppearance="@style/TextAppearance.Tab"
+            app:tabIndicator="@drawable/tab_indicator"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:tabIndicatorFullWidth="false"
+            android:id="@+id/tabLayout" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/viewPager" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

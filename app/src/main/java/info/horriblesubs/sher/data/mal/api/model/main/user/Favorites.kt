@@ -1,7 +1,7 @@
 package info.horriblesubs.sher.data.mal.api.model.main.user
 
 import com.google.gson.annotations.SerializedName
-import info.horriblesubs.sher.api.mal.model.common.base.BaseWithImage
+import info.horriblesubs.sher.data.mal.api.model.common.base.BaseWithImage
 
 data class Favorites (
     @SerializedName("characters") var characters: ArrayList<BaseWithImage>? = null,

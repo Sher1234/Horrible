@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
-import info.horriblesubs.sher.data.RepositoryData
+import info.horriblesubs.sher.data.RepoResut
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.database.toNotifications
@@ -94,5 +94,5 @@ object LatestRepository {
         get() = cacheRequest.onGetData(LatestResult::class.java)
 
     class LatestResult(time: String?, value: List<ItemLatest>?):
-        RepositoryData<List<ItemLatest>>(time ?: "", value)
+        RepoResut<List<ItemLatest>>(time ?: "", value)
 }

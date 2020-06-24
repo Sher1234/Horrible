@@ -3,7 +3,7 @@
 package info.horriblesubs.sher.data.cache
 
 import androidx.lifecycle.MutableLiveData
-import info.horriblesubs.sher.data.RepositoryData
+import info.horriblesubs.sher.data.RepoResut
 import info.horriblesubs.sher.data.RepositoryResult
 import java.time.ZonedDateTime
 
@@ -23,7 +23,7 @@ fun MutableLiveData<ZonedDateTime>.set(value: ZonedDateTime? = null) {
     postValue(value)
 }
 
-inline fun <E, T: RepositoryData<E>> T?.isCacheInvalid(crossinline after: ZonedDateTime.() -> ZonedDateTime?): Boolean {
+inline fun <E, T: RepoResut<E>> T?.isCacheInvalid(crossinline after: ZonedDateTime.() -> ZonedDateTime?): Boolean {
     val cVTime = this?.time?.zonedDateTimeISO?.after() ?: return true
     val nTime = ZonedDateTime.now() ?: return true
     return cVTime < nTime

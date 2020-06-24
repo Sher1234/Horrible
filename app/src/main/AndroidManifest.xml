@@ -15,7 +15,6 @@
     <application
         android:fullBackupContent="@xml/backup_descriptor"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:autoRevokePermissions="allowed"
         android:banner="@drawable/logo_tv"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/Theme"
@@ -69,9 +68,11 @@
 
         <activity android:name=".ui.c.ShowActivity" />
 
-        <activity android:name=".ui.q.SettingsActivity" />
-
         <activity android:name=".ui.d.SearchAnimeActivity" />
+
+        <activity android:name=".ui.e.AnimeMalActivity" android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.q.SettingsActivity" />
 
     </application>
 

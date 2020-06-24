@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
-import info.horriblesubs.sher.data.RepositoryData
+import info.horriblesubs.sher.data.RepoResut
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
@@ -98,5 +98,5 @@ object ShowsRepository {
         get() = cacheRequest.onGetData(ShowsResult::class.java)
 
     class ShowsResult(time: String?, t: List<ItemList>?):
-        RepositoryData<List<ItemList>>(time ?: "", t)
+        RepoResut<List<ItemList>>(time ?: "", t)
 }

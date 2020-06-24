@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
-import info.horriblesubs.sher.data.RepositoryData
+import info.horriblesubs.sher.data.RepoResut
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.isCacheInvalid
 import info.horriblesubs.sher.data.cache.setFailure
@@ -72,7 +72,7 @@ object TrendingRepository {
         set(value) = value?.let { cacheRequest.onCacheData(it) } ?: Unit
         get() = cacheRequest.onGetData(TrendingResult::class.java)
 
-    class TrendingResult(value: List<ItemList>?): RepositoryData<List<ItemList>>(
+    class TrendingResult(value: List<ItemList>?): RepoResut<List<ItemList>>(
         ZonedDateTime.now().format(DateTimeFormatter.ISO_ZONED_DATE_TIME),
         value
     )

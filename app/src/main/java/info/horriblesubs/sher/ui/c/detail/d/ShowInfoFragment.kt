@@ -10,7 +10,7 @@ import info.horriblesubs.sher.functions.getRelativeTime
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
 import info.horriblesubs.sher.ui.BaseFragment
-import info.horriblesubs.sher.ui._extras.adapters.ShowInfoAdapter
+import info.horriblesubs.sher.ui._extras.adapters.InfoAdapter
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.setFlexLayoutAdapter
 import info.horriblesubs.sher.ui.viewModels
@@ -24,7 +24,7 @@ class ShowInfoFragment: BaseFragment() {
     override val layoutId: Int = R.layout.c_fragment_1_d
     override val name: String = "show-info"
     private val adapter =
-        ShowInfoAdapter()
+        InfoAdapter()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -32,12 +32,12 @@ class ShowInfoFragment: BaseFragment() {
         adapter.apply {
             adapter.removeAll()
             adapter.add(
-                ShowInfoAdapter.ShowInfo("Total Views", 0.toString()),
-                ShowInfoAdapter.ShowInfo("Total Bookmarked", 0.toString()),
-                ShowInfoAdapter.ShowInfo("Data Source", "HorribleSubs"),
-                ShowInfoAdapter.ShowInfo("Detail Cache Time", "Never"),
-                ShowInfoAdapter.ShowInfo("Batches Cache Time", "Never"),
-                ShowInfoAdapter.ShowInfo("Episodes Cache Time", "Never")
+                InfoAdapter.Info("Total Views", 0.toString()),
+                InfoAdapter.Info("Total Bookmarked", 0.toString()),
+                InfoAdapter.Info("Data Source", "HorribleSubs"),
+                InfoAdapter.Info("Detail Cache Time", "Never"),
+                InfoAdapter.Info("Batches Cache Time", "Never"),
+                InfoAdapter.Info("Episodes Cache Time", "Never")
             )
         }
         model.episodesTime.observe(viewLifecycleOwner) { onEpisodesChanged(it) }

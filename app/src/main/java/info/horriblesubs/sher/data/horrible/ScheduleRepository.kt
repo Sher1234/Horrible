@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
-import info.horriblesubs.sher.data.RepositoryData
+import info.horriblesubs.sher.data.RepoResut
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
@@ -88,5 +88,5 @@ object ScheduleRepository {
         get() = cacheRequest.onGetData(ScheduleResult::class.java)
 
     class ScheduleResult(time: String?, t: List<List<ItemSchedule>>?):
-        RepositoryData<List<List<ItemSchedule>>>(time ?: "", t)
+        RepoResut<List<List<ItemSchedule>>>(time ?: "", t)
 }

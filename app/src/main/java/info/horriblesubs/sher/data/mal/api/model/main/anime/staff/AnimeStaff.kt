@@ -1,7 +1,7 @@
 package info.horriblesubs.sher.data.mal.api.model.main.anime.staff
 
 import com.google.gson.annotations.SerializedName
-import info.horriblesubs.sher.api.mal.model.common.base.BaseWithImage
+import info.horriblesubs.sher.data.mal.api.model.common.base.BaseWithImage
 
 class AnimeStaff(
     @SerializedName("positions") var positions: ArrayList<String>? = null,

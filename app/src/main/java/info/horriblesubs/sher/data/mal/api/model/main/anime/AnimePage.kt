@@ -14,12 +14,14 @@ class AnimePage (
     background: String? = null,
     synopsis: String? = null,
     imageUrl: String? = null,
+    title: String? = null,
+
     related: Related? = null,
+
     popularity: Int? = null,
     status: String? = null,
     favorites: Int? = null,
     scoredBy: Int? = null,
-    title: String? = null,
     score: Double? = null,
     members: Int? = null,
     type: String? = null,

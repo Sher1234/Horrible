@@ -99,9 +99,9 @@ fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setF
 }
 
 fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setGridLayoutAdapter(
-    adapter: A?, span: Int = 3
+    adapter: A?, span: Int = 3, orientation: Int = RecyclerView.VERTICAL
 ) {
-    layoutManager = GridLayoutManager(context, span)
+    layoutManager = GridLayoutManager(context, span).apply { this.orientation = orientation }
     itemAnimator = DefaultItemAnimator()
     this.adapter = adapter
 }

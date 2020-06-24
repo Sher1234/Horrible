@@ -47,5 +47,28 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="def_time_desc">Set default time format to view inside the app.</string>
     <string name="close_dialog_desc">Tap outside the dialog to close.</string>
+    <string name="episodes">Episodes</string>
+    <string name="characters_staff">Characters &amp; Staff</string>
+    <string name="news">News</string>
+    <string name="videos">Videos</string>
+    <string name="pictures">Pictures</string>
+    <string name="stats">Stats</string>
+    <string name="info">Info</string>
+    <string name="reviews">Reviews</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="user_updates">User Updates</string>
+    <string name="background">Background</string>
+    <string name="openings_amp_endings"><![CDATA[Openings & Endings]]></string>
+    <string name="data_not_available">Data not available.</string>
+    <string name="openings">Openings</string>
+    <string name="endings">Endings</string>
+    <string name="studios">Studios</string>
+    <string name="licensors">Licensors</string>
+    <string name="producers">Producers</string>
+    <string name="other_details">Other Details</string>
+    <string name="characters">Characters</string>
+    <string name="staff">Staff</string>
+    <string name="voice_actors">Voice Actors</string>
+    <string name="open">Open</string>
 
 </resources>

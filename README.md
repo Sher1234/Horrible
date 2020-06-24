@@ -35,8 +35,10 @@ an!me implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Minor UI Tweaks, Enabled MAL Anime (Search & View) | Beta                         Major Commit   - June  24, 2020
+Toolbar Fixes, MAL Anime Search Added                                             Major Commit   - June  18, 2020
 Improved performance, with caching support, UI Improvements                       Major Commit   - June  01, 2020
-Added support for TV [Alpha], Updated dependecies                                 Major Commit   - April 12, 2020
+Added support for TV [Alpha], Updated dependencies                                Major Commit   - April 12, 2020
 Updated dependecies & Kotlin 1.4.                                                 Minor Commit   - Mar   22, 2020
 Fixed Ads Support.                                                                Minor Commit   - Nov   10, 2019
 Tablet Support & Updated Privacy Policy.                                          Major Commit   - Nov   10, 2019
@@ -97,8 +99,11 @@ Added Support for Lists, Notification sometimes buggy, Show Pages, Search       
 Added Support for Schedule, Notification on New Release & Design Improvements     Major Commit   - March 05, 2018
 Currently Listing Latest 60 Releases & Reimplemented some features                Initial Commit - March 04, 2018
 ```
-#### Todo
+#### In Progress
 * MAL Implementation
+
+#### Todo
+* MAL App UI Refine
 * Minimal nyaa.si Implementation
 * XDCC-IRC Download Tutorial for older episodes
 * User Registration & Cloud Sync of Favourites

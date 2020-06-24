@@ -1,15 +1,18 @@
 package info.horriblesubs.sher.ui.c.detail.e
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.ui.*
+import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui._extras.adapters.horrible.DownloadAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.d.SearchAnimeActivity
+import info.horriblesubs.sher.ui.e.AnimeMalActivity
+import info.horriblesubs.sher.ui.setGridLayoutAdapter
+import info.horriblesubs.sher.ui.startBrowser
+import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_1_e.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,7 +33,7 @@ class ExternalLinksFragment: BaseFragment(), OnItemClickListener<Link> {
                 adapter.reset(
                     Link(
                         source = (if (mal_id.isNullOrBlank()) "Search" else "View in") + " MyAnimeList",
-                        link = if (mal_id.isNullOrBlank()) title else "https://myanimelist.net/anime/$mal_id"
+                        link = if (mal_id.isNullOrBlank()) title else mal_id
                     ),
                     Link(
                         source = "Search Nyaa.si",
@@ -48,15 +51,17 @@ class ExternalLinksFragment: BaseFragment(), OnItemClickListener<Link> {
 
     @ExperimentalCoroutinesApi
     override fun onItemClick(view: View, t: Link?, position: Int) {
-        if (t?.source == "Search MyAnimeList") {
-            startActivity(
-                Intent(context, SearchAnimeActivity::class.java)
-                    .apply { putExtra(EXTRA_DATA, t.link) }
-            )
-        } else {
-            val url = t?.link
-            if (!url.isNullOrBlank())
-                startBrowser(context, url)
+        when (t?.source) {
+            "Search MyAnimeList" -> SearchAnimeActivity.startSearchAnimeActivity(context, t.link)
+            "View in MyAnimeList" -> {
+                val id = t.link?.toIntOrNull() ?: -1
+                AnimeMalActivity.startAnimeMalActivity(context, id)
+            }
+            else -> {
+                val url = t?.link
+                if (!url.isNullOrBlank())
+                    startBrowser(context, url)
+            }
         }
     }
 

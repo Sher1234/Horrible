@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:text="@tools:sample/full_names"
+    android:layout_marginHorizontal="4dp"
+    android:theme="@style/AppBar.Button"
+    android:layout_width="wrap_content"
+    tools:icon="@drawable/ic_playlist"
+    app:strokeColor="?colorPrimary"
+    android:layout_height="48dp"
+    android:textAllCaps="false"
+    android:id="@+id/button"
+    android:textSize="13sp"
+    app:iconSize="20dp" />

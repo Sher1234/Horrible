@@ -5,9 +5,7 @@ import androidx.core.text.parseAsHtml
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui.c.ShowModel
-import info.horriblesubs.sher.ui.gone
 import info.horriblesubs.sher.ui.viewModels
-import info.horriblesubs.sher.ui.visible
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_1_c.view.*
 
@@ -26,14 +24,16 @@ class DescriptionFragment: BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         model.detail.observe(viewLifecycleOwner) {
-            view?.button?.apply { if ((it?.value?.body?.length ?: 0) > 150) visible else gone }
+            view?.synopsisId?.apply {
+                if ((it?.value?.body?.length ?: 0) <= 150) checkMarkDrawable = null
+                else setCheckMarkDrawable(R.drawable.da_up_down)
+            }
             view?.descriptionText?.text = it?.value?.body.short.parseAsHtml()
-            view?.button?.setText(R.string.view_more)
             descToggle = false
-            view?.button?.setOnClickListener { _ ->
+            view?.synopsisId?.setOnClickListener { _ ->
                 val b = descToggle
+                view?.synopsisId?.isChecked = b
                 view?.descriptionText?.text = (if (b) it?.value?.body else it?.value?.body?.short)?.parseAsHtml()
-                view?.button?.setText(if (b) R.string.view_less else R.string.view_more)
             }
         }
     }

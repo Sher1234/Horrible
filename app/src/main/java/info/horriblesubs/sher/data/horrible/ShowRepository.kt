@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
 import info.horriblesubs.sher.App
-import info.horriblesubs.sher.data.RepositoryData
+import info.horriblesubs.sher.data.RepoResut
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.horrible.HorribleCache.FileType
@@ -31,7 +31,6 @@ class ShowRepository {
     val liveResourceDetail = MutableLiveData<RepositoryResult<ItemShow>>()
     val liveResourceEpisodesTime = MutableLiveData<ZonedDateTime>()
     val liveResourceBatchesTime = MutableLiveData<ZonedDateTime>()
-    val link = MutableLiveData<String>()
 
     private var episodesJob: Job? = null
         set(value) {
@@ -266,8 +265,8 @@ class ShowRepository {
     }
 
     class ShowResult(time: String?, t: ItemShow?):
-        RepositoryData<ItemShow>(time ?: "", t)
+        RepoResut<ItemShow>(time ?: "", t)
 
     class ReleaseResult(time: String?, t: List<ItemRelease>?):
-        RepositoryData<List<ItemRelease>>(time ?: "", t)
+        RepoResut<List<ItemRelease>>(time ?: "", t)
 }

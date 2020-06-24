@@ -6,4 +6,6 @@ open class BaseWithName(
     @SerializedName("name") var name: String? = null,
     url: String? = null,
     malId: Int? = null,
-): Base(malId = malId, url = url)
+): Base(malId = malId, url = url) {
+    override fun toString() = name ?: "Null"
+}

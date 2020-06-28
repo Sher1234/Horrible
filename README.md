@@ -1,4 +1,4 @@
-## an!me
+## an!me - better ongoing
 an!me - better ongoing is an android application with *notification support* for newer releases <br />
 Not affiliated to source i.e. **[horriblesubs.info](https://horriblesubs.info)** in any way <br />
 Support the official site **[horriblesubs.info](https://horriblesubs.info)**
@@ -9,12 +9,12 @@ an!me implements number of open source projects listed bellow:
 - Glide for Displaying images
 - Retrofit networking libraries
 - SimpleHtmlDom for HTML parsing
-- Firebase for FCM notifications & google ads
+- Firebase for FCM notifications & GoogleAdMob
 
 #### *Notes:*
 - ***[Supported]*** Versions 0.9.0 (and above) (Api-v7)
-- ***[Supported]*** Versions 0.8.0 (and above) (Api-v6)
-- ***[Supported]*** Versions 0.7.0 - 0.7.9 (Api-v5)
+- ***[Supported]*** Versions 0.8.0 (to 0.8.4) (Api-v6)
+- ***[Supported]*** Versions 0.7.0 (to 0.7.9) (Api-v5)
   - [Changed Signing Keys] Versions 0.7.5 - 0.7.9
   - [Changed Signing Keys] Versions 0.7.0 - 0.7.4
 - [Unsupported] Versions 0.6.5 and earlier
@@ -35,6 +35,7 @@ an!me implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Minor UI Tweaks, Fixed Release View (Horrible), Updated Dependencies              Major Commit   - June  28, 2020
 Minor UI Tweaks, Enabled MAL Anime (Search & View) | Beta                         Major Commit   - June  24, 2020
 Toolbar Fixes, MAL Anime Search Added                                             Major Commit   - June  18, 2020
 Improved performance, with caching support, UI Improvements                       Major Commit   - June  01, 2020
@@ -109,7 +110,7 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 * User Registration & Cloud Sync of Favourites
 
 #### Download
-> Head over to releases for downloading latest release/beta/alpha: [Downloads](https://github.com/Sher1234/HorribleSubs/releases)
+> Head over to releases for downloading latest release/beta/alpha: [RELEASES](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
 * **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)

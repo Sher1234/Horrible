@@ -19,7 +19,7 @@ class AnimeMalActivity: AppCompatActivity() {
             context?.startActivity(getAnimeMalActivityIntent(context, id))
             executeAtEnd()
         }
-        fun getAnimeMalActivityIntent(context: Context?, id: Int): Intent {
+        private fun getAnimeMalActivityIntent(context: Context?, id: Int): Intent {
             return Intent(context, AnimeMalActivity::class.java).apply {
                 putExtra(EXTRA_DATA, id)
             }
@@ -27,7 +27,7 @@ class AnimeMalActivity: AppCompatActivity() {
     }
 
     private val model by viewModels<AnimeModel> {
-        val id = intent?.getIntExtra(EXTRA_DATA, 235) ?: 235 // Todo: 235 to -1
+        val id = intent?.getIntExtra(EXTRA_DATA, -1) ?: -1
         if (id < 1) {
             this@AnimeMalActivity.toast("Internal app error!!!")
             finish()
@@ -38,11 +38,12 @@ class AnimeMalActivity: AppCompatActivity() {
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
         setContentView(R.layout.c_activity)
-        //TODO: Enable
-//        GoogleAds(this).apply {
-//            getBannerAd(this@AnimeMalActivity, adBannerLayout)
-//            getInterstitialAd(this@AnimeMalActivity)
-//        }
+/*        TODO("Enable Ads")
+ *        GoogleAds(this).apply {
+ *            getBannerAd(this@AnimeMalActivity, adBannerLayout)
+ *            getInterstitialAd(this@AnimeMalActivity)
+ *        }
+*/
         when(model.itemId) {
             "character-staff" -> CharacterStaffFragment()
             else -> AnimeHomeFragment()

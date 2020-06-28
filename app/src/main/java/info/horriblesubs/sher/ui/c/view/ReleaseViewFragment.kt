@@ -112,18 +112,21 @@ class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<Item
                 setUnselected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
                 setUnselected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
                 setSelected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
+                adapter.reset(model.liveSharedItem.value.HD)
                 "HD [720p]"
             }
             2 -> {
                 setSelected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
                 setUnselected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
                 setUnselected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
+                adapter.reset(model.liveSharedItem.value.FHD)
                 "Full HD [1080p]"
             }
             else -> {
                 setUnselected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
                 setUnselected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
                 setSelected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
+                adapter.reset(model.liveSharedItem.value.SD)
                 "HQ [360p] or SD [480p]"
             }
         }

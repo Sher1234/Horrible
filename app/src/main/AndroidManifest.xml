@@ -70,7 +70,7 @@
 
         <activity android:name=".ui.d.SearchAnimeActivity" />
 
-        <activity android:name=".ui.e.AnimeMalActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ui.e.AnimeMalActivity" />
 
         <activity android:name=".ui.q.SettingsActivity" />
 

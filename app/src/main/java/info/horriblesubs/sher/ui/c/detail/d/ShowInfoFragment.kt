@@ -10,6 +10,7 @@ import info.horriblesubs.sher.functions.getRelativeTime
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
 import info.horriblesubs.sher.ui.BaseFragment
+import info.horriblesubs.sher.ui._extras.adapters.Info
 import info.horriblesubs.sher.ui._extras.adapters.InfoAdapter
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.setFlexLayoutAdapter
@@ -32,12 +33,12 @@ class ShowInfoFragment: BaseFragment() {
         adapter.apply {
             adapter.removeAll()
             adapter.add(
-                InfoAdapter.Info("Total Views", 0.toString()),
-                InfoAdapter.Info("Total Bookmarked", 0.toString()),
-                InfoAdapter.Info("Data Source", "HorribleSubs"),
-                InfoAdapter.Info("Detail Cache Time", "Never"),
-                InfoAdapter.Info("Batches Cache Time", "Never"),
-                InfoAdapter.Info("Episodes Cache Time", "Never")
+                Info("Total Views", 0.toString()),
+                Info("Total Bookmarked", 0.toString()),
+                Info("Data Source", "HorribleSubs"),
+                Info("Detail Cache Time", "Never"),
+                Info("Batches Cache Time", "Never"),
+                Info("Episodes Cache Time", "Never")
             )
         }
         model.episodesTime.observe(viewLifecycleOwner) { onEpisodesChanged(it) }

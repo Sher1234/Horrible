@@ -1,57 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:layout_margin="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/recycler_item_f_grad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:alpha="0.35" />
+    <data>
+        <import type="info.horriblesubs.sher.ui._extras.adapters.Info" />
+        <import type="kotlin.jvm.functions.Function1" />
+        <import type="android.view.View" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        <variable name="data" type="Info" />
+        <variable name="click" type="Function1&lt;View>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{v -> click.invoke(v)}"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="9dp"
-        android:paddingEnd="9dp"
-        android:padding="4dp">
+        android:layout_margin="4dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:textAppearance="?textAppearanceSubtitle1"
-            android:fontFamily="@font/metropolis_medium"
-            tools:text="@tools:sample/full_names"
+        <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/recycler_item_f_grad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:alpha="0.35" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:paddingBottom="1dp"
-            android:id="@id/textView2"
-            android:textSize="12sp" />
+            android:orientation="vertical"
+            android:paddingStart="9dp"
+            android:paddingEnd="9dp"
+            android:padding="4dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:fontFamily="@font/metropolis_regular"
-            tools:text="@tools:sample/full_names"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
-            android:id="@id/textView1"
-            android:gravity="center"
-            android:textSize="9sp"
-            tools:ignore="SmallSp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:textAppearance="?textAppearanceSubtitle1"
+                android:fontFamily="@font/metropolis_medium"
+                tools:text="@tools:sample/full_names"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:text="@{data.value}"
+                android:paddingBottom="1dp"
+                android:id="@id/textView2"
+                android:textSize="12sp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.textview.MaterialTextView
+                android:fontFamily="@font/metropolis_regular"
+                tools:text="@tools:sample/full_names"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"
+                android:text="@{data.title}"
+                android:id="@id/textView1"
+                android:gravity="center"
+                android:textSize="9sp"
+                tools:ignore="SmallSp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

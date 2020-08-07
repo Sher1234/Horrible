@@ -56,7 +56,6 @@
         android:clipToPadding="false"
         android:scrollbars="vertical"
         android:fadeScrollbars="true"
-        android:paddingBottom="96dp"
-        />
+        android:paddingBottom="96dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

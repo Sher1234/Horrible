@@ -17,7 +17,7 @@ import com.google.android.gms.ads.AdRequest.Builder as AdBuilder
 
 class GoogleAds(storeOwner: ViewModelStoreOwner) {
 
-    private val model by viewModels<AdsModel>(storeOwner)
+    private val model by storeOwner.viewModels<AdsModel>()
 
     companion object {
         private const val INTERSTITIAL = 87256

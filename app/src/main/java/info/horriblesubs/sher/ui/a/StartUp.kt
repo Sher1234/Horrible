@@ -17,10 +17,12 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import info.horriblesubs.sher.R
+import info.horriblesubs.sher.databinding.AActivityBinding
 import info.horriblesubs.sher.ui.PERMISSION_REQUEST
 import info.horriblesubs.sher.ui.UPDATE_CHECK
 import info.horriblesubs.sher.ui.b.MainActivity
-import kotlinx.android.synthetic.main.a_activity.*
+import info.horriblesubs.sher.ui.toast
+import info.horriblesubs.sher.ui.viewBindings
 import android.Manifest.permission as Permission
 import androidx.core.content.ContextCompat.checkSelfPermission as isAvailable
 
@@ -29,14 +31,10 @@ class StartUp: AppCompatActivity(), InstallStateUpdatedListener {
     private val manager by lazy { AppUpdateManagerFactory.create(this) }
 
     private val texts by lazy {
-        arrayListOf(
-            "Checking permissions...",
-            "Checking for update...",
-            "Starting...",
-        )
+        listOf("Checking permissions...", "Checking for update...", "Starting...")
     }
 
-    private var startUpChecks = MutableLiveData<Int>()
+    private val startUpChecks = MutableLiveData<Int>().apply { value = 0 }
     private var checks: Int
         get() = startUpChecks.value ?: 0
         set(value) { startUpChecks.value = value }
@@ -45,20 +43,16 @@ class StartUp: AppCompatActivity(), InstallStateUpdatedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.a_activity)
+        setContentView(viewBindings<AActivityBinding>(R.layout.a_activity) {
+            i = startUpChecks
+            strings = texts
+        }.root)
 
         startUpChecks.observe(this) {
             when(it) {
-                0 -> {
-                    textView.text = texts[0]
-                    onPermissionsCheck()
-                }
-                1 -> {
-                    textView.text = texts[1]
-                    onPlayStoreUpdateCheck()
-                }
+                0 -> onPermissionsCheck()
+                1 -> onPlayStoreUpdateCheck()
                 2, null -> {
-                    textView.text = texts[2]
                     startActivity(Intent(this, MainActivity::class.java))
                     finishAfterTransition()
                 }
@@ -96,11 +90,11 @@ class StartUp: AppCompatActivity(), InstallStateUpdatedListener {
         if (requestCode == UPDATE_CHECK) {
             when (resultCode) {
                 Activity.RESULT_CANCELED -> {
-                    textView.text = ("Update cancelled")
+                    toast("Update cancelled")
                     checks++
                 }
                 ActivityResult.RESULT_IN_APP_UPDATE_FAILED -> {
-                    textView.text = ("Update failed")
+                    toast("Update failed")
                     checks++
                 }
             }

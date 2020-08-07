@@ -8,13 +8,18 @@ import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
-import androidx.fragment.app.Fragment
+import androidx.core.app.ComponentActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -61,27 +66,45 @@ val Int.pxToDp: Int
 
 
 @MainThread
-inline fun <reified VM : ViewModel> viewModels(
-    storeOwner: ViewModelStoreOwner,
-    noinline apply: VM.() -> VM = { this }
-): Lazy<VM> = lazy {
-    ViewModelProvider(storeOwner).get(VM::class.java).apply()
-}
-
-@MainThread
-inline fun <reified VM : ViewModel> ComponentActivity.viewModels(
-    storeOwner: ViewModelStoreOwner = this,
-    noinline apply: VM.() -> VM = { this }
-): Lazy<VM> = lazy {
-    ViewModelProvider(storeOwner).get(VM::class.java).apply()
-}
-
-@MainThread
-inline fun <reified VM : ViewModel> Fragment.viewModels(
+inline fun <reified VM : ViewModel> ViewModelStoreOwner.viewModels(
     noinline ownerProducer: () -> ViewModelStoreOwner = { this },
-    noinline factoryProducer: () -> ViewModelProvider.Factory = {defaultViewModelProviderFactory}
+    noinline apply: VM.() -> VM = { this }
 ): Lazy<VM> = lazy {
-    ViewModelProvider(ownerProducer(), factoryProducer()).get(VM::class.java)
+    ViewModelProvider(ownerProducer()).get(VM::class.java).apply()
+}
+
+//@MainThread
+//inline fun <reified VM : ViewModel> ViewModelStoreOwner.viewModels(
+//    noinline ownerProducer: () -> ViewModelStoreOwner = { this },
+//    noinline factoryProducer: () -> ViewModelProvider.Factory = {defaultViewModelProviderFactory}
+//): Lazy<VM> = lazy {
+//    ViewModelProvider(ownerProducer(), factoryProducer()).get(VM::class.java)
+//}
+
+@MainThread
+inline fun <reified VDB: ViewDataBinding> LifecycleOwner?.viewBindings(
+    inflater: LayoutInflater, layoutId: Int, group: ViewGroup?,
+    lifecycleOwner: LifecycleOwner? = this,
+    crossinline apply: VDB.() -> Unit = {}
+): VDB {
+    val vdb = DataBindingUtil.inflate<VDB>(inflater, layoutId, group, false)
+    vdb.lifecycleOwner = lifecycleOwner
+    vdb.apply()
+    return vdb
+}
+
+@MainThread
+inline fun <reified VDB: ViewDataBinding> viewBindings(layoutId: Int, group: ViewGroup): VDB =
+    DataBindingUtil.inflate(LayoutInflater.from(group.context), layoutId, group, false)
+
+@MainThread
+inline fun <reified VDB: ViewDataBinding> ComponentActivity.viewBindings(
+    @LayoutRes layoutId: Int, crossinline apply: VDB.() -> Unit = {}
+): VDB {
+    val vdb = DataBindingUtil.setContentView<VDB>(this, layoutId)
+    vdb.lifecycleOwner = this
+    vdb.apply()
+    return vdb
 }
 
 fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setLinearLayoutAdapter(

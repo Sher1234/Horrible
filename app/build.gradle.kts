@@ -24,14 +24,14 @@ val properties by lazy {
 }
 
 android {
-    signingConfigs {
+    signingConfigs(Action {
         register("default") {
             storeFile = file(properties.getProperty("storeFile"))
             storePassword = properties.getProperty("password")
             keyPassword = properties.getProperty("password")
             keyAlias = properties.getProperty("keyAlias")
         }
-    }
+    })
 
     compileSdkVersion(30)
 
@@ -46,19 +46,21 @@ android {
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
     }
 
-    buildTypes {
+    buildTypes(Action {
         getByName("release") {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("default")
             isMinifyEnabled = false
+            debuggable(false)
         }
 
         getByName("debug") {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("default")
             isMinifyEnabled = false
+            debuggable(true)
         }
-    }
+    })
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -66,29 +68,23 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+    kotlinOptions.jvmTarget = "1.8"
 }
 
-configurations {
-    implementation.get().exclude(mapOf(
-        "group" to "androidx.browser",
-        "module" to "browser"
-    ))
-}
+configurations.implementation.get().exclude(mapOf(
+    "group" to "androidx.browser",
+    "module" to "browser"
+))
 
-androidExtensions {
-    isExperimental = true
-}
+androidExtensions.isExperimental = true
 
 dependencies {
     //kotlin-coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
 
     //kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4-M2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4-M3")
 
     //androidx.lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha05")
@@ -98,7 +94,7 @@ dependencies {
 
     //androidx.*
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0-rc01")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta7")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta8")
     implementation("androidx.recyclerview:recyclerview:1.2.0-alpha04")
     implementation("androidx.annotation:annotation:1.2.0-alpha01")
     implementation("androidx.viewpager2:viewpager2:1.1.0-alpha01")
@@ -115,9 +111,9 @@ dependencies {
     implementation("com.google.android.material:material:1.3.0-alpha01")
 
     //com.google.firebase
-    implementation("com.google.firebase:firebase-analytics:17.4.3")
-    implementation("com.google.firebase:firebase-messaging:20.2.1")
-    implementation("com.google.firebase:firebase-core:17.4.3")
+    implementation("com.google.firebase:firebase-analytics:17.4.4")
+    implementation("com.google.firebase:firebase-messaging:20.2.3")
+    implementation("com.google.firebase:firebase-core:17.4.4")
 
     //com.google.android
     implementation("com.google.android.gms:play-services-ads:19.2.0")

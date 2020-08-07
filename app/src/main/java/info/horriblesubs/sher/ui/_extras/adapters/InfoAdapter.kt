@@ -1,20 +1,17 @@
 package info.horriblesubs.sher.ui._extras.adapters
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import info.horriblesubs.sher.R
+import info.horriblesubs.sher.databinding.RecyclerItemFBinding
+import info.horriblesubs.sher.ui.viewBindings
 
 class InfoAdapter: RecyclerView.Adapter<InfoAdapter.Holder>() {
 
     private val list = arrayListOf<Info>()
 
     override fun onCreateViewHolder(group: ViewGroup, viewType: Int) =
-        Holder(
-            LayoutInflater.from(group.context).inflate(R.layout.recycler_item_f, group, false)
-        )
+        Holder(viewBindings(R.layout.recycler_item_f, group))
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.onBindToViewHolder(list[position])
@@ -51,15 +48,9 @@ class InfoAdapter: RecyclerView.Adapter<InfoAdapter.Holder>() {
         list.clear()
     }
 
-    class Holder (view: View): RecyclerView.ViewHolder(view) {
-        private val value: AppCompatTextView = itemView.findViewById(R.id.textView2)
-        private val title: AppCompatTextView = itemView.findViewById(R.id.textView1)
-
+    class Holder(private val binding: RecyclerItemFBinding): RecyclerView.ViewHolder(binding.root) {
         fun onBindToViewHolder(t: Info) {
-            value.text = t.value
-            title.text = t.title
+            binding.data = t
         }
     }
-
-    data class Info(val title: String, var value: String)
 }

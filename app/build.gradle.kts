@@ -46,7 +46,7 @@ android {
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
     }
 
-    buildTypes(Action {
+    buildTypes {
         getByName("release") {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("default")
@@ -60,7 +60,7 @@ android {
             isMinifyEnabled = false
             debuggable(true)
         }
-    })
+    }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
@@ -80,44 +80,44 @@ androidExtensions.isExperimental = true
 
 dependencies {
     //kotlin-coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
 
     //kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4-M3")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
 
     //androidx.lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha05")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.0-alpha05")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha05")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.0-beta01")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-beta01")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
 
     //androidx.*
-    implementation("androidx.recyclerview:recyclerview-selection:1.1.0-rc01")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta8")
-    implementation("androidx.recyclerview:recyclerview:1.2.0-alpha04")
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0-rc03")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation("androidx.recyclerview:recyclerview:1.2.0-alpha06")
     implementation("androidx.annotation:annotation:1.2.0-alpha01")
     implementation("androidx.viewpager2:viewpager2:1.1.0-alpha01")
-    implementation("androidx.appcompat:appcompat:1.3.0-alpha01")
-    implementation("androidx.core:core-ktx:1.5.0-alpha01")
+    implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
+    implementation("androidx.core:core-ktx:1.5.0-alpha04")
 
     //androidx.room
-    implementation("androidx.room:room-runtime:2.3.0-alpha01")
-    implementation("androidx.room:room-guava:2.3.0-alpha01")
-    implementation("androidx.room:room-ktx:2.3.0-alpha01")
-    kapt("androidx.room:room-compiler:2.3.0-alpha01")
+    implementation("androidx.room:room-runtime:2.3.0-alpha02")
+    implementation("androidx.room:room-guava:2.3.0-alpha02")
+    implementation("androidx.room:room-ktx:2.3.0-alpha02")
+    kapt("androidx.room:room-compiler:2.3.0-alpha02")
 
     //com.google.android.material
-    implementation("com.google.android.material:material:1.3.0-alpha01")
+    implementation("com.google.android.material:material:1.3.0-alpha03")
 
     //com.google.firebase
-    implementation("com.google.firebase:firebase-analytics:17.4.4")
-    implementation("com.google.firebase:firebase-messaging:20.2.3")
-    implementation("com.google.firebase:firebase-core:17.4.4")
+    implementation("com.google.firebase:firebase-analytics:17.6.0")
+    implementation("com.google.firebase:firebase-messaging:20.3.0")
+    implementation("com.google.firebase:firebase-core:17.5.1")
 
     //com.google.android
-    implementation("com.google.android.gms:play-services-ads:19.2.0")
-    implementation("com.google.android.play:core:1.7.3")
+    implementation("com.google.android.gms:play-services-ads:19.4.0")
+    implementation("com.google.android.play:core:1.8.2")
 
     //bumptech.glide
     implementation("com.github.bumptech.glide:glide:4.11.0")
@@ -131,9 +131,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //androidx.paging
-    implementation("androidx.paging:paging-guava:3.0.0-alpha02")
-    implementation("androidx.paging:paging-runtime-ktx:3.0.0-alpha02")
-    testImplementation("androidx.paging:paging-common-ktx:3.0.0-alpha02")
+    implementation("androidx.paging:paging-guava:3.0.0-alpha07")
+    implementation("androidx.paging:paging-runtime-ktx:3.0.0-alpha07")
+    testImplementation("androidx.paging:paging-common-ktx:3.0.0-alpha07")
 
 //    implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.20")
 
@@ -154,8 +154,8 @@ dependencies {
 //    implementation ("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
 
     testImplementation("junit:junit:4.13")
-    androidTestImplementation("androidx.test.ext:junit:1.1.2-rc01")
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.9")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0-rc01")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }

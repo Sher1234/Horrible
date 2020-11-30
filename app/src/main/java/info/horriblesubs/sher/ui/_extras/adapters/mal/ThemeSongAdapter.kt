@@ -14,7 +14,7 @@ class ThemeSongAdapter(val listener: OnItemClickListener<String>): RecyclerView.
 
     override fun onCreateViewHolder(group: ViewGroup, viewType: Int) =
         Holder(
-            LayoutInflater.from(group.context).inflate(R.layout.recycler_item_j, group, false),
+            LayoutInflater.from(group.context).inflate(R.layout.recycler_item_k, group, false),
             this@ThemeSongAdapter
         )
 

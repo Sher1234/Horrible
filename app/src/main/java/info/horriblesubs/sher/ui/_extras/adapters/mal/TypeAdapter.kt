@@ -17,7 +17,7 @@ class TypeAdapter<T: BaseWithName>(val listener: OnItemClickListener<T>?):
     override fun onCreateViewHolder(group: ViewGroup, viewType: Int) =
         Holder(this,
             LayoutInflater.from(group.context)
-                .inflate(R.layout.recycler_item_h, group, false)
+                .inflate(R.layout.recycler_item_i, group, false)
         )
 
     override fun onBindViewHolder(holder: Holder<T>, position: Int) {

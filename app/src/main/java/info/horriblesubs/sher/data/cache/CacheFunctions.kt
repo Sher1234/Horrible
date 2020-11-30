@@ -30,5 +30,5 @@ inline fun <E, T: RepoResut<E>> T?.isCacheInvalid(crossinline after: ZonedDateTi
 }
 
 val String?.zonedDateTimeISO: ZonedDateTime? get() {
-    return ZonedDateTime.parse(this ?: return null)
+    return if (this.isNullOrBlank()) null else ZonedDateTime.parse(this)
 }

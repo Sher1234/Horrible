@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    tools:context=".ui.a.StartUp">
+    android:layout_width="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
@@ -18,8 +16,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:textAppearance="?textAppearanceHeadline6"

@@ -17,7 +17,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/recycler_item_g"
+        tools:listitem="@layout/recycler_item_h"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:paddingHorizontal="18dp"

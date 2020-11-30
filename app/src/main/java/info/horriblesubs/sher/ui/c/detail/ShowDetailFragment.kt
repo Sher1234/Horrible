@@ -1,7 +1,9 @@
 package info.horriblesubs.sher.ui.c.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui.c.detail.a.ImageTitleFragment
@@ -15,8 +17,8 @@ class ShowDetailFragment: BaseFragment() {
     override val layoutId: Int = R.layout.c_fragment_1
     override val name: String = "show-detail-home"
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         onSetFragment(R.id.fragmentContainerView5, ExternalLinksFragment())
         onSetFragment(R.id.fragmentContainerView3, DescriptionFragment())
         onSetFragment(R.id.fragmentContainerView2, NewReleaseFragment())
@@ -24,7 +26,7 @@ class ShowDetailFragment: BaseFragment() {
         onSetFragment(R.id.fragmentContainerView4, ShowInfoFragment())
     }
 
-    private fun <T: BaseFragment> onSetFragment(@IdRes id: Int, fragment: T) {
-        childFragmentManager.beginTransaction().replace(id, fragment, fragment.name).commit()
-    }
+    private fun onSetFragment(@IdRes id: Int, fragment: Fragment) =
+        childFragmentManager.beginTransaction()
+            .replace(id, fragment, fragment.javaClass.name).commit()
 }

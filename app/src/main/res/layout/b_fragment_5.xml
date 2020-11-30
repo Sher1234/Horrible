@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?colorSurface"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                app:titleTextAppearance="@style/TextAppearance.Toolbar.Title"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textAppearance="@style/TextAppearance.Toolbar.Title"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/settings" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <View
+                android:background="?colorControlHighlight"
+                android:layout_width="match_parent"
+                android:layout_height="0.75dp" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:verticalScrollbarPosition="defaultPosition"
+            android:scrollbarStyle="outsideOverlay"
+            tools:listitem="@layout/_lib_pref_base"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerView"
+            android:fadeScrollbars="true"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:paddingBottom="116dp"
+            android:paddingTop="8dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

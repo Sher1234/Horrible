@@ -1,11 +1,8 @@
 package info.horriblesubs.sher.ui.c.detail.d
 
 import android.os.Bundle
+import android.view.View
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.horrible.api.detailAgo
-import info.horriblesubs.sher.data.horrible.api.detailTimeStamp
-import info.horriblesubs.sher.data.horrible.api.model.ItemShow
 import info.horriblesubs.sher.functions.getRelativeTime
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
@@ -24,26 +21,21 @@ class ShowInfoFragment: BaseFragment() {
     private val model by viewModels<ShowModel>({requireActivity()})
     override val layoutId: Int = R.layout.c_fragment_1_d
     override val name: String = "show-info"
-    private val adapter =
-        InfoAdapter()
+    private val adapter = InfoAdapter()
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        view?.recyclerView?.setFlexLayoutAdapter(adapter)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.recyclerView?.setFlexLayoutAdapter(adapter)
         adapter.apply {
             adapter.removeAll()
             adapter.add(
-                Info("Total Views", 0.toString()),
-                Info("Total Bookmarked", 0.toString()),
-                Info("Data Source", "HorribleSubs"),
+                Info("Data Source", "SubsPlease"),
                 Info("Detail Cache Time", "Never"),
-                Info("Batches Cache Time", "Never"),
-                Info("Episodes Cache Time", "Never")
+                Info("Releases Cache Time", "Never")
             )
         }
         model.episodesTime.observe(viewLifecycleOwner) { onEpisodesChanged(it) }
-        model.batchesTime.observe(viewLifecycleOwner) { onBatchesChanged(it) }
-        model.detail.observe(viewLifecycleOwner) { onDetailChanged(it) }
+        model.detailTime.observe(viewLifecycleOwner) { onBatchesChanged(it) }
     }
 
     override fun onDestroy() {
@@ -51,32 +43,16 @@ class ShowInfoFragment: BaseFragment() {
         super.onDestroy()
     }
 
-    private fun onDetailChanged(t: RepositoryResult<ItemShow>?) {
-        t?.value.let {
-            adapter.update(0) {
-                value = (it?.views ?: 0).toString()
-                this
-            }
-            adapter.update(1) {
-                value = (it?.favs ?: 0).toString()
-                this
-            }
-            adapter.update(3) {
-                value = (if (TimeLeftPreference.value) it?.detailAgo
-                else TimeFormatPreference.format(it.detailTimeStamp)) ?: "Never"
-                this
-            }
-        }
-    }
     private fun onEpisodesChanged(t: ZonedDateTime?) {
-        adapter.update(5) {
+        adapter.update(2) {
             value = (if (TimeLeftPreference.value) getRelativeTime(ZonedDateTime.now(), t)
             else TimeFormatPreference.format(t)) ?: "Never"
             this
         }
     }
+
     private fun onBatchesChanged(t: ZonedDateTime?) {
-        adapter.update(4) {
+        adapter.update(1) {
             value = (if (TimeLeftPreference.value) getRelativeTime(ZonedDateTime.now(), t)
             else TimeFormatPreference.format(t)) ?: "Never"
             this

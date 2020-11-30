@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
+import info.horriblesubs.sher.databinding.CActivityBinding
 import info.horriblesubs.sher.functions.GoogleAds
 import info.horriblesubs.sher.libs.dialog.LoadingDialog
 import info.horriblesubs.sher.libs.dialog.NetworkErrorDialog
@@ -14,11 +16,11 @@ import info.horriblesubs.sher.ui.*
 import info.horriblesubs.sher.ui._extras.listeners.OnBackPressedListener
 import info.horriblesubs.sher.ui.c.detail.ShowDetailFragment
 import info.horriblesubs.sher.ui.c.releases.ReleasesFragment
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.c_activity.*
 
 
 class ShowActivity: AppCompatActivity() {
+
+    private val binding by viewBinding<CActivityBinding>(R.layout.c_activity)
 
     companion object {
         fun startShowActivity(context: Context?, link: String, executeAtEnd: () -> Unit = {}) {
@@ -46,23 +48,18 @@ class ShowActivity: AppCompatActivity() {
 
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
-        setContentView(R.layout.c_activity)
-
+        setContentView(binding.root)
         errorDialog = NetworkErrorDialog(this)
-
         model.episodes.observe(this) { onLoadListener(it) }
-        model.batches.observe(this) { onLoadListener(it) }
         model.detail.observe(this) { onLoadListener(it) }
         GoogleAds(this).apply {
-            getBannerAd(this@ShowActivity, adBannerLayout)
+            getBannerAd(this@ShowActivity, binding.adBannerLayout)
             getInterstitialAd(this@ShowActivity)
         }
         when(model.itemId) {
             "show-releases" -> ReleasesFragment()
             else -> ShowDetailFragment()
-        }.let {
-            onChangeFragment(it)
-        }
+        }.let { onChangeFragment(it) }
     }
 
     private fun <T> onLoadListener(it: RepositoryResult<T>?) {
@@ -99,21 +96,20 @@ class ShowActivity: AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        model.stopServerCall
-        clearFindViewByIdCache()
         loadingDialog?.dismiss()
         errorDialog?.dismiss()
+        model.stopServerCall
         super.onDestroy()
     }
 
-    fun <T: BaseFragment> onChangeFragment(fragment: T, t: ItemRelease? = null) {
+    fun onChangeFragment(fragment: Fragment, t: ItemRelease? = null) {
+        val newFragment = supportFragmentManager.findFragmentByTag(fragment.javaClass.name)
         val visibleFragment = supportFragmentManager.findFragmentById(R.id.fragment)
-        val newFragment = supportFragmentManager.findFragmentByTag(fragment.name)
         if (visibleFragment != newFragment || visibleFragment == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment, fragment, fragment.name)
+                .replace(R.id.fragment, fragment, fragment.javaClass.name)
                 .addToBackStack(FRAGMENT_STACK).commit()
-            model.itemId = fragment.name
+            model.itemId = fragment.javaClass.name
         }
         model.sharedItem = t
     }

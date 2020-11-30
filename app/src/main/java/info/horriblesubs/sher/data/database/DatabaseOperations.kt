@@ -3,9 +3,8 @@ package info.horriblesubs.sher.data.database
 import androidx.annotation.WorkerThread
 import info.horriblesubs.sher.data.database.model.BookmarkedShow
 import info.horriblesubs.sher.data.database.model.NotificationItem
-import info.horriblesubs.sher.data.horrible.LibraryRepository
-import info.horriblesubs.sher.data.horrible.NotificationRepository
-import info.horriblesubs.sher.data.horrible.api.HorribleApi
+import info.horriblesubs.sher.data.subsplease.LibraryRepository
+import info.horriblesubs.sher.data.subsplease.NotificationRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,12 +21,10 @@ fun <T> operateOnDB(@WorkerThread run: suspend () -> T, after: T.() -> Unit = {}
 fun onBookmarkChange(show: BookmarkedShow) {
     GlobalScope.launch {
         withContext(Dispatchers.IO) {
-            if (LibraryRepository.isPresent(show)) {
+            if (LibraryRepository.isPresent(show))
                 LibraryRepository.delete(show)
-            } else {
+            else
                 LibraryRepository.insert(show)
-                HorribleApi.api.bookmark(show.sid)
-            }
         }
     }
 }

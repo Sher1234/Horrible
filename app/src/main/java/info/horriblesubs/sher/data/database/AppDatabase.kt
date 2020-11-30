@@ -15,7 +15,7 @@ import info.horriblesubs.sher.data.database.model.NotificationItem
     version = 1
 )
 abstract class AppDatabase: RoomDatabase() {
-    abstract fun getHorribleNotifications(): NotificationsDAO
+    abstract fun getSpNotifications(): NotificationsDAO
     abstract fun getLibrary(): LibraryDAO
     companion object {
         val database: AppDatabase = Room

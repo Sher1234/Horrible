@@ -17,7 +17,7 @@ class MoreMalAdapter(val listener: OnItemClickListener<BaseMalFragment>?):
     override fun onCreateViewHolder(group: ViewGroup, viewType: Int) =
         Holder(this,
             LayoutInflater.from(group.context)
-                .inflate(R.layout.recycler_item_i, group, false)
+                .inflate(R.layout.recycler_item_j, group, false)
         )
 
     override fun onBindViewHolder(holder: Holder, position: Int) {

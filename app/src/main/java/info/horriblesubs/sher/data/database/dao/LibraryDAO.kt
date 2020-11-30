@@ -7,19 +7,19 @@ import info.horriblesubs.sher.data.database.model.CountItem
 
 @Dao
 interface LibraryDAO {
-    @Query("SELECT COUNT(*) AS items FROM Bookmarks WHERE sid = :sid OR link = :sid")
+    @Query("SELECT COUNT(*) AS items FROM Bookmarks WHERE sid = :sid OR url = :sid")
     fun countById(sid: String): CountItem
 
-    @Query("SELECT * FROM Bookmarks WHERE sid = :sid OR link = :sid LIMIT 1")
+    @Query("SELECT * FROM Bookmarks WHERE sid = :sid OR url = :sid LIMIT 1")
     suspend fun getById(sid: String): BookmarkedShow?
 
-    @Query("SELECT * FROM Bookmarks WHERE sid = :sid OR link = :sid")
+    @Query("SELECT * FROM Bookmarks WHERE sid = :sid OR url = :sid")
     fun getByIdLive(sid: String): LiveData<List<BookmarkedShow>>
 
     @Delete
     suspend fun delete(items: List<BookmarkedShow>)
 
-    @Query ("DELETE FROM Bookmarks WHERE sid = :sid OR link = :sid")
+    @Query ("DELETE FROM Bookmarks WHERE sid = :sid OR url = :sid")
     suspend fun delete(sid: String)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

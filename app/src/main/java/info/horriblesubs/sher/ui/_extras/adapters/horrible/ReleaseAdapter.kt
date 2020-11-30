@@ -9,7 +9,10 @@ import androidx.core.text.parseAsHtml
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.FHD
+import info.horriblesubs.sher.data.subsplease.api.model.HD
+import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.SD
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 
 class ReleaseAdapter(
@@ -31,12 +34,12 @@ class ReleaseAdapter(
         notifyDataSetChanged()
     }
 
-    override fun getItemId(position: Int) = list[position].release?.toLongOrNull() ?: -1
+    override fun getItemId(position: Int) = list[position].episode.toLongOrNull() ?: -1
 
     override fun getItemCount() = list.size
 
     override fun onCreateViewHolder(group: ViewGroup, viewType: Int) = Holder(
-        LayoutInflater.from(group.context).inflate(R.layout.recycler_item_e, group, false),
+        LayoutInflater.from(group.context).inflate(R.layout.recycler_item_f, group, false),
         this@ReleaseAdapter
     )
 
@@ -51,7 +54,7 @@ class ReleaseAdapter(
                 val filteredList: List<ItemRelease> = if (charSequence.isNullOrBlank())
                     listClone
                 else listClone.filter {
-                    it.release?.contains(charSequence, true) == true
+                    it.episode.contains(charSequence, true)
                 }
                 return FilterResults().apply {
                     values = filteredList
@@ -80,10 +83,10 @@ class ReleaseAdapter(
 
         fun onBindToViewHolder(t: ItemRelease, position: Int) {
             itemView.setOnClickListener{ adapter.listener.onItemClick(it, t, position) }
-            if (t.quality?.get(2) == false) fhd.visibility = View.GONE
-            if (t.quality?.get(1) == false) hd.visibility = View.GONE
-            if (t.quality?.get(0) == false) sd.visibility = View.GONE
-            textView.text = t.release?.parseAsHtml()
+            if (t.FHD == null) fhd.visibility = View.GONE
+            if (t.HD == null) hd.visibility = View.GONE
+            if (t.SD == null) sd.visibility = View.GONE
+            textView.text = t.episode.parseAsHtml()
         }
     }
 }

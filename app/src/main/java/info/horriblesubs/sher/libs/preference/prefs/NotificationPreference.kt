@@ -19,20 +19,18 @@ object NotificationPreference: ListPreference<Int>() {
         addEntries("Every Release", "Bookmarked Only", "Never/Off")
         addEntryValues(100, 0, -100)
         summaryProvider = object: TextProvider<Int> {
-            override fun provideText(preference: BasePreference<Int>): String? {
-                return when (preference.value) {
-                    100 -> {
-                        setIcon(R.drawable.ic_notifications_all)
-                        "You will be notified for every release available on HorribleSubs."
-                    }
-                    0 -> {
-                        setIcon(R.drawable.ic_notifications_some)
-                        "You will only be notified for every release present in your Library."
-                    }
-                    else -> {
-                        setIcon(R.drawable.ic_notifications_off)
-                        App.get().getString(R.string.notification_desc)
-                    }
+            override fun provideText(preference: BasePreference<Int>) = when (preference.value) {
+                100 -> {
+                    setIcon(R.drawable.ic_notifications_all)
+                    "You will be notified for every release available on SubsPlease."
+                }
+                0 -> {
+                    setIcon(R.drawable.ic_notifications_some)
+                    "You will only be notified for every release present in your Library."
+                }
+                else -> {
+                    setIcon(R.drawable.ic_notifications_off)
+                    App.get().getString(R.string.notification_desc)
                 }
             }
         }

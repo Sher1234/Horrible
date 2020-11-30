@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-
-    <androidx.fragment.app.FragmentContainerView
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/fragment" />
+        android:layout_width="match_parent">
 
-    <FrameLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/adBannerLayout"
-        android:layout_gravity="bottom" />
+        <androidx.fragment.app.FragmentContainerView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/fragment" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <FrameLayout
+            android:layout_gravity="bottom|center"
+            android:layout_height="wrap_content"
+            android:id="@+id/adBannerLayout"
+            android:layout_width="300dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

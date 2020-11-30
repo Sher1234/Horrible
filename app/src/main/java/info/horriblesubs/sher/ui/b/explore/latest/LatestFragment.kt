@@ -1,10 +1,14 @@
 package info.horriblesubs.sher.ui.b.explore.latest
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.horrible.api.model.ItemLatest
+import info.horriblesubs.sher.data.subsplease.api.model.ItemLatest
+import info.horriblesubs.sher.databinding.BFragment2BBinding
 import info.horriblesubs.sher.functions.Info
 import info.horriblesubs.sher.libs.dialog.InfoDialog
 import info.horriblesubs.sher.libs.dialog.LoadingDialog
@@ -13,58 +17,51 @@ import info.horriblesubs.sher.ui.*
 import info.horriblesubs.sher.ui._extras.adapters.horrible.LatestAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.c.ShowActivity
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.b_fragment_2_c.view.*
 
-class LatestFragment: BaseFragment(), OnItemClickListener<ItemLatest> {
-
-    private var errorDialog: NetworkErrorDialog? = null
-    private var loadingDialog: LoadingDialog? = null
-    private var infoDialog: InfoDialog? = null
+class LatestFragment: Fragment(), OnItemClickListener<ItemLatest> {
 
     val model by viewModels<LatestModel>({requireActivity()})
+    private var errorDialog: NetworkErrorDialog? = null
+    private var loadingDialog: LoadingDialog? = null
+    private lateinit var binding: BFragment2BBinding
+    private var infoDialog: InfoDialog? = null
     private val adapter = LatestAdapter(this)
-    override val layoutId = R.layout.b_fragment_2_c
-    override val name = "latest"
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?, bundle: Bundle?): View {
+        binding = viewBindings(inflater, R.layout.b_fragment_2_b, group) {
+            title = "Latest Releases"
+        }
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.buttonA.setOnClickListener { infoDialog?.show(Info.LATEST, model.resourceTime.value) }
+        binding.buttonB.setOnClickListener { model.refreshDataFromServer }
         errorDialog = context?.let{ NetworkErrorDialog(it) }
+        binding.recyclerView.setLinearLayoutAdapter(adapter)
         infoDialog = context?.let{ InfoDialog(it) }
-
-        view?.recyclerView?.setLinearLayoutAdapter(adapter)
-        view?.titleTextView?.text = ("Latest Releases")
-        view?.buttonA?.setOnClickListener {
-            infoDialog?.show(Info.LATEST, model.resourceTime.value)
-        }
-        view?.buttonB?.setOnClickListener {
-            view?.buttonB?.text = adapter.toggleLimiter.toString()
-        }
-        view?.buttonC?.setOnClickListener {
-            model.refreshDataFromServer
-        }
-        model.resourceTimeLive.observe(viewLifecycleOwner) {
-            view?.subtitleTextView?.text = it ?: "Never"
-        }
         model.resource.observe(viewLifecycleOwner) { onChanged(it) }
+        model.resourceTimeLive.observe(viewLifecycleOwner) { binding.subtitleTextView.text = it ?: "Never" }
     }
 
     override fun onDestroyView() {
-        model.killTimer
-        model.stopServerCall
-        model.resource.removeObservers(viewLifecycleOwner)
         model.resourceTimeLive.removeObservers(viewLifecycleOwner)
-        clearFindViewByIdCache()
-        model.stopServerCall
-        super.onDestroyView()
+        model.resource.removeObservers(viewLifecycleOwner)
         loadingDialog?.dismiss()
         errorDialog?.dismiss()
+        super.onDestroyView()
         infoDialog?.dismiss()
+        model.stopServerCall
+        model.stopServerCall
+        model.killTimer
     }
 
-    private fun onChanged(t: RepositoryResult<List<ItemLatest>>?) = when(t?.status) {
-        RepositoryResult.SUCCESS -> onSetData(t.value)
+    private fun onChanged(t: RepositoryResult<LinkedHashMap<String, ItemLatest>>?) = when(t?.status) {
+        RepositoryResult.SUCCESS -> {
+            adapter.reset(t.value?.values?.toMutableList())
+            onSetLoading(false)
+        }
         RepositoryResult.FAILURE -> onSetError(t.message)
         RepositoryResult.LOADING -> onSetLoading(true)
         else -> onSetError("Unexpected error occurred!!!")
@@ -72,39 +69,29 @@ class LatestFragment: BaseFragment(), OnItemClickListener<ItemLatest> {
 
     private fun onSetError(str: String) {
         onSetLoading(false)
-        view?.buttonB?.text = adapter.itemCount.toString()
-        errorDialog?.show("https://horriblesubs.info")
+        errorDialog?.show("https://subsplease.org")
         context.toast(str)
     }
 
-    private fun onSetData(items: List<ItemLatest>?) {
-        onSetLoading(false)
-        adapter.reset(items)
-        view?.buttonB?.text = adapter.itemCount.toString()
+    private fun onSetLoading(b: Boolean) { loadingDialog = if (b) startLoading else stopLoading }
+
+    private val stopLoading: LoadingDialog? get() = binding.let {
+        loadingDialog?.dismiss()
+        it.progressBar.gone
+        it.buttonB.visible
+        it.buttonB.enable
+        return null
     }
 
-    private fun onSetLoading(b: Boolean) {
-        view?.buttonB?.text = 0.toString()
-        loadingDialog = if (b) {
-            onSetLoading(false)
-            view?.progressBar?.visible
-            view?.buttonC?.invisible
-            view?.buttonC?.disable
-            context?.let {
-                LoadingDialog(it).apply {
-                    show()
-                }
-            }
-        } else {
-            view?.progressBar?.gone
-            view?.buttonC?.visible
-            view?.buttonC?.enable
-            loadingDialog?.dismiss()
-            null
-        }
+    private val startLoading: LoadingDialog? get() = binding.let {
+        it.progressBar.visible
+        it.buttonB.invisible
+        it.buttonB.disable
+        stopLoading
+        context?.let { LoadingDialog(it).apply { show() } }
     }
 
     override fun onItemClick(view: View, t: ItemLatest?, position: Int) {
-        t?.link?.let { ShowActivity.startShowActivity(context, it) }
+        t?.page?.let { ShowActivity.startShowActivity(context, it) }
     }
 }

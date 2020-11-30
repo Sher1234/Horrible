@@ -109,7 +109,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                tools:listitem="@layout/recycler_item_h"
+                tools:listitem="@layout/recycler_item_i"
                 android:layout_marginHorizontal="18dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -185,7 +185,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                tools:listitem="@layout/recycler_item_f"
+                tools:listitem="@layout/recycler_item_g"
                 android:layout_marginHorizontal="16dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -209,7 +209,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                tools:listitem="@layout/recycler_item_i"
+                tools:listitem="@layout/recycler_item_j"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="-4dp"
@@ -234,7 +234,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                tools:listitem="@layout/recycler_item_h"
+                tools:listitem="@layout/recycler_item_i"
                 android:layout_marginHorizontal="18dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -270,7 +270,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                tools:listitem="@layout/recycler_item_h"
+                tools:listitem="@layout/recycler_item_i"
                 android:layout_marginHorizontal="18dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -306,7 +306,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                tools:listitem="@layout/recycler_item_h"
+                tools:listitem="@layout/recycler_item_i"
                 android:layout_marginHorizontal="18dp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -348,7 +348,7 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewB"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/recycler_item_j"
+                tools:listitem="@layout/recycler_item_k"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="-4dp"
@@ -391,7 +391,7 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewB"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/recycler_item_j"
+                tools:listitem="@layout/recycler_item_k"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="-4dp"

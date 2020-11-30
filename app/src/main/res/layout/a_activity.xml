@@ -1,57 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="java.util.List" />
         <import type="androidx.lifecycle.LiveData" />
-        <variable name="i" type="LiveData&lt;Integer>" />
-        <variable name="strings" type="List&lt;String>" />
+
+        <variable name="message" type="LiveData&lt;String>" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_height="match_parent"
-        tools:context=".ui.a.StartUp">
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_marginHorizontal="72dp"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_marginBottom="36dp"
             android:src="@drawable/app_icon"
             android:layout_gravity="center"
-            android:paddingBottom="72dp"
+            android:layout_width="250dp"
             android:id="@+id/imageView" />
 
         <com.google.android.material.textview.MaterialTextView
             android:textAppearance="?textAppearanceBody1"
-            app:layout_anchorGravity="bottom|center"
             tools:text="@tools:sample/lorem/random"
-            android:layout_marginHorizontal="24dp"
             android:layout_height="wrap_content"
             style="@style/TextAppearance.Medium"
-            android:layout_width="match_parent"
-            app:layout_anchor="@id/imageView"
-            android:text="@{strings.get(i)}"
-            android:layout_gravity="bottom"
+            android:layout_width="250dp"
             android:id="@+id/textView"
+            android:text="@{message}"
             android:gravity="center"
             android:textSize="13sp"
             tools:lines="2" />
 
-        <ProgressBar
-            style="?android:progressBarStyleHorizontal"
-            android:theme="@style/Theme.Secondary"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            app:layout_anchorGravity="bottom"
-            app:layout_anchor="@id/textView"
-            android:layout_gravity="bottom"
-            android:id="@+id/progressBar"
-            android:layout_margin="148dp"
-            android:indeterminate="true"
-            android:paddingTop="12dp" />
+            android:layout_width="wrap_content"
+            android:layout_marginTop="32dp">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginHorizontal="4dp"
+                android:id="@+id/loadingDotA"
+                android:src="?colorOnSurface"
+                android:layout_height="6dp"
+                android:layout_width="6dp"
+                android:alpha="1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginHorizontal="4dp"
+                android:id="@+id/loadingDotB"
+                android:src="?colorOnSurface"
+                android:layout_height="6dp"
+                android:layout_width="6dp"
+                android:alpha="0.5" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginHorizontal="4dp"
+                android:id="@+id/loadingDotC"
+                android:src="?colorOnSurface"
+                android:layout_height="6dp"
+                android:layout_width="6dp"
+                android:alpha="0.5" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginHorizontal="4dp"
+                android:id="@+id/loadingDotD"
+                android:src="?colorOnSurface"
+                android:layout_height="6dp"
+                android:layout_width="6dp"
+                android:alpha="0.5" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginHorizontal="4dp"
+                android:id="@+id/loadingDotE"
+                android:src="?colorOnSurface"
+                android:layout_height="6dp"
+                android:layout_width="6dp"
+                android:alpha="0.5" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 </layout>

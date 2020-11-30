@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?colorSurface"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                app:titleTextAppearance="@style/TextAppearance.Toolbar.Title"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar"
+                app:menu="@menu/menu_1">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textAppearance="@style/TextAppearance.Toolbar.Title"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/library" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <FrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:src="?colorControlHighlight"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:alpha="0.425" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textColor="@color/color_primary"
+                    tools:text="@tools:sample/lorem/random"
+                    style="@style/TextAppearance.Medium"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/messageTextView"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="6dp"
+                    tools:visibility="visible"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    tools:lines="1" />
+
+            </FrameLayout>
+
+            <View
+                android:background="?colorControlHighlight"
+                android:layout_width="match_parent"
+                android:layout_height="0.75dp" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:id="@+id/emptyLayout">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:src="@drawable/app_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:layout_height="110dp"
+                android:padding="44dp"
+                android:alpha="0.75" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:text="@string/bookmark_text"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:verticalScrollbarPosition="defaultPosition"
+            tools:listitem="@layout/recycler_item_a"
+            android:scrollbarStyle="outsideOverlay"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="24dp"
+            android:id="@+id/recyclerView"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="true"
+            android:paddingBottom="116dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

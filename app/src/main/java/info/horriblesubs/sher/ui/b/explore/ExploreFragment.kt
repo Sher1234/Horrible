@@ -1,47 +1,26 @@
 package info.horriblesubs.sher.ui.b.explore
 
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.libs.toolbar.Toolbar
-import info.horriblesubs.sher.ui.BaseFragment
-import info.horriblesubs.sher.ui.b.MainActivity
+import info.horriblesubs.sher.databinding.BFragment2Binding
 import info.horriblesubs.sher.ui.b.explore.latest.LatestFragment
-import info.horriblesubs.sher.ui.b.explore.random.RandomFragment
-import info.horriblesubs.sher.ui.b.explore.trending.TrendingFragment
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.b_fragment_2.view.*
+import info.horriblesubs.sher.ui.b.explore.today.TodayFragment
+import info.horriblesubs.sher.ui.viewBindings
 
-class ExploreFragment: BaseFragment(), Toolbar.OnToolbarActionListener {
-    override val layoutId: Int = R.layout.b_fragment_2
-    override val name: String = "explore"
+class ExploreFragment: Fragment() {
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        view?.toolbar?.apply {
-            onToolbarActionListener = this@ExploreFragment
-            inflateMenu(R.menu.menu_c)
-        }
+    override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?, bundle: Bundle?) =
+        viewBindings<BFragment2Binding>(inflater, R.layout.b_fragment_2, group).root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         childFragmentManager.beginTransaction().apply {
-                TrendingFragment().let {
-                    replace(R.id.fragmentContainerView2, it, it.name)
-                }
-                RandomFragment().let {
-                    replace(R.id.fragmentContainerView3, it, it.name)
-                }
-                LatestFragment().let {
-                    replace(R.id.fragmentContainerView4, it, it.name)
-                }
-            }.commit()
-    }
-
-    override fun onMenuItemClickListener(item: MenuItem) {
-        if(item.itemId == R.id.settings)
-            (activity as? MainActivity)?.onNavigationItemSelected(item)
-    }
-
-    override fun onDestroy() {
-        clearFindViewByIdCache()
-        super.onDestroy()
+            LatestFragment().let { replace(R.id.fragment2, it, it.javaClass.name) }
+            TodayFragment().let { replace(R.id.fragment1, it, it.javaClass.name) }
+        }.commit()
     }
 }

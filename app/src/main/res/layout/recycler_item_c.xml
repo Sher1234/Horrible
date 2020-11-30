@@ -16,17 +16,27 @@
         android:layout_width="6dp"
         android:id="@+id/marked" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="18dp"
+        tools:src="@tools:sample/avatars"
+        android:layout_height="40dp"
+        android:layout_width="40dp"
+        android:id="@+id/imageView" />
+
     <com.google.android.material.textview.MaterialTextView
+        app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintEnd_toStartOf="@id/textView2"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textAppearance="?textAppearanceBody1"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginTop="8dp"
         android:id="@+id/textView1"

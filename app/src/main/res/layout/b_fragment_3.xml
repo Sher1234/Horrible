@@ -1,64 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    tools:context=".ui.a.StartUp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.appbar.AppBarLayout
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
-        android:background="@android:color/transparent"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:paddingTop="14dp"
-        app:elevation="0dp">
-
-        <info.horriblesubs.sher.libs.toolbar.Toolbar
-            app:placeholderImage="@drawable/app_icon"
-            android:layout_marginHorizontal="20dp"
-            app:strokeColor="?colorControlNormal"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/toolbar"
-            app:menu="@menu/menu_a"
-            app:strokeWidth="1dp"
-            app:enabled="false"
-            app:hint="@string/search" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:background="@drawable/recycler_item_f_grad"
-            tools:text="@tools:sample/lorem/random"
-            android:layout_marginHorizontal="20dp"
-            style="@style/TextAppearance.Medium"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginVertical="4dp"
-            android:id="@+id/messageTextView"
-            android:paddingHorizontal="18dp"
-            android:paddingVertical="12dp"
-            tools:visibility="visible"
-            android:visibility="gone"
-            android:gravity="center"
-            android:textSize="12sp"
-            tools:lines="1" />
-
-        <com.google.android.material.tabs.TabLayout
-            app:tabTextAppearance="@style/TextAppearance.Tab"
-            app:tabIndicator="@drawable/tab_indicator"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            app:tabIndicatorFullWidth="false"
-            android:id="@+id/tabLayout"
-            app:tabMode="scrollable" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/viewPager" />
+        android:layout_width="match_parent">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?colorSurface"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                app:titleTextAppearance="@style/TextAppearance.Toolbar.Title"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar"
+                app:menu="@menu/menu_2">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textAppearance="@style/TextAppearance.Toolbar.Title"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/weekly_schedule" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <com.google.android.material.tabs.TabLayout
+                app:tabTextAppearance="@style/TextAppearance.Tab"
+                app:tabIndicator="@drawable/tab_indicator"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:tabIndicatorFullWidth="false"
+                android:id="@+id/tabLayout"
+                app:tabMode="scrollable" />
+
+            <View
+                android:background="?colorControlHighlight"
+                android:layout_width="match_parent"
+                android:layout_height="0.75dp" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/viewPager" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,23 +1,15 @@
 package info.horriblesubs.sher.ui.b.shows
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.horrible.ShowsRepository
-import info.horriblesubs.sher.data.horrible.api.model.ItemList
+import info.horriblesubs.sher.data.subsplease.ShowsRepository
+import info.horriblesubs.sher.data.subsplease.api.model.ItemList
+import java.time.ZonedDateTime
 
 class ShowsModel: ViewModel() {
-    val resourceCurrent: LiveData<RepositoryResult<List<ItemList>>> = ShowsRepository.liveCurrent
-    val resourceAll: LiveData<RepositoryResult<List<ItemList>>> = ShowsRepository.liveAllShows
-    val resourceTime = ShowsRepository.liveTime
-    val allShowing = MutableLiveData<Boolean>()
-
-    val refreshDataFromServer: Unit get() {
-        ShowsRepository.refreshFromServer(true)
-    }
-
-    val stopServerCall: Unit get() {
-        ShowsRepository.stopServerCall
-    }
+    val resourceShows: LiveData<RepositoryResult<List<ItemList>>> by lazy { ShowsRepository.liveShows }
+    val resourceTime: LiveData<ZonedDateTime> by lazy { ShowsRepository.liveTime }
+    val refreshDataFromServer: Unit get() = ShowsRepository.refreshFromServer()
+    val stopServerCall: Unit get() = ShowsRepository.stopServerCall
 }

@@ -1,7 +1,7 @@
 ## an!me - better ongoing
 an!me - better ongoing is an android application with *notification support* for newer releases <br />
-Not affiliated to source i.e. **[horriblesubs.info](https://horriblesubs.info)** in any way <br />
-Support the official site **[horriblesubs.info](https://horriblesubs.info)**
+Not affiliated to source i.e. **[subsplease.org](https://subsplease.org)** in any way <br />
+Support the official site **[subsplease.org](https://subsplease.org)**
 
 #### Tech
 an!me implements number of open source projects listed bellow:
@@ -12,35 +12,33 @@ an!me implements number of open source projects listed bellow:
 - Firebase for FCM notifications & GoogleAdMob
 
 #### *Notes:*
-- ***[Supported]*** Versions 0.9.0 (and above) (Api-v7)
-- ***[Supported]*** Versions 0.8.0 (to 0.8.4) (Api-v6)
-- ***[Supported]*** Versions 0.7.0 (to 0.7.9) (Api-v5)
-  - [Changed Signing Keys] Versions 0.7.5 - 0.7.9
-  - [Changed Signing Keys] Versions 0.7.0 - 0.7.4
-- [Unsupported] Versions 0.6.5 and earlier
+- ***[Supported]*** Version 1.0.0 (On Device Api)
+- Previous versions are now unsupported.
+- [Unsupported] Versions 0.9.0 and earlier
 
 
 #### Features
- * Lists New/Latest Releases from HorribleSubs Website,
+ * Lists Latest Releases from SubsPlease Website,
  * Lists Today's Schedule as well as Week's Schedule day wise (According to User Timezone),
- * Notification Support for every new release available on HorribleSubs
+ * Notification Support for every new release available on SubsPlease
    - Needs to be enabled in the Settings,
    - Notification might get delayed (30 min at max),
- * Bookmark a Show for faster & easier access,
+ * Bookmark a show for faster & easier access,
  * Detailed Show page,
  * Lists Search for the shows/release.
- * Views All as well as Current Shows with Search option.
+ * Views all shows.
  * Show Activity for viewing previous show releases and show description.
  * ~About Activity & Application Update Notification.~
 
 #### Release Updates
 ```
+Migrated to SubsPlease [Full Support], Updated Dependencies & UI                  Major Commit   - Nov   30, 2020
 Minor UI Tweaks, Fixed Release View (Horrible), Updated Dependencies              Major Commit   - June  28, 2020
 Minor UI Tweaks, Enabled MAL Anime (Search & View) | Beta                         Major Commit   - June  24, 2020
 Toolbar Fixes, MAL Anime Search Added                                             Major Commit   - June  18, 2020
 Improved performance, with caching support, UI Improvements                       Major Commit   - June  01, 2020
 Added support for TV [Alpha], Updated dependencies                                Major Commit   - April 12, 2020
-Updated dependecies & Kotlin 1.4.                                                 Minor Commit   - Mar   22, 2020
+Updated dependencies & Kotlin 1.4.                                                Minor Commit   - Mar   22, 2020
 Fixed Ads Support.                                                                Minor Commit   - Nov   10, 2019
 Tablet Support & Updated Privacy Policy.                                          Major Commit   - Nov   10, 2019
 UI fixes, UX Improvements, Migration Support, & more.                             Major Commit   - Nov   10, 2019
@@ -113,6 +111,6 @@ Currently Listing Latest 60 Releases & Reimplemented some features              
 > Head over to releases for downloading latest release/beta/alpha: [RELEASES](https://github.com/Sher1234/HorribleSubs/releases)
 
 #### Authors
-* **Udit Aggarwal** - [Sher1234](https://github.com/Sher1234)
+* **[Sher1234](https://github.com/Sher1234)**
 
 **Free Application, Hell Yeah!**

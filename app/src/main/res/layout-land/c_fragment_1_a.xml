@@ -1,205 +1,165 @@
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1">
+        android:layout_width="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            app:layout_constraintBottom_toTopOf="@id/titleText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="wrap_content"
-            app:layout_constrainedHeight="true"
-            android:layout_marginBottom="6dp"
-            tools:src="@tools:sample/avatars"
-            android:layout_marginTop="12dp"
-            android:adjustViewBounds="true"
-            tools:scaleType="centerCrop"
-            android:id="@+id/imageView"
-            android:layout_width="0dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1">
 
-        <ProgressBar
-            app:layout_constraintBottom_toBottomOf="@id/imageView"
-            app:layout_constraintStart_toStartOf="@id/imageView"
-            app:layout_constraintTop_toTopOf="@id/imageView"
-            app:layout_constraintEnd_toEndOf="@id/imageView"
-            android:indeterminateTint="?colorPrimary"
-            android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatImageView
+                app:layout_constraintBottom_toTopOf="@id/titleTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                app:layout_constrainedHeight="true"
+                app:layout_constrainedWidth="true"
+                tools:src="@tools:sample/avatars"
+                android:adjustViewBounds="true"
+                tools:scaleType="centerCrop"
+                android:id="@+id/imageView"
+                android:layout_width="0dp" />
+
+            <ProgressBar
+                app:layout_constraintBottom_toBottomOf="@id/imageView"
+                app:layout_constraintStart_toStartOf="@id/imageView"
+                app:layout_constraintTop_toTopOf="@id/imageView"
+                app:layout_constraintEnd_toEndOf="@id/imageView"
+                android:indeterminateTint="?colorPrimary"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                style="?android:progressBarStyle"
+                android:id="@+id/progressBar"
+                android:indeterminate="true"
+                android:padding="8dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textAppearance="?textAppearanceHeadline6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@tools:sample/full_names"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.Medium"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/titleTextView"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:textSize="15sp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_height="match_parent"
             android:layout_width="wrap_content"
-            style="?android:progressBarStyle"
-            android:id="@+id/progressBar"
-            android:indeterminate="true"
-            android:padding="8dp" />
+            android:layout_marginStart="12dp"
+            android:orientation="vertical"
+            android:layout_weight="0">
 
-        <com.google.android.material.textview.MaterialTextView
-            app:layout_constraintBottom_toTopOf="@id/scheduleText"
-            android:textAppearance="?textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="@tools:sample/full_names"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.Medium"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/titleText"
-            android:layout_width="0dp"
-            android:gravity="center"
-            android:textSize="15sp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <com.google.android.material.textview.MaterialTextView
-            app:layout_constraintBottom_toTopOf="@id/lastUpdatedText"
-            app:layout_constraintEnd_toStartOf="@id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_height="wrap_content"
-            tools:text="Saturday's at 6:00 PM"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="3dp"
-            android:id="@+id/scheduleText"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textSize="9sp"
-            tools:ignore="SmallSp"
-            android:gravity="end" />
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:layout_constraintVertical_bias="0"
+                android:theme="@style/AppBar.Button"
+                android:id="@+id/buttonAllReleases"
+                app:icon="@drawable/ic_playlist"
+                android:layout_marginTop="12dp"
+                app:strokeColor="?colorPrimary"
+                android:layout_height="52dp"
+                android:layout_width="44dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:padding="0dp"
+                app:iconSize="20dp" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            app:layout_constraintBottom_toBottomOf="@id/airingStatusText"
-            app:layout_constraintTop_toTopOf="@id/scheduleText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="?colorControlHighlight"
-            android:layout_height="3dp"
-            android:layout_width="3dp"
-            android:id="@+id/divider" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <com.google.android.material.textview.MaterialTextView
-            app:layout_constraintBottom_toBottomOf="@id/scheduleText"
-            app:layout_constraintTop_toTopOf="@id/scheduleText"
-            app:layout_constraintStart_toEndOf="@id/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/airingStatusText"
-            android:layout_marginStart="3dp"
-            tools:text="Currently Airing"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textSize="9sp"
-            tools:ignore="SmallSp" />
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/buttonLibraryToggle"
+                android:theme="@style/AppBar.Button"
+                app:icon="@drawable/ic_bookmark"
+                app:strokeColor="?colorPrimary"
+                android:layout_height="52dp"
+                android:layout_width="44dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:padding="0dp"
+                app:iconSize="20dp" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:background="@drawable/recycler_item_f_grad"
-            android:textAppearance="?textAppearanceSubtitle2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:id="@+id/lastUpdatedText"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="4dp"
-            tools:text="2d 9h 3m 15s ago"
-            android:textSize="11sp"
-            tools:ignore="SmallSp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:theme="@style/AppBar.Button"
+                app:strokeColor="?colorPrimary"
+                app:icon="@drawable/ic_share"
+                android:id="@+id/buttonShare"
+                android:layout_height="52dp"
+                android:layout_width="44dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:padding="0dp"
+                app:iconSize="20dp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_weight="0">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0"
-            android:theme="@style/AppBar.Button"
-            android:id="@+id/buttonAllReleases"
-            app:icon="@drawable/ic_playlist"
-            android:layout_marginTop="12dp"
-            app:strokeColor="?colorPrimary"
-            android:layout_height="52dp"
-            android:layout_width="44dp"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:padding="0dp"
-            app:iconSize="20dp" />
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_open_in_browser"
+                android:theme="@style/AppBar.Button"
+                app:strokeColor="?colorPrimary"
+                android:id="@+id/buttonOpen"
+                android:layout_height="52dp"
+                android:layout_width="44dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:padding="0dp"
+                app:iconSize="20dp" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@id/buttonAllReleases"
-            app:layout_constraintBottom_toTopOf="@id/buttonShare"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/buttonLibraryToggle"
-            android:theme="@style/AppBar.Button"
-            app:icon="@drawable/ic_bookmark"
-            app:strokeColor="?colorPrimary"
-            android:layout_height="52dp"
-            android:layout_width="44dp"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:padding="0dp"
-            app:iconSize="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@id/buttonLibraryToggle"
-            app:layout_constraintBottom_toTopOf="@id/buttonOpen"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:theme="@style/AppBar.Button"
-            app:strokeColor="?colorPrimary"
-            app:icon="@drawable/ic_share"
-            android:id="@+id/buttonShare"
-            android:layout_height="52dp"
-            android:layout_width="44dp"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:padding="0dp"
-            app:iconSize="20dp" />
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:theme="@style/AppBar.Button"
+                android:layout_marginBottom="12dp"
+                app:strokeColor="?colorPrimary"
+                android:id="@+id/buttonRefresh"
+                app:icon="@drawable/ic_refresh"
+                android:layout_height="52dp"
+                android:layout_width="44dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:padding="0dp"
+                app:iconSize="20dp" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:layout_constraintBottom_toTopOf="@id/buttonRefresh"
-            app:layout_constraintTop_toBottomOf="@id/buttonShare"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:icon="@drawable/ic_open_in_browser"
-            android:theme="@style/AppBar.Button"
-            app:strokeColor="?colorPrimary"
-            android:id="@+id/buttonOpen"
-            android:layout_height="52dp"
-            android:layout_width="44dp"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:padding="0dp"
-            app:iconSize="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-        <com.google.android.material.button.MaterialButton
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:theme="@style/AppBar.Button"
-            android:layout_marginBottom="12dp"
-            app:strokeColor="?colorPrimary"
-            android:id="@+id/buttonRefresh"
-            app:icon="@drawable/ic_refresh"
-            android:layout_height="52dp"
-            android:layout_width="44dp"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:padding="0dp"
-            app:iconSize="20dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

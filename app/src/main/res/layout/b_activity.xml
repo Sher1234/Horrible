@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    tools:context=".ui.a.StartUp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/fragment" />
+        android:layout_width="match_parent">
 
-    <FrameLayout
-        app:layout_anchor="@id/bottomNavigationView"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/adBannerLayout"
-        app:layout_anchorGravity="top"
-        android:layout_gravity="top" />
+        <androidx.fragment.app.FragmentContainerView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/fragment" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:itemTextAppearanceInactive="@style/TextAppearance.Regular"
-        app:itemTextAppearanceActive="@style/TextAppearance.Medium"
-        android:id="@+id/bottomNavigationView"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        app:menu="@menu/navigation_bottom"
-        app:labelVisibilityMode="labeled"
-        android:layout_gravity="bottom" />
+        <FrameLayout
+            app:layout_anchorGravity="bottom|center_horizontal"
+            app:layout_anchor="@id/bottomNavigationView"
+            android:layout_gravity="bottom|center"
+            android:layout_height="wrap_content"
+            android:id="@+id/adBannerLayout"
+            android:layout_width="300dp" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            android:background="@drawable/bottom_navigation_background"
+            app:itemIconTint="@color/bottom_navigation_color_selector"
+            android:layout_gravity="bottom|center_horizontal"
+            android:id="@+id/bottomNavigationView"
+            android:layout_marginHorizontal="24dp"
+            android:layout_height="wrap_content"
+            app:labelVisibilityMode="unlabeled"
+            android:layout_marginBottom="16dp"
+            app:menu="@menu/navigation_bottom"
+            android:layout_width="280dp"
+            android:elevation="8dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -12,7 +12,7 @@ import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.database.inLibrary
 import info.horriblesubs.sher.data.database.isNotified
 import info.horriblesubs.sher.data.database.model.NotificationItem
-import info.horriblesubs.sher.data.database.toNotificationItem
+import info.horriblesubs.sher.data.database.toNotificationItems2
 import info.horriblesubs.sher.functions.parseAsHtml
 import info.horriblesubs.sher.libs.preference.prefs.NotificationPreference
 import info.horriblesubs.sher.libs.preference.prefs.TokenPreference
@@ -28,29 +28,31 @@ class NotificationHandler: FirebaseMessagingService() {
 
     override fun onMessageReceived(msg: RemoteMessage) {
         super.onMessageReceived(msg)
-        val item = msg.data.toNotificationItem()
-        if (item.id.isBlank() or item.id.equals("null", true)) return
-        isNotified(item) {
-            if (!this@isNotified) {
-                when (NotificationPreference.value) {
-                    0 -> inLibrary(item.link ?: "NULL") {
-                        if (this)
-                            onNotifyRelease(item)
+        val items = msg.data.toNotificationItems2()
+        for (it in items) {
+            if (it.id.isBlank() or it.id.equals("null", true)) return
+            isNotified(it) {
+                if (!this@isNotified) {
+                    when (NotificationPreference.value) {
+                        0 -> inLibrary(it.page) {
+                            if (this)
+                                onNotifyRelease(it)
+                        }
+                        100 -> onNotifyRelease(it)
                     }
-                    100 -> onNotifyRelease(item)
                 }
             }
         }
     }
 
     private fun onNotifyRelease(item: NotificationItem) {
-        item.release = when {
-            item.release?.contains("-") == true -> "Batch ${item.release} is now available..."
-            item.release.isNullOrBlank() -> "New release available..."
-            else -> "Episode ${item.release} is now available..."
+        item.episode = when {
+            item.episode.contains("-") -> "Batch ${item.episode} is now available..."
+            item.episode.isBlank() -> "New release available..."
+            else -> "Episode ${item.episode} is now available..."
         }
 
-        val intent = ShowActivity.getShowActivityIntent(applicationContext, item.link ?: "")
+        val intent = ShowActivity.getShowActivityIntent(applicationContext, item.page)
             .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val notificationCode = Random.nextInt(99999)
 
@@ -65,9 +67,9 @@ class NotificationHandler: FirebaseMessagingService() {
                     setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_SUMMARY)
                     priority = NotificationCompat.PRIORITY_HIGH
                     setGroup(Notifications.GROUP_NEW_RELEASES)
-                    setContentTitle(item.title.parseAsHtml)
+                    setContentTitle(item.show.parseAsHtml)
                     setSmallIcon(R.drawable.ic_new)
-                    setContentText(item.release)
+                    setContentText(item.episode)
                     setGroupSummary(true)
                     setAutoCancel(true)
                 }

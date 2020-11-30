@@ -50,13 +50,13 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="horriblesubs.info" />
+                <data android:scheme="http" android:host="subsplease.org" />
                 <data android:scheme="https" />
                 <data android:scheme="app" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.a.StartUp">
+        <activity android:name=".ui.a.ScreenA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -71,8 +71,6 @@
         <activity android:name=".ui.d.SearchAnimeActivity" />
 
         <activity android:name=".ui.e.AnimeMalActivity" />
-
-        <activity android:name=".ui.q.SettingsActivity" />
 
     </application>
 

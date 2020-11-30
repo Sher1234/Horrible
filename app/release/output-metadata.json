@@ -5,13 +5,13 @@
     "kind": "Directory"
   },
   "applicationId": "info.horriblesubs.sher",
-  "variantName": "processReleaseResources",
+  "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
-      "versionCode": 90,
-      "versionName": "0.9.0-beta4",
+      "versionCode": 95,
+      "versionName": "1.0.0-alpha0",
       "outputFile": "app-release.apk"
     }
   ]

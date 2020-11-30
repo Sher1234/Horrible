@@ -28,7 +28,7 @@ class BaseImageAdapter(
     private var listClone = arrayListOf<MediaObject<BaseWithImage>>()
     private var list = arrayListOf<MediaObject<BaseWithImage>>()
 
-    private val layout = if (horizontal) R.layout.recycler_item_l else R.layout.recycler_item_k
+    private val layout = if (horizontal) R.layout.recycler_item_m else R.layout.recycler_item_l
 
     fun set(list: List<BaseWithImage>? = null) {
         this.list.clear()

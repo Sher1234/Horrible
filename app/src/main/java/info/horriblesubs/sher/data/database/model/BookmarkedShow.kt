@@ -5,13 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Bookmarks")
+
 data class BookmarkedShow(
-    @ColumnInfo(index = true) var link: String = "",
-    @ColumnInfo(index = true) var id: String = "",
-    @ColumnInfo var image: String? = null,
+    @ColumnInfo(index = true) var url: String = "",
+    @ColumnInfo var synopsis: String = "",
+    @ColumnInfo var image: String = "",
     @ColumnInfo var title: String = "",
-    @ColumnInfo var body: String = "",
-    @PrimaryKey var sid: String = ""
-) {
-    val uid get() = if (sid.isBlank()) if (link.isBlank()) "" else link else sid
-}
+    @PrimaryKey var sid: String = "",
+)

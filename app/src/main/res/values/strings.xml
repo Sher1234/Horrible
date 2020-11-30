@@ -16,7 +16,7 @@
     <string name="delete_bookmarks">Delete bookmarks</string>
     <string name="close_delete">Close delete</string>
     <string name="about_library">About Library</string>
-    <string name="about_weekly_schedule">About Weekly Schedule</string>
+    <string name="about_weekly_schedule">About Schedule</string>
     <string name="about_shows">About Shows</string>
     <string name="refresh_from_server">Refresh from server</string>
     <string name="delete_help">Click/Long press the show to delete</string>
@@ -70,5 +70,8 @@
     <string name="staff">Staff</string>
     <string name="voice_actors">Voice Actors</string>
     <string name="open">Open</string>
+    <string name="bookmark_text">Bookmarked shows will be shown here.</string>
+    <string name="aired">Aired</string>
+    <string name="next">Next</string>
 
 </resources>

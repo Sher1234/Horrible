@@ -24,7 +24,7 @@ class IntentHandler: AppCompatActivity() {
             1 -> {
                 val id = when(data.pathSegments[0]) {
                     "bookmarked", "bookmark", "favourites" -> R.id.library
-                    "schedule", "release-schedule" -> R.id.schedule
+                    "schedule", "release-schedule" -> R.id.settings
                     "shows", "current-season" -> R.id.shows
                     else -> R.id.explore
                 }

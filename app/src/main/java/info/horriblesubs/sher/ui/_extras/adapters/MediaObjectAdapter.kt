@@ -88,7 +88,7 @@ class MediaObjectAdapter<T>(
                 adapter.listener.onItemClick(it, t.value, position)
             }
             Glide.with(imageView).load(t.imageUrl).transform().apply {
-                transform(RoundedCorners(3), FitCenter())
+                transform(RoundedCorners(8), FitCenter())
                 placeholder(R.drawable.app_placeholder)
                 timeout(30000)
             }.into(imageView, progressBar)

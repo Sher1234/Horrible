@@ -3,7 +3,7 @@ package info.horriblesubs.sher.ui._extras.adapters
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.databinding.RecyclerItemFBinding
+import info.horriblesubs.sher.databinding.RecyclerItemGBinding
 import info.horriblesubs.sher.ui.viewBindings
 
 class InfoAdapter: RecyclerView.Adapter<InfoAdapter.Holder>() {
@@ -11,7 +11,7 @@ class InfoAdapter: RecyclerView.Adapter<InfoAdapter.Holder>() {
     private val list = arrayListOf<Info>()
 
     override fun onCreateViewHolder(group: ViewGroup, viewType: Int) =
-        Holder(viewBindings(R.layout.recycler_item_f, group))
+        Holder(viewBindings(R.layout.recycler_item_g, group))
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.onBindToViewHolder(list[position])
@@ -48,9 +48,10 @@ class InfoAdapter: RecyclerView.Adapter<InfoAdapter.Holder>() {
         list.clear()
     }
 
-    class Holder(private val binding: RecyclerItemFBinding): RecyclerView.ViewHolder(binding.root) {
+    class Holder(private val binding: RecyclerItemGBinding): RecyclerView.ViewHolder(binding.root) {
         fun onBindToViewHolder(t: Info) {
-            binding.data = t
+            binding.dataValue = t.value
+            binding.dataTitle = t.title
         }
     }
 }

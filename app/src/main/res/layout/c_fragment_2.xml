@@ -10,43 +10,27 @@
         android:background="@android:color/transparent"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingTop="14dp"
         app:elevation="0dp">
 
-        <info.horriblesubs.sher.libs.toolbar.Toolbar
-            app:placeholderImage="@drawable/app_icon"
-            android:layout_marginHorizontal="20dp"
-            app:strokeColor="?colorControlNormal"
+        <com.google.android.material.appbar.MaterialToolbar
+            app:titleTextAppearance="@style/TextAppearance.Toolbar.Title"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
+            app:menu="@menu/menu_2"
             android:id="@+id/toolbar"
-            app:menu="@menu/menu_b"
-            app:strokeWidth="1dp"
-            app:hint="@string/search" />
+            app:title="@string/releases" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:background="@drawable/recycler_item_f_grad"
-            tools:text="@tools:sample/lorem/random"
-            android:layout_marginHorizontal="20dp"
-            style="@style/TextAppearance.Medium"
-            android:layout_height="wrap_content"
+        <View
+            android:background="?colorControlHighlight"
             android:layout_width="match_parent"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/messageTextView"
-            android:paddingHorizontal="18dp"
-            android:paddingVertical="12dp"
-            tools:visibility="visible"
-            android:visibility="gone"
-            android:gravity="center"
-            android:textSize="12sp"
-            tools:lines="1" />
+            android:layout_marginTop="4dp"
+            android:layout_height="0.8dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/recycler_item_e"
+        tools:listitem="@layout/recycler_item_f"
         android:scrollbarStyle="outsideOverlay"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
@@ -55,7 +39,8 @@
         android:id="@+id/recyclerView"
         android:clipToPadding="false"
         android:scrollbars="vertical"
+        android:paddingVertical="8dp"
         android:fadeScrollbars="true"
-        android:paddingBottom="96dp" />
+        android:paddingBottom="116dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

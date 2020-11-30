@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="title" type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintEnd_toStartOf="@id/subtitleTextView"
+            app:layout_constraintBottom_toBottomOf="@id/buttonA"
+            app:layout_constraintTop_toTopOf="@id/buttonA"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            tools:text="@tools:sample/full_names"
+            style="@style/TextAppearance.Medium"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constrainedWidth="true"
+            android:layout_marginStart="20dp"
+            android:id="@+id/titleTextView"
+            android:layout_marginEnd="6dp"
+            android:textSize="11.5sp"
+            android:text="@{title}"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintBottom_toBottomOf="@id/buttonA"
+            app:layout_constraintEnd_toStartOf="@id/buttonB"
+            app:layout_constraintTop_toTopOf="@id/buttonA"
+            tools:text="@tools:sample/full_names"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/subtitleTextView"
+            android:layout_marginEnd="12dp"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Theme.Button.Outlined"
+            android:layout_marginEnd="20dp"
+            android:layout_height="48dp"
+            android:layout_width="42dp"
+            android:id="@+id/buttonA"
+            android:padding="0dp"
+            android:text="@string/info_mark"
+            tools:text="\?" />
+
+        <com.google.android.material.button.MaterialButton
+            app:layout_constraintEnd_toStartOf="@id/buttonA"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Theme.Button.Outlined"
+            app:icon="@drawable/ic_refresh"
+            android:layout_marginEnd="4dp"
+            android:layout_height="48dp"
+            android:layout_width="42dp"
+            app:iconGravity="textStart"
+            android:id="@+id/buttonB"
+            app:iconPadding="0dp"
+            app:iconSize="20dp" />
+
+        <ProgressBar
+            app:layout_constraintBottom_toBottomOf="@id/buttonB"
+            app:layout_constraintStart_toStartOf="@id/buttonB"
+            app:layout_constraintTop_toTopOf="@id/buttonB"
+            app:layout_constraintEnd_toEndOf="@id/buttonB"
+            android:indeterminateTint="?colorPrimary"
+            style="?android:progressBarStyle"
+            android:id="@+id/progressBar"
+            android:indeterminate="true"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:padding="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/buttonA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/recycler_item_c"
+            android:layout_width="match_parent"
+            android:id="@+id/recyclerView"
+            android:clipToPadding="false"
+            android:fadeScrollbars="true"
+            android:scrollbars="vertical"
+            android:paddingBottom="98dp"
+            android:layout_height="0dp"
+            android:paddingTop="4dp"
+            tools:itemCount="3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,59 +1,51 @@
 package info.horriblesubs.sher.ui.b.shows
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
-import info.horriblesubs.sher.data.horrible.api.model.ItemList
+import info.horriblesubs.sher.data.subsplease.api.model.ItemList
+import info.horriblesubs.sher.databinding.BFragment4Binding
 import info.horriblesubs.sher.functions.Info
 import info.horriblesubs.sher.libs.dialog.InfoDialog
 import info.horriblesubs.sher.libs.dialog.LoadingDialog
 import info.horriblesubs.sher.libs.dialog.NetworkErrorDialog
-import info.horriblesubs.sher.libs.toolbar.Toolbar
-import info.horriblesubs.sher.ui.BaseFragment
-import info.horriblesubs.sher.ui._extras.adapters.MediaObjectAdapter
+import info.horriblesubs.sher.ui._extras.adapters.MediaNoImageAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
-import info.horriblesubs.sher.ui.b.MainActivity
 import info.horriblesubs.sher.ui.c.ShowActivity
+import info.horriblesubs.sher.ui.setLinearLayoutAdapter
 import info.horriblesubs.sher.ui.toast
+import info.horriblesubs.sher.ui.viewBindings
 import info.horriblesubs.sher.ui.viewModels
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.b_fragment_4.view.*
 
-class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
-    Toolbar.OnToolbarActionListener {
-
-    private var errorDialog: NetworkErrorDialog? = null
-    private var loadingDialog: LoadingDialog? = null
-    private var infoDialog: InfoDialog? = null
+class ShowsFragment: Fragment(), OnItemClickListener<ItemList>, Toolbar.OnMenuItemClickListener {
 
     val model by viewModels<ShowsModel>({requireActivity()})
-    private val adapter = MediaObjectAdapter(this)
-    override val layoutId = R.layout.b_fragment_4
-    override val name = "shows"
+    private var errorDialog: NetworkErrorDialog? = null
+    private var loadingDialog: LoadingDialog? = null
+    private lateinit var binding: BFragment4Binding
+    private val adapter = MediaNoImageAdapter(this)
+    private var infoDialog: InfoDialog? = null
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?, bundle: Bundle?): View {
+        binding = viewBindings(inflater, R.layout.b_fragment_4, group)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        model.resourceShows.observe(viewLifecycleOwner) { onChanged(it) }
+        binding.toolbar.menu?.findItem(R.id.info)?.title = "About Shows"
+        binding.recyclerView.setLinearLayoutAdapter(adapter)
         errorDialog = context?.let{ NetworkErrorDialog(it) }
+        binding.toolbar.setOnMenuItemClickListener(this)
         infoDialog = context?.let{ InfoDialog(it) }
-
-        view?.recyclerView?.apply {
-            adapter = this@ShowsFragment.adapter
-            setHasFixedSize(true)
-            columnWidth = 1.25f
-        }
-        view?.toolbar?.apply {
-            onToolbarActionListener = this@ShowsFragment
-            customizeMenu = {
-                it?.findItem(R.id.info)?.title = getString(R.string.about_shows)
-                it?.findItem(R.id.toggle)?.title = getString(
-                    if (model.allShowing.value == true)
-                        R.string.current_season else R.string.all_shows)
-            }
-            runCustomizeMenu
-        }
+        binding.recyclerView.setHasFixedSize(true)
     }
 
     private fun onSetLoading(b: Boolean) {
@@ -70,21 +62,8 @@ class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        model.resourceCurrent.observe(viewLifecycleOwner) { onChanged(it) }
-        model.allShowing.observe(viewLifecycleOwner) {
-            view?.toolbar?.runCustomizeMenu
-            onSetShows(isAll = it ?: false)
-        }
-    }
-
-    private fun onSetShows(
-        current: List<ItemList> = model.resourceCurrent.value?.value ?: emptyList(),
-        all: List<ItemList> = model.resourceAll.value?.value ?: emptyList(),
-        isAll: Boolean = model.allShowing.value ?: false
-    ) = adapter.apply {
-        reset(if (isAll) all else current)
+    private fun onSetShows(shows: List<ItemList> = model.resourceShows.value?.value ?: emptyList()) = adapter.apply {
+        reset(shows)
         filter.filter("")
     }
 
@@ -92,7 +71,7 @@ class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
         when(t?.status) {
             null -> context.toast("Internal app error!!!")
             RepositoryResult.SUCCESS -> {
-                t.value?.let { onSetShows(current = it) } ?: onSetShows()
+                onSetShows(t.value ?: emptyList())
                 onSetLoading(false)
             }
             RepositoryResult.LOADING -> onSetLoading(true)
@@ -104,37 +83,25 @@ class ShowsFragment: BaseFragment(), OnItemClickListener<ItemList>,
         }
     }
 
-    override fun onDestroyView() {
-        model.stopServerCall
-        model.allShowing.removeObservers(viewLifecycleOwner)
-        model.resourceCurrent.removeObservers(viewLifecycleOwner)
-        clearFindViewByIdCache()
-        onSetLoading(false)
-        super.onDestroyView()
-        loadingDialog?.dismiss()
-        errorDialog?.dismiss()
-        infoDialog?.dismiss()
-    }
-
-    override fun onMenuItemClickListener(item: MenuItem) = when(item.itemId) {
-        R.id.settings -> {
-            (activity as? MainActivity)?.onNavigationItemSelected(item)
-            Unit
-        }
-        R.id.toggle -> {
-            model.allShowing.value = !(model.allShowing.value ?: false)
+    override fun onMenuItemClick(item: MenuItem?) = when(item?.itemId) {
+        R.id.info -> {
+            infoDialog?.show(Info.SHOWS, model.resourceTime.value)
+            true
         }
         R.id.refresh -> {
             model.refreshDataFromServer
+            true
         }
-        R.id.info -> {
-            infoDialog?.show(Info.SHOWS, model.resourceTime.value) ?: Unit
-        }
-        else -> Unit
+        else -> false
     }
 
-    override fun onQueryChanged(text: String?) {
-        adapter.filter.filter(text)
+    override fun onDestroyView() {
+        loadingDialog?.dismiss()
+        errorDialog?.dismiss()
+        infoDialog?.dismiss()
+        super.onDestroyView()
+        model.stopServerCall
+        onSetLoading(false)
     }
 
     override fun onItemClick(view: View, t: ItemList?, position: Int) {

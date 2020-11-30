@@ -52,4 +52,9 @@
         <item name="colorPrimary">?colorOnSurface</item>
     </style>
 
+    <style name="TextAppearance.Toolbar.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/metropolis_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

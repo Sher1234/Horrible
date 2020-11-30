@@ -2,9 +2,8 @@ package info.horriblesubs.sher.ui.c
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import info.horriblesubs.sher.data.horrible.ShowRepository
-import info.horriblesubs.sher.data.horrible.api.HorribleApi
-import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.ShowRepository
+import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
 
 class ShowModel: ViewModel() {
 
@@ -26,12 +25,11 @@ class ShowModel: ViewModel() {
                 repository.initialize(value)
         }
 
-    val episodes = repository.liveResourceEpisodes
-    val batches = repository.liveResourceBatches
+    val episodes = repository.liveResourceReleases
     val detail = repository.liveResourceDetail
 
-    val episodesTime = repository.liveResourceEpisodesTime
-    val batchesTime = repository.liveResourceBatchesTime
+    val episodesTime = repository.liveResourceReleasesTime
+    val detailTime = repository.liveResourceDetailTime
 
     var sharedItem: ItemRelease?
         set(value) { liveSharedItem.value = value }
@@ -40,35 +38,14 @@ class ShowModel: ViewModel() {
     val refreshDataFromServer: Unit get() {
         val link = showLink
         if (!link.isNullOrBlank())
-            repository.refreshFromServer(link, true)
+            repository.refreshFromServer(link)
     }
 
     val refreshReleases: Unit get() {
         val link = showLink
         val sid = detail.value?.value?.sid
         if (!link.isNullOrBlank() && !sid.isNullOrBlank())
-            repository.onLoadEpisodes(link, sid, reset = true)
-    }
-
-    val refreshBatches: Unit get() {
-        val link = showLink
-        val sid = detail.value?.value?.sid
-        if (!link.isNullOrBlank() && !sid.isNullOrBlank())
-            repository.onLoadBatches(link, sid, true)
-    }
-
-    val onLoadMoreEpisodes: Unit get() {
-        val link = showLink
-        val sid = detail.value?.value?.sid
-        if (!link.isNullOrBlank() && !sid.isNullOrBlank())
-            repository.onLoadEpisodes(link, sid, mode = HorribleApi.ApiEpisodes.SOME)
-    }
-
-    val onLoadAllEpisodes: Unit get() {
-        val link = showLink
-        val sid = detail.value?.value?.sid
-        if (!link.isNullOrBlank() && !sid.isNullOrBlank())
-            repository.onLoadEpisodes(link, sid, mode = HorribleApi.ApiEpisodes.ALL)
+            repository.onLoadEpisodes(link, sid)
     }
 
     val stopServerCall: Unit get() {

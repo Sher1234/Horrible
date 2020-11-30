@@ -1,6 +1,7 @@
 package info.horriblesubs.sher.ui.c.detail.c
 
 import android.os.Bundle
+import android.view.View
 import androidx.core.text.parseAsHtml
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.ui.BaseFragment
@@ -21,19 +22,19 @@ class DescriptionFragment: BaseFragment() {
             return field
         }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model.detail.observe(viewLifecycleOwner) {
-            view?.synopsisId?.apply {
-                if ((it?.value?.body?.length ?: 0) <= 150) checkMarkDrawable = null
+            view.synopsisId?.apply {
+                if ((it?.value?.synopsis?.length ?: 0) <= 150) checkMarkDrawable = null
                 else setCheckMarkDrawable(R.drawable.da_up_down)
             }
-            view?.descriptionText?.text = it?.value?.body.short.parseAsHtml()
+            view.descriptionText?.text = it?.value?.synopsis.short.parseAsHtml()
             descToggle = false
-            view?.synopsisId?.setOnClickListener { _ ->
+            view.synopsisId?.setOnClickListener { _ ->
                 val b = descToggle
-                view?.synopsisId?.isChecked = b
-                view?.descriptionText?.text = (if (b) it?.value?.body else it?.value?.body?.short)?.parseAsHtml()
+                view.synopsisId?.isChecked = b
+                view.descriptionText?.text = (if (b) it?.value?.synopsis else it?.value?.synopsis?.short)?.parseAsHtml()
             }
         }
     }

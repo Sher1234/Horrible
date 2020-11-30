@@ -2,7 +2,6 @@ package info.horriblesubs.sher
 
 import android.app.Application
 import com.google.android.gms.ads.MobileAds
-import info.horriblesubs.sher.data.database.model.DatabaseMigrationHelper
 import info.horriblesubs.sher.service.Notifications
 
 class App: Application() {
@@ -16,7 +15,7 @@ class App: Application() {
         super.onCreate()
         MobileAds.initialize(this)
         Notifications.createChannels(this)
-        DatabaseMigrationHelper.onMigrate()
+//        DatabaseMigrationHelper.onMigrate()
         SettingsMigrationHelper.onMigrate()
     }
 }

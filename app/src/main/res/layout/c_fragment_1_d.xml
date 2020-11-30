@@ -17,7 +17,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         tools:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-        tools:listitem="@layout/recycler_item_f"
+        tools:listitem="@layout/recycler_item_g"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:paddingHorizontal="16dp"

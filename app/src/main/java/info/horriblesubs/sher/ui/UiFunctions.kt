@@ -107,6 +107,16 @@ inline fun <reified VDB: ViewDataBinding> ComponentActivity.viewBindings(
     return vdb
 }
 
+@MainThread
+inline fun <reified VDB: ViewDataBinding> ComponentActivity.viewBinding(
+    @LayoutRes layoutId: Int, crossinline apply: VDB.() -> Unit = {}
+): Lazy<VDB> = lazy {
+    val vdb = DataBindingUtil.setContentView<VDB>(this, layoutId)
+    vdb.lifecycleOwner = this
+    vdb.apply()
+    vdb
+}
+
 fun <VH: RecyclerView.ViewHolder, A: RecyclerView.Adapter<VH>> RecyclerView.setLinearLayoutAdapter(
     adapter: A?, orientation: Int = RecyclerView.VERTICAL
 ) {
@@ -169,3 +179,9 @@ fun startBrowser(context: Context?, url: String, chooserText: String = "Select b
         data = Uri.parse(url)
     }, chooserText))
 }
+
+@Suppress("FunctionName")
+inline fun Runnable(crossinline block: Runnable.() -> Unit): Runnable =
+    object : Runnable {
+        override fun run() { block() }
+    }

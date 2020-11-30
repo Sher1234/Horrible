@@ -2,7 +2,10 @@ package info.horriblesubs.sher.ui.c.detail.a
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -14,27 +17,20 @@ import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.database.model.BookmarkedShow
 import info.horriblesubs.sher.data.database.onBookmarkChange
 import info.horriblesubs.sher.data.database.toBookmarkedShow
-import info.horriblesubs.sher.data.horrible.LibraryRepository
-import info.horriblesubs.sher.data.horrible.api.detailAgo
-import info.horriblesubs.sher.data.horrible.api.detailTimeStamp
-import info.horriblesubs.sher.data.horrible.api.imageUrl
-import info.horriblesubs.sher.data.horrible.api.model.ItemShow
-import info.horriblesubs.sher.data.horrible.api.shortDisplay
+import info.horriblesubs.sher.data.subsplease.LibraryRepository
+import info.horriblesubs.sher.data.subsplease.api.model.ItemShow
+import info.horriblesubs.sher.data.subsplease.api.model.imageUrl
+import info.horriblesubs.sher.databinding.CFragment1ABinding
 import info.horriblesubs.sher.functions.parseAsHtml
-import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
-import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
 import info.horriblesubs.sher.ui.*
 import info.horriblesubs.sher.ui.c.ShowActivity
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.c.releases.ReleasesFragment
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.c_fragment_1_a.view.*
 
-class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
+class ImageTitleFragment: Fragment(), Observer<List<BookmarkedShow>> {
 
     private val model by viewModels<ShowModel>({requireActivity()})
-    override val layoutId: Int = R.layout.c_fragment_1_a
-    override val name: String = "show-detail"
+    private lateinit var binding: CFragment1ABinding
 
     private var liveBookmark: LiveData<List<BookmarkedShow>> = MutableLiveData()
         set(value) {
@@ -43,53 +39,47 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
             field.observe(viewLifecycleOwner, this)
         }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, group: ViewGroup?, bundle: Bundle?): View {
+        binding = viewBindings(inflater, R.layout.c_fragment_1_a, group)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model.detail.observe(viewLifecycleOwner) { onChanged(it) }
     }
 
     private fun onSetDetail(t: ItemShow?) {
         if (t?.title.isNullOrBlank() && model.showLink.isNullOrBlank())
             context.toast("Undefined URL!")
-        context?.let {
-            Glide.with(it).load(t.imageUrl).transform().apply {
-                transform(RoundedCorners(6), FitCenter())
-                placeholder(R.drawable.app_placeholder)
-                timeout(30000)
-            }.into(view?.imageView, view?.progressBar)
-        }
-        view?.airingStatusText?.text = if(t?.ongoing == true) "Currently Airing" else "Completed"
-        view?.lastUpdatedText?.text = if (TimeLeftPreference.value) t.detailAgo else
-            TimeFormatPreference.format(t.detailTimeStamp) ?: "Never"
-        view?.titleText?.text = t?.title?.parseAsHtml
-        view?.scheduleText?.text = t?.shortDisplay
-
-        view?.buttonAllReleases?.setOnClickListener {
+        Glide.with(requireContext()).load(t?.imageUrl).transform().apply {
+            transform(RoundedCorners(10), FitCenter())
+            placeholder(R.drawable.app_placeholder)
+            timeout(30000)
+        }.into(binding.imageView, binding.progressBar)
+        binding.titleTextView.text = t?.title?.parseAsHtml
+        binding.buttonAllReleases.setOnClickListener {
             (activity as? ShowActivity)?.onChangeFragment(ReleasesFragment())
         }
 
-        view?.buttonLibraryToggle?.setOnClickListener { _ ->
+        binding.buttonLibraryToggle.setOnClickListener {
             t?.toBookmarkedShow()?.let { onBookmarkChange(it) }
         }
 
-        view?.buttonRefresh?.setOnClickListener {
-            model.refreshDataFromServer
+        binding.buttonRefresh.setOnClickListener { model.refreshDataFromServer }
+
+        binding.buttonOpen.setOnClickListener {
+            val link  = t?.url ?: model.showLink
+            if(link.isNullOrBlank()) context.toast("Internal app error, Unable to open link..")
+            else startBrowser(context,
+                if (link.contains("shows")) link else "https://subsplease.org/shows/$link")
         }
 
-        view?.buttonOpen?.setOnClickListener {
-            val link  = t?.link ?: model.showLink
-            if(link.isNullOrBlank())
-                context.toast("Internal app error, Unable to open link..")
-            else
-                startBrowser(context, if (link.contains("shows")) link else
-                    "https://horriblesubs.info/shows/$link")
-        }
-
-        view?.buttonShare?.setOnClickListener {
-            if(t != null && t.link.isNotBlank()) {
-                val link = if (t.link.contains("shows")) t.link else
-                    "https://horriblesubs.info/shows/${t.link}"
-                val text = "${t.title}\n${t.body.short}\n\n$link\n\n\nShared via an!me."
+        binding.buttonShare.setOnClickListener {
+            if(t != null && t.url.isNotBlank()) {
+                val link = if (t.url.contains("shows")) t.url else
+                    "https://subsplease.org/shows/${t.url}"
+                val text = "${t.title}\n${t.synopsis.short}\n\n$link\n\n\nShared via an!me."
                 startActivity(Intent.createChooser(
                     Intent().apply {
                         putExtra(Intent.EXTRA_TEXT, text)
@@ -101,9 +91,7 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
             } else
                 context.toast("Internal app error, Unable to share.")
         }
-        t?.toBookmarkedShow()?.let {
-            liveBookmark = LibraryRepository.getByIdLive(it)
-        }
+        t?.toBookmarkedShow()?.let { liveBookmark = LibraryRepository.getByIdLive(it) }
     }
 
     private fun onChanged(t: RepositoryResult<ItemShow>?) = when(t?.status) {
@@ -113,17 +101,9 @@ class ImageTitleFragment: BaseFragment(), Observer<List<BookmarkedShow>> {
         else -> {}
     }
 
-    override fun onDestroy() {
-        clearFindViewByIdCache()
-        super.onDestroy()
-    }
-
-    override fun onChanged(t: List<BookmarkedShow>?) {
-        view?.buttonLibraryToggle?.icon = ContextCompat.getDrawable(
-            requireContext(),
-            if (t.isNullOrEmpty()) R.drawable.ic_bookmark else R.drawable.ic_bookmarked
-        )
-    }
+    override fun onChanged(t: List<BookmarkedShow>?) = binding.buttonLibraryToggle.setIconResource(
+        if (t.isNullOrEmpty()) R.drawable.ic_bookmark else R.drawable.ic_bookmarked
+    )
 
     private val String?.short: String get() {
         return if (this.isNullOrBlank()) "" else

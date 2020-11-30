@@ -9,56 +9,40 @@ import info.horriblesubs.sher.ui._extras.adapters.horrible.DownloadAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 import info.horriblesubs.sher.ui.c.ShowModel
 import info.horriblesubs.sher.ui.d.SearchAnimeActivity
-import info.horriblesubs.sher.ui.e.AnimeMalActivity
 import info.horriblesubs.sher.ui.setGridLayoutAdapter
 import info.horriblesubs.sher.ui.startBrowser
 import info.horriblesubs.sher.ui.viewModels
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_1_e.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import info.horriblesubs.sher.data.horrible.api.model.ItemRelease.Download as Link
 
-class ExternalLinksFragment: BaseFragment(), OnItemClickListener<Link> {
+class ExternalLinksFragment: BaseFragment(), OnItemClickListener<String> {
 
     private val model by viewModels<ShowModel>({requireActivity()})
     override val layoutId: Int = R.layout.c_fragment_1_e
     private val adapter = DownloadAdapter(this)
     override val name: String = "show-external"
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        view?.recyclerView?.setGridLayoutAdapter(adapter, 2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.recyclerView?.setGridLayoutAdapter(adapter, 3)
         model.detail.observe(viewLifecycleOwner) {
             it.value?.apply {
                 adapter.reset(
-                    Link(
-                        source = (if (mal_id.isNullOrBlank()) "Search" else "View in") + " MyAnimeList",
-                        link = if (mal_id.isNullOrBlank()) title else mal_id
-                    ),
-                    Link(
-                        source = "Search Nyaa.si",
-                        link = "https://nyaa.si/?f=0&c=0_0&q=${Uri.encode(title)}"
-                    ),
-                    Link(
-                        source = "Search AnimeKaizoku",
-                        link = "https://animekaizoku.com//?s=${Uri.encode(title)}"
-                    ),
-                    clear = true
+                    arrayListOf("Search MAL", "Search Nyaa", "Search AnimeKaizoku"),
+                    arrayListOf(title, "https://nyaa.si/?f=0&c=0_0&q=${Uri.encode(title)}",
+                        "https://animekaizoku.com//?s=${Uri.encode(title)}")
                 )
             }
         }
     }
 
     @ExperimentalCoroutinesApi
-    override fun onItemClick(view: View, t: Link?, position: Int) {
-        when (t?.source) {
-            "Search MyAnimeList" -> SearchAnimeActivity.startSearchAnimeActivity(context, t.link)
-            "View in MyAnimeList" -> {
-                val id = t.link?.toIntOrNull() ?: -1
-                AnimeMalActivity.startAnimeMalActivity(context, id)
-            }
+    override fun onItemClick(view: View, t: String?, position: Int) {
+        when (position) {
+            0 -> SearchAnimeActivity.startSearchAnimeActivity(context, t)
             else -> {
-                val url = t?.link
+                val url = t
                 if (!url.isNullOrBlank())
                     startBrowser(context, url)
             }

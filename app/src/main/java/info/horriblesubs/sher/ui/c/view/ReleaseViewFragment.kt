@@ -1,6 +1,7 @@
 package info.horriblesubs.sher.ui.c.view
 
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,11 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.data.horrible.api.FHD
-import info.horriblesubs.sher.data.horrible.api.HD
-import info.horriblesubs.sher.data.horrible.api.SD
-import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.FHD
+import info.horriblesubs.sher.data.subsplease.api.model.HD
+import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.SD
 import info.horriblesubs.sher.functions.getRelativeTime
-import info.horriblesubs.sher.functions.orientation
 import info.horriblesubs.sher.functions.parseAsHtml
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
@@ -26,9 +26,10 @@ import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.c_fragment_3.view.*
 import java.time.ZonedDateTime
 
-class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<ItemRelease.Download> {
+class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<String> {
 
     private val model by viewModels<ShowModel>({requireActivity()})
+    private val titles = arrayListOf("Magnet", "Torrent", "XDCC")
     private val adapter = DownloadAdapter(this)
 
     companion object {
@@ -45,14 +46,14 @@ class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<Item
         return inflater.inflate(R.layout.c_fragment_3, group)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        view?.recyclerView?.setGridLayoutAdapter(adapter, orientation(2, 3))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         model.liveSharedItem.observe(viewLifecycleOwner) { onChanged(it) }
         model.episodesTime.observe(viewLifecycleOwner) { onSetShowData() }
-        view?.fhdText?.setOnClickListener { onItemChange(2) }
-        view?.hdText?.setOnClickListener { onItemChange(1) }
-        view?.sdText?.setOnClickListener { onItemChange(0) }
+        view.recyclerView?.setGridLayoutAdapter(adapter, 3)
+        view.fhdText?.setOnClickListener { onItemChange(2) }
+        view.hdText?.setOnClickListener { onItemChange(1) }
+        view.sdText?.setOnClickListener { onItemChange(0) }
     }
 
     override fun onDestroy() {
@@ -70,63 +71,38 @@ class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<Item
     }
 
     private fun onChanged(t: ItemRelease?) {
-        view?.releaseText?.text = t?.release?.parseAsHtml
-        view?.titleText?.text = t?.title?.parseAsHtml
-        var booleanSD = false
-        var booleanHD = false
-        if (t.SD.isNullOrEmpty()) {
-            setUnselected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
-            view?.sdText?.gone
-            booleanSD = true
-        } else {
-            view?.sdText?.visible
-            adapter.reset(t.SD)
-            onItemChange(0)
-        }
-        if (t.HD.isNullOrEmpty()) {
-            setUnselected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
-            view?.hdText?.gone
-            booleanHD = true
-        } else {
-            view?.hdText?.visible
-            if (booleanSD) {
-                adapter.reset(t.HD)
-                onItemChange(1)
-            }
-        }
-        if (t.FHD.isNullOrEmpty()) {
-            setUnselected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
-            view?.fhdText?.gone
-        } else {
-            view?.fhdText?.visible
-            if (booleanSD && booleanHD) {
-                adapter.reset(t.FHD)
-                onItemChange(2)
-            }
-        }
+        view?.releaseText?.text = t?.episode?.parseAsHtml
+        view?.titleText?.text = t?.show?.parseAsHtml
+        onItemChange(0, t)
     }
 
-    private fun onItemChange(state: Int = 0) {
+    private fun onItemChange(state: Int = 0, release: ItemRelease? = model.sharedItem) {
         view?.selectedButtonText?.text = when (state) {
             1 -> {
                 setUnselected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
                 setUnselected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
                 setSelected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
-                adapter.reset(model.liveSharedItem.value.HD)
+                val link = release?.HD
+                val xdcc = if (link?.xdcc.isNullOrBlank()) null else "https://subsplease.org/xdcc/?search=${Uri.encode(link?.xdcc)}"
+                adapter.reset(titles, arrayListOf(link?.magnet, link?.torrent, xdcc))
                 "HD [720p]"
             }
             2 -> {
                 setSelected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
                 setUnselected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
                 setUnselected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
-                adapter.reset(model.liveSharedItem.value.FHD)
+                val link = release?.FHD
+                val xdcc = if (link?.xdcc.isNullOrBlank()) null else "https://subsplease.org/xdcc/?search=${Uri.encode(link?.xdcc)}"
+                adapter.reset(titles, arrayListOf(link?.magnet, link?.torrent, xdcc))
                 "Full HD [1080p]"
             }
             else -> {
                 setUnselected(view?.fhdText, view?.selectedFullHD1, view?.selectedFullHD2)
                 setUnselected(view?.hdText, view?.selectedHD1, view?.selectedHD2)
                 setSelected(view?.sdText, view?.selectedSD1, view?.selectedSD2)
-                adapter.reset(model.liveSharedItem.value.SD)
+                val link = release?.SD
+                val xdcc = if (link?.xdcc.isNullOrBlank()) null else "https://subsplease.org/xdcc/?search=${Uri.encode(link?.xdcc)}"
+                adapter.reset(titles, arrayListOf(link?.magnet, link?.torrent, xdcc))
                 "HQ [360p] or SD [480p]"
             }
         }
@@ -149,7 +125,7 @@ class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<Item
         button?.requestLayout()
     }
 
-    override fun onItemClick(view: View, t: ItemRelease.Download?, position: Int) {
-        t?.link?.let { startBrowser(this.context, it, "Select an application to continue.") }
+    override fun onItemClick(view: View, t: String?, position: Int) {
+        if (!t.isNullOrBlank()) startBrowser(context, t, "Select an application to continue.")
     }
 }

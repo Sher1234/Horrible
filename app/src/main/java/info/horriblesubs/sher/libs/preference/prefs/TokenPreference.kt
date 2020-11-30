@@ -13,12 +13,10 @@ object TokenPreference: BasePreference<String>() {
 
     init {
         summaryProvider = object: TextProvider<String> {
-            override fun provideText(preference: BasePreference<String>): String? {
-                return if (value.isBlank())
-                    "Notification ID not set., Tap to set Notification ID." else
-                    "Tap to reset Notification ID."
-            }
+            override fun provideText(preference: BasePreference<String>) = if (value.isBlank())
+                "Notification ID not set., Tap to set Notification ID." else
+                "Tap to reset your device Notification ID."
         }
-        title = "App Notification ID"
+        title = "Fix Notification Issues"
     }
 }

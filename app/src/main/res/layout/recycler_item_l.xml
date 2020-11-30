@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
     android:layout_gravity="center">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -11,16 +11,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:layout_width="wrap_content"
+        tools:src="@tools:sample/avatars"
+        android:layout_height="wrap_content"
         app:layout_goneMarginBottom="6dp"
         android:layout_marginStart="4dp"
         android:adjustViewBounds="true"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:scaleType="fitCenter"
-        android:layout_height="0dp"
-        android:id="@+id/imageView" />
+        tools:scaleType="centerCrop"
+        android:id="@+id/imageView"
+        android:layout_width="0dp" />
 
     <ProgressBar
         app:layout_constraintBottom_toBottomOf="@id/imageView"

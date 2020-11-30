@@ -6,7 +6,7 @@
     android:layout_width="match_parent">
 
     <info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
-        tools:listitem="@layout/recycler_item_j"
+        tools:listitem="@layout/recycler_item_k"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:paddingHorizontal="16dp"

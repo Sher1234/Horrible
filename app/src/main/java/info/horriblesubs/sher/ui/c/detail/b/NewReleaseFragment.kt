@@ -3,7 +3,7 @@ package info.horriblesubs.sher.ui.c.detail.b
 import android.os.Bundle
 import android.view.View
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.data.horrible.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
 import info.horriblesubs.sher.functions.getRelativeTime
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
@@ -29,9 +29,6 @@ class NewReleaseFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
         model.episodes.observe(viewLifecycleOwner) {
             it?.value?.let { list -> onResetView(episodes = list) }
         }
-        model.batches.observe(viewLifecycleOwner) {
-            it?.value?.let { list -> onResetView(batches = list) }
-        }
         model.episodesTime.observe(viewLifecycleOwner) {
             view.lastUpdatedText?.text = (if (TimeLeftPreference.value)
                 getRelativeTime(ZonedDateTime.now(), it) else
@@ -40,21 +37,10 @@ class NewReleaseFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
     }
 
     private fun onResetView(
-        episodes: List<ItemRelease> = model.episodes.value?.value ?: emptyList(),
-        batches: List<ItemRelease> = model.batches.value?.value ?: emptyList()
-    ) {
-        if (episodes.isNotEmpty() && batches.isNotEmpty()) {
-            setAdapter(arrayListOf<ItemRelease>().apply {
-                addAll(batches)
-                addAll(episodes)
-            }, 3)
-        }
-        else if (episodes.isNotEmpty()) setAdapter(episodes, 4)
-        else if (batches.isNotEmpty()) setAdapter(batches, 3)
-        else {
-            view?.recyclerView?.gone
-            view?.textView?.visible
-        }
+        episodes: HashMap<String, ItemRelease> = model.episodes.value?.value ?: hashMapOf()
+    ) = if (episodes.isNotEmpty()) setAdapter(episodes) else {
+        view?.recyclerView?.gone
+        view?.textView?.visible
     }
 
     override fun onItemClick(view: View, t: ItemRelease?, position: Int) {
@@ -64,11 +50,18 @@ class NewReleaseFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
         }
     }
 
-    private fun setAdapter(list: List<ItemRelease>?, span: Int) {
-        val size = if (list?.size ?: 0 > (span - 1)) span else list?.size ?: 0
-        adapter.reset(list?.subList(0, size)?: emptyList())
-        (view?.recyclerView)?.spanCount = span
+    private fun setAdapter(list: HashMap<String, ItemRelease>?) {
+        val size = if ((list?.size ?: 0) > 3) 4 else list?.size ?: 0
+        val arrayList = arrayListOf<ItemRelease>()
+        var counter = 0
+        for (item in list ?: hashMapOf()) {
+            counter++
+            arrayList.add(item.value)
+            if (counter == size) break
+        }
+        (view?.recyclerView)?.spanCount = 4
         view?.recyclerView?.visible
+        adapter.reset(arrayList)
         view?.textView?.gone
     }
 

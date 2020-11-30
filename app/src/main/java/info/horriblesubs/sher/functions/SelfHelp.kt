@@ -72,13 +72,14 @@ fun ZonedDateTime?.format(
 fun getRelativeTime(startTime: Temporal?, endTime: Temporal?, isDetailed: Boolean = true): String? {
     if (startTime == null || endTime == null) return null
     val duration = Duration.between(endTime, startTime) ?: return null
-    val s = if (duration.seconds > 0) "ago" else ""
+    val j = if (duration.seconds == 0L) "Just now" else ""
+    val s = if (duration.seconds > 0) " ago" else ""
     val p = if (duration.seconds > 0) "" else "In "
     val minutes = abs(duration.toMinutes())%60
     val seconds = abs(duration.seconds)%60
     val hours = abs(duration.toHours())%24
     val days = abs(duration.toDays())
-    return (p +
+    return if (j.isNotBlank()) j else (p +
             (if (days > 0) if (isDetailed) "${days}d " else return "$p$days days $s".trim() else "") +
             (if (hours > 0) if (isDetailed) "${hours}h " else return "$p$hours hours $s".trim() else "") +
             (if (minutes > 0) if (isDetailed) "${minutes}m " else return "$p$minutes minutes $s".trim() else "") +

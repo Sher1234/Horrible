@@ -12,7 +12,7 @@ interface NotificationsDAO {
     @Query("SELECT COUNT(*) AS items FROM Notifications WHERE id = :id")
     suspend fun countById(id: String): CountItem
 
-    @Query("SELECT * FROM Notifications WHERE link = :id LIMIT 1")
+    @Query("SELECT * FROM Notifications WHERE page = :id LIMIT 1")
     suspend fun getById(id: String): NotificationItem?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

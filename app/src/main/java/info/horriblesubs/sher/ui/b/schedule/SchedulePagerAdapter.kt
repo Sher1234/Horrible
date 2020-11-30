@@ -8,14 +8,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import info.horriblesubs.sher.R
-import info.horriblesubs.sher.data.horrible.api.model.ItemSchedule
+import info.horriblesubs.sher.data.subsplease.api.model.ItemSchedule
 import info.horriblesubs.sher.libs.recyclerview.AutoFitRecyclerView
 import info.horriblesubs.sher.ui._extras.adapters.horrible.ScheduleAdapter
 import info.horriblesubs.sher.ui._extras.listeners.OnItemClickListener
 
 class SchedulePagerAdapter (
-    private val listener: OnItemClickListener<ItemSchedule>,
-    viewPager2: ViewPager2?,
+    private val listener: OnItemClickListener<ItemSchedule.Show>,
+    viewPager: ViewPager2?,
     tabLayout: TabLayout?
 ): RecyclerView.Adapter<SchedulePagerAdapter.Holder>() {
 
@@ -23,41 +23,41 @@ class SchedulePagerAdapter (
         listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Not yet scheduled")
     }
 
+    private val keys by lazy {
+        listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "TBD")
+    }
+
     init {
-        if (viewPager2 != null && tabLayout != null) {
-            viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            viewPager2.adapter = this
-            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+        if (viewPager != null && tabLayout != null) {
+            viewPager.adapter = this
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = tabs[position]
             }.attach()
+            viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
     }
 
-    var result: List<List<ItemSchedule>>? = null
+    var result: ItemSchedule? = null
         set(value) {
             field = value
             for (i in 0..8) notifyItemChanged(i)
         }
 
-    override fun onCreateViewHolder(group: ViewGroup, i: Int) = Holder(
-        LayoutInflater.from(group.context).inflate(R.layout.b_fragment_3_, group, false),
-        this@SchedulePagerAdapter
-    )
+    override fun onCreateViewHolder(group: ViewGroup, i: Int) =
+        Holder(LayoutInflater.from(group.context).inflate(R.layout.b_fragment_3_, group, false))
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.onBindToViewHolder(result?.get(position) ?: emptyList())
+        val list = result?.schedule?.get(keys[position]) ?: emptyList()
+        holder.recyclerView?.apply {
+            adapter = ScheduleAdapter(this@SchedulePagerAdapter.listener, list)
+            setHasFixedSize(true)
+            columnWidth = 1.45f
+        }
     }
 
     override fun getItemCount() = tabs.size
 
-    inner class Holder(view: View, private val adapter: SchedulePagerAdapter) : RecyclerView.ViewHolder(view) {
-        val recyclerView: AutoFitRecyclerView? = itemView.findViewById(R.id.recyclerView)
-
-        fun onBindToViewHolder(list: List<ItemSchedule>) =
-            recyclerView?.apply {
-                adapter = ScheduleAdapter(this@Holder.adapter.listener, list)
-                setHasFixedSize(true)
-                columnWidth = 1.25f
-            }
+    inner class Holder(view: View) : RecyclerView.ViewHolder(view) {
+        val recyclerView = itemView.findViewById<AutoFitRecyclerView>(R.id.recyclerView)
     }
 }

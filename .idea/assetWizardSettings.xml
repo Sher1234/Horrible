@@ -183,7 +183,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android%20Studio%20%5BCanary%5D/plugins/android/lib/android.jar!/images/material/icons/materialiconsoutlined/group/outline_group_24.xml" />
+                                      <entry key="url" value="jar:file:/D:/SystemC/Softwares/Android%20Studio%204.2/plugins/android/lib/android.jar!/images/material/icons/materialiconsoutlined/delete_forever/outline_delete_forever_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -193,7 +193,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_group" />
+                            <entry key="outputName" value="ic_delete_off" />
                             <entry key="sourceFile" value="C:\Users\agghu\Desktop\perm_device_information-24px.svg" />
                           </map>
                         </option>

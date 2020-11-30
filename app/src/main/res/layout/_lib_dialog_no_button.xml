@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_gravity="center"
-    android:layout_margin="32dp"
-    app:cardCornerRadius="8dp">
+    android:layout_margin="36dp"
+    app:cardCornerRadius="8dp"
+    android:minWidth="320dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
+        android:layout_width="match_parent">
 
         <com.google.android.material.textview.MaterialTextView
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +26,7 @@
             android:layout_width="wrap_content"
             app:layout_constrainedWidth="true"
             android:layout_marginTop="16dp"
-            android:paddingVertical="4dp"
+            android:paddingVertical="5dp"
             android:id="@+id/textView1"
             android:textSize="14.5sp" />
 
@@ -39,7 +40,7 @@
             style="@style/TextAppearance.Regular"
             android:lineSpacingMultiplier="1.215"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             app:layout_constrainedWidth="true"
             android:paddingVertical="6dp"
             android:id="@+id/textView2"
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:textStyle="italic"
             android:textSize="10sp"
             tools:ignore="SmallSp"

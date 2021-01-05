@@ -19,7 +19,7 @@ object BuildDatePreference: BasePreference<String>() {
         val time = ZonedDateTime.of(LocalDateTime.parse(value), ZoneOffset.UTC)
             .withZoneSameInstant(ZoneId.systemDefault())
         summaryProvider = object: TextProvider<String> {
-            override fun provideText(preference: BasePreference<String>): String? {
+            override fun provideText(preference: BasePreference<String>): String {
                 return (if (TimeLeftPreference.value) getRelativeTime(ZonedDateTime.now(), time)
                     else TimeFormatPreference.format(time)) ?: value
             }

@@ -19,7 +19,7 @@ interface SubsPleaseApi {
     suspend fun getShowReleases(
         @Query(value = "tz") timezone: String,
         @Query(value = "sid") sid: String
-    ): LinkedHashMap<String, ItemRelease>?
+    ): ItemReleasePage?
 
     @GET("api/?f=schedule")
     suspend fun getSchedule(@Query(value = "tz") timezone: String): ItemSchedule?

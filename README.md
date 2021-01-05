@@ -32,6 +32,7 @@ an!me implements number of open source projects listed bellow:
 
 #### Release Updates
 ```
+Streamlined to WebsiteAPI changes for batches, Updated Dependencies               Major Commit   - Jan   05, 2021
 Migrated to SubsPlease [Full Support], Updated Dependencies & UI                  Major Commit   - Nov   30, 2020
 Minor UI Tweaks, Fixed Release View (Horrible), Updated Dependencies              Major Commit   - June  28, 2020
 Minor UI Tweaks, Enabled MAL Anime (Search & View) | Beta                         Major Commit   - June  24, 2020

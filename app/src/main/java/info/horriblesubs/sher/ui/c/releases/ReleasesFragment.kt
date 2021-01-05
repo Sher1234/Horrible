@@ -5,6 +5,7 @@ import android.view.View
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.ItemReleasePage
 import info.horriblesubs.sher.data.subsplease.api.model.toArrayList
 import info.horriblesubs.sher.ui.BaseFragment
 import info.horriblesubs.sher.ui._extras.adapters.horrible.ReleaseAdapter
@@ -37,29 +38,26 @@ class ReleasesFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
         model.episodes.observe(viewLifecycleOwner) { onChanged(it) }
     }
 
-    private fun onSetReleases(episodes: LinkedHashMap<String, ItemRelease> = model.episodes.value?.value ?: linkedMapOf()) = adapter.apply {
+    private fun onSetReleases(
+        episodes: LinkedHashMap<String, ItemRelease> = getMap(model.episodes.value?.value)
+    ) = adapter.apply {
         reset(episodes.toArrayList())
         filter.filter("")
     }
 
-    private fun onChanged(t: RepositoryResult<LinkedHashMap<String, ItemRelease>>?) {
-        when(t?.status) {
-            null -> context.toast("Internal app error!!!")
-            RepositoryResult.SUCCESS -> {
-                t.value?.let { onSetReleases(episodes = it) } ?: onSetReleases()
-                onSetLoading(false)
-            }
-            RepositoryResult.LOADING -> onSetLoading(true)
-            RepositoryResult.FAILURE -> {
-                context.toast(t.message)
-                onSetLoading(false)
-            }
-        }
+    private fun getMap(page: ItemReleasePage?): LinkedHashMap<String, ItemRelease> {
+        val map = LinkedHashMap<String, ItemRelease>()
+        page?.batch?.let { map.putAll(it) }
+        page?.episode?.let { map.putAll(it) }
+        return map
     }
 
-    private fun onSetLoading(b: Boolean) {
-        if (b) {
-            onSetLoading(false)
+    private fun onChanged(t: RepositoryResult<ItemReleasePage>?) {
+        when(t?.status) {
+            RepositoryResult.SUCCESS -> onSetReleases(episodes = getMap(t.value))
+            RepositoryResult.LOADING -> context.toast("Loading...")
+            RepositoryResult.FAILURE -> context.toast(t.message)
+            null -> context.toast("Internal app error!!!")
         }
     }
 
@@ -67,7 +65,6 @@ class ReleasesFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
         model.stopServerCall
         model.episodes.removeObservers(viewLifecycleOwner)
         clearFindViewByIdCache()
-        onSetLoading(false)
         super.onDestroyView()
     }
 

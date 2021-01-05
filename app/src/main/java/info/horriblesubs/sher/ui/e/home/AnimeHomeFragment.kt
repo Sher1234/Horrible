@@ -82,16 +82,16 @@ class AnimeHomeFragment: BaseFragment() {
             return field
         }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        view?.recyclerViewA?.setFlexLayoutAdapter(adapterG)
-        view?.recyclerViewB?.setFlexLayoutAdapter(adapterI)
-        view?.recyclerViewC?.setFlexLayoutAdapter(adapterM)
-        view?.recyclerViewD?.setGridLayoutAdapter(adapterO, 2)
-        view?.recyclerViewE?.setGridLayoutAdapter(adapterE, 2)
-        view?.recyclerViewF?.setFlexLayoutAdapter(adapterS)
-        view?.recyclerViewG?.setFlexLayoutAdapter(adapterL)
-        view?.recyclerViewH?.setFlexLayoutAdapter(adapterP)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.recyclerViewA?.setFlexLayoutAdapter(adapterG)
+        view.recyclerViewB?.setFlexLayoutAdapter(adapterI)
+        view.recyclerViewC?.setFlexLayoutAdapter(adapterM)
+        view.recyclerViewD?.setGridLayoutAdapter(adapterO, 2)
+        view.recyclerViewE?.setGridLayoutAdapter(adapterE, 2)
+        view.recyclerViewF?.setFlexLayoutAdapter(adapterS)
+        view.recyclerViewG?.setFlexLayoutAdapter(adapterL)
+        view.recyclerViewH?.setFlexLayoutAdapter(adapterP)
         model.liveData.observe(viewLifecycleOwner) { onChanged(it) }
         sharedModel.liveSharedId.observe(viewLifecycleOwner) { model.initialize(it) }
     }

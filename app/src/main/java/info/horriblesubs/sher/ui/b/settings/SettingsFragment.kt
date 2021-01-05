@@ -47,7 +47,8 @@ class SettingsFragment: Fragment(), OnPreferenceChangeListener {
             ThemePreference, MarkedPreference,
             GroupTitlePreference("Others"),
             PrivacyPolicyPreference, GithubPreference,
-            BuildDatePreference, VersionPreference
+            BuildDatePreference, VersionPreference,
+            AppCachePreference
         )
     }
 
@@ -71,10 +72,15 @@ class SettingsFragment: Fragment(), OnPreferenceChangeListener {
                     context?.toast("Fixing notification id...")
                 }
             }
+            is AppCachePreference -> {
+                context.toast("Deleting ${preference.value} B of cache...")
+                preference.deleteCache()
+            }
             is ThemePreference -> {
                 AppCompatDelegate.setDefaultNightMode(preference.value)
                 context?.toast(preference.summary ?: "")
             }
         }
     }
+
 }

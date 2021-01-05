@@ -11,7 +11,7 @@ import info.horriblesubs.sher.data.RepositoryResult
 import info.horriblesubs.sher.data.cache.*
 import info.horriblesubs.sher.data.subsplease.SubsPleaseCache.FileType
 import info.horriblesubs.sher.data.subsplease.api.getShowDetail
-import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.ItemReleasePage
 import info.horriblesubs.sher.data.subsplease.api.model.ItemShow
 import info.horriblesubs.sher.data.subsplease.api.timezone
 import kotlinx.coroutines.*
@@ -20,10 +20,10 @@ import java.time.format.DateTimeFormatter
 
 class ShowRepository {
 
-    private val rReleases = SubsPleaseCache<LinkedHashMap<String, ItemRelease>>(FileType(FileType.SHOW))
+    private val rReleases = SubsPleaseCache<ItemReleasePage>(FileType(FileType.SHOW))
     private val rDetail = SubsPleaseCache<ItemShow>(FileType(FileType.SHOW))
 
-    val liveResourceReleases = MutableLiveData<RepositoryResult<LinkedHashMap<String, ItemRelease>>>()
+    val liveResourceReleases = MutableLiveData<RepositoryResult<ItemReleasePage>>()
     val liveResourceDetail = MutableLiveData<RepositoryResult<ItemShow>>()
     val liveResourceReleasesTime = MutableLiveData<ZonedDateTime>()
     val liveResourceDetailTime = MutableLiveData<ZonedDateTime>()
@@ -208,6 +208,6 @@ class ShowRepository {
     class ShowResult(time: String?, t: ItemShow?):
         RepoResut<ItemShow>(time ?: "", t)
 
-    class ReleaseResult(time: String?, t: LinkedHashMap<String, ItemRelease>?):
-        RepoResut<LinkedHashMap<String, ItemRelease>>(time ?: "", t)
+    class ReleaseResult(time: String?, t: ItemReleasePage?):
+        RepoResut<ItemReleasePage>(time ?: "", t)
 }

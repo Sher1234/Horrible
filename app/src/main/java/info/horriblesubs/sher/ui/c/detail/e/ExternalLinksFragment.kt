@@ -42,9 +42,8 @@ class ExternalLinksFragment: BaseFragment(), OnItemClickListener<String> {
         when (position) {
             0 -> SearchAnimeActivity.startSearchAnimeActivity(context, t)
             else -> {
-                val url = t
-                if (!url.isNullOrBlank())
-                    startBrowser(context, url)
+                if (!t.isNullOrBlank())
+                    startBrowser(context, t)
             }
         }
     }

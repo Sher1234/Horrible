@@ -77,13 +77,10 @@ class ScreenA: AppCompatActivity(), InstallStateUpdatedListener {
 
     private fun onPlayStoreUpdateCheck() {
         manager.registerListener(this)
-        manager.appUpdateInfo?.addOnCompleteListener {
-            if (it?.isSuccessful == true) {
-                if (it.result?.updateAvailability() == UPDATE_AVAILABLE &&
-                    it.result?.isUpdateTypeAllowed(FLEXIBLE) == true)
-                    manager.startUpdateFlowForResult(it.result, FLEXIBLE, this, UPDATE_CHECK)
-                else message.value = "Starting..."
-            } else message.value = "Starting..."
+        manager.appUpdateInfo.addOnCompleteListener {
+            if (it.isSuccessful && it.result.updateAvailability() == UPDATE_AVAILABLE && it.result.isUpdateTypeAllowed(FLEXIBLE))
+                manager.startUpdateFlowForResult(it.result, FLEXIBLE, this, UPDATE_CHECK)
+            else message.value = "Starting..."
         }
     }
 
@@ -123,7 +120,7 @@ class ScreenA: AppCompatActivity(), InstallStateUpdatedListener {
             message.value = "Checking for update..."
     }
 
-    override fun onStateUpdate(state: InstallState?) = when (state?.installStatus()) {
+    override fun onStateUpdate(state: InstallState) = when (state.installStatus()) {
         InstallStatus.DOWNLOADED -> {
             AlertDialog.Builder(this).apply {
                 title = "Update App"

@@ -34,13 +34,11 @@ class CharacterStaffFragment: BaseMalFragment(), OnItemClickListener<BaseWithIma
         CharacterStaffAdapter(this, view?.viewPager, view?.tabLayout)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        errorDialog = context?.let{ NetworkErrorDialog(it) }
-
-        model.liveData.observe(viewLifecycleOwner) { onChanged(it) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         sharedModel.liveSharedId.observe(viewLifecycleOwner) { model.initialize(it) }
+        model.liveData.observe(viewLifecycleOwner) { onChanged(it) }
+        errorDialog = context?.let{ NetworkErrorDialog(it) }
     }
 
     private fun onChanged(t: RepositoryResult<AnimeCharactersStaffPage>?) = when(t?.status) {

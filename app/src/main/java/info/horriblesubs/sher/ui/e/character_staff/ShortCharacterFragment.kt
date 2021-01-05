@@ -44,19 +44,19 @@ class ShortCharacterFragment: BottomSheetDialogFragment(), OnItemClickListener<B
         return inflater.inflate(R.layout.e_fragment_2_a, group)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        view?.button?.setOnClickListener { character?.url?.let { s -> startBrowser(context, s) } }
-        view?.recyclerView?.setLinearLayoutAdapter(adapter, RecyclerView.HORIZONTAL)
-        view?.subtitleText?.text = character?.role?.parseAsHtml
-        view?.titleText?.text = character?.name
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.button?.setOnClickListener { character?.url?.let { s -> startBrowser(context, s) } }
+        view.recyclerView?.setLinearLayoutAdapter(adapter, RecyclerView.HORIZONTAL)
+        view.subtitleText?.text = character?.role?.parseAsHtml
+        view.titleText?.text = character?.name
         adapter.set(character?.voiceActors)
         context?.let {
             Glide.with(it).load(character?.imageUrl).transform().apply {
                 transform(RoundedCorners(6), FitCenter())
                 placeholder(R.drawable.app_placeholder)
                 timeout(30000)
-            }.into(view?.imageView, view?.progressBar)
+            }.into(view.imageView, view.progressBar)
         }
     }
 

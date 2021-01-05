@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import info.horriblesubs.sher.R
 import info.horriblesubs.sher.data.subsplease.api.model.ItemRelease
+import info.horriblesubs.sher.data.subsplease.api.model.ItemReleasePage
 import info.horriblesubs.sher.functions.getRelativeTime
 import info.horriblesubs.sher.libs.preference.prefs.TimeFormatPreference
 import info.horriblesubs.sher.libs.preference.prefs.TimeLeftPreference
@@ -27,7 +28,7 @@ class NewReleaseFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
         super.onViewCreated(view, savedInstanceState)
         view.recyclerView?.setGridLayoutAdapter(adapter, 4)
         model.episodes.observe(viewLifecycleOwner) {
-            it?.value?.let { list -> onResetView(episodes = list) }
+            onResetView(episodes = getMap(it?.value))
         }
         model.episodesTime.observe(viewLifecycleOwner) {
             view.lastUpdatedText?.text = (if (TimeLeftPreference.value)
@@ -36,8 +37,15 @@ class NewReleaseFragment: BaseFragment(), OnItemClickListener<ItemRelease> {
         }
     }
 
+    private fun getMap(page: ItemReleasePage?): LinkedHashMap<String, ItemRelease> {
+        val map = LinkedHashMap<String, ItemRelease>()
+        page?.batch?.let { map.putAll(it) }
+        page?.episode?.let { map.putAll(it) }
+        return map
+    }
+
     private fun onResetView(
-        episodes: HashMap<String, ItemRelease> = model.episodes.value?.value ?: hashMapOf()
+        episodes: LinkedHashMap<String, ItemRelease> = getMap(model.episodes.value?.value)
     ) = if (episodes.isNotEmpty()) setAdapter(episodes) else {
         view?.recyclerView?.gone
         view?.textView?.visible

@@ -3,6 +3,7 @@ package info.horriblesubs.sher.libs.preference.prefs
 import info.horriblesubs.sher.App
 import info.horriblesubs.sher.libs.preference.model.BasePreference
 import java.io.File
+import kotlin.math.roundToInt
 
 object AppCachePreference: BasePreference<String>() {
 
@@ -14,7 +15,7 @@ object AppCachePreference: BasePreference<String>() {
             var size = 0F
             size += getDirSize(App.get().externalCacheDir)
             size += getDirSize(App.get().cacheDir)
-            val float = ((size /1024)/1024)
+            val float = (((size*100)/1024)/1024).roundToInt().toFloat()/100F
             return "$float"
         }
 

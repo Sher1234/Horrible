@@ -71,7 +71,7 @@ class LatestAdapter(
             release?.text = t.episode.parseAsHtml()
             title?.text = t.show.parseAsHtml()
             t.downloads.forEachIndexed { i, it ->
-                if (i == 0) sd?.visibility = if (it.res.contains("360") || it.res.contains("480")) View.VISIBLE else View.GONE
+                if (i == 0) sd?.visibility = if (it.res.contains("360") || it.res.contains("480") || it.res.contains("540")) View.VISIBLE else View.GONE
                 if (i != 2) hd?.visibility = if (it.res.contains("720", true)) View.VISIBLE else View.GONE
                 fhd?.visibility = if (it.res.contains("1080", true)) View.VISIBLE else View.GONE
             }

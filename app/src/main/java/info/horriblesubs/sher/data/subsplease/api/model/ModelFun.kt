@@ -26,7 +26,7 @@ val BookmarkedShow.imageUrl get() = if (image.contains("subsplease.org")) image 
 val ItemRelease.SD: ItemRelease.Links? get() {
     var link: ItemRelease.Links? = null
     downloads.forEach {
-        if (it.res.contains("360") || it.res.contains("480"))
+        if (it.res.contains("360") || it.res.contains("480") || it.res.contains("540"))
             link = it
     }
     return link

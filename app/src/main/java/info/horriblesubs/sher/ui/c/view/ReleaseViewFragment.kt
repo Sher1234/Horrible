@@ -103,7 +103,7 @@ class ReleaseViewFragment: BottomSheetDialogFragment(), OnItemClickListener<Stri
                 val link = release?.SD
                 val xdcc = if (link?.xdcc.isNullOrBlank()) null else "https://subsplease.org/xdcc/?search=${Uri.encode(link?.xdcc)}"
                 adapter.reset(titles, arrayListOf(link?.magnet, link?.torrent, xdcc))
-                "HQ [360p] or SD [480p]"
+                "HQ [360p] or SD [480p/540p]"
             }
         }
     }

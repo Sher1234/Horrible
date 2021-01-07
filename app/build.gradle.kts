@@ -38,10 +38,10 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         applicationId = "info.horriblesubs.sher"
-        versionName = "1.0.0-alpha1"
+        versionName = "1.0.0-alpha2"
         targetSdkVersion(30)
         minSdkVersion(21)
-        versionCode = 96
+        versionCode = 97
 
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
     }
